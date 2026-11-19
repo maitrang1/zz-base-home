@@ -175,5 +175,25 @@ try std.testing.expect(hasCall(&mck2, "remote add mirr git@gitlab.com:u/zz-base-
 const excl = try std.Io.Dir.cwd().readFileAlloc(std.testing.io, try std.fs.path.join(allo, &.{ home, ".zz-base-home-docs.git", "info", "exclude" }), allo, .limited(64));
 try std.testing.expectEqualStrings("*\n", excl);
 }
+test "init: ls-remote exit 2 means no docs yet (skip), any other failure is reported, never skipped silently" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const home = try make.homeOf(allo, &tmp);
+const gitd = try std.fs.path.join(allo, &.{ home, ".zz-base-home-docs.git" });
+const lsr: []const []const u8 = &.{ "git", "--git-dir", gitd, "ls-remote" };
+var mck: mock.Mock = .{ .rule = &.{ GTOP, .{ .pref = &.{ "git", "remote", "get-url" }, .outz = "git@gitlab.com:u/zz-base-home.git\n" }, .{ .pref = lsr, .code = 2 }, .{ .pref = &.{"git"} } } };
+var buff: std.Io.Writer.Allocating = .init(allo);
+const none = make.make(allo, &buff.writer, &mck, .{}, home, true, false);
+try std.testing.expectEqual(exit.Code.okay, try docs.comm(&none, &.{"init"}));
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "remote has no docs yet") != null and !hasCall(&mck, "checkout"));
+var mck2: mock.Mock = .{ .rule = &.{ GTOP, .{ .pref = &.{ "git", "remote", "get-url" }, .outz = "git@gitlab.com:u/zz-base-home.git\n" }, .{ .pref = lsr, .code = 128, .errz = "could not read from remote" }, .{ .pref = &.{"git"} } } };
+var buf2: std.Io.Writer.Allocating = .init(allo);
+const down = make.make(allo, &buf2.writer, &mck2, .{}, home, true, false);
+try std.testing.expectEqual(exit.Code.fail, try docs.comm(&down, &.{"init"}));
+try std.testing.expect(std.mem.indexOf(u8, buf2.written(), "cannot reach origin") != null and !hasCall(&mck2, "checkout"));
+}
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

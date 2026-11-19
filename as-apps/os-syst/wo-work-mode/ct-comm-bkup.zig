@@ -39,7 +39,7 @@ const top = cx.trim(topp.outz);
 const lsfl = (try ctxz.tool(&.{ "git", "-C", top, "ls-files", "-z", "--others", "--ignored", "--exclude-standard", "--directory" }, &.{})) orelse { try facts.append(ctxz.allo, cx.mkfa("docs", .bloc, "git absent: ignored docs not listed")); return null; };
 if (lsfl.code != 0) { try facts.append(ctxz.allo, cx.mkfa("docs", .fail, "git ls-files failed")); return null; }
 const pick = try docsPick(ctxz.allo, top, lsfl.outz, ctxz.conf.bkup_docs_list);
-try facts.append(ctxz.allo, cx.mkfa("docs", .okay, try std.fmt.allocPrint(ctxz.allo, "{d} ignored doc path(s) added", .{pick.len})));
+try facts.append(ctxz.allo, cx.mkfa("docs", .okay, try std.fmt.allocPrint(ctxz.allo, "{d} ignored doc path(s) found", .{pick.len})));
 return pick;
 }
 fn statRun(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact)) !void {

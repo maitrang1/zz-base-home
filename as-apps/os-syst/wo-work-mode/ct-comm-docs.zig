@@ -60,7 +60,8 @@ _ = (try ctxz.step(facts, try std.fmt.allocPrint(ctxz.allo, "remo {s}", .{remo})
 }
 const frst = ctxz.conf.docs_remo_list[0];
 const lsrm = (try ctxz.tool(&.{ "git", "--git-dir", gitd, "ls-remote", "--exit-code", "--heads", frst, CF.bran }, &.{})) orelse return;
-if (lsrm.code != 0) { try facts.append(ctxz.allo, cx.mkfa("rest", .skip, "remote has no docs yet: the first sync pushes them")); return; }
+if (lsrm.code == 2) { try facts.append(ctxz.allo, cx.mkfa("rest", .skip, "remote has no docs yet: the first sync pushes them")); return; }
+if (lsrm.code != 0) { try facts.append(ctxz.allo, cx.mkfa("rest", .fail, try std.fmt.allocPrint(ctxz.allo, "cannot reach {s}: {s}", .{ frst, cx.clip(cx.trim(lsrm.errz)) }))); return; }
 var scra: std.ArrayList(fcts.Fact) = .empty;
 const have = (try bkup.docsFind(ctxz, &scra)) orelse return;
 if (have.len > 0) { try facts.append(ctxz.allo, cx.mkfa("rest", .drif, "docs already on disk and the remote has docs: not overwritten, review then run sync")); return; }

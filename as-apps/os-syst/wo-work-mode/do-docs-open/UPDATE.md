@@ -16,3 +16,11 @@ Added: `wo bkup stat` and `wo bkup nigh`, the `box` profile, and the checks `cpu
 Added: release builds target a baseline CPU, are stripped, and are byte-identical when built twice.
 Added: two hub jobs (off): wo-bkup-stat, wo-bkup-nigh.
 Known gaps: `secr lend`. OCI idle numbers wait for the box.
+
+## 2026-11-19
+Added: `wo docs init` and `wo docs sync`. They keep your git-ignored docs (`do-*` folders, `CLAUDE.md`, `aa-todo-*`, and so on) in step across devices through a private docs repo. Every file is scanned for secrets first, and a conflict stops with both copies kept.
+Added: `wo beat`, a heartbeat ping to an outside monitor, so a hub that dies silently raises an alarm.
+Added: `wo rels sign TAG`, which signs the verified release hashes with your key. How to check a release yourself is in HOW-TO.
+Added: the `WO_DEVI_NAME` environment variable gives each device its own name. Checks: the Mac baseline CPU `apple_m1` is accepted.
+Changed: `wipz_remo_list` must now name PRIVATE remotes (it ships with `wipg` and `wipl`). A public repo would show your unfinished work.
+Added: hub jobs wo-docs (on), wo-beat (off) and wo-doct (on). The hub takes an optional jobs file name, for example `auto-task 4000 aa-auto-task-li01.json`.
