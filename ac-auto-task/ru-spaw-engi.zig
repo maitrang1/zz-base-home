@@ -24,7 +24,8 @@ fn markGone(self: *Runz) void { self.gone_deci.store(self.sincStar(nowzMsec(self
 pub fn runz(allo: std.mem.Allocator, iozz: std.Io, wrtr: *std.Io.Writer, regz: *regi.Regi, opts: RunzOpts, star_msec: i64) !i32 {
 const argv = try argvBuil(allo, opts.shel, opts.cmdz);
 var envi_ptrz: ?*std.process.Environ.Map = opts.envi; var boot_mapz: std.process.Environ.Map = undefined; var boot_mapz_live = false; defer if (boot_mapz_live) boot_mapz.deinit();
-if (cmdzBootUses(opts.shel)) { if (opts.envi) |mapz| { const expa = try enviExpa(allo, opts.cmdz, mapz); try mapz.put(CF.envi_name, expa); envi_ptrz = mapz; } else { boot_mapz = try stor.enviLive().createMap(allo); boot_mapz_live = true; const expa = try enviExpa(allo, opts.cmdz, &boot_mapz); try boot_mapz.put(CF.envi_name, expa); envi_ptrz = &boot_mapz; } }
+if (opts.envi == null and (cmdzBootUses(opts.shel) or stor.tune.envi_fres)) { boot_mapz = try stor.enviMap(allo); boot_mapz_live = true; envi_ptrz = &boot_mapz; }
+if (cmdzBootUses(opts.shel)) { if (envi_ptrz) |mapz| { const expa = try enviExpa(allo, opts.cmdz, mapz); try mapz.put(CF.envi_name, expa); } }
 var chil = chilSpaw(iozz, .{ .argv = argv, .cwd = .{ .path = opts.cwdz }, .environ_map = envi_ptrz, .stdin = .pipe, .stdout = .pipe, .stderr = .pipe, .pgid = if (builtin.os.tag != .windows) 0 else null, .create_no_window = true }) catch |errz| { var buff: [256]u8 = undefined; const mesg = std.fmt.bufPrint(&buff, "auto-task: cannot start command: {t}\n", .{errz}) catch "auto-task: cannot start command\n"; try stre.erroWrit(wrtr, mesg); try stre.exitWrit(wrtr, -1, nowzMsec(iozz) - star_msec, opts.cwdz); return -1; };
 const jobz: ?std.os.windows.HANDLE = if (builtin.os.tag == .windows) (if (chil.id) |hand| regi.winzJobzCrea(hand) else null) else null;
 const trac_pidz: i32 = if (builtin.os.tag != .windows) (if (chil.id) |pidz| @intCast(pidz) else 0) else 0;

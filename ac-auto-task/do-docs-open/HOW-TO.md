@@ -15,7 +15,7 @@ Assumes it is already running. If not, see README.md.
 Click detach. The tab unlocks, the command keeps streaming with its own abort button. Reload or close the page: running commands keep going and come back with everything they printed. Only abort stops them.
 
 ## Change the folder
-Type `cd "C:\path\to\folder"`. The tab remembers it. Each tab keeps its own folder. `cd` alone shows the current one.
+Type `cd "C:\path\to\folder"`. The tab remembers it. Each tab keeps its own folder. `cd` alone shows the current one. If that folder is deleted or moved, the next command says so and runs in the default folder.
 
 ## Answer a command that asks a question
 Every running command has its own input box under its output. It shows after half a second. Type your answer, press Enter. Up and Down bring back earlier answers from that command. An empty Enter sends a blank line, for "press Enter to continue".
@@ -59,12 +59,16 @@ Press Ctrl+C in its console. Any command still running stops with it.
 ## Use it from another device
 auto-task only listens on its own machine, by design. Use an SSH tunnel: ssh -L 4000:127.0.0.1:4000 you@the-machine, then open http://127.0.0.1:4000 on the device you are using.
 
+## New programs and PATH changes
+Commands run with the environment as it is now, not as it was when auto-task started. On Windows, after you install a program or change PATH or a variable, the next command already sees it: no restart, no new window. Open `http://127.0.0.1:4000/env` to see which variable names differ from the start-up environment (names only, no values). On Linux and macOS the start-up environment is fixed. To read your profile files, set `"envi_mode": "login"` in aa-conf-main.json, or restart auto-task from a fresh terminal. A new group (docker, dialout) still needs a log out and in.
+
 ## When something goes wrong
 | You see | Do this |
 |---|---|
 | The top-right pill is red | The program is not running. Start it again. |
 | A closed tab's output came back | Reload the page once. |
 | A scheduled job never runs | Open SCHEDULE. Check it is on. A bad schedule is listed with the reason. |
+| A command works in a new window but not here, or just installed, not found | Open `/env`. The name you need should be listed. If not, restart auto-task. |
 | `AccessDenied` when rebuilding | Stop the program first, then build again. |
 | A job's log ends with TIMEOUT | It ran past its time limit (1 hour if none is set). Raise out. |
 | `error: port 4000 is already in use.` | Another program has the port. Close it, or start with the port it suggests: `E:\zz-base-home\ac-auto-task\zig-out\bin\auto-task.exe 4001`. |

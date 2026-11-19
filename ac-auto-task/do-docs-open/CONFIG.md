@@ -18,6 +18,7 @@ File: aa-conf-main.json, next to aa-auto-task.json. Every key is optional. A mis
 | cmds_hist_maxz | commands kept in history | 64 | 1 to 10000 |
 | time_limi_seco | default time limit of a job, in seconds | 86400 | 1 to 86400 |
 | apps_data_loca | name of the data folder under your user folder | .ac-auto-task | letters, digits, . _ - (max 64) |
+| envi_mode | the environment (PATH and other variables) that commands run with. fresh: Windows picks up changes made after the program started (an install, setx, System Properties); other systems keep the launch environment. login: fresh, and on Linux/macOS the default shell runs as a login shell (-lc) so it reads your profile files. inherit: the launch environment, exactly as before | fresh | fresh, login, inherit |
 
 ## Your data
 Saved in `~\.ac-auto-task\` (the apps_data_loca setting; Windows: C:\Users\<you>\.ac-auto-task\), outside the program folder, so updates never touch it.

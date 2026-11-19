@@ -1,6 +1,10 @@
 # Updates
 What changed, newest first.
 
+## 2026-11-19
+Added: commands now run with a fresh environment (Windows): a program you install or a PATH or variable you change after auto-task started is seen by the next command, with no restart. Setting `envi_mode` in aa-conf-main.json: fresh (default), login (Linux/macOS login shell), inherit (old behavior). `/env` lists which variable names differ.
+Fixed: a tab whose folder was deleted or moved no longer fails every command until the tab is closed. The next command says so and runs in the default folder.
+
 ## 2026-11-18
 Added: web addresses in the output are clickable links (new tab), with a small copy icon before each one. Only http, https and www. are linked.
 Added: stop / play (pause / resume) on every running block and on every running chain. It freezes the command with all the programs it started (a chain also holds back its next step) and resumes exactly where it stopped. Stop still works while paused.

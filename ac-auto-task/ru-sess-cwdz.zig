@@ -10,6 +10,7 @@ pub const Sess = struct {
 mapz: std.StringHashMapUnmanaged([]const u8) = .empty, mute: std.Io.Mutex = .init,
 pub fn dein(self: *Sess, allo: std.mem.Allocator) void { var iter = self.mapz.iterator(); while (iter.next()) |entr| { allo.free(entr.key_ptr.*); allo.free(entr.value_ptr.*); } self.mapz.deinit(allo); }
 pub fn getz(self: *Sess, iozz: std.Io, tabz_iden: []const u8) !?[]const u8 { try self.mute.lock(iozz); defer self.mute.unlock(iozz); return self.mapz.get(tabz_iden); }
+pub fn delz(self: *Sess, allo: std.mem.Allocator, iozz: std.Io, tabz_iden: []const u8) !void { try self.mute.lock(iozz); defer self.mute.unlock(iozz); if (self.mapz.fetchRemove(tabz_iden)) |kvzz| { allo.free(kvzz.key); allo.free(kvzz.value); } }
 pub fn setz(self: *Sess, allo: std.mem.Allocator, iozz: std.Io, tabz_iden: []const u8, dirz: []const u8) !void { try self.mute.lock(iozz); defer self.mute.unlock(iozz); const gopz = try self.mapz.getOrPut(allo, tabz_iden); if (gopz.found_existing) { allo.free(gopz.value_ptr.*); } else { gopz.key_ptr.* = try allo.dupe(u8, tabz_iden); } gopz.value_ptr.* = try allo.dupe(u8, dirz); }
 };
 pub const CdzzKind = enum { none, bare, pure, with_cmdz, badz_dirz };

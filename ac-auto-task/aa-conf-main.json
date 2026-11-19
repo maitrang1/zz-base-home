@@ -3,5 +3,6 @@
   "jobs_same_time": 4,
   "cmds_hist_maxz": 64,
   "time_limi_seco": 86400,
-  "apps_data_loca": ".ac-auto-task"
+  "apps_data_loca": ".ac-auto-task",
+  "envi_mode": "fresh"
 }

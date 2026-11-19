@@ -24,3 +24,4 @@ Added: `wo rels sign TAG`, which signs the verified release hashes with your key
 Added: the `WO_DEVI_NAME` environment variable gives each device its own name. Checks: the Mac baseline CPU `apple_m1` is accepted.
 Changed: `wipz_remo_list` must now name PRIVATE remotes (it ships with `wipg` and `wipl`). A public repo would show your unfinished work.
 Added: hub jobs wo-docs (on), wo-beat (off) and wo-doct (on). The hub takes an optional jobs file name, for example `auto-task 4000 aa-auto-task-li01.json`.
+Changed: `wo docs sync` always ends with ONE version of each doc. Different lines are merged; on the same lines the newer edit wins (the commit carries the real edit time), and the loser is saved once in `zz-dele-auto/_docs-<stamp>/`. A busy remote is retried up to 3 times, and only changed files are scanned (every 4 minutes now).

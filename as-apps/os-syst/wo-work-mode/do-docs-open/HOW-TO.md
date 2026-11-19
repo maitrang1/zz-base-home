@@ -28,8 +28,8 @@ It copies your work to one private backup branch per device (`refs/wipz/<device>
 ## Keep your docs in step across devices
 1. Create the private repo once on your git host, named like the main repo plus `-docs`, and add the same remote names the main repo has (`origin`, `mirr`).
 2. Practice run: `wo docs init`, then `wo docs sync`
-3. Real run: `wo docs init --live` on each device (it restores the docs on a new device), then `wo docs sync --live` (every 15 minutes)
-A conflict aborts the sync and keeps both copies, and the `docs` stamp stops moving, so `wo beat` raises the alarm. Deleted docs are not deleted on the other device.
+3. Real run: `wo docs init --live` on each device (it restores the docs on a new device), then `wo docs sync --live` (every 4 minutes; only changed files are scanned, so it is cheap)
+Edits to different lines of a doc are merged. If both devices changed the same lines, the newer edit wins and there is only ONE version on every device; the losing text is saved once in `zz-dele-auto/_docs-<stamp>/` (and stays in the docs repo history). A doc deleted on one device but edited on the other is kept. A leak stops the sync before anything is committed. Deleted docs are not deleted on the other device.
 
 ## Get an alarm when the hub dies
 1. Make a free check at an outside monitor (for example Healthchecks.io): period 15 minutes, grace 15 minutes, with an email alert.
