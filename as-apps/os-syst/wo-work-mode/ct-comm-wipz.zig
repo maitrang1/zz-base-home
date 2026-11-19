@@ -42,7 +42,7 @@ pub fn comm(ctxz: *const cx.Ctxz, args: []const []const u8) !exit.Code {
 _ = args;
 var facts: std.ArrayList(fcts.Fact) = .empty;
 const dirt = (try ctxz.tool(&.{ "git", "status", "--porcelain" }, &.{})) orelse { try facts.append(ctxz.allo, cx.mkfa("snap", .bloc, "git absent")); return ctxz.emit(facts.items); };
-if (dirt.code != 0) { try facts.append(ctxz.allo, cx.mkfa("snap", .fail, "git status failed")); return ctxz.emit(facts.items); }
+if (dirt.code != 0) { try facts.append(ctxz.allo, cx.mkfa("snap", .fail, try std.fmt.allocPrint(ctxz.allo, "git status failed: {s}", .{cx.clip(cx.trim(dirt.errz))}))); return ctxz.emit(facts.items); }
 if (cx.trim(dirt.outz).len == 0) { try facts.append(ctxz.allo, cx.mkfa("snap", .skip, "clean, nothing to snapshot")); return ctxz.emit(facts.items); }
 if (ctxz.conf.wipz_remo_list.len == 0) { try facts.append(ctxz.allo, cx.mkfa("remo", .bloc, "wipz_remo_list is empty: name the private remotes")); return ctxz.emit(facts.items); }
 const refz = try headName(ctxz.allo, ctxz.devi);
