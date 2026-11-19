@@ -31,7 +31,7 @@ for (names) |name| { if (std.mem.startsWith(u8, base, name)) { try outz.append(a
 }
 return outz.items;
 }
-fn docsFind(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact)) !?[]const []const u8 {
+pub fn docsFind(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact)) !?[]const []const u8 {
 if (ctxz.conf.bkup_docs_list.len == 0) return &.{};
 const topp = (try ctxz.tool(&.{ "git", "rev-parse", "--show-toplevel" }, &.{})) orelse { try facts.append(ctxz.allo, cx.mkfa("docs", .bloc, "git absent: ignored docs not listed")); return null; };
 if (topp.code != 0) { try facts.append(ctxz.allo, cx.mkfa("docs", .bloc, "not inside a git repo: ignored docs not listed")); return null; }

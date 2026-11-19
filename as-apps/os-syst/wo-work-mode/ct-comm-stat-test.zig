@@ -11,7 +11,7 @@ const make = @import("te-ctxz-make.zig");
 const mock = @import("te-mock-runn.zig");
 const stat = @import("st-stat-file.zig");
 const exit = @import("ct-exit-code.zig");
-test "fresh home: version + four 'none yet' lines, exit ok, no tool run" {
+test "fresh home: version + five 'none yet' lines, exit ok, no tool run" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -22,7 +22,7 @@ var mck: mock.Mock = .{ .rule = &.{} };
 var buff: std.Io.Writer.Allocating = .init(allo);
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, home, false, false);
 try std.testing.expectEqual(exit.Code.okay, try comm.comm(&ctxz, &.{}));
-try std.testing.expectEqualStrings("okay\tvers\two 0.1.0\nskip\twipz\tnone yet\nskip\tbkup\tnone yet\nskip\tbknt\tnone yet\nskip\tdril\tnone yet\n", buff.written());
+try std.testing.expectEqualStrings("okay\tvers\two 0.1.0\nskip\twipz\tnone yet\nskip\tbkup\tnone yet\nskip\tbknt\tnone yet\nskip\tdocs\tnone yet\nskip\tdril\tnone yet\n", buff.written());
 try std.testing.expectEqual(@as(usize, 0), mck.call.items.len);
 }
 test "ages come from the stamp; a failed last run is shown but never fails stat" {

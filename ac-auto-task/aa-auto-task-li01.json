@@ -1,5 +1,6 @@
 [
   { "id": "wo-wipz", "type": "puls", "on": true, "sche": "5m", "run": "WO_DEVI_NAME=li01 /home/mai_trang/.local/bin/mise exec -- /home/mai_trang/zz-base-home/as-apps/os-syst/wo-work-mode/zig-out/bin/wo wipz --live", "cwd": "/home/mai_trang/zz-base-home" },
+  { "id": "wo-docs", "type": "puls", "on": true, "sche": "15m", "run": "WO_DEVI_NAME=li01 /home/mai_trang/.local/bin/mise exec -- /home/mai_trang/zz-base-home/as-apps/os-syst/wo-work-mode/zig-out/bin/wo docs sync --live", "cwd": "/home/mai_trang/zz-base-home" },
   { "id": "wo-bkup-stat", "type": "puls", "on": false, "sche": "5m", "run": "WO_DEVI_NAME=li01 /home/mai_trang/.local/bin/mise exec -- /home/mai_trang/zz-base-home/as-apps/os-syst/wo-work-mode/zig-out/bin/wo bkup stat --live", "cwd": "/home/mai_trang/zz-base-home" },
   { "id": "wo-bkup-nigh", "type": "cron", "on": false, "sche": "0 2 * * *", "run": "WO_DEVI_NAME=li01 /home/mai_trang/.local/bin/mise exec -- /home/mai_trang/zz-base-home/as-apps/os-syst/wo-work-mode/zig-out/bin/wo bkup nigh --live", "cwd": "/home/mai_trang/zz-base-home" },
   { "id": "wo-doct", "type": "cron", "on": false, "sche": "0 3 * * *", "run": "WO_DEVI_NAME=li01 /home/mai_trang/.local/bin/mise exec -- /home/mai_trang/zz-base-home/as-apps/os-syst/wo-work-mode/zig-out/bin/wo doct", "cwd": "/home/mai_trang/zz-base-home" },

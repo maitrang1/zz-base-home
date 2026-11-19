@@ -26,6 +26,8 @@
   "bkup_docs_list": ["do-", "aa-todo-", "ag-agen", "CLAUDE.md", "AGENTS.md"],
   "bkup_tagz_stat": "stat",
   "bkup_tagz_nigh": "nigh",
+  "docs_gitd_name": ".zz-base-home-docs.git",
+  "docs_remo_list": ["origin", "mirr"],
   "bknt_ager_maxz": 100800,
   "kill_step_list": [
     ["gh", "variable", "set", "AGEN_ENAB", "--body", "false"],

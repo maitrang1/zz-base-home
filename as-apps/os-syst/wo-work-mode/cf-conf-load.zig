@@ -34,6 +34,8 @@ bkup_dbzz_list: []const []const u8 = &.{},
 bkup_docs_list: []const []const u8 = &.{ "do-", "aa-todo-", "ag-agen", "CLAUDE.md", "AGENTS.md" },
 bkup_tagz_stat: []const u8 = "stat",
 bkup_tagz_nigh: []const u8 = "nigh",
+docs_gitd_name: []const u8 = ".zz-base-home-docs.git",
+docs_remo_list: []const []const u8 = &.{ "origin", "mirr" },
 bknt_ager_maxz: i64 = 100800,
 kill_step_list: []const []const []const u8 = &.{ &.{ "gh", "variable", "set", "AGEN_ENAB", "--body", "false" }, &.{ "sudo", "-n", "-u", "agen", "claude", "auth", "logout" } },
 };

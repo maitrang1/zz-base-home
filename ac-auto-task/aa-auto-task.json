@@ -1,5 +1,6 @@
 [
   { "id": "wo-wipz", "type": "puls", "on": true, "sche": "5m", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe wipz --live", "cwd": "E:\\zz-base-home" },
+  { "id": "wo-docs", "type": "puls", "on": true, "sche": "15m", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe docs sync --live", "cwd": "E:\\zz-base-home" },
   { "id": "wo-bkup-stat", "type": "puls", "on": false, "sche": "5m", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe bkup stat --live", "cwd": "E:\\zz-base-home" },
   { "id": "wo-bkup-nigh", "type": "cron", "on": false, "sche": "0 2 * * *", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe bkup nigh --live", "cwd": "E:\\zz-base-home" },
   { "id": "wo-doct", "type": "cron", "on": false, "sche": "0 3 * * *", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe doct", "cwd": "E:\\zz-base-home" },
