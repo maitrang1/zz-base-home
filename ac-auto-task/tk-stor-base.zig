@@ -17,7 +17,9 @@ pub const Task = struct { id: []const u8 = "", type: []const u8 = "", on: bool =
 pub const Reje = struct { inde: usize, iden: []const u8, whyz: []const u8 };
 pub const Load = struct { aren: std.heap.ArenaAllocator, task: []Task, reje: []Reje, rawz_okay: bool, pub fn dein(self: *Load) void { self.aren.deinit(); } };
 pub const ChaiStat = struct { inde: u32, ranz: u32, fail: u32, next_msec: i64, star_msec: i64 };
-pub fn taskPath(allo: std.mem.Allocator, root: []const u8) ![]const u8 { return std.fs.path.join(allo, &.{ root, FILE_NAME }); }
+pub var jobzFile: []const u8 = CF.file;
+pub fn jobzFileSet(name: []const u8) bool { if (name.len == 0 or name.len > 64 or !std.mem.endsWith(u8, name, ".json")) return false; if (std.mem.indexOfAny(u8, name, "/\\") != null or std.mem.indexOf(u8, name, "..") != null) return false; jobzFile = name; return true; }
+pub fn taskPath(allo: std.mem.Allocator, root: []const u8) ![]const u8 { return std.fs.path.join(allo, &.{ root, jobzFile }); }
 pub fn norm(tas0: Task) Task { var task = tas0; if (task.dela == null) task.dela = task.dlyM; if (task.tmo == null) task.tmo = task.tmoS; if (task.@"try" == null) task.@"try" = task.retry; task.dlyM = null; task.tmoS = null; task.retry = null; return task; }
 pub fn chaiChec(task: Task) bool { return std.mem.eql(u8, task.type, "chai"); }
 pub fn autoIdenChec(iden: []const u8) bool { if (iden.len == 0) return false; for (iden) |char| { const okay = (char >= 'a' and char <= 'z') or (char >= 'A' and char <= 'Z') or (char >= '0' and char <= '9') or char == '-' or char == '_' or char == '.'; if (!okay) return false; } return true; }

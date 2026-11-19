@@ -21,7 +21,7 @@ modTaskArmz.addImport("taskstore", modTaskStor); modTaskArmz.addImport("tasktime
 modTaskTick.addImport("taskstore", modTaskStor); modTaskTick.addImport("tasktime", modTaskTime); modTaskTick.addImport("taskarm", modTaskArmz); modTaskTick.addImport("taskevent", modTaskEven); modTaskTick.addImport("spawn", modSpaw); modTaskTick.addImport("registry", modRegi); modTaskTick.addImport("tasksuper", modTaskSupe); modTaskTick.addImport("taskprobe", modTaskProb); modTaskTick.addImport("store", modStor); modTaskTick.addImport("stream", modStre);
 modSpaw.addImport("registry", modRegi); modSpaw.addImport("stream", modStre); modSpaw.addImport("cwd", modCwdz); modSpaw.addImport("store", modStor);
 modServ.addImport("http", modHttp); modServ.addImport("spawn", modSpaw); modServ.addImport("registry", modRegi); modServ.addImport("stream", modStre); modServ.addImport("cwd", modCwdz); modServ.addImport("store", modStor); modServ.addImport("history", modHist); modServ.addImport("watch", modWatc); modServ.addImport("taskstore", modTaskStor); modServ.addImport("tasktime", modTaskTime); modServ.addImport("ticker", modTaskTick); modServ.addImport("static", modStat); modServ.addImport("build_options", opts.createModule());
-modRoot.addImport("server", modServ); modRoot.addImport("store", modStor); modRoot.addImport("ticker", modTaskTick); modRoot.addImport("spawn", modSpaw);
+modRoot.addImport("server", modServ); modRoot.addImport("store", modStor); modRoot.addImport("taskstore", modTaskStor); modRoot.addImport("ticker", modTaskTick); modRoot.addImport("spawn", modSpaw);
 return modRoot;
 }
 fn testAddz(buil: *std.Build, targ: Targ, opti: Opti, step: *std.Build.Step, spec: Spec) void {

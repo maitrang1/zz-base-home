@@ -16,6 +16,7 @@ pub fn autoRunz(allo: std.mem.Allocator, root: []const u8, iden: []const u8) !?[
 fn fileExis(iozz: std.Io, path: []const u8) bool { _ = std.Io.Dir.cwd().statFile(iozz, path, .{}) catch return false; return true; }
 var save_sequ: std.atomic.Value(u32) = .init(0);
 pub fn save(allo: std.mem.Allocator, iozz: std.Io, root: []const u8, body: []const u8) !void { const path = try taskPath(allo, root); const sequ = save_sequ.fetchAdd(1, .monotonic); const temp = try std.fmt.allocPrint(allo, "{s}.{d}.tmp", .{ path, sequ }); var file = try std.Io.Dir.cwd().createFile(iozz, temp, .{ .truncate = true, .read = true }); { errdefer file.close(iozz); try file.writePositionalAll(iozz, body, 0); file.sync(iozz) catch {}; } file.close(iozz); try std.Io.Dir.rename(.cwd(), temp, .cwd(), path, iozz); }
-pub fn mtimMsec(iozz: std.Io, root: []const u8) i128 { var buff: [std.fs.max_path_bytes]u8 = undefined; if (root.len + 1 + FILE_NAME.len > buff.len) return 0; const path = std.fmt.bufPrint(&buff, "{s}{c}{s}", .{ root, std.fs.path.sep, FILE_NAME }) catch return 0; const stat = std.Io.Dir.cwd().statFile(iozz, path, .{}) catch return 0; return stat.mtime.toMilliseconds(); }
+pub const jobzFileSet = tkstorbase.jobzFileSet;
+pub fn mtimMsec(iozz: std.Io, root: []const u8) i128 { var buff: [std.fs.max_path_bytes]u8 = undefined; if (root.len + 1 + tkstorbase.jobzFile.len > buff.len) return 0; const path = std.fmt.bufPrint(&buff, "{s}{c}{s}", .{ root, std.fs.path.sep, tkstorbase.jobzFile }) catch return 0; const stat = std.Io.Dir.cwd().statFile(iozz, path, .{}) catch return 0; return stat.mtime.toMilliseconds(); }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
