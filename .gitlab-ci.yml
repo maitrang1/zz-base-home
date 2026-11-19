@@ -17,3 +17,27 @@ boot:
     - apt-get update -qq
     - apt-get install -y -qq --no-install-recommends git curl ca-certificates xz-utils bzip2 unzip
     - sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
+
+build2:
+  stage: test
+  variables:
+    GIT_DEPTH: "0"
+    DEBIAN_FRONTEND: noninteractive
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v/
+    - if: $CI_COMMIT_BRANCH == "ci-test"
+  script:
+    - apt-get update -qq
+    - apt-get install -y -qq --no-install-recommends git curl ca-certificates xz-utils bzip2 unzip
+    - sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
+    - export PATH="$HOME/.local/bin:$PATH"
+    - mise exec -- zig build dist --build-file as-apps/os-syst/wo-work-mode/build.zig --prefix /tmp/out1 --cache-dir /tmp/zc1 --global-cache-dir /tmp/zg1
+    - mise exec -- zig build dist --build-file as-apps/os-syst/wo-work-mode/build.zig --prefix /tmp/out2 --cache-dir /tmp/zc2 --global-cache-dir /tmp/zg2
+    - (cd /tmp/out1/dist && find . -type f -exec sha256sum {} + | sort -k2) > /tmp/h1.txt
+    - (cd /tmp/out2/dist && find . -type f -exec sha256sum {} + | sort -k2) > /tmp/h2.txt
+    - diff /tmp/h1.txt /tmp/h2.txt
+    - mkdir -p out && cp /tmp/h1.txt out/sha256.txt && cat out/sha256.txt
+  artifacts:
+    paths:
+      - out/sha256.txt
+    expire_in: 1 year
