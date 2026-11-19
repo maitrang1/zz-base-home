@@ -21,7 +21,7 @@
 | tail_vers_minz | Oldest Tailscale version allowed | 1.102.1 | version text |
 | clau_vers_minz | Oldest Claude Code version allowed (box only) | 2.1.302 | version text |
 | patc_days_maxz | Most days since the last OS update | 45 | whole number |
-| cpuz_okay_list | CPU model names a release build may have | x86_64, x86_64_v2, generic | text list |
+| cpuz_okay_list | CPU model names a release build may have | x86_64, x86_64_v2, generic, apple_m1 (the Mac baseline) | text list |
 | bknt_ager_maxz | Longest allowed gap since the nightly database copy (seconds) | 100800 | whole number |
 | devi_name_main | Device name used in backup branch names. The environment variable `WO_DEVI_NAME` overrides it, so each device can keep its own name | empty (uses the computer name) | text |
 | prof_main | Check set used when you give no `--prof` | t0 | t0, box, ci |

@@ -11,7 +11,7 @@
   "tail_vers_minz": "1.102.1",
   "clau_vers_minz": "2.1.302",
   "patc_days_maxz": 45,
-  "cpuz_okay_list": ["x86_64", "x86_64_v2", "generic"],
+  "cpuz_okay_list": ["x86_64", "x86_64_v2", "generic", "apple_m1"],
   "devi_name_main": "dev1",
   "prof_main": "t0",
   "chek_t0_list": ["hook", "head", "tool", "cpuz", "wipz", "bkup", "bknt", "dril", "tail", "tsfl", "lock", "patc", "esus"],
