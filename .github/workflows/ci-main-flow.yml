@@ -44,3 +44,21 @@ jobs:
         run: |
           gh extension install github/gh-actions-lock --pin v0.4.1
           gh actions-lock --no-fix
+  leak:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: step-security/harden-runner@v2.22.4
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: bootstrap
+        run: sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
+      - name: gitleaks over the whole history
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          mise exec -- gitleaks git --redact --no-banner

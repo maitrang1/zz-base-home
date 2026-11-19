@@ -28,7 +28,7 @@
 | chek_t0_list | Checks for the full profile | hook, head, tool, cpuz, wipz, bkup, bknt, dril, tail, tsfl, lock, patc, esus | those names |
 | chek_box_list | Checks for the box profile | same, with clfl instead of esus | those names |
 | chek_ci_list | Checks for the CI profile | hook, tool, cpuz | those names |
-| wipz_remo_list | Private remotes to push saved work to | none | remote names |
+| wipz_remo_list | PRIVATE remotes to push saved work to. Never a public repo: saved work is readable by anyone who can read the remote. Add the same remote names on every device (`git remote add NAME URL`) | none (ships with wipg, wipl) | remote names |
 | wipz_file_maxz | Files bigger than this many bytes stay out of the saved work | 10485760 | whole number |
 | wipz_rest_tagz | Restic label for work that held a secret | wipz-held | text |
 | bkup_list_file | List of state files the 5-minute backup saves | mo-modu/mo-core/bk-back-modu/bk-stat-list.txt | file path |
@@ -37,6 +37,9 @@
 | bkup_tagz_stat / bkup_tagz_nigh | Restic labels for the two backup jobs | stat / nigh | text |
 | docs_gitd_name | Folder (under your home) holding the hidden git data of the private docs repo. `wo docs init` creates it, `wo docs sync` keeps the git-ignored docs (same name starts as `bkup_docs_list`) in step across devices | .zz-base-home-docs.git | folder name |
 | docs_remo_list | Remotes of the main repo that the docs repo also uses (same host and account, repo name + `-docs`) | origin, mirr | remote names |
+| beat_urlz_file | File (under your home) whose first line is the https ping address of an outside dead-man monitor such as Healthchecks.io. `wo beat --live` pings it, or pings `/fail` when a check below is stale. If the hub dies the pings stop and the monitor alerts you. Keep the file outside the repo | empty (off) | file path |
+| beat_chek_list | Stamps that must be fresh for a healthy ping (`docs`, `wipz`, `bkup`, `bknt`). Empty = ping only proves the hub runs | docs | text list |
+| beat_ager_maxz | Seconds a stamp may be old before the ping says fail | 3600 | seconds |
 | dril_mirr_dirz | Folder of the mirror repo to verify | empty (skipped) | folder path |
 | kill_step_list | Commands `kill` runs, one list per command | gh variable set AGEN_ENAB --body false; sudo -n -u agen claude auth logout | lists of text |
 

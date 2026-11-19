@@ -1,9 +1,10 @@
 [
   { "id": "wo-wipz", "type": "puls", "on": true, "sche": "5m", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe wipz --live", "cwd": "E:\\zz-base-home" },
   { "id": "wo-docs", "type": "puls", "on": true, "sche": "15m", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe docs sync --live", "cwd": "E:\\zz-base-home" },
+  { "id": "wo-beat", "type": "puls", "on": false, "sche": "15m", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe beat --live", "cwd": "E:\\zz-base-home" },
   { "id": "wo-bkup-stat", "type": "puls", "on": false, "sche": "5m", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe bkup stat --live", "cwd": "E:\\zz-base-home" },
   { "id": "wo-bkup-nigh", "type": "cron", "on": false, "sche": "0 2 * * *", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe bkup nigh --live", "cwd": "E:\\zz-base-home" },
-  { "id": "wo-doct", "type": "cron", "on": false, "sche": "0 3 * * *", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe doct", "cwd": "E:\\zz-base-home" },
+  { "id": "wo-doct", "type": "cron", "on": true, "sche": "0 3 * * *", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe doct", "cwd": "E:\\zz-base-home" },
   { "id": "wo-dril", "type": "cron", "on": false, "sche": "0 4 1 * *", "run": "D:\\60-SOFT\\mise\\mise\\bin\\mise.exe exec -- E:\\zz-base-home\\as-apps\\os-syst\\wo-work-mode\\zig-out\\bin\\wo.exe dril --live", "cwd": "E:\\zz-base-home" },
   { "id": "linu-shut-nigh", "type": "cron", "on": false, "sche": "00,15,30,45 23,00,01,02 * * *", "run": "bash ~/zz-base-home/as-apps/os-syst/ss-star-shut/ru-shut-guar.sh tick", "cwd": "~/zz-base-home" }
 ]

@@ -17,6 +17,8 @@ boot:
     - apt-get update -qq
     - apt-get install -y -qq --no-install-recommends git curl ca-certificates xz-utils bzip2 unzip
     - sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
+    - export PATH="$HOME/.local/bin:$PATH"
+    - mise exec -- gitleaks git --redact --no-banner
 
 build2:
   stage: test

@@ -20,7 +20,8 @@ const kill = @import("ct-comm-kill.zig");
 const secr = @import("ct-comm-secr.zig");
 const bkup = @import("ct-comm-bkup.zig");
 const docs = @import("ct-comm-docs.zig");
-const CF = .{ .bufz = 8192, .usag = "usage: wo [--conf FILE] [--prof t0|box|ci] [--json] [--live [--force]] stat|conf|doct|wipz|bkup [stat|nigh]|docs init|sync|dril|kill|secr init|lend\n" };
+const beat = @import("ct-comm-beat.zig");
+const CF = .{ .bufz = 8192, .usag = "usage: wo [--conf FILE] [--prof t0|box|ci] [--json] [--live [--force]] stat|conf|doct|wipz|bkup [stat|nigh]|docs init|sync|beat|dril|kill|secr init|lend\n" };
 fn devName(allo: std.mem.Allocator, envm: *const std.process.Environ.Map, name: []const u8) ![]const u8 {
 if (envm.get("WO_DEVI_NAME")) |envv| { if (envv.len > 0) return envv; }
 if (name.len > 0) return name;
@@ -40,6 +41,7 @@ if (std.mem.eql(u8, comm, "kill")) return kill.comm(ctxz, tail);
 if (std.mem.eql(u8, comm, "secr")) return secr.comm(ctxz, tail);
 if (std.mem.eql(u8, comm, "bkup")) return bkup.comm(ctxz, tail);
 if (std.mem.eql(u8, comm, "docs")) return docs.comm(ctxz, tail);
+if (std.mem.eql(u8, comm, "beat")) return beat.comm(ctxz, tail);
 return exit.Erro.Usag;
 }
 fn run(init: std.process.Init, outw: *std.Io.Writer) !exit.Code {
