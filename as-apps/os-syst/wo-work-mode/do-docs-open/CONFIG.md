@@ -37,6 +37,7 @@
 | bkup_tagz_stat / bkup_tagz_nigh | Restic labels for the two backup jobs | stat / nigh | text |
 | docs_gitd_name | Folder (under your home) holding the hidden git data of the private docs repo. `wo docs init` creates it, `wo docs sync` keeps the git-ignored docs (same name starts as `bkup_docs_list`) in step across devices | .zz-base-home-docs.git | folder name |
 | docs_remo_list | Remotes of the main repo that the docs repo also uses (same host and account, repo name + `-docs`) | origin, mirr | remote names |
+| rels_keyz_file | Public key (under your home) whose private half is loaded in ssh-agent; `wo rels sign TAG --live` signs the verified release hashes with it | .ssh/id_ed25519_sign.pub | file path |
 | beat_urlz_file | File (under your home) whose first line is the https ping address of an outside dead-man monitor such as Healthchecks.io. `wo beat --live` pings it, or pings `/fail` when a check below is stale. If the hub dies the pings stop and the monitor alerts you. Keep the file outside the repo | empty (off) | file path |
 | beat_chek_list | Stamps that must be fresh for a healthy ping (`docs`, `wipz`, `bkup`, `bknt`). Empty = ping only proves the hub runs | docs | text list |
 | beat_ager_maxz | Seconds a stamp may be old before the ping says fail | 3600 | seconds |
