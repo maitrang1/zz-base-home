@@ -1,0 +1,14 @@
+name: ci-agen-flow
+on:
+  issues:
+    types: [labeled]
+permissions: {}
+cache-mode: read
+jobs:
+  gate:
+    if: vars.AGEN_ENAB == 'true' && github.event.label.name == 'agen'
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      # W5 stub: job A (agent) + job B (validate, open PR) come later
+      - run: echo "gate open"

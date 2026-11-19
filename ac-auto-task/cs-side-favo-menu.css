@@ -1,0 +1,73 @@
+/* ===================================================================
+Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+Des: Favorites, label popup, item menus, panel foot
+Flo: read selectors > style favorites > style popups and menus
+I/O: favorites markup (html) > favorites and menu look
+=================================================================== */
+.fav-item { font-family: var(--mono); font-size: var(--font-12); padding: var(--sp-6) var(--sp-8); border-radius: var(--radius); color: var(--muted); cursor: grab; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background var(--time-p12s), color var(--time-p12s); display: flex; align-items: center; gap: var(--sp-6); border: var(--size-1) solid transparent; }
+.fav-item:hover { background: var(--surface2); color: var(--text); }
+.fav-item.insert-above, .hist-item.insert-above, .sche-item.insert-above { border-top: var(--size-2) solid var(--accent); }
+.fav-item.insert-below, .hist-item.insert-below, .sche-item.insert-below { border-bottom: var(--size-2) solid var(--accent); }
+.fav-item.dragging, .hist-item.dragging, .sche-item.dragging { opacity: .35; }
+.fav-drag-handle { color: var(--dim); font-size: var(--font-11); flex-shrink: 0; cursor: grab; }
+.fav-drag-handle:active { cursor: grabbing; }
+.fav-group-head.drag-over { outline: var(--size-1) dashed var(--accent); background: var(--surface2); border-radius: var(--radius); }
+.fav-group.dragging { opacity: .35; }
+.fav-group.grp-drag-over { outline: var(--size-1) dashed var(--accent); border-radius: var(--radius); }
+.fav-ungrp-name { color: var(--dim) !important; font-style: italic; }
+.fav-run { font-size: var(--font-10); padding: var(--sp-1) var(--sp-6); line-height: 1.2; border-radius: var(--radi-3); border: var(--size-1) solid var(--border); color: var(--dim); background: transparent; transition: color var(--time-p1s), border-color var(--time-p1s), background var(--time-p1s); flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.fav-run:hover { color: var(--accent); border-color: var(--accent); background: var(--acce-surf); }
+.fav-run.is-abrt { border-color: var(--err-bord); color: var(--err); background: var(--err-surf); }
+.fav-run.is-abrt:hover { background: var(--err-surf2); border-color: var(--err); }
+.fav-del { font-size: var(--font-11); color: var(--dim); border: var(--size-1) solid var(--border); padding: var(--sp-1) var(--sp-6); opacity: 0; transition: opacity var(--time-p1s), color var(--time-p1s), border-color var(--time-p1s); flex-shrink: 0; cursor: pointer; }
+.fav-item:hover .fav-del { opacity: 1; }
+.fav-del:hover { color: var(--err) !important; border-color: var(--err) !important; }
+.fav-edit { font-size: var(--font-11); color: var(--dim); border: var(--size-1) solid var(--border); padding: var(--sp-1) var(--sp-6); opacity: 0; transition: opacity var(--time-p1s), color var(--time-p1s), border-color var(--time-p1s); flex-shrink: 0; cursor: pointer; }
+.fav-item:hover .fav-edit { opacity: 1; }
+.fav-labl-btn { opacity: .3; }
+.fav-labl-btn:hover { color: var(--color-light-sunflower) !important; border-color: var(--color-light-sunflower) !important; }
+.fav-chain-btn:hover { color: var(--color-light-carrot) !important; border-color: var(--color-light-carrot) !important; }
+.fav-cmdedit-btn:hover { color: var(--color-dark-wisteria) !important; border-color: var(--color-dark-wisteria) !important; }
+.fav-copy-btn:hover { color: var(--color-light-turquoise) !important; border-color: var(--color-light-turquoise) !important; }
+.fav-dup-btn:hover { color: var(--color-dark-nephritis) !important; border-color: var(--color-dark-nephritis) !important; }
+.fav-sche-btn:hover { color: var(--color-dark-greensea) !important; border-color: var(--color-dark-greensea) !important; }
+.fav-pin-btn:hover { color: var(--color-light-peterriver) !important; border-color: var(--color-light-peterriver) !important; }
+.fav-newgrp-btn:hover { color: var(--color-dark-belizehole) !important; border-color: var(--color-dark-belizehole) !important; }
+.fav-chain-badge { font-size: var(--font-9); padding: 0 var(--sp-4); border-radius: var(--radi-3); border: var(--size-1) solid var(--border2); color: var(--info); flex-shrink: 0; line-height: 1.6; }
+.fav-labl-pill { font-family: var(--mono); font-size: var(--font-9); padding: var(--sp-1) var(--sp-6); border-radius: var(--radi-3); border: var(--size-1) solid; flex-shrink: 1; min-width: 0; max-width: 45%; overflow: hidden; text-overflow: ellipsis; cursor: pointer; white-space: nowrap; line-height: 1.6; transition: opacity var(--time-p1s); }
+.fav-labl-pill:hover { opacity: .6; }
+.labl-popu { background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius); box-shadow: var(--shad-md); padding: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-6); min-width: var(--size-185); }
+.labl-popu-inp { font-family: var(--mono); font-size: var(--font-11); padding: var(--sp-4) var(--sp-8); border-radius: var(--radius); border: var(--size-1) solid var(--border); background: var(--bg); color: var(--text); outline: none; width: 100%; box-sizing: border-box; }
+.labl-popu-inp:focus { border-color: var(--acce-bord); box-shadow: 0 0 0 var(--size-3) var(--acce-glow); }
+.labl-colo-row { display: flex; flex-flow: row wrap; gap: var(--sp-4); align-content: center; max-width: calc(var(--size-14) * 7 + var(--sp-4) * 6); }
+.labl-colo-swat { width: var(--size-14); height: var(--size-14); border-radius: 50%; cursor: pointer; flex-shrink: 0; border: var(--size-2) solid transparent; transition: transform var(--time-p1s), border-color var(--time-p1s); }
+.labl-colo-swat:hover { transform: scale(1.2); }
+.labl-colo-swat.sel { border-color: var(--text); }
+.labl-popu-add-row { display: flex; align-items: center; gap: var(--sp-6); }
+.more-wrap { position: relative; }
+.more-drop { display: none; position: fixed; z-index: 600; flex-direction: column; gap: var(--sp-4); background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius); box-shadow: var(--shad-md); padding: var(--sp-6); }
+.more-drop.open { display: flex; }
+.more-drop .btn-sm { text-align: left; }
+.conf-pop { background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius); box-shadow: var(--shad-md); padding: var(--sp-8) var(--sp-10); display: flex; flex-direction: column; gap: var(--sp-8); min-width: var(--size-170); }
+.conf-pop-msg { font-family: var(--mono); font-size: var(--font-11); color: var(--text); }
+.conf-pop-btns { display: flex; align-items: center; gap: var(--sp-6); }
+.conf-pop-skip { font-family: var(--mono); font-size: var(--font-10); color: var(--dim); cursor: pointer; margin-left: auto; }
+.conf-pop-skip:hover { color: var(--muted); text-decoration: underline; }
+.fav-grp-btn { font-size: var(--font-11); padding: 0 var(--sp-4); border-radius: var(--radi-3); border: var(--size-1) solid var(--border); background: transparent; color: var(--dim); cursor: pointer; transition: color var(--time-p1s), border-color var(--time-p1s); flex-shrink: 0; line-height: 1.6; display: flex; align-items: center; }
+.fav-grp-btn:hover { color: var(--color-light-sunflower); border-color: var(--color-light-sunflower); }
+.item-dots-wrap { position: relative; flex-shrink: 0; }
+.item-dots-btn { opacity: 1; pointer-events: auto; width: var(--size-20); height: var(--size-20); display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: var(--radi-3); color: var(--dim); transition: opacity var(--time-p12s); }
+.item-dots-btn:hover { background: var(--surface2); color: var(--text); }
+.item-dots-drop { position: fixed; z-index: 9999; border: var(--size-1) solid var(--border); border-radius: var(--radi-6); padding: var(--sp-4) var(--sp-4); display: none; flex-flow: row wrap; gap: var(--sp-2); box-shadow: 0 var(--size-4) var(--size-16) rgba(0,0,0,.3); max-width: calc(100vw - var(--size-8)); }
+.item-dots-drop.open { display: flex; background: var(--bg); }
+.item-dots-drop .hist-fav, .item-dots-drop .fav-del, .item-dots-drop .fav-edit, .item-dots-drop .fav-grp-btn, .item-dots-drop .hist-edit, .item-dots-drop .hist-new-grp, .item-dots-drop .btn-blk { opacity: 1 !important; margin-left: 0 !important; width: auto; box-sizing: border-box; cursor: pointer; padding: var(--sp-2) var(--sp-6); border-radius: var(--radi-4); display: flex; align-items: center; flex-shrink: 0; }
+.item-dots-drop .btn-blk .blk-lbl { display: none !important; }
+.sidebar-panel-foot { display: flex; justify-content: flex-start; gap: var(--sp-4); position: sticky; bottom: 0; background: var(--surface); }
+.sidebar-panel-outp .sidebar-panel-foot { padding: var(--sp-6); }
+.btn-grp-add { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: var(--font-9); font-family: var(--mono); padding: var(--sp-1) var(--sp-6); border-radius: var(--radi-3); border: var(--size-1) solid var(--border); background: transparent; color: var(--dim); cursor: pointer; transition: color var(--time-p1s), border-color var(--time-p1s); white-space: nowrap; }
+.btn-grp-add:hover { color: var(--accent); border-color: var(--accent); }
+.btn-grp-add svg { width: var(--size-10); height: var(--size-10); }
+#scheExpoBtn:hover, #favExpoBtn:hover, #histExpoBtn:hover, #outpExpoBtn:hover { color: var(--color-light-peterriver); border-color: var(--color-light-peterriver); }
+#scheImpoBtn:hover, #favImpoBtn:hover, #histImpoBtn:hover, #outpImpoBtn:hover { color: var(--color-light-sunflower); border-color: var(--color-light-sunflower); }
+/* =======================___THIS_IS_THE_END___=======================
+==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___============== */

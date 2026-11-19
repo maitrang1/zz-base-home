@@ -1,0 +1,21 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Unit tests for the one-time saved label fix
+// Flo: load both label files > feed saved entries > assert changed or kept
+// I/O: history lists + output maps > counts and exact labels
+// Run: node "E:\zz-base-home\ac-auto-task\js-labl-migr-test.js"
+// ===================================================================
+const fs = require('fs'); const vm = require('vm'); const assert = require('assert'); const path = require('path'); const ctxz = vm.createContext({}); for (const file of ['js-labl-auto.js', 'js-labl-migr.js']) vm.runInContext(fs.readFileSync(path.join(__dirname, file), 'utf8'), ctxz); let doneCoun = 0; const test = (name, func) => { try { func(); doneCoun++; } catch (erro) { console.error('FAIL ' + name + '\n' + erro.message); process.exitCode = 1; } };
+const SHOT = [['cd /d E:\\zz-base-home && dir /b', 'd zz-base-home &&'], ['dir /b', 'b'], ['cd /d E:\\zz-base-home', 'd zz-base-home'], ['echo %USERNAME% %COMPUTERNAME%', '%USERNAME% %COMPUTERNAME%'], ['ping -t 127.0.0.1', '127.0.0.1'], ['dir C:\\ && dir C:\\no-such-folder', '&& dir no-such-folder'], ['ping -n 6 127.0.0.1', '127.0.0.1'], ['cmd /c exit 3', 'c exit 3'], ['echo hello', 'hello']];
+const SAME = ['npm run build', 'git commit -m "fix bug"', 'node server.js', 'python a.py b.py', 'docker compose up', 'C:\\tools\\my.exe --live', 'ls -la /usr/bin', 'ls -la', 'grep "foo bar" file.txt', 'ssh {host}', 'git status', 'zig build test', 'echo hello', '/usr/bin/env node', 'dir > out.txt'];
+for (const [cmdz, want] of SHOT) test('old builder matches the label the page showed: ' + cmdz, () => assert.strictEqual(ctxz.lablAutoOldz(cmdz), want));
+for (const cmdz of SAME) test('new builder equals old for plain command: ' + cmdz, () => assert.strictEqual(ctxz.lablAutoBuil(cmdz), ctxz.lablAutoOldz(cmdz)));
+test('an old auto label in history becomes the new one', () => { const hist = [{ cmd: 'dir /b', label: 'b', color: '#fff' }]; const resu = ctxz.lablMigrRun(hist, {}); assert.deepStrictEqual({ ...resu }, { hist: 1, outp: 0 }); assert.strictEqual(hist[0].label, 'dir'); assert.strictEqual(hist[0].color, '#fff'); });
+test('all nine labels from the screenshot move to the new rules', () => { const hist = SHOT.map(([cmdz, labl]) => ({ cmd: cmdz, label: labl })); const resu = ctxz.lablMigrRun(hist, {}); assert.strictEqual(resu.hist, 5); assert.deepStrictEqual(hist.map(entr => entr.label), ['dir', 'dir', 'cd zz-base-home', '%USERNAME% %COMPUTERNAME%', '127.0.0.1', 'dir', '127.0.0.1', 'exit 3', 'hello']); });
+test('a label the user edited is never touched', () => { const hist = [{ cmd: 'dir /b', label: 'my files' }, { cmd: 'dir /b', label: '' }, { cmd: 'dir /b', label: 'dir' }]; const resu = ctxz.lablMigrRun(hist, {}); assert.strictEqual(resu.hist, 0); assert.deepStrictEqual(hist.map(entr => entr.label), ['my files', '', 'dir']); });
+test('saved output blocks are fixed per tab, other shapes are skipped', () => { const outp = { main: [{ cmd: 'cmd /c exit 3', label: 'c exit 3', data: { code: 3 } }, { cmd: 'echo hello', label: 'hello' }], odd: 'text', none: null, list: [null, 5, { cmd: 'x' }, { label: 'b' }] }; const resu = ctxz.lablMigrRun([], outp); assert.deepStrictEqual({ ...resu }, { hist: 0, outp: 1 }); assert.strictEqual(outp.main[0].label, 'exit 3'); assert.deepStrictEqual(outp.main[0].data, { code: 3 }); assert.strictEqual(outp.main[1].label, 'hello'); });
+test('bad input never throws', () => { for (const [hist, outp] of [[null, null], [undefined, undefined], ['x', 5], [[null, 1, 'a', {}, { cmd: 1, label: 2 }], { a: [null] }]]) assert.deepStrictEqual({ ...ctxz.lablMigrRun(hist, outp) }, { hist: 0, outp: 0 }); });
+test('running twice changes nothing the second time', () => { const hist = [{ cmd: 'dir /b', label: 'b' }, { cmd: 'cd /d E:\\x', label: 'd x' }]; assert.strictEqual(ctxz.lablMigrRun(hist, {}).hist, 2); assert.deepStrictEqual({ ...ctxz.lablMigrRun(hist, {}) }, { hist: 0, outp: 0 }); });
+console.log(doneCoun + ' passed' + (process.exitCode ? ', some FAILED' : ''));
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

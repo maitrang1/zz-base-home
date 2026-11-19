@@ -1,0 +1,13 @@
+{
+  "name": "auto-task-mini",
+  "version": "1.0.0",
+  "description": "Optional always-on-top Electron wrapper for auto-task. Loads the same local page the browser loads, no duplicated UI logic.",
+  "main": "js-mini-main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^30.0.0"
+  }
+}

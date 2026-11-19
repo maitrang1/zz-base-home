@@ -1,0 +1,17 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Clickable links in output lines
+// Flo: find http(s):// and www. in text > trim trailing marks > check scheme > split into text and link parts > build safe anchors + a copy mark
+// I/O: plain text or escaped line HTML > parts or HTML with <a class="out-link"> anchors; click on a copy mark > link in the clipboard
+// ===================================================================
+const CF_LINK = { find: /(?:https?:\/\/|www\.)[^\s<>"'`]+/gi, tail: '.,;:!?\'"', pair: { ')': '(', ']': '[', '}': '{' }, maxUrl: 2048, maxLine: 8192, hint: /:\/\/|www\./i, doneMsec: 1200 };
+function linkTrim(strz) { let endz = strz.length; for (;;) { const last = strz[endz - 1]; if (last !== undefined && CF_LINK.tail.includes(last)) { endz--; continue; } const open = CF_LINK.pair[last]; if (open) { let opnz = 0, clsz = 0; for (let indx = 0; indx < endz; indx++) { if (strz[indx] === open) opnz++; else if (strz[indx] === last) clsz++; } if (clsz > opnz) { endz--; continue; } } break; } return strz.slice(0, endz); }
+function linkHref(strz) { const href = /^www\./i.test(strz) ? 'https://' + strz : strz; try { const urlz = new URL(href); if ((urlz.protocol !== 'http:' && urlz.protocol !== 'https:') || !/[a-z0-9]/i.test(urlz.hostname)) return ''; } catch { return ''; } return href; }
+function linkSplit(strz) { if (strz.length > CF_LINK.maxLine || !CF_LINK.hint.test(strz)) return [{ t: strz }]; const outz = []; let last = 0; for (const mtch of strz.matchAll(CF_LINK.find)) { const idxz = mtch.index, prev = idxz > 0 ? strz[idxz - 1] : ''; if (prev && (/^www\./i.test(mtch[0]) ? /[\w.\/@:%#-]/.test(prev) : /[A-Za-z0-9]/.test(prev))) continue; const text = linkTrim(mtch[0].slice(0, CF_LINK.maxUrl)), href = linkHref(text); if (!href) continue; if (idxz > last) outz.push({ t: strz.slice(last, idxz) }); outz.push({ t: text, h: href }); last = idxz + text.length; } if (last < strz.length) outz.push({ t: strz.slice(last) }); return outz.length ? outz : [{ t: strz }]; }
+function linkAnch(part) { return '<span class="out-copy" data-copy="' + esc(part.h) + '" title="copy link"></span><a class="out-link" href="' + esc(part.h) + '" target="_blank" rel="noopener noreferrer">' + esc(part.t) + '</a>'; }
+function linkHtml(html) { if (!CF_LINK.hint.test(html)) return html; return html.split(/(<[^>]*>)/).map(segz => { if (segz.startsWith('<') || !CF_LINK.hint.test(segz)) return segz; return linkSplit(segz.replace(/&(lt|gt|amp);/g, (skip, nam) => ({ lt: '<', gt: '>', amp: '&' })[nam])).map(part => part.h ? linkAnch(part) : esc(part.t)).join(''); }).join(''); }
+function linkCopyFall(href) { try { const area = document.createElement('textarea'); area.value = href; area.style.position = 'fixed'; area.style.opacity = '0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } catch {} }
+function linkCopyDo(evnt) { const butt = evnt.target?.closest?.('[data-copy]'); if (!butt) return; const href = butt.dataset.copy; Promise.resolve().then(() => navigator.clipboard.writeText(href)).catch(() => linkCopyFall(href)); butt.classList.add('is-done'); setTimeout(() => butt.classList.remove('is-done'), CF_LINK.doneMsec); }
+if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', linkCopyDo);
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

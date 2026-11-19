@@ -1,0 +1,14 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Unit tests for shell names, argv and cmd bootstrap
+// Flo: parse shell name > build argv > assert per OS
+// I/O: shell name + command > ShelKind, argv
+// ===================================================================
+const std = @import("std"); const builtin = @import("builtin"); const spaw = @import("ru-spaw-engi.zig");
+const tszz = std.testing; const enviExpa = spaw.enviExpa; const cmdzBootUses = spaw.cmdzBootUses; const argvBuil = spaw.argvBuil; const shelPars = spaw.shelPars; const ShelKind = spaw.ShelKind;
+fn mapzTest(allo: std.mem.Allocator) !std.process.Environ.Map { var mapz: std.process.Environ.Map = .init(allo); try mapz.put("FOO", "bar"); try mapz.put("USERNAME", "Admin"); try mapz.put("EMPTY", ""); return mapz; }
+test "cmdzBootUses only for cmd/default, and only on Windows" { const wind = builtin.os.tag == .windows; try tszz.expectEqual(wind, cmdzBootUses(.cmdz)); try tszz.expectEqual(wind, cmdzBootUses(.defa)); try tszz.expect(!cmdzBootUses(.powe)); try tszz.expect(!cmdzBootUses(.pwsh)); try tszz.expect(!cmdzBootUses(.bash)); try tszz.expect(!cmdzBootUses(.shzz)); }
+test "argvBuil: cmd bootstrap; bash is -c, bash-login is -lc" { const argv_cmdz = try argvBuil(tszz.allocator, .cmdz, "echo hi"); defer tszz.allocator.free(argv_cmdz); if (builtin.os.tag == .windows) { try tszz.expectEqualStrings("%CMDRUN_CMD%", argv_cmdz[argv_cmdz.len - 1]); } const argv_bash = try argvBuil(tszz.allocator, .bash, "echo hi"); defer tszz.allocator.free(argv_bash); try tszz.expectEqualStrings("-c", argv_bash[1]); try tszz.expectEqualStrings("echo hi", argv_bash[argv_bash.len - 1]); const argv_logi = try argvBuil(tszz.allocator, .bash_logi, "echo hi"); defer tszz.allocator.free(argv_logi); try tszz.expectEqualStrings("-lc", argv_logi[1]); }
+test "shelPars maps every UI name, unknown = default" { try tszz.expectEqual(ShelKind.bash_logi, shelPars("bash-login")); try tszz.expectEqual(ShelKind.zshz, shelPars("zsh")); try tszz.expectEqual(ShelKind.wslz, shelPars("wsl")); try tszz.expectEqual(ShelKind.defa, shelPars("nope")); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

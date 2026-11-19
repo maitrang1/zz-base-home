@@ -1,0 +1,18 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Command input suggestion dropdown and run button
+// Flo: type cmd > filter > render drop > highlight > run
+// I/O: cmdInput text (DOM) > suggestion dropdown, run call (DOM)
+// ===================================================================
+cmdInput.addEventListener('input', () => { clearCmdBtn.style.display = cmdInput.value ? 'block' : 'none'; inlineError.classList.remove('show'); if (activeTab) activeTab.cmd = cmdInput.value; if (activeTab?.running) updateRunUi(activeTab); });
+clearCmdBtn.addEventListener('click', () => { cmdInput.value = ''; clearCmdBtn.style.display = 'none'; inlineError.classList.remove('show'); stor.rem('cmrn_cmd'); cmdInput.focus(); if (activeTab?.running) updateRunUi(activeTab); });
+let cmdzDropIndx = -1;
+function cmdzDropRend() { cmdDrop.innerHTML = ''; cmdzDropIndx = -1; const quer = cmdInput.value.toLowerCase(), tabzHist = (activeTab && activeTab.hist) ? activeTab.hist : [], histMatc = tabzHist.filter(cmdz => !quer || cmdz.toLowerCase().includes(quer)).slice(0, CFHI.dropShow); if (!histMatc.length) { cmdDrop.classList.remove('open'); return; } histMatc.forEach((hist, indx) => { const item = document.createElement('div'); item.className = 'builder-drop-item'; item.dataset.idx = indx; const textElem = document.createElement('span'); textElem.style.cssText = 'flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0'; textElem.textContent = hist; item.appendChild(textElem); item.addEventListener('mousedown', evnt => { evnt.preventDefault(); cmdInput.value = hist; clearCmdBtn.style.display = 'block'; stor.set('cmrn_cmd', hist); cmdDrop.classList.remove('open'); cmdInput.focus(); }); cmdDrop.appendChild(item); }); cmdDrop.classList.add('open'); }
+function cmdzDropHigh(indx) { const itemList = cmdDrop.querySelectorAll('.builder-drop-item'); itemList.forEach((elem, iter) => elem.classList.toggle('active', iter === indx)); if (itemList[indx]) itemList[indx].scrollIntoView({ block: 'nearest' }); }
+cmdInput.addEventListener('focus', cmdzDropRend);
+cmdInput.addEventListener('input', cmdzDropRend);
+cmdInput.addEventListener('blur', () => setTimeout(() => cmdDrop.classList.remove('open'), CFHI.blurWait));
+cmdInput.addEventListener('keydown', evnt => { if (evnt.key === 'Enter') { if (cmdDrop.classList.contains('open') && cmdzDropIndx >= 0) { const itemList = cmdDrop.querySelectorAll('.builder-drop-item'); if (itemList[cmdzDropIndx]) { itemList[cmdzDropIndx].dispatchEvent(new MouseEvent('mousedown')); return; } } runCmd(true); return; } if (evnt.key === 'ArrowUp') { evnt.preventDefault(); if (cmdDrop.classList.contains('open')) { cmdzDropIndx = Math.max(0, cmdzDropIndx - 1); cmdzDropHigh(cmdzDropIndx); } else { if (histIndex < cmdHistory.length - 1) { histIndex++; cmdInput.value = cmdHistory[histIndex].cmd; clearCmdBtn.style.display = 'block'; } } } if (evnt.key === 'ArrowDown') { evnt.preventDefault(); if (cmdDrop.classList.contains('open')) { const itemList = cmdDrop.querySelectorAll('.builder-drop-item'); cmdzDropIndx = Math.min(itemList.length - 1, cmdzDropIndx + 1); cmdzDropHigh(cmdzDropIndx); } else { if (histIndex > 0) { histIndex--; cmdInput.value = cmdHistory[histIndex].cmd; } else { histIndex = -1; cmdInput.value = ''; clearCmdBtn.style.display = 'none'; } } } if (evnt.key === 'Escape') { cmdDrop.classList.remove('open'); } });
+runBtn.onclick = () => runCmd(true);
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

@@ -1,0 +1,14 @@
+#!/bin/sh
+# ===================================================================
+# Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+# Des: Pre-push: secret scan of the repo (advisory, CI repeats)
+# Flo: go to repo root > gitleaks on history
+# I/O: git repo > exit 0 ok, non-zero blocks the push
+# Run: git config core.hooksPath ci-flow-sync
+# ===================================================================
+set -e
+cd "$(git rev-parse --show-toplevel)"
+tool() { if command -v mise >/dev/null 2>&1; then mise exec -- "$@"; else "$@"; fi; }
+tool gitleaks git --redact --no-banner
+# =======================___THIS_IS_THE_END___=======================
+# ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

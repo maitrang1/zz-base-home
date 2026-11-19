@@ -1,0 +1,58 @@
+/* ===================================================================
+Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+Des: Sidebar layout, tabs, search, history rows
+Flo: read selectors > style sidebar shell > style history
+I/O: sidebar markup (html) > sidebar shell and history look
+=================================================================== */
+.sidebar { container-type: inline-size; container-name: sidebar; width: 25%; min-width: var(--size-160); max-width: 80%; flex-shrink: 0; border-right: var(--size-1) solid var(--border); background: var(--surface); display: flex; flex-direction: column; overflow: hidden; position: relative; user-select: none; transition: width var(--time-p15s), min-width var(--time-p15s), border var(--time-p15s); }
+.sidebar.collapsed { width: 0 !important; min-width: 0 !important; border-right: none; }
+.sidebar-resize { position: absolute; right: 0; top: 0; bottom: 0; width: var(--size-5); cursor: col-resize; z-index: 10; }
+.sidebar-resize:hover { background: var(--accent); opacity: .3; }
+@media (pointer: coarse) { .sidebar-resize { width: var(--size-20); right: calc(-1 * var(--size-8)); } }
+.sidebar-tabs { display: flex; justify-content: space-between; border-bottom: var(--size-1) solid var(--border); background: var(--surface); flex-shrink: 0; padding: 0 var(--sp-10); }
+.sidebar-tabs .sidebar-tab-mobi { display: none; }
+.sidebar-tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: var(--sp-4); font-size: var(--font-10); letter-spacing: var(--size-p1em); text-transform: uppercase; font-family: var(--mono); color: var(--muted); background: none; border: none; border-bottom: var(--size-2) solid transparent; padding: var(--sp-8) 0; cursor: pointer; transition: color var(--time-p12s), border-color var(--time-p12s); }
+.sidebar-tab i { width: var(--size-12); height: var(--size-12); }
+.sidebar-tab:hover { color: var(--text); }
+.sidebar-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+@container sidebar (max-width: 300px) { .sidebar-tab-label { font-size: 0; letter-spacing: 0; } .sidebar-tab-label::before { content: attr(data-short); font-size: var(--font-10); letter-spacing: var(--size-p1em); } }
+.sidebar-panels { flex: 1; overflow: hidden; position: relative; }
+.sidebar-panel { display: none; height: 100%; overflow-y: auto; padding: var(--sp-10); }
+.sidebar-panel.active { display: block; }
+.sidebar-panel::-webkit-scrollbar-thumb { background: var(--dim); border-radius: var(--radi-4); }
+.sidebar-panel::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+.sidebar-panel-head { display: flex; align-items: center; gap: var(--sp-6); margin-bottom: var(--sp-6); }
+#histSectHead { display: contents; }
+.sidebar-panel-head .sche-stat { padding: 0; white-space: nowrap; }
+.sidebar-panel-head .btn-grp-add, .sidebar-panel-head .btn-sm { height: var(--sp-20); border-radius: var(--radius); box-sizing: border-box; display: inline-flex; align-items: center; }
+.fav-search, .sche-search, .hist-search, .outp-search { flex: 1; height: var(--sp-20); box-sizing: border-box; font-family: var(--mono); font-size: var(--font-11); padding: 0 var(--sp-8); border-radius: var(--radius); border: var(--size-1) solid var(--border); background: var(--bg); color: var(--text); outline: none; }
+.fav-search:focus, .sche-search:focus, .hist-search:focus, .outp-search:focus { border-color: var(--acce-bord); box-shadow: 0 0 0 var(--size-3) var(--acce-glow); }
+.fav-search::placeholder, .sche-search::placeholder, .hist-search::placeholder, .outp-search::placeholder { color: var(--dim); }
+.outp-search { flex: 0 1 30%; min-width: 0; display: none; }
+.hist-item { font-family: var(--mono); font-size: var(--font-12); padding: var(--sp-6) 0; border-radius: var(--radius); color: var(--muted); cursor: grab; transition: background var(--time-p12s), color var(--time-p12s); display: flex; align-items: center; gap: var(--sp-6); border: var(--size-1) solid transparent; }
+.hist-item:hover { background: var(--surface2); color: var(--text); }
+.hist-run { font-size: var(--font-10); padding: var(--sp-1) var(--sp-6); line-height: 1.2; border-radius: var(--radi-3); border: var(--size-1) solid var(--border); color: var(--dim); background: transparent; transition: color var(--time-p1s), border-color var(--time-p1s), background var(--time-p1s); flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.hist-run:hover { color: var(--accent); border-color: var(--accent); background: var(--acce-surf); }
+.hist-run.is-abrt { border-color: var(--err-bord); color: var(--err); background: var(--err-surf); }
+.hist-run.danger:hover { color: var(--err); border-color: var(--err); background: var(--err-surf); }
+.hist-run.is-abrt:hover { background: var(--err-surf2); border-color: var(--err); }
+.hist-fav { font-size: var(--font-11); padding: var(--sp-1) var(--sp-6); border-radius: var(--radi-3); border: var(--size-1) solid var(--border); background: transparent; color: var(--dim); transition: color var(--time-p1s), border-color var(--time-p1s); flex-shrink: 0; cursor: pointer; display: flex; align-items: center; }
+.hist-fav:hover { color: var(--color-dark-pumpkin); border-color: var(--color-dark-pumpkin); }
+.hist-new-grp { font-size: var(--font-11); padding: var(--sp-1) var(--sp-6); border-radius: var(--radi-3); border: var(--size-1) solid var(--border); background: transparent; color: var(--dim); transition: color var(--time-p1s), border-color var(--time-p1s); flex-shrink: 0; cursor: pointer; display: flex; align-items: center; }
+.hist-new-grp:hover { color: var(--color-dark-belizehole); border-color: var(--color-dark-belizehole); }
+.hist-edit { font-size: var(--font-11); padding: var(--sp-1) var(--sp-6); border-radius: var(--radi-3); border: var(--size-1) solid var(--border); background: transparent; color: var(--dim); transition: color var(--time-p1s), border-color var(--time-p1s); flex-shrink: 0; cursor: pointer; display: flex; align-items: center; }
+.hist-edit:hover { color: var(--color-dark-wisteria); border-color: var(--color-dark-wisteria); }
+.hist-del-btn:hover { color: var(--err) !important; border-color: var(--err) !important; }
+.hist-copy-btn:hover { color: var(--color-light-turquoise) !important; border-color: var(--color-light-turquoise) !important; }
+.hist-sche-btn:hover { color: var(--color-dark-greensea) !important; border-color: var(--color-dark-greensea) !important; }
+.hist-newtab-btn:hover, .fav-newtab-btn:hover { color: var(--color-light-amethyst) !important; border-color: var(--color-light-amethyst) !important; }
+.hist-chain-btn:hover { color: var(--color-light-carrot) !important; border-color: var(--color-light-carrot) !important; }
+.hist-dup-btn:hover { color: var(--color-dark-nephritis) !important; border-color: var(--color-dark-nephritis) !important; }
+.hist-labl-btn:hover { color: var(--color-light-sunflower) !important; border-color: var(--color-light-sunflower) !important; }
+.hist-item .fav-grp-btn { padding: var(--sp-1) var(--sp-6); font-size: inherit; line-height: normal; }
+.hist-item-code { font-size: var(--font-10); flex-shrink: 0; width: var(--size-16); height: var(--size-16); border-radius: var(--radi-3); display: flex; align-items: center; justify-content: center; }
+.code-ok { background: var(--acce-bg); color: var(--accent); }
+.code-err { background: var(--err-bg); color: var(--err); }
+.hist-clea-btn { margin-left: auto; }
+/* =======================___THIS_IS_THE_END___=======================
+==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___============== */

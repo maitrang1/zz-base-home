@@ -1,0 +1,54 @@
+/* ===================================================================
+Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+Des: Palette bar, modal overlays, boot loader styles
+Flo: read selectors > style overlays > style boot loader
+I/O: overlay markup (html) > modal and loader look
+=================================================================== */
+.palette-bar { display: none; position: fixed; top: var(--topBarHei); width: 100%; max-width: var(--size-600); background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius-lg); box-shadow: var(--shad-lg); z-index: 100; overflow: hidden; }
+.palette-bar.visible { display: block; }
+.palette-bar-inner { display: block; }
+.palette-input { width: 100%; font-family: var(--mono); font-size: var(--font-14); padding: var(--sp-12) var(--sp-16); background: transparent; border: none; border-bottom: var(--size-1) solid var(--border); color: var(--text); outline: none; box-sizing: border-box; }
+.palette-input::placeholder { color: var(--dim); }
+.palette-results { max-height: var(--size-280); overflow-y: auto; }
+.palette-item { font-family: var(--mono); font-size: var(--font-12); padding: var(--sp-8) var(--sp-16); cursor: pointer; color: var(--muted); display: flex; align-items: center; gap: var(--sp-10); transition: background var(--time-p1s); }
+.palette-item:hover, .palette-item.selected { background: var(--surface2); color: var(--text); }
+.palette-item-type { font-size: var(--font-10); color: var(--dim); flex-shrink: 0; min-width: var(--size-28); }
+.palette-item-note { font-size: var(--font-10); color: var(--accent); flex-shrink: 0; max-width: 30%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.palette-hint { font-size: var(--font-10); color: var(--dim); padding: var(--sp-6) var(--sp-16); border-top: var(--size-1) solid var(--border); }
+.snip-overlay { display: none; position: fixed; inset: 0; background: var(--over-bg2); z-index: 200; align-items: center; justify-content: center; }
+.snip-overlay.visible { display: flex; }
+.snip-box { background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius-lg); width: var(--size-420); max-width: 90vw; padding: var(--sp-18); box-shadow: var(--shad-lg); }
+.snip-title { font-family: var(--mono); font-size: var(--font-10); color: var(--muted); text-transform: uppercase; letter-spacing: var(--size-p1em); margin-bottom: var(--sp-10); }
+.snip-cmd-preview { font-family: var(--mono); font-size: var(--font-12); color: var(--dim); margin-bottom: var(--sp-14); padding: var(--sp-6) var(--sp-10); background: var(--bg); border-radius: var(--radius); border: var(--size-1) solid var(--border); word-break: break-all; }
+.snip-actions { display: flex; justify-content: flex-end; gap: var(--sp-8); }
+.sess-overlay { display: none; position: fixed; inset: 0; background: var(--over-bg); z-index: 350; align-items: center; justify-content: center; }
+.sess-overlay.visible { display: flex; }
+.sess-box { background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius-lg); padding: var(--sp-18) var(--sp-16); width: var(--size-400); max-width: 92vw; box-shadow: var(--shad-lg); display: flex; flex-direction: column; gap: var(--sp-10); }
+.sess-title { font-family: var(--mono); font-size: var(--font-13); color: var(--accent); display: flex; align-items: center; gap: var(--sp-6); }
+.sess-save-row { display: flex; gap: var(--sp-6); }
+.sess-name-inp { font-family: var(--mono); font-size: var(--font-12); padding: var(--sp-4) var(--sp-8); border-radius: var(--radius); border: var(--size-1) solid var(--border); background: var(--bg); color: var(--text); flex: 1; outline: none; }
+.sess-name-inp:focus { border-color: var(--acce-bord); box-shadow: 0 0 0 var(--size-3) var(--acce-glow); }
+.sess-list { display: flex; flex-direction: column; gap: var(--sp-4); max-height: var(--size-260); overflow-y: auto; }
+.sess-empty { font-size: var(--font-12); color: var(--dim); padding: var(--sp-6) 0; }
+.sess-row { display: flex; align-items: center; gap: var(--sp-8); padding: var(--sp-6) var(--sp-8); border-radius: var(--radius); background: var(--surface2); }
+.sess-row-name { font-family: var(--mono); font-size: var(--font-12); font-weight: 500; color: var(--text); flex: 1; }
+.sess-row-meta { font-size: var(--font-11); color: var(--dim); flex-shrink: 0; }
+.sess-del-btn { color: var(--dim); }
+.sess-del-btn:hover { color: var(--err); border-color: var(--err); }
+.sess-foot { display: flex; justify-content: flex-end; align-items: center; gap: var(--sp-8); }
+.sess-msg { flex: 1; font-size: var(--font-11); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.boot-load { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: row; align-items: center; justify-content: center; gap: var(--sp-8); transition: opacity var(--time-p25s); opacity: 1; }
+.boot-load:not(.visible) { opacity: 0; pointer-events: none; }
+.boot-load-dot { width: var(--size-4); height: var(--size-4); border-radius: 50%; background: var(--accent); animation: pulse var(--time-1s) ease-in-out infinite; }
+.boot-load-dot:nth-child(2) { animation-delay: var(--time-p2s); }
+.boot-load-dot:nth-child(3) { animation-delay: var(--time-p4s); }
+.boot-load-text { font-family: var(--mono); font-size: var(--font-12); color: var(--muted); letter-spacing: var(--size-3); }
+.corner-btns { position: fixed; bottom: var(--size-5); right: var(--size-5); z-index: 99999; display: flex; gap: var(--sp-4); }
+.corner-btn { width: var(--size-20); height: var(--size-20); display: flex; align-items: center; justify-content: center; font-size: var(--font-13); font-family: var(--mono); line-height: 1; padding: 0; background: var(--surface); color: var(--dim); border: var(--size-1) solid var(--border); border-radius: var(--radi-4); cursor: pointer; opacity: .9; transition: color var(--time-p12s), border-color var(--time-p12s), opacity var(--time-p12s); }
+.corner-btn:hover { color: var(--text); border-color: var(--border2); opacity: 1; }
+.corner-btn:disabled { cursor: default; }
+.corner-btn:disabled:hover { color: var(--dim); border-color: var(--border); }
+.corner-btn .lucide { width: var(--size-12); height: var(--size-12); }
+.tab-evicted .corner-btns { display: none; }
+/* =======================___THIS_IS_THE_END___=======================
+==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___============== */

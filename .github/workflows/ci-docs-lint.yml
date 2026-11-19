@@ -1,0 +1,19 @@
+name: ci-docs-lint
+on:
+  pull_request:
+    paths: ['**/*.txt', '**/*.md']
+permissions: {}
+cache-mode: read
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: docs are txt only
+        run: |
+          bad=$(git ls-files '*.md' | grep -v -E '(^|/)(CLAUDE|AGENTS)\.md$|(^|/)do-docs-open/' || true)
+          if [ -n "$bad" ]; then echo "$bad"; exit 1; fi

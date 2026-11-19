@@ -1,0 +1,15 @@
+min_version = "2026.11.9"
+
+[settings]
+lockfile = true
+locked = true
+minimum_release_age = "7d"
+
+[tools]
+zig = "0.16.0"
+zls = "0.16.1"
+gitleaks = "8.30.1"
+zizmor = "1.32.0"
+restic = "0.19.1"
+litestream = "0.5.18"
+age = "1.3.2"

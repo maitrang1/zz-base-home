@@ -1,0 +1,16 @@
+#!/bin/sh
+# ===================================================================
+# Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+# Des: Pre-commit: guard, secret scan, workflow lint (advisory, CI repeats)
+# Flo: go to repo root > guard on all paths > gitleaks on staged > zizmor if workflows changed
+# I/O: git index > exit 0 ok, non-zero blocks the commit
+# Run: git config core.hooksPath ci-flow-sync
+# ===================================================================
+set -e
+cd "$(git rev-parse --show-toplevel)"
+tool() { if command -v mise >/dev/null 2>&1; then mise exec -- "$@"; else "$@"; fi; }
+git ls-files -z | tool zig run ci-flow-sync/ci-comm-guar.zig
+tool gitleaks git --pre-commit --staged --redact --no-banner
+if git diff --cached --name-only | grep -q '^\.github/workflows/'; then tool zizmor .github/workflows; fi
+# =======================___THIS_IS_THE_END___=======================
+# ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

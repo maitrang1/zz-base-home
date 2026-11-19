@@ -1,0 +1,4 @@
+# Electron is an optional, opt-in dependency — never commit it.
+# `npm install` here is a deliberate user choice; the repo stays dep-free.
+node_modules/
+package-lock.json

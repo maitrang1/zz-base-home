@@ -1,0 +1,5 @@
+# State files for the 5-min restic job (`wo bkup stat`). One path per line, relative to the user home.
+# Never list *.db, *.db-wal, *.db-shm (the job skips them: SQLite travels via Litestream + `wo bkup nigh`).
+# Never list secrets (~/.zz-base-home-secr) or the vault; they have their own path (F5).
+.ac-auto-task/config.json
+.ac-auto-task/task-state

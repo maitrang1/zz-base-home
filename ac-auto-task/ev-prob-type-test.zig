@@ -1,0 +1,17 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Unit tests for probe polling and edge firing
+// Flo: arm > poll with fake clock > assert edge fires once
+// I/O: Prob + now ms > bool fire, status name
+// ===================================================================
+const std = @import("std"); const builtin = @import("builtin"); const modu = @import("ev-task-prob.zig");
+const tszz = std.testing; const Prob = modu.Prob; const Kind = modu.Kind; const Cond = modu.Cond; const ArmzErro = modu.ArmzErro; const CF = modu.CF; const probArmz = modu.probArmz; const probTypeChec = modu.probTypeChec; const sizePars = modu.sizePars; const duraPars = modu.duraPars; const statPars = modu.statPars; const procRunn = modu.procRunn;
+var test_iozz_impl = std.Io.Threaded.init_single_threaded; const iozz: std.Io = test_iozz_impl.io();
+fn edge(prob: *Prob, read: Cond) bool { prob.poll_coun += 1; const prev = prob.last; prob.last = read; if (read != .onzz) return false; if (prev != .offz) return false; return true; }
+test "poll cadence: between polls duez() does no work and returns false" { var prob = try probArmz("tcpr", "127.0.0.1:1"); try tszz.expectEqual(@as(i64, CF.poll_slow_msec), prob.poll_msec); try tszz.expect(!prob.duez(iozz, 1000)); try tszz.expectEqual(@as(u32, 0), prob.poll_coun); try tszz.expectEqualStrings("priming", prob.statName()); var time: i64 = 2000; while (time < 1000 + CF.poll_slow_msec) : (time += 1000) try tszz.expect(!prob.duez(iozz, time)); try tszz.expectEqual(@as(u32, 0), prob.poll_coun); try tszz.expect(!prob.duez(iozz, 1000 + CF.poll_slow_msec)); try tszz.expectEqual(@as(u32, 1), prob.poll_coun); }
+test "EDGE not level: a satisfied condition fires exactly once" { var prob = try probArmz("tcpr", "127.0.0.1:3000"); prob.poll_next_msec = 1; prob.last = .unkn; prob.poll_coun = 1; prob.last = .onzz; try tszz.expect(!edge(&prob, .onzz)); try tszz.expect(edge(&prob, .offz) == false); try tszz.expect(edge(&prob, .onzz)); try tszz.expect(!edge(&prob, .onzz)); try tszz.expect(!edge(&prob, .onzz)); try tszz.expect(!edge(&prob, .offz)); try tszz.expect(edge(&prob, .onzz)); }
+test "unknown breaks the edge chain instead of faking one" { var prob = try probArmz("disk", "C:\\<10GB"); try tszz.expect(!edge(&prob, .offz)); try tszz.expect(edge(&prob, .onzz)); try tszz.expect(!edge(&prob, .unkn)); try tszz.expect(!edge(&prob, .onzz)); try tszz.expect(!edge(&prob, .onzz)); try tszz.expect(!edge(&prob, .offz)); try tszz.expect(edge(&prob, .onzz)); }
+test "statName distinguishes waiting from unreadable" { var prob = try probArmz("tcpr", "127.0.0.1:3000"); try tszz.expectEqualStrings("priming", prob.statName()); prob.poll_coun = 1; prob.last = .offz; try tszz.expectEqualStrings("waiting", prob.statName()); prob.last = .onzz; try tszz.expectEqualStrings("satisfied", prob.statName()); prob.last = .unkn; try tszz.expectEqualStrings("unreadable", prob.statName()); prob.last = .offz; prob.last_erro = true; try tszz.expectEqualStrings("unreadable", prob.statName()); }
+test "tcpr sense: a closed local port reads OFF, not unknown" { var prob = try probArmz("tcpr", "127.0.0.1:1"); const cond = prob.tcpzSens(iozz); try tszz.expectEqual(Cond.offz, cond); try tszz.expect(!prob.last_erro); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

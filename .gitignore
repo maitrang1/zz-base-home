@@ -1,0 +1,17 @@
+*.key
+*.pem
+*.pass
+.claude/settings.local.json
+.env*
+.zig-cache/
+AGENTS.md
+CLAUDE.md
+aa-todo-*/
+ag-agen*/
+do-*/
+!do-docs-open/
+id_ed25519*
+node_modules/
+zig-out/
+zig-pkg/
+zz-dele-auto/

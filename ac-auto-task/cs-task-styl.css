@@ -1,0 +1,89 @@
+/* ===================================================================
+Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+Des: Schedule task list, editor, log viewer styles
+Flo: read selectors > style task list > style editor and log
+I/O: schedule markup (html, js) > schedule pane look
+=================================================================== */
+.sche-stat { display: flex; flex-wrap: wrap; gap: var(--sp-6); align-items: center; padding: 0 0 var(--sp-6); }
+.sche-count { font-family: var(--mono); font-size: var(--font-10); color: var(--dim); }
+.sche-warn { font-family: var(--mono); font-size: var(--font-10); color: var(--warn); }
+.sche-bad { font-family: var(--mono); font-size: var(--font-10); color: var(--err); border: var(--size-1) solid var(--err); border-radius: var(--radius); padding: 0 var(--sp-4); cursor: help; }
+#scheList { display: flex; flex-direction: column; gap: var(--sp-4); padding-bottom: var(--sp-8); }
+.sche-item { border-radius: var(--radius); padding: var(--sp-6) var(--sp-8); display: flex; align-items: center; gap: var(--sp-6); min-width: 0; transition: background var(--time-p12s), opacity var(--time-p12s); }
+.sche-item:hover { background: var(--surface2); }
+.sche-item.off { opacity: .5; }
+.sche-type { font-family: var(--mono); font-size: var(--font-9); letter-spacing: var(--size-p06em); padding: var(--sp-1) var(--sp-6); border-radius: var(--radi-3); border: var(--size-1) solid var(--acce-bord); color: var(--accent); line-height: 1.6; flex-shrink: 0; }
+.sche-id { font-family: var(--mono); font-size: var(--font-11); color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sche-runchip { display: inline-flex; align-items: center; gap: var(--size-4); font-family: var(--mono); font-size: var(--font-9); color: var(--ok, var(--accent)); flex-shrink: 1; min-width: 0; max-width: 60%; white-space: nowrap; }
+.sche-runchip .sche-tail { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.sche-rundot.paused { animation: none; color: var(--warn); }
+.sche-paus-btn.is-paused { color: var(--warn); }
+.sche-rundot { width: var(--size-6); height: var(--size-6); border-radius: 50%; background: currentColor; flex-shrink: 0; animation: pulse var(--time-1p2s) ease-in-out infinite; }
+.sche-rundot.wait { animation: none; opacity: .55; }
+.sche-fires { font-family: var(--mono); font-size: var(--font-9); color: var(--info); flex-shrink: 0; }
+.sche-last { font-size: var(--font-10); flex-shrink: 0; width: var(--size-16); height: var(--size-16); border-radius: var(--radi-3); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.sche-last.ok { color: var(--accent); background: var(--acce-bg); }
+.sche-last.bad { color: var(--err); background: var(--err-bg); }
+.sche-last-popu { z-index: 500; background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius); box-shadow: var(--shad-md); padding: var(--sp-8) var(--sp-10); min-width: var(--size-160); display: flex; flex-direction: column; gap: var(--sp-4); font-family: var(--mono); font-size: var(--font-11); }
+.sche-last-popu-row { display: flex; align-items: center; gap: var(--sp-6); }
+.sche-last-popu-row .ok { color: var(--accent); }
+.sche-last-popu-row .bad { color: var(--err); }
+.sche-last-popu-dim { color: var(--muted); }
+.sche-log-popu { z-index: 500; background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius-lg); box-shadow: var(--shad-lg); padding: var(--sp-14); width: 92vw; max-width: var(--size-640); display: flex; flex-direction: column; gap: var(--sp-8); }
+@media (max-width: 900px) { .sche-log-popu { width: 94vw; } }
+.sche-sche-popu { z-index: 500; background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius); box-shadow: var(--shad-md); padding: var(--sp-8) var(--sp-10); width: var(--size-320); max-width: 92vw; display: flex; flex-direction: column; gap: var(--sp-6); }
+.sche-sche-head { font-family: var(--mono); font-size: var(--font-11); color: var(--text); }
+.sche-sche-bar { display: flex; gap: var(--sp-6); }
+.sche-sche-sel { flex: 0 0 var(--size-4p5rem); width: var(--size-4p5rem); }
+.sche-sche-inp { flex: 1 1 auto; width: auto; }
+.sche-sche-hint { font-size: var(--font-10); color: var(--dim); line-height: 1.5; }
+.sche-sche-err { font-family: var(--mono); font-size: var(--font-10); color: var(--err); }
+.sche-sche-foot { display: flex; justify-content: flex-end; gap: var(--sp-6); margin-top: var(--sp-2); }
+.sche-sche-foot button { font-size: var(--font-10); padding: var(--sp-2) var(--sp-10); border-radius: var(--radi-3); border: var(--size-1) solid var(--border); background: transparent; color: var(--dim); cursor: pointer; transition: color var(--time-p1s), border-color var(--time-p1s), background var(--time-p1s); }
+.sche-sche-save:hover { color: var(--accent); border-color: var(--accent); background: var(--acce-surf); }
+.empty-hint { display: block; margin-top: var(--sp-6); font-size: var(--font-10); color: var(--dim); line-height: 1.5; }
+.empty-hint code { font-family: var(--mono); color: var(--info); }
+.empty-hint b { color: var(--muted); font-weight: 600; }
+.sche-bad-txt { font-family: var(--mono); font-size: var(--font-9); flex-shrink: 0; cursor: help; color: var(--err); background: var(--err-surf); padding: var(--sp-1) var(--sp-4); border-radius: var(--radius); }
+.sche-log-btn:hover { color: var(--color-dark-orange) !important; border-color: var(--color-dark-orange) !important; }
+.sche-tog-btn:hover { color: var(--color-light-emerald) !important; border-color: var(--color-light-emerald) !important; }
+.sche-del-btn:hover { color: var(--err) !important; border-color: var(--err) !important; }
+.sche-copy-btn:hover { color: var(--color-light-turquoise) !important; border-color: var(--color-light-turquoise) !important; }
+.sche-dup-btn:hover { color: var(--color-dark-nephritis) !important; border-color: var(--color-dark-nephritis) !important; }
+.sche-cmdedit-btn:hover { color: var(--color-dark-wisteria) !important; border-color: var(--color-dark-wisteria) !important; }
+.sche-edit-btn:hover { color: var(--color-dark-greensea) !important; border-color: var(--color-dark-greensea) !important; }
+.sche-fav-btn:hover { color: var(--color-dark-pumpkin) !important; border-color: var(--color-dark-pumpkin) !important; }
+.sche-newgrp-btn:hover { color: var(--color-dark-belizehole) !important; border-color: var(--color-dark-belizehole) !important; }
+.sche-pin-btn:hover { color: var(--color-light-peterriver) !important; border-color: var(--color-light-peterriver) !important; }
+.sche-msg { font-family: var(--mono); font-size: var(--font-10); color: var(--info); padding: 0; height: fit-content; }
+.sche-msg:not(:empty) { padding: var(--sp-2) 0; }
+.sche-msg.bad { color: var(--err); }
+.sche-overlay { display: none; position: fixed; inset: 0; background: var(--over-bg); z-index: 360; align-items: center; justify-content: center; }
+.sche-overlay.visible { display: flex; }
+.sche-box { background: var(--surface); border: var(--size-1) solid var(--border2); border-radius: var(--radius-lg); padding: var(--sp-14) var(--sp-14); width: 92vw; max-width: var(--size-560); box-shadow: var(--shad-lg); display: flex; flex-direction: column; gap: var(--sp-8); }
+.sche-box-title { font-family: var(--mono); font-size: var(--font-13); color: var(--accent); display: flex; align-items: center; gap: var(--sp-6); }
+.sche-colo-dot { width: var(--sp-12); height: var(--sp-12); margin: 0 var(--sp-12); border-radius: 50%; flex-shrink: 0; cursor: pointer; border: var(--size-1) solid var(--border2); }
+.sche-form { display: flex; flex-direction: column; gap: var(--sp-6); }
+.sche-row { display: flex; gap: var(--sp-8); align-items: center; justify-content: space-between; }
+.sche-field { display: flex; align-items: center; gap: var(--sp-6); min-width: 0; }
+.sche-field-full { flex: 1; }
+.sche-field-80 { flex: 6; }
+.sche-field-60 { flex: 11; }
+.sche-field-fit { flex: 0 0 auto; }
+.sche-field-area { align-items: flex-start; }
+.sche-row-grp:has(#scheEditLock) { flex: 0 0 auto; }
+.sche-field:has(> #scheEditLock) { flex: 0 0 auto; }
+#scheEditLock { width: var(--size-80); }
+.sche-row-grp { display: flex; gap: var(--sp-8); align-items: center; flex: 1; }
+.sche-row-grp-40 { flex: 9; }
+.sche-row-grp-btns { justify-content: flex-end; }
+.sche-lab { font-family: var(--mono); font-size: var(--font-10); color: var(--muted); width: var(--sp-22); flex-shrink: 0; text-align: right; white-space: nowrap; }
+.sche-field-area .sche-lab { padding-top: var(--sp-4); }
+.sche-inp { font-family: var(--mono); font-size: var(--font-11); padding: var(--sp-4) var(--sp-6); border-radius: var(--radius); border: var(--size-1) solid var(--border2); background: var(--bg); color: var(--text); outline: none; width: 100%; min-width: 0; }
+.sche-inp:focus { border-color: var(--acce-bord); box-shadow: 0 0 0 var(--size-3) var(--acce-glow); }
+.sche-inp:disabled { opacity: .4; cursor: not-allowed; }
+.sche-area { resize: none; overflow: hidden; min-height: var(--size-24); line-height: 1.4; }
+.sche-prim { color: var(--accent); border-color: var(--acce-bord); }
+.sche-log { font-family: var(--mono); font-size: var(--font-11); line-height: 1.5; color: var(--muted); background: var(--bg); border: var(--size-1) solid var(--border); border-radius: var(--radius); padding: var(--sp-8) var(--sp-10); margin: 0; max-height: 52vh; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+/* =======================___THIS_IS_THE_END___=======================
+==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___============== */
