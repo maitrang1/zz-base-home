@@ -23,7 +23,7 @@
 | patc_days_maxz | Most days since the last OS update | 45 | whole number |
 | cpuz_okay_list | CPU model names a release build may have | x86_64, x86_64_v2, generic | text list |
 | bknt_ager_maxz | Longest allowed gap since the nightly database copy (seconds) | 100800 | whole number |
-| devi_name_main | Device name used in backup branch names | empty (uses the computer name) | text |
+| devi_name_main | Device name used in backup branch names. The environment variable `WO_DEVI_NAME` overrides it, so each device can keep its own name | empty (uses the computer name) | text |
 | prof_main | Check set used when you give no `--prof` | t0 | t0, box, ci |
 | chek_t0_list | Checks for the full profile | hook, head, tool, cpuz, wipz, bkup, bknt, dril, tail, tsfl, lock, patc, esus | those names |
 | chek_box_list | Checks for the box profile | same, with clfl instead of esus | those names |

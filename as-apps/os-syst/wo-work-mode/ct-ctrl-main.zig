@@ -21,6 +21,7 @@ const secr = @import("ct-comm-secr.zig");
 const bkup = @import("ct-comm-bkup.zig");
 const CF = .{ .bufz = 8192, .usag = "usage: wo [--conf FILE] [--prof t0|box|ci] [--json] [--live [--force]] stat|conf|doct|wipz|bkup [stat|nigh]|dril|kill|secr init|lend\n" };
 fn devName(allo: std.mem.Allocator, envm: *const std.process.Environ.Map, name: []const u8) ![]const u8 {
+if (envm.get("WO_DEVI_NAME")) |envv| { if (envv.len > 0) return envv; }
 if (name.len > 0) return name;
 const raww = envm.get("COMPUTERNAME") orelse envm.get("HOSTNAME") orelse "devi";
 return std.ascii.allocLowerString(allo, raww);
