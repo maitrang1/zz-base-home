@@ -1,7 +1,9 @@
 # Updates
 
 ## 2026-11-19 · Old setup carried over
-- Windows login now also starts the One-Tap Keys script (`ks-keys-shor`, as admin). It opens your WiFi, Sticky Notes, folders, Chrome profiles and VSCode, then starts the tr scheduler hidden (only if it is not already running) and opens its mini window (only if none is open). Linux does the same with a Chrome tab: no second tr, no second page.
+- Windows login opens your WiFi, Sticky Notes, folders, Chrome profiles and VSCode, then starts the tr scheduler hidden (only if it is not already running) and opens its mini window (only if none is open). Linux does the same with a Chrome tab: no second tr, no second page. The One-Tap Keys script now starts from its own scheduled task, not from this script.
+- New: the old auto hub (`cmd-run`, port 3030) starts with the rest at login, hidden and only if it is not already running (`HUBZ_BINA`, `HUBZ_PORT`). `ru-star-wind.vbs hub` starts only the hub. Linux does the same with `HUBZ_BINA` (detached).
+- New: `ru-star-wind.vbs tr` starts or opens only tr and its mini window. The desktop `CMDRUN` shortcut and the taskbar pin use it.
 - Windows shutdown saves your work with `wo wipz` first, then closes apps. New `ru-shut-wind.bat -Auto` skips the admin prompt and the countdowns (for scheduler jobs).
 - Linux: the AI servers (text and vision) start from the new app `lm-llam-serv`; `AISV_PORT` and `AISV_VPORT` are gone here (ports live in that app's settings), `AISV_VENV` is now the role `visi`.
 - Linux: the opener now starts tr (`ac-auto-task`) instead of cmd-run; new setting `CMDR_JOBS` picks this device's jobs file. The night guard asks tr on port 4000.

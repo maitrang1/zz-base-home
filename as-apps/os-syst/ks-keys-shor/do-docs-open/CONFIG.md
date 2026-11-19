@@ -14,7 +14,7 @@ To change a key, edit its line in `ru-keys-shor.ahk` with Notepad. Other setting
 | taps | `CF` in `ut-keys-func.ahk` | 300 | milliseconds allowed between two taps of a double-tap key |
 | hdbl | `CF` in `ut-keys-func.ahk` | 0.2 | seconds Home waits for its second press |
 | shut | `CF` in `ut-keys-func.ahk` | `ss-star-shut\ru-shut-wind.bat` next to this folder | what End x2 runs |
-| Start at login | `EXTR_LIST` in `ss-star-shut\ru-star-wind.vbs` | on | the login script starts `ru-keys-shor.ahk` as admin |
+| Start at login | Task Scheduler task `keys-short-script-autohotkey` | on | starts `ru-keys-shor.ahk` at log on, as admin, with no prompt |
 
 ## Input
 Key presses.

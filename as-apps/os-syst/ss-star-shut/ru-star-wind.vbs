@@ -1,15 +1,15 @@
 ' ===================================================================
 ' Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-' Des: At login: WiFi, Sticky Notes, folders, Chrome profiles, VSCode, tr scheduler, extras
-' Flo: WiFi > Sticky Notes > folders > Chrome profiles > VSCode > tr (hidden, only if down; mini window only if none open) > extra scripts (admin)
-' I/O: config lines below + aa-conf-main.env (WIFI_NAME, PROF_LIST, VSCO_BINA) > apps opened; a missing item shows a warning and the run goes on
-' Run: wscript.exe "E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-star-wind.vbs"
+' Des: At login: WiFi, Sticky Notes, folders, Chrome profiles, VSCode, tr, old hub (3030); arg tr or hub = that one only
+' Flo: WiFi > Sticky Notes > folders > Chrome profiles > VSCode > tr (hidden, only if down; mini window only if none open) > old hub (hidden, only if down) > extra scripts (admin)
+' I/O: config lines below + aa-conf-main.env (WIFI_NAME, PROF_LIST, VSCO_BINA, HUBZ_BINA, HUBZ_PORT) > apps opened; a missing item shows a warning and the run goes on
+' Run: wscript.exe "E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-star-wind.vbs" [tr|hub]
 ' ===================================================================
 Option Explicit
 Const CODE_OPEN = True : Const TR_PORT = 4000 : Const WAIT_SECO = 3 : Const PAUS_FOLD = 1000 : Const STIC_APPID = "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App"
 Dim sh, fso, waitms, root : Set sh = CreateObject("WScript.Shell") : Set fso = CreateObject("Scripting.FileSystemObject") : waitms = WAIT_SECO * 1000
 root = fso.GetParentFolderName(fso.GetParentFolderName(fso.GetParentFolderName(fso.GetParentFolderName(WScript.ScriptFullName))))
-Dim WIFI_NAME, VSCO_BINA, TR_EXEC, FOLD_LIST, PROF_LIST, EXTR_LIST : WIFI_NAME = "" : VSCO_BINA = "" : TR_EXEC = root & "\ac-auto-task\zig-out\bin\auto-task.exe" : FOLD_LIST = Array(root, "%USERPROFILE%\Downloads") : PROF_LIST = Array("Default") : EXTR_LIST = Array(root & "\as-apps\os-syst\ks-keys-shor\ru-keys-shor.ahk")
+Dim WIFI_NAME, VSCO_BINA, HUBZ_BINA, HUBZ_PORT, TR_EXEC, FOLD_LIST, PROF_LIST, EXTR_LIST : WIFI_NAME = "" : VSCO_BINA = "" : HUBZ_BINA = "" : HUBZ_PORT = 3030 : TR_EXEC = root & "\ac-auto-task\zig-out\bin\auto-task.exe" : FOLD_LIST = Array(root, "%USERPROFILE%\Downloads") : PROF_LIST = Array("Default") : EXTR_LIST = Array()
 Sub Warn(msg, ttl) : MsgBox msg, vbExclamation, ttl : End Sub
 Function EnvPath(nam) : EnvPath = sh.ExpandEnvironmentStrings(nam) : End Function
 Function FindExe(paths) : Dim i : FindExe = "" : For i = 0 To UBound(paths) : If FindExe = "" Then If fso.FileExists(paths(i)) Then FindExe = paths(i)
@@ -57,6 +57,8 @@ Dim i
 Select Case k
 Case "WIFI_NAME" : WIFI_NAME = v
 Case "VSCO_BINA" : VSCO_BINA = v
+Case "HUBZ_BINA" : HUBZ_BINA = v
+Case "HUBZ_PORT" : If IsNumeric(v) Then HUBZ_PORT = CLng(v)
 Case "PROF_LIST" : PROF_LIST = Split(v, ",") : For i = 0 To UBound(PROF_LIST) : PROF_LIST(i) = Trim(PROF_LIST(i)) : Next
 End Select
 End Sub
@@ -75,16 +77,29 @@ Sub OpenStic()
 If STIC_APPID = "" Then Exit Sub
 sh.Run "explorer.exe shell:AppsFolder\" & STIC_APPID, 1, False : WScript.Sleep PAUS_FOLD
 End Sub
-Function TrPing()
+Function PingAt(port)
 Dim tmp, ts
-TrPing = "" : tmp = sh.ExpandEnvironmentStrings("%TEMP%") & "\ss-star-tr-ping.txt"
+PingAt = "" : tmp = sh.ExpandEnvironmentStrings("%TEMP%") & "\ss-star-ping-" & port & ".txt"
 fso.CreateTextFile(tmp, True).Close
-sh.Run "cmd /c curl -s -f -m 2 http://127.0.0.1:" & TR_PORT & "/ping -o """ & tmp & """ >nul 2>&1", 0, True
+sh.Run "cmd /c curl -s -f -m 2 http://127.0.0.1:" & port & "/ping -o """ & tmp & """ >nul 2>&1", 0, True
 Set ts = fso.OpenTextFile(tmp, 1)
-If Not ts.AtEndOfStream Then TrPing = ts.ReadAll
+If Not ts.AtEndOfStream Then PingAt = ts.ReadAll
 ts.Close
+End Function
+Function TrPing()
+TrPing = PingAt(TR_PORT)
 If InStr(TrPing, """ok"":true") = 0 Then TrPing = ""
 End Function
+Sub OpenHub()
+Dim i
+If HUBZ_BINA = "" Then Exit Sub
+If PingAt(HUBZ_PORT) <> "" Then Exit Sub
+If Not fso.FileExists(HUBZ_BINA) Then Warn "Hub not found: " & HUBZ_BINA, "Hub Warning" : Exit Sub
+sh.Run """" & HUBZ_BINA & """ " & HUBZ_PORT, 0, False
+For i = 1 To 20 : WScript.Sleep 500 : If PingAt(HUBZ_PORT) <> "" Then Exit For
+Next
+If PingAt(HUBZ_PORT) = "" Then Warn "Hub did not answer on port " & HUBZ_PORT, "Hub Warning"
+End Sub
 Function UiAge(js)
 Dim rx, m
 UiAge = -1 : Set rx = New RegExp : rx.Pattern = """uiAgeS"":(-?\d+)" : Set m = rx.Execute(js)
@@ -104,6 +119,14 @@ End If
 age = UiAge(js)
 If age < 0 Or age > 90 Then sh.Run "curl.exe -s http://127.0.0.1:" & TR_PORT & "/open-mini", 0, True
 End Sub
-LoadConf : OpenWifi : OpenStic : OpenFold : OpenChro : OpenCode : OpenTr : OpenExtr
+If WScript.Arguments.Count = 0 Then
+LoadConf : OpenWifi : OpenStic : OpenFold : OpenChro : OpenCode : OpenTr : OpenHub : OpenExtr
+ElseIf LCase(WScript.Arguments(0)) = "tr" Then
+LoadConf : OpenTr
+ElseIf LCase(WScript.Arguments(0)) = "hub" Then
+LoadConf : OpenHub
+Else
+Warn "Use: ru-star-wind.vbs [tr|hub]", "Usage"
+End If
 ' =======================___THIS_IS_THE_END___=======================
 ' ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

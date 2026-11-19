@@ -37,6 +37,12 @@ printf '#!/usr/bin/env bash\necho "wdog $*" >> "%s"\n' "$logz" > "$tmpz/bin/fake
 chk "ai watchdog started for text" grep -q "^wdog $" "$logz"
 chk "ai watchdog started for vision role" grep -q "^wdog visi$" "$logz"
 : > "$logz"; AISV_WDOG="$tmpz/bin/none-wdog" bash "$app/ru-star-linu.sh" > "$tmpz/o9.txt"; chk "missing ai watchdog warns and goes on" grep -q "WARN AI server watchdog not found" "$tmpz/o9.txt"
+: > "$logz"; HUBZ_BINA="$tmpz/bin/cmd-run" HUBZ_PORT=39031 bash "$app/ru-star-linu.sh" >/dev/null; sleep 1
+chk "old hub started on its port" grep -q "^cmd-run 39031$" "$logz"
+: > "$logz"; HUBZ_BINA="$tmpz/bin/cmd-run" HUBZ_PORT=$pp bash "$app/ru-star-linu.sh" >/dev/null; sleep 1
+chk "old hub already up: not started again" bash -c "! grep -q '^cmd-run $pp\$' '$logz'"
+HUBZ_BINA="$tmpz/bin/none-hub" bash "$app/ru-star-linu.sh" > "$tmpz/o8.txt"; chk "missing hub warns and goes on" grep -q "WARN hub not found" "$tmpz/o8.txt"
+: > "$logz"; bash "$app/ru-star-linu.sh" >/dev/null; sleep 1; chk "no hub setting: no hub start" bash -c "! grep -q 'cmd-run 3030' '$logz'"
 fini
 # =======================___THIS_IS_THE_END___=======================
 # ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

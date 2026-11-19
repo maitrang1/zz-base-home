@@ -1,7 +1,7 @@
 # ===================================================================
 # Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 # Des: Open the work setup at login (Linux)
-# Flo: load config > folders > tr (detached, silent; skipped if up) > AI servers > Chrome profiles > tr tab (only if no page is open) > VSCode
+# Flo: load config > folders > tr (detached, silent; skipped if up) > old hub (same rule) > AI servers > Chrome profiles > tr tab (only if no page is open) > VSCode
 # I/O: [--dry-run] [--verbose] [status] + aa-conf-main.env > apps launched; missing app = WARN, run goes on
 # Run: bash ~/zz-base-home/as-apps/os-syst/ss-star-shut/ru-star-linu.sh
 # ===================================================================
@@ -23,11 +23,12 @@ tr_wait() { local n=$((OPEN_GAPS * 6)); ((n == 0)) && return 0; while ((n-- > 0)
 gap() { ((dryz)) || sleep "$OPEN_GAPS"; }
 open_fold() { local dir; if have "$FILE_MANA"; then for dir in "$WORK_PATH" ${CLOU_PATH:+"$CLOU_PATH"} "$DOWN_PATH"; do if [[ -d $dir ]]; then launch "$FILE_MANA" "$dir"; ((dryz)) || sleep "${CF_OPEN[paus]}"; else echo "    WARN folder missing: $dir"; fi; done; else echo "    WARN file manager not found: $FILE_MANA"; fi; }
 open_cmdr() { [[ -n $CMDR_BINA ]] || return 0; if [[ ! -x $CMDR_BINA ]]; then echo "    WARN tr not found: $CMDR_BINA"; elif port_up; then detail "tr already up on :$CMDR_PORT"; else launch "$CMDR_BINA" "$CMDR_PORT" ${CMDR_JOBS:+"$CMDR_JOBS"}; ((dryz)) || tr_wait || echo "    WARN tr did not answer on :$CMDR_PORT"; fi; }
+open_hubz() { [[ -n $HUBZ_BINA ]] || return 0; if [[ ! -x $HUBZ_BINA ]]; then echo "    WARN hub not found: $HUBZ_BINA"; elif port_up "$HUBZ_PORT"; then detail "hub already up on :$HUBZ_PORT"; else launch "$HUBZ_BINA" "$HUBZ_PORT"; fi; return 0; }
 open_aisv() { [[ -n $AISV_WDOG ]] || return 0; if [[ ! -r $AISV_WDOG ]]; then echo "    WARN AI server watchdog not found: $AISV_WDOG"; return 0; fi; launch bash "$AISV_WDOG"; [[ -n $AISV_VENV ]] && launch bash "$AISV_WDOG" "$AISV_VENV"; return 0; }
 open_chro() { local profs prof tabz="" age; if have "$CHRO_BINA"; then IFS=',' read -ra profs <<< "$CHRO_PROF"; for prof in "${profs[@]}"; do [[ -z $prof ]] && continue; if [[ -d $CHRO_DATA/launcher-$prof ]]; then if [[ -z $tabz && $CMDR_DBGP != 0 ]]; then chrome_win "$prof" --start-maximized --remote-debugging-port="$CMDR_DBGP" --remote-debugging-address=127.0.0.1; else chrome_win "$prof" --start-maximized; fi; gap; [[ -z $tabz ]] && tabz=$prof; else echo "    WARN Chrome launcher missing: $prof"; fi; done; if [[ -n $CMDR_BINA && -n $tabz ]]; then age=$(tr_age); if [[ -z $age ]] || ((age < 0 || age > 90)); then chrome_win "$tabz" "http://127.0.0.1:$CMDR_PORT"; else detail "tr page already open (age ${age}s)"; fi; fi; else echo "    WARN Chrome not found: $CHRO_BINA"; fi; }
 open_code() { local dir; if have "$CODE_BINA"; then for dir in "$WORK_PATH" ${CLOU_PATH:+"$CLOU_PATH"}; do if [[ -d $dir ]]; then launch "$CODE_BINA" "$dir"; ((dryz)) || sleep "${CF_OPEN[paus]}"; else echo "    WARN folder missing: $dir"; fi; done; else echo "    WARN VSCode not found: $CODE_BINA"; fi; }
 banner "Opening your work setup$( ((dryz)) && echo ' (dry-run)') -- please wait"
-open_fold; open_cmdr; open_aisv; open_chro; open_code
+open_fold; open_cmdr; open_hubz; open_aisv; open_chro; open_code
 banner "Done --> all apps opened"
 exit 0
 # =======================___THIS_IS_THE_END___=======================

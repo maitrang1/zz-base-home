@@ -1,5 +1,8 @@
 # What changed
 
+## 2026-11-20
+Changed: the hub job names are now `work-wipz`, `work-docs`, `work-beat`, `work-bkup-stat`, `work-bkup-nigh`, `work-doct`, `work-dril` (were `wo-...`). The commands they run did not change.
+
 ## 2026-11-18
 Added: first release. Commands `stat`, `conf`, `doct`, `wipz`, `dril`, `kill` and `secr init`.
 Added: practice run by default; `--live` makes real changes.

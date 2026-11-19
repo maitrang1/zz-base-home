@@ -34,7 +34,7 @@ Edits to different lines of a doc are merged. If both devices changed the same l
 ## Get an alarm when the hub dies
 1. Make a free check at an outside monitor (for example Healthchecks.io): period 15 minutes, grace 15 minutes, with an email alert.
 2. Put its https ping address, alone on one line, in a file under your home (outside the repo) and name that file in `beat_urlz_file`.
-3. Practice run: `wo beat`. Real run: `wo beat --live` (every 15 minutes). Turn the job wo-beat on.
+3. Practice run: `wo beat`. Real run: `wo beat --live` (every 15 minutes). Turn the job work-beat on.
 It pings when the stamps in `beat_chek_list` are fresh, and pings `/fail` when they are stale. If the hub stops, the pings stop and the monitor alerts you.
 
 ## Test that a restore works

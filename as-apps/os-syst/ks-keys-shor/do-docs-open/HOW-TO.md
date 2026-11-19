@@ -17,8 +17,8 @@
 | Backtick + 1 to 6 | Heading 1 to 6 | CapsLock x2 | Types `a` (Shift: `A`) |
 
 ## Start at every login
-The login script `ru-star-wind.vbs` already starts it. It asks for admin once per login (click **Yes**), so the keys also work in admin windows.
-Make sure your Startup shortcut points to:
+A Task Scheduler task, `keys-short-script-autohotkey`, starts it at every log on with admin rights and no prompt, so the keys also work in admin windows.
+To change it, open Task Scheduler (`taskschd.msc`) and edit that task. The Startup shortcut (login script) starts the other apps and must point to:
 ```
 E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-star-wind.vbs
 ```
@@ -33,7 +33,7 @@ E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-star-wind.vbs
 ```
 "E:\zz-base-home\as-apps\os-syst\ks-keys-shor\ru-keys-shor.ahk"
 ```
-7. Click OK. Then remove `ru-keys-shor.ahk` from `EXTR_LIST` in `ru-star-wind.vbs`, or it starts twice.
+7. Click OK. Keep `EXTR_LIST` in `ru-star-wind.vbs` empty, or it starts twice.
 
 ## Shut down with End x2
 Double-tap **End**. A countdown starts (`ru-shut-wind.bat`). Press any key to cancel. Save your work first.

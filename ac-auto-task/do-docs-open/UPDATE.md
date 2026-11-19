@@ -1,6 +1,14 @@
 # Updates
 What changed, newest first.
 
+## 2026-11-20
+Changed: the task files (`aa-auto-task.json`, `aa-auto-task-li01.json`) now use the old hub layout: one compact task per line, a blank line between tasks, a fixed key order. The content did not change.
+Changed: the seven `wo-*` task ids are now `work-*` (every id word has 4 letters), for example `work-wipz`. Old log files were copied to the new names. A device that runs its own task file keeps its old history under the old name.
+Added: `do-docs-deve/ta-task-writ.txt`, the rules for writing tasks.
+Changed: the `work-*` jobs no longer carry long command lines with your folders. `ba-cmds-wind.bat` and `sh-cmds-linu.sh` now hold their commands (one line or case per id), find the repo from where they sit, and read the device name from the private `aa-conf-main.env`. On a Linux device that runs `wo`, set `WO_DEVI_NAME` there once, or `wo` uses the computer name.
+Changed: `linu-shut-nigh` moved to the Linux task file only (Linux-only jobs go last).
+Added: two checks for the scripts, `sh-cmds-linu-test.sh` and `ba-cmds-wind-test.bat`.
+
 ## 2026-11-19
 Added: commands now run with a fresh environment (Windows): a program you install or a PATH or variable you change after auto-task started is seen by the next command, with no restart. Setting `envi_mode` in aa-conf-main.json: fresh (default), login (Linux/macOS login shell), inherit (old behavior). `/env` lists which variable names differ.
 Fixed: a tab whose folder was deleted or moved no longer fails every command until the tab is closed. The next command says so and runs in the default folder.

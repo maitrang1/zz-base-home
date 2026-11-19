@@ -11,7 +11,7 @@ File: `aa-conf-main.env` next to the scripts. One `KEY=value` per line. `~` mean
 | Key | Default | Meaning |
 |---|---|---|
 | WORK_PATH | ~/zz-base-home | folder to open and save |
-| CLOU_PATH | ~/04-clou-base | optional 2nd folder (cloud): file manager + its own VSCode window; empty = skip |
+| CLOU_PATH | empty | optional 2nd folder (cloud): file manager + its own VSCode window; empty = skip |
 | DOWN_PATH | ~/Downloads | second folder window |
 | FILE_MANA | nemo | file manager |
 | CHRO_BINA | google-chrome | Chrome command |
@@ -22,6 +22,8 @@ File: `aa-conf-main.env` next to the scripts. One `KEY=value` per line. `~` mean
 | CMDR_PORT | 4000 | tr port; the tab opens in the first CHRO_PROF launcher |
 | CMDR_JOBS | empty | tr jobs file for this device (plain name, e.g. aa-auto-task-mydevice.json); empty = default aa-auto-task.json |
 | CMDR_DBGP | 8000 | debug port on the first Chrome launcher so shutdown can close the tr tab first; 0 = off |
+| HUBZ_BINA | empty (skip) | the old auto hub (`cmd-run`): started detached/hidden only if nothing answers `/ping` on its port. Windows: the `.exe`; Linux: `~/00_modules/04-sche-task/zig-out/bin/cmd-run` (or `dist-lx/cmd-run`) |
+| HUBZ_PORT | 3030 | port of the old hub |
 | AISV_WDOG | empty (skip) | `ru-llam-watc.sh` of the AI server app (`ai-mind/lm-llam-serv`): starts llama-server and keeps it up. Its models and ports live in that app's `aa-conf-main.env` |
 | AISV_VENV | empty (skip) | role of the second server: `visi` starts the vision server with the same watchdog |
 | SYNC_CMDZ | `mise exec -- wo wipz --live` (wo found next to this app) | command run in WORK_PATH before apps close, saves your work to a private backup branch; full paths, no `~`; empty = skip; a missing tool only warns |
@@ -62,7 +64,7 @@ File: `aa-conf-main.env` next to the scripts, for both Windows and Linux. It is 
 
 ## Input
 - Linux: command flags `--dry-run` · `--auto` · `--remove` · `status` · `shortcuts` · `tick|arm|check|disarm|later <min>` (night guard).
-- Windows: `ru-shut-wind.bat -Auto` = no admin prompt and no countdowns (for tr jobs). A key press during a countdown cancels.
+- Windows: `ru-star-wind.vbs tr` = start or open only the tr scheduler and its mini window; `ru-star-wind.vbs hub` = start only the old hub (3030). The login script reads `HUBZ_BINA` and `HUBZ_PORT` from `aa-conf-main.env`. `ru-shut-wind.bat -Auto` = no admin prompt and no countdowns (for tr jobs). A key press during a countdown cancels.
 
 ## Output
 - Console lines with `WARN` for anything skipped. Exit codes: 0 ok · 1 refused or failed · 2 usage.

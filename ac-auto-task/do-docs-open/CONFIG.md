@@ -73,6 +73,7 @@ Optional per job:
 | noLog | no log for this job | false | true · false |
 | _cmt | a note to yourself | — | any text |
 A job with a mistake is not run. It is listed with the reason, and the other jobs keep going.
+Auto-run scripts: the repo's own jobs (`work-*` for the `wo` tool, `linu-shut-nigh`) have no run line; `ba-cmds-wind.bat` / `sh-cmds-linu.sh` know their commands. Private settings for them go in `aa-conf-main.env` next to the scripts (git-ignored, one `KEY=value` per line, an environment variable of the same name wins): `CMDS_MISE` = the mise command (default: mise on your PATH) · `WO_DEVI_NAME` = the device name `wo` uses in its backup refs (default: the computer name).
 
 ## Input
 Commands typed in the page, and the jobs in aa-auto-task.json.
