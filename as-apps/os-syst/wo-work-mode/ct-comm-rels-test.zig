@@ -97,7 +97,7 @@ const ctxz = make.make(allo, &buff.writer, &mck, confMake(), home, true, false);
 try std.testing.expectEqual(exit.Code.okay, try rels.comm(&ctxz, &.{ "sign", "v1.0.0" }));
 try std.testing.expectEqual(@as(usize, 4), mck.call.items.len);
 try std.testing.expect(std.mem.startsWith(u8, mck.call.items[1], "gh release download v1.0.0 -p sha256.txt -D "));
-try std.testing.expect(std.mem.startsWith(u8, mck.call.items[2], "ssh-keygen -Y sign -f ") and std.mem.indexOf(u8, mck.call.items[2], "-n zz-base-home-release") != null and std.mem.endsWith(u8, mck.call.items[2], "sha256.txt"));
+try std.testing.expect(std.mem.startsWith(u8, mck.call.items[2], "ssh-keygen -Y sign -U -f ") and std.mem.indexOf(u8, mck.call.items[2], "-n zz-base-home-release") != null and std.mem.endsWith(u8, mck.call.items[2], "sha256.txt"));
 try std.testing.expect(std.mem.startsWith(u8, mck.call.items[3], "gh release upload v1.0.0 ") and std.mem.endsWith(u8, mck.call.items[3], "sha256.txt.sig --clobber"));
 try std.testing.expect(ctxz.stamGet("rels").?.okay);
 }

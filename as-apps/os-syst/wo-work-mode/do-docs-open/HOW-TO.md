@@ -79,4 +79,4 @@ A release says **Verified** only after two separate builders (GitHub and GitLab)
    You should see `Good "zz-base-home-release" signature`.
 4. Optional: rebuild it yourself with `zig build dist` (see the build notes) and compare again. The build is reproducible.
 
-For the owner: after a release is marked Verified, run `wo rels sign vX.Y.Z --live` from the repo folder on a trusted device (the key must be loaded in ssh-agent). It signs `sha256.txt` with the key in ssh-agent and uploads the `.sig`.
+For the owner: after a release is marked Verified, run `wo rels sign vX.Y.Z --live` from the repo folder on a trusted device, in cmd or PowerShell (not Git Bash, whose ssh-keygen cannot reach the Windows agent). The key must be loaded in ssh-agent. It signs `sha256.txt` with the key in ssh-agent and uploads the `.sig`.

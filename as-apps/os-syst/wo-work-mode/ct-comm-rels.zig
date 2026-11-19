@@ -1,7 +1,7 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: wo rels sign TAG: sign the verified release hashes with the owner's SSH key
-// Flo: release body says Verified? > download sha256.txt > ssh-keygen -Y sign via the agent > upload sha256.txt.sig > stamp
+// Flo: release body says Verified? > download sha256.txt > ssh-keygen -Y sign -U (key from ssh-agent) > upload sha256.txt.sig > stamp
 // I/O: Ctxz + sign TAG (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================
 const std = @import("std");
@@ -29,7 +29,7 @@ const dirz = try std.fs.path.join(ctxz.allo, &.{ try ctxz.dirzData(), "rels", tr
 try std.Io.Dir.cwd().createDirPath(ctxz.iozz, dirz);
 _ = (try ctxz.step(&facts, "down", &.{ "gh", "release", "download", tag, "-p", CF.shaz, "-D", dirz }, &.{})) orelse return ctxz.emit(facts.items);
 const shap = try std.fs.path.join(ctxz.allo, &.{ dirz, CF.shaz });
-_ = (try ctxz.step(&facts, "sign", &.{ "ssh-keygen", "-Y", "sign", "-f", keyp, "-n", CF.nspc, shap }, &.{})) orelse return ctxz.emit(facts.items);
+_ = (try ctxz.step(&facts, "sign", &.{ "ssh-keygen", "-Y", "sign", "-U", "-f", keyp, "-n", CF.nspc, shap }, &.{})) orelse return ctxz.emit(facts.items);
 const sigp = try std.fs.path.join(ctxz.allo, &.{ dirz, CF.sigz });
 _ = (try ctxz.step(&facts, "upld", &.{ "gh", "release", "upload", tag, sigp, "--clobber" }, &.{})) orelse return ctxz.emit(facts.items);
 try ctxz.stamPut("rels", .{ .when = ctxz.nowz(), .okay = true, .note = tag });
