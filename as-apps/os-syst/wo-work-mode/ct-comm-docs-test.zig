@@ -23,13 +23,12 @@ var numb: usize = 0;
 for (mck.call.items) |line| { if (std.mem.indexOf(u8, line, part) != null) numb += 1; }
 return numb;
 }
-fn fileMake(allo: std.mem.Allocator, path: []const u8, body: []const u8) !void {
+fn fileMake(path: []const u8, body: []const u8) !void {
 if (std.fs.path.dirname(path)) |dirz| try std.Io.Dir.cwd().createDirPath(std.testing.io, dirz);
-_ = allo;
 try std.Io.Dir.cwd().writeFile(std.testing.io, .{ .sub_path = path, .data = body });
 }
 fn gitdMake(allo: std.mem.Allocator, home: []const u8) !void {
-try fileMake(allo, try std.fs.path.join(allo, &.{ home, ".zz-base-home-docs.git", "HEAD" }), "ref: refs/heads/main\n");
+try fileMake(try std.fs.path.join(allo, &.{ home, ".zz-base-home-docs.git", "HEAD" }), "ref: refs/heads/main\n");
 }
 fn envHas(mck: *const mock.Mock, part: []const u8) bool {
 for (mck.envz.items) |line| { if (std.mem.indexOf(u8, line, part) != null) return true; }
@@ -110,7 +109,7 @@ defer tmp.cleanup();
 const home = try make.homeOf(allo, &tmp);
 try gitdMake(allo, home);
 const top = try std.fs.path.join(allo, &.{ home, "repo" });
-try fileMake(allo, try std.fs.path.join(allo, &.{ top, "do-core-plan", "a.txt" }), "x");
+try fileMake(try std.fs.path.join(allo, &.{ top, "do-core-plan", "a.txt" }), "x");
 var mck: mock.Mock = .{ .rule = &.{ gtop(top), GLST, .{ .pref = &.{ "git", "diff", "--cached" }, .outz = "do-core-plan/a.txt\x00" }, .{ .pref = &.{"git"} }, .{ .pref = &.{"gitleaks"} } } };
 var buff: std.Io.Writer.Allocating = .init(allo);
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, home, true, false);
@@ -129,7 +128,7 @@ defer tmp.cleanup();
 const home = try make.homeOf(allo, &tmp);
 try gitdMake(allo, home);
 const top = try std.fs.path.join(allo, &.{ home, "repo" });
-try fileMake(allo, try std.fs.path.join(allo, &.{ top, "do-core-plan", "a.txt" }), "x");
+try fileMake(try std.fs.path.join(allo, &.{ top, "do-core-plan", "a.txt" }), "x");
 var mck: mock.Mock = .{ .rule = &.{ gtop(top), GLST, .{ .pref = &.{ "git", "diff", "--cached" }, .outz = "do-core-plan/a.txt\x00" }, .{ .pref = &.{"git"} }, .{ .pref = &.{"gitleaks"}, .code = 9 } } };
 var buff: std.Io.Writer.Allocating = .init(allo);
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, home, true, false);
@@ -146,7 +145,7 @@ defer tmp.cleanup();
 const home = try make.homeOf(allo, &tmp);
 try gitdMake(allo, home);
 const top = try std.fs.path.join(allo, &.{ home, "repo" });
-try fileMake(allo, try std.fs.path.join(allo, &.{ top, "do-core-plan", "a.txt" }), "x");
+try fileMake(try std.fs.path.join(allo, &.{ top, "do-core-plan", "a.txt" }), "x");
 var mck: mock.Mock = .{ .rule = &.{ gtop(top), GLST, .{ .pref = &.{ "git", "diff", "--cached" }, .outz = "do-core-plan/a.txt\x00" }, .{ .pref = &.{"git"} } } };
 var buff: std.Io.Writer.Allocating = .init(allo);
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, home, true, false);
@@ -154,7 +153,7 @@ try std.testing.expectEqual(exit.Code.bloc, try docs.comm(&ctxz, &.{"sync"}));
 try std.testing.expect(hasCall(&mck, "git reset -q") and !hasCall(&mck, " commit "));
 }
 fn saveMake(allo: std.mem.Allocator, top: []const u8, file: []const u8) !void {
-try fileMake(allo, try std.fs.path.join(allo, &.{ top, "zz-dele-auto", "_docs-" ++ STMP, file }), "loser");
+try fileMake(try std.fs.path.join(allo, &.{ top, "zz-dele-auto", "_docs-" ++ STMP, file }), "loser");
 }
 test "a clash: the newer edit wins, the loser is saved aside first, then one merge commit and the push" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);

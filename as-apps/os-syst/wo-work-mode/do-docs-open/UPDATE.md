@@ -18,7 +18,7 @@ Added: two hub jobs (off): wo-bkup-stat, wo-bkup-nigh.
 Known gaps: `secr lend`. OCI idle numbers wait for the box.
 
 ## 2026-11-19
-Added: `wo docs init` and `wo docs sync`. They keep your git-ignored docs (`do-*` folders, `CLAUDE.md`, `aa-todo-*`, and so on) in step across devices through a private docs repo. Every file is scanned for secrets first, and a conflict stops with both copies kept.
+Added: `wo docs init` and `wo docs sync`. They keep your git-ignored docs (`do-*` folders, `CLAUDE.md`, `aa-todo-*`, and so on) in step across devices through a private docs repo. Every changed file is scanned for secrets first.
 Added: `wo beat`, a heartbeat ping to an outside monitor, so a hub that dies silently raises an alarm.
 Added: `wo rels sign TAG`, which signs the verified release hashes with your key. How to check a release yourself is in HOW-TO.
 Added: the `WO_DEVI_NAME` environment variable gives each device its own name. Checks: the Mac baseline CPU `apple_m1` is accepted.
