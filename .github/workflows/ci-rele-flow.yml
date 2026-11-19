@@ -55,3 +55,56 @@ jobs:
       - uses: actions/attest-build-provenance@v4.2.2
         with:
           subject-path: dist/**
+  verify:
+    needs: build
+    runs-on: ubuntu-latest
+    cache-mode: none
+    permissions:
+      contents: read
+    steps:
+      - uses: step-security/harden-runner@v2.22.4
+        with:
+          egress-policy: audit
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: dist
+          path: dist
+      - name: GitLab built the same bytes
+        run: |
+          url="https://gitlab.com/api/v4/projects/dinhthimaitrang1%2Fzz-base-home/jobs/artifacts/${GITHUB_REF_NAME}/raw/out/sha256.txt?job=build2"
+          code=000
+          for i in $(seq 1 50); do
+            code=$(curl -s -o gl.txt -w '%{http_code}' "$url") || true
+            [ "$code" = 200 ] && break
+            sleep 30
+          done
+          [ "$code" = 200 ] || { echo "GitLab sha256.txt not found for $GITHUB_REF_NAME (last http $code)"; exit 1; }
+          norm() { sed 's/ \*/ /; s/  / /' "$1" | awk '{print $1, $2}' | sort -k2; }
+          norm dist/sha256.txt > gh.n
+          norm gl.txt > gl.n
+          diff gh.n gl.n
+          echo "GitHub and GitLab agree on $(wc -l < gh.n) binaries"
+  publish:
+    needs: [build, attest, verify]
+    runs-on: ubuntu-latest
+    cache-mode: none
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: dist
+          path: dist
+      - name: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p rel
+          for dir in dist/*/; do
+            name=$(basename "$dir")
+            tar --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner -cf - -C "$dir" . | gzip -n > "rel/wo-$name.tar.gz"
+          done
+          cp dist/sha256.txt rel/sha256.txt
+          pre=""
+          case "$GITHUB_REF_NAME" in *-*) pre="--prerelease";; esac
+          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --verify-tag --title "$GITHUB_REF_NAME" --generate-notes $pre rel/*
