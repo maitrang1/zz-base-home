@@ -10,7 +10,7 @@ It keeps running in the background and restarts the server if it dies. Run it tw
 ```
 bash ~/zz-base-home/as-apps/ai-mind/lm-llam-serv/ru-llam-watc.sh visi
 ```
-It uses the `VISI_*` lines of the same settings file: its own model, projector and port (3011).
+It uses the `VISI_*` lines of the same settings file: its own model, projector and port (4008).
 
 ## Stop a server
 ```
@@ -33,9 +33,9 @@ Set `AISV_WDOG` (and `AISV_VENV=visi` for the photo server) in `ss-star-shut/aa-
 | `ai server: missing /path/model.gguf` | fix `AISV_MODL` (or `AISV_BINA`, `AISV_MMPJ`, or the `VISI_` twin) in `aa-conf-main.env` |
 | `ai server: AISV_MODL is not set` | set `AISV_MODL` (photo server: `VISI_MODL`) |
 | `config aa-conf-main.env line N: unknown key X` | fix line N |
-| `config: role visi needs VISI_PORT` | add `VISI_PORT=3011` |
+| `config: role visi needs VISI_PORT` | add `VISI_PORT=4008` |
 | `config: unknown role 'x' (use main or visi)` | use `visi`, or no argument |
 | `config: AISV_PORT must be 1..65535` | use a whole number in range |
 | `ai server: binary or model is gone - watchdog stopping` | the file was moved; restore it and start again |
-| `port 3010 is used by 'xyz' (pid N) - left running` | another program owns the port; close it or change `AISV_PORT` |
+| `port 4004 is used by 'xyz' (pid N) - left running` | another program owns the port; close it or change `AISV_PORT` |
 | `WARN llama-server N still up after TERM` | wait a moment and run stop again |

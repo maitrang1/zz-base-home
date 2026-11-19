@@ -6,6 +6,7 @@
 - Linux: the AI servers (text and vision) start from the new app `lm-llam-serv`; `AISV_PORT` and `AISV_VPORT` are gone here (ports live in that app's settings), `AISV_VENV` is now the role `visi`.
 - Linux: the opener now starts tr (`ac-auto-task`) instead of cmd-run; new setting `CMDR_JOBS` picks this device's jobs file. The night guard asks tr on port 4000.
 - New: one private file per device, `aa-conf-main.env`, now git-ignored and untracked. Your WiFi, Chrome profiles, VSCode path and device jobs file live only there; the scripts ship generic defaults. Windows scripts read it too (`WIFI_NAME`, `PROF_LIST`, `VSCO_BINA`, `SYNC_EXEC`, `COUN_SECO`, ...). All `*.env` files are git-ignored.
+- Changed: the Chrome debug port that lets shutdown close the `tr` tab is now 8000 (was 9333); set it with `CMDR_DBGP`, `0` = off. The AI servers moved to ports 4004 and 4008 (see the AI server app).
 - Changed: Linux shutdown now saves your work with `wo wipz --live` (setting `SYNC_CMDZ`), like Windows. The old `git-sync-safe-guard` and its `SYNC_BINA` setting are gone.
 - Changed: the Windows scripts find the repo from where they sit (no fixed `E:` path), and Chrome exit-flag fixing now keeps the file as UTF-8 and leaves a clean file untouched. A missing `aa-conf-main.env` now means defaults on Linux too.
 - Changed: a config error now names the file and the line (`config aa-conf-main.env line 1: ...`).

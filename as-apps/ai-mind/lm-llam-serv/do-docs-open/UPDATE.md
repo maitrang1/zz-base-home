@@ -6,4 +6,5 @@
 - Changed: stop no longer force-kills. It asks the server to quit and warns if it stays up.
 - Changed: stop checks that the lock really belongs to the watchdog before ending it.
 - Changed: a wrong setting now names the file and the line.
+- Changed: default ports are now 4004 (text) and 4008 (photos). Change them in `aa-conf-main.env` (`AISV_PORT`, `VISI_PORT`); anything that calls the server must use the new port.
 - Tested: 48 of 48 checks on Debian with a fake server. A real model was not started.

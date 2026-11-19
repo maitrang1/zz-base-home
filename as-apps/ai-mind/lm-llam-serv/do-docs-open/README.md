@@ -5,7 +5,7 @@ Linux and macOS.
 
 ## What you get
 1. A watchdog that starts `llama-server` (llama.cpp) and restarts it if it stops.
-2. A text server on port 3010 and an optional photo-reading server on port 3011.
+2. A text server on port 4004 and an optional photo-reading server on port 4008.
 3. A healthy server is never touched. A port used by another program is never taken over.
 4. One stop command. One settings file for both servers.
 
@@ -22,7 +22,7 @@ bash ~/zz-base-home/as-apps/ai-mind/lm-llam-serv/ru-llam-watc.sh
 ```
 3. Check it (after a few seconds):
 ```
-curl http://127.0.0.1:3010/health
+curl http://127.0.0.1:4004/health
 ```
 Your login script starts it for you if `AISV_WDOG` is set in `ss-star-shut/aa-conf-main.env`.
 

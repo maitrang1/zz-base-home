@@ -14,7 +14,7 @@ Two roles: `main` is the text server (the `AISV_*` lines). `visi` is the photo-r
 | AISV_MODL | none (required) | model file (`.gguf`) |
 | AISV_MMPJ | empty | projector file for a photo model; empty = text only |
 | AISV_HOST | 127.0.0.1 | address to listen on (local only by default) |
-| AISV_PORT | 3010 | port (1 to 65535). `visi` must set `VISI_PORT` (3011) |
+| AISV_PORT | 4004 | port (1 to 65535). `visi` must set `VISI_PORT` (4008) |
 | AISV_SLOT | 1 | requests served at the same time |
 | AISV_CTXN | 4096 | context size in tokens |
 | AISV_THRD | 4 | CPU threads |

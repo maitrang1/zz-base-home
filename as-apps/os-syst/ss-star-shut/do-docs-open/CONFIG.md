@@ -21,7 +21,7 @@ File: `aa-conf-main.env` next to the scripts. One `KEY=value` per line. `~` mean
 | CMDR_BINA | auto-task in ac-auto-task/zig-out/bin | tr scheduler; empty = skip. Opens as a Chrome tab only |
 | CMDR_PORT | 4000 | tr port; the tab opens in the first CHRO_PROF launcher |
 | CMDR_JOBS | empty | tr jobs file for this device (plain name, e.g. aa-auto-task-mydevice.json); empty = default aa-auto-task.json |
-| CMDR_DBGP | 9333 | debug port on the first Chrome launcher so shutdown can close the tr tab first; 0 = off |
+| CMDR_DBGP | 8000 | debug port on the first Chrome launcher so shutdown can close the tr tab first; 0 = off |
 | AISV_WDOG | empty (skip) | `ru-llam-watc.sh` of the AI server app (`ai-mind/lm-llam-serv`): starts llama-server and keeps it up. Its models and ports live in that app's `aa-conf-main.env` |
 | AISV_VENV | empty (skip) | role of the second server: `visi` starts the vision server with the same watchdog |
 | SYNC_CMDZ | `mise exec -- wo wipz --live` (wo found next to this app) | command run in WORK_PATH before apps close, saves your work to a private backup branch; full paths, no `~`; empty = skip; a missing tool only warns |
