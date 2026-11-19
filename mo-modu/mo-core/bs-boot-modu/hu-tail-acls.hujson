@@ -1,0 +1,22 @@
+// Tailscale policy for the tailnet (paste into admin > Access controls > JSON editor). The autogroup:self ssh rule keeps the untagged box reachable until it is tagged.
+{
+	"tagOwners": {
+		"tag:devb":      ["autogroup:admin"],
+		"tag:phon":      ["autogroup:admin"],
+		"tag:cizz-none": ["autogroup:admin"],
+	},
+
+	"acls": [
+		{"action": "accept", "src": ["autogroup:member"], "dst": ["autogroup:self:*"]},
+		{"action": "accept", "src": ["autogroup:member"], "dst": ["tag:devb:*"]},
+		{"action": "accept", "src": ["tag:phon"],         "dst": ["tag:devb:22,443"]},
+	],
+
+	"ssh": [
+		{"action": "check",  "src": ["autogroup:member"], "dst": ["autogroup:self"], "users": ["autogroup:nonroot", "root"]},
+		{"action": "check",  "src": ["autogroup:member"], "dst": ["tag:devb"], "users": ["admi", "root"], "checkPeriod": "12h"},
+		{"action": "accept", "src": ["autogroup:member", "tag:phon"], "dst": ["tag:devb"], "users": ["agen"]},
+	],
+
+	// no "tests" block: Tailscale's test runner rejects autogroup:member as a source (a group would need an email in git)
+}
