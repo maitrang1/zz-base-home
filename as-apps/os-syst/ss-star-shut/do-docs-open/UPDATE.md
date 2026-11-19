@@ -1,5 +1,16 @@
 # Updates
 
+## 2026-11-19 · Old setup carried over
+- Windows login now also starts the One-Tap Keys script (`ks-keys-shor`, as admin). It opens your WiFi, Sticky Notes, folders, Chrome profiles and VSCode, then starts the tr scheduler hidden (only if it is not already running) and opens its mini window (only if none is open). Linux does the same with a Chrome tab: no second tr, no second page.
+- Windows shutdown saves your work with `wo wipz` first, then closes apps. New `ru-shut-wind.bat -Auto` skips the admin prompt and the countdowns (for scheduler jobs).
+- Linux: the AI servers (text and vision) start from the new app `lm-llam-serv`; `AISV_PORT` and `AISV_VPORT` are gone here (ports live in that app's settings), `AISV_VENV` is now the role `visi`.
+- Linux: the opener now starts tr (`ac-auto-task`) instead of cmd-run; new setting `CMDR_JOBS` picks this device's jobs file. The night guard asks tr on port 4000.
+- New: one private file per device, `aa-conf-main.env`, now git-ignored and untracked. Your WiFi, Chrome profiles, VSCode path and device jobs file live only there; the scripts ship generic defaults. Windows scripts read it too (`WIFI_NAME`, `PROF_LIST`, `VSCO_BINA`, `SYNC_EXEC`, `COUN_SECO`, ...). All `*.env` files are git-ignored.
+- Changed: Linux shutdown now saves your work with `wo wipz --live` (setting `SYNC_CMDZ`), like Windows. The old `git-sync-safe-guard` and its `SYNC_BINA` setting are gone.
+- Changed: the Windows scripts find the repo from where they sit (no fixed `E:` path), and Chrome exit-flag fixing now keeps the file as UTF-8 and leaves a clean file untouched. A missing `aa-conf-main.env` now means defaults on Linux too.
+- Changed: a config error now names the file and the line (`config aa-conf-main.env line 1: ...`).
+- Tested: 89 of 89 checks on Debian; PowerShell parse, a PowerShell reader check and a VBScript reader check ok.
+
 ## 2026-11-18 · One app for Windows and Linux
 - Moved here as `ss-star-shut`: the Windows close-and-shut-down and auto-open scripts now sit beside the Linux ones.
 - Changed: every file has a new short name (`ru-shut-wind.bat`, `ru-shut-wind.ps1`, `ru-star-wind.vbs`, `ru-*.sh` and others). Update any shortcut or job that used an old name.

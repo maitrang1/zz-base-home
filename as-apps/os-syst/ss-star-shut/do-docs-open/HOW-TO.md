@@ -26,13 +26,17 @@ One hub job (`linu-shut-nigh`) runs every 15 minutes from 23:00 to 02:45 only: t
 | You see (real message) | Do this |
 |---|---|
 | `wmctrl missing: sudo apt install wmctrl` | run that command |
-| `config line N: unknown key X` | fix line N in `aa-conf-main.env` |
+| `config FILE line N: unknown key X` | fix line N in that file |
 | `wmctrl cannot reach the X display` / `Wayland session` | log in to a Cinnamon X11 session and run from the desktop |
 | `power-off command not found` | fix `POWE_CMDZ` |
 | `WARN still open: 0x...` | that app wants you to save; save, or cancel the power-off |
 | `WARN Chrome profile missing: Profile 9` | fix `CHRO_PROF` |
 | `No terminal for the cancel key. Use --auto` | run from a terminal, or add `--auto` |
-| `WARN git sync skipped` | git-sync tool missing; ignore it or set `SYNC_BINA` |
+| `WARN save skipped` | the save-work tool is missing (`mise` or `wo`); build `wo` or fix `SYNC_CMDZ` |
+
+## Windows: shutdown with no prompts (for scheduler jobs)
+`E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-shut-wind.bat -Auto`
+No admin prompt, no countdowns: it saves your work (`wo wipz`), closes apps and powers off at once. Use it only in a tr job you trust. The normal run (no `-Auto`) also saves your work first, then closes apps.
 
 ## Windows shutdown: set up
 ### Set Up — Close All Apps, Then Shut Down

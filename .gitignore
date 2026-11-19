@@ -3,6 +3,7 @@
 *.pass
 .claude/settings.local.json
 .env*
+*.env
 .zig-cache/
 AGENTS.md
 CLAUDE.md
