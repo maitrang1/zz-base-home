@@ -1,0 +1,19 @@
+# GitLab CI: Linux only, no secrets. macOS + Windows + attest + release stay on GitHub.
+image: ubuntu:24.04@sha256:73b999393d07f2bf65a40373778a44dc9a6d54ad7718d29247d8ff9413c4d6a8
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "ci-test"
+    - if: $CI_COMMIT_TAG
+
+boot:
+  stage: test
+  variables:
+    GIT_DEPTH: "0"
+    DEBIAN_FRONTEND: noninteractive
+  script:
+    - apt-get update -qq
+    - apt-get install -y -qq --no-install-recommends git curl ca-certificates xz-utils bzip2 unzip
+    - sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
