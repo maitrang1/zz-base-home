@@ -1,5 +1,9 @@
 # Updates
 
+## 2026-11-20
+- Changed: if `aa-conf-main.env` is missing, the Windows login now says so by name. It used to fall back silently and then report "VSCode not found". The `tr` and hub shortcuts stay quiet.
+- Changed: the shutdown console looks like the old one again: no extra "save your work" line, and the save step shows only `work saved.` (or the full error).
+
 ## 2026-11-19 · Old setup carried over
 - Windows login opens your WiFi, Sticky Notes, folders, Chrome profiles and VSCode, then starts the tr scheduler hidden (only if it is not already running) and opens its mini window (only if none is open). Linux does the same with a Chrome tab: no second tr, no second page. The One-Tap Keys script now starts from its own scheduled task, not from this script.
 - New: the old auto hub (`cmd-run`, port 3030) starts with the rest at login, hidden and only if it is not already running (`HUBZ_BINA`, `HUBZ_PORT`). `ru-star-wind.vbs hub` starts only the hub. Linux does the same with `HUBZ_BINA` (detached).

@@ -62,10 +62,13 @@ Case "HUBZ_PORT" : If IsNumeric(v) Then HUBZ_PORT = CLng(v)
 Case "PROF_LIST" : PROF_LIST = Split(v, ",") : For i = 0 To UBound(PROF_LIST) : PROF_LIST(i) = Trim(PROF_LIST(i)) : Next
 End Select
 End Sub
-Sub LoadConf()
+Sub LoadConf(wrn)
 Dim pf, ts, ln, p
 pf = fso.GetParentFolderName(WScript.ScriptFullName) & "\aa-conf-main.env"
-If Not fso.FileExists(pf) Then Exit Sub
+If Not fso.FileExists(pf) Then
+If wrn Then Warn "aa-conf-main.env not found beside ru-star-wind.vbs." & vbCrLf & "WiFi, Chrome profiles and the VSCode path use the defaults.", "Config Warning"
+Exit Sub
+End If
 Set ts = fso.OpenTextFile(pf, 1)
 Do While Not ts.AtEndOfStream
 ln = Trim(ts.ReadLine) : p = InStr(ln, "=")
@@ -120,11 +123,11 @@ age = UiAge(js)
 If age < 0 Or age > 90 Then sh.Run "curl.exe -s http://127.0.0.1:" & TR_PORT & "/open-mini", 0, True
 End Sub
 If WScript.Arguments.Count = 0 Then
-LoadConf : OpenWifi : OpenStic : OpenFold : OpenChro : OpenCode : OpenTr : OpenHub : OpenExtr
+LoadConf True : OpenWifi : OpenStic : OpenFold : OpenChro : OpenCode : OpenTr : OpenHub : OpenExtr
 ElseIf LCase(WScript.Arguments(0)) = "tr" Then
-LoadConf : OpenTr
+LoadConf False : OpenTr
 ElseIf LCase(WScript.Arguments(0)) = "hub" Then
-LoadConf : OpenHub
+LoadConf False : OpenHub
 Else
 Warn "Use: ru-star-wind.vbs [tr|hub]", "Usage"
 End If
