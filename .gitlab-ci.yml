@@ -1,5 +1,6 @@
 # GitLab CI: Linux only, no secrets. macOS + Windows + attest + release stay on GitHub.
-image: ubuntu:24.04@sha256:73b999393d07f2bf65a40373778a44dc9a6d54ad7718d29247d8ff9413c4d6a8
+# The image already holds git, curl, tar, xz, bzip2 and unzip, so no apt download can fail or drift.
+image: buildpack-deps:noble@sha256:890e8b5c0040e1deff5cc7dc7b4414e67069f79e3301afc4ec5bd49d64ef13e5
 
 workflow:
   rules:
@@ -8,14 +9,16 @@ workflow:
     - if: $CI_COMMIT_BRANCH == "ci-test"
     - if: $CI_COMMIT_TAG
 
+default:
+  retry:
+    max: 2
+    when: [runner_system_failure, stuck_or_timeout_failure, api_failure]
+
 boot:
   stage: test
   variables:
     GIT_DEPTH: "0"
-    DEBIAN_FRONTEND: noninteractive
   script:
-    - apt-get update -qq
-    - apt-get install -y -qq --no-install-recommends git curl ca-certificates xz-utils bzip2 unzip
     - sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
     - export PATH="$HOME/.local/bin:$PATH"
     - mise exec -- gitleaks git --redact --no-banner
@@ -24,13 +27,10 @@ build2:
   stage: test
   variables:
     GIT_DEPTH: "0"
-    DEBIAN_FRONTEND: noninteractive
   rules:
     - if: $CI_COMMIT_TAG =~ /^v/
     - if: $CI_COMMIT_BRANCH == "ci-test"
   script:
-    - apt-get update -qq
-    - apt-get install -y -qq --no-install-recommends git curl ca-certificates xz-utils bzip2 unzip
     - sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
     - export PATH="$HOME/.local/bin:$PATH"
     - mise exec -- zig build dist --build-file as-apps/os-syst/wo-work-mode/build.zig --prefix /tmp/out1 --cache-dir /tmp/zc1 --global-cache-dir /tmp/zg1
