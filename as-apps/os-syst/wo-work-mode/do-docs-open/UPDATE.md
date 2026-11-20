@@ -1,6 +1,7 @@
 # What changed
 
 ## 2026-11-20
+Added: `wo push`: commits the files that sat idle for 2+ minutes and pushes `main` to GitHub and GitLab. Practice run first (`wo push`), real run `wo push --live`. Hub job `work-push` (hourly, off until you turn it on). It stops on a leak, a conflict, diverged remotes, a big file or a busy git, and it never pulls by itself. `work-wipz` and the `work-minu` chain are gone from the job list; docs sync is its own job `work-docs` again.
 Added: `wo ci stat|test|leak|lock|rele|repr|deps`: local mirrors of the CI jobs and cloud watchers, all read-only. Hub jobs: `cicd-stat` (10 min), `cicd-rele` (30 min), chain `cicd-nigh` (02:00: test, leak, lock), chain `cicd-week` (Sunday 03:00: repr, deps).
 Changed: the hub job names are now `work-wipz`, `work-docs`, `work-beat`, `work-bkup-stat`, `work-bkup-nigh`, `work-doct`, `work-dril` (were `wo-...`). The commands they run did not change.
 

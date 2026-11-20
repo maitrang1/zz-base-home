@@ -23,7 +23,8 @@ const docs = @import("ct-comm-docs.zig");
 const beat = @import("ct-comm-beat.zig");
 const rels = @import("ct-comm-rels.zig");
 const ciii = @import("ct-comm-ci.zig");
-const CF = .{ .bufz = 8192, .usag = "usage: wo [--conf FILE] [--prof t0|box|ci] [--json] [--live [--force]] stat|conf|doct|wipz|bkup [stat|nigh]|docs init|sync|beat|rels sign TAG|ci stat|test|leak|lock|rele|repr|deps|dril|kill|secr init|lend\n" };
+const push = @import("ct-comm-push.zig");
+const CF = .{ .bufz = 8192, .usag = "usage: wo [--conf FILE] [--prof t0|box|ci] [--json] [--live [--force]] stat|conf|doct|wipz|push|bkup [stat|nigh]|docs init|sync|beat|rels sign TAG|ci stat|test|leak|lock|rele|repr|deps|dril|kill|secr init|lend\n" };
 fn devName(allo: std.mem.Allocator, envm: *const std.process.Environ.Map, name: []const u8) ![]const u8 {
 if (envm.get("WO_DEVI_NAME")) |envv| { if (envv.len > 0) return envv; }
 if (name.len > 0) return name;
@@ -46,6 +47,7 @@ if (std.mem.eql(u8, comm, "docs")) return docs.comm(ctxz, tail);
 if (std.mem.eql(u8, comm, "beat")) return beat.comm(ctxz, tail);
 if (std.mem.eql(u8, comm, "rels")) return rels.comm(ctxz, tail);
 if (std.mem.eql(u8, comm, "ci")) return ciii.comm(ctxz, tail);
+if (std.mem.eql(u8, comm, "push")) return push.comm(ctxz, tail);
 return exit.Erro.Usag;
 }
 fn run(init: std.process.Init, outw: *std.Io.Writer) !exit.Code {

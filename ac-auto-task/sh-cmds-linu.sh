@@ -13,6 +13,7 @@ cd "$R" || exit 1
 case "$1" in
 work-wipz) exec "$CMDS_MISE" exec -- "$WOZ" wipz --live ;;
 work-docs) exec "$CMDS_MISE" exec -- "$WOZ" docs sync --live ;;
+work-push) exec "$CMDS_MISE" exec -- "$WOZ" push --live ;;
 work-beat) exec "$CMDS_MISE" exec -- "$WOZ" beat --live ;;
 work-bkup-stat) exec "$CMDS_MISE" exec -- "$WOZ" bkup stat --live ;;
 work-bkup-nigh) exec "$CMDS_MISE" exec -- "$WOZ" bkup nigh --live ;;

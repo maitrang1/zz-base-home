@@ -1,6 +1,8 @@
 [
 
-{"type":"chai","sche":"5m","plus":["y","m","d","h","m","s"],"id":"work-minu","on":true,"tmo":600,"ids":["work-wipz","work-docs"],"_cmt":"save work refs, then sync docs"},
+{"type":"puls","sche":"5m","id":"work-docs","on":true,"_cmt":"sync docs to the private docs repo"},
+
+{"type":"puls","sche":"60m","id":"work-push","on":false,"_cmt":"commit idle changes, push main to all remotes"},
 
 {"type":"puls","sche":"10m","id":"cicd-stat","on":true,"lock":"none","_cmt":"GitHub and GitLab CI status, mirror match"},
 

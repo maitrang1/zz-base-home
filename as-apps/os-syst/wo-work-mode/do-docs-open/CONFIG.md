@@ -41,6 +41,13 @@
 | beat_urlz_file | File (under your home) whose first line is the https ping address of an outside dead-man monitor such as Healthchecks.io. `wo beat --live` pings it, or pings `/fail` when a check below is stale. If the hub dies the pings stop and the monitor alerts you. Keep the file outside the repo | empty (off) | file path |
 | beat_chek_list | Stamps that must be fresh for a healthy ping (`docs`, `wipz`, `bkup`, `bknt`). Empty = ping only proves the hub runs | docs | text list |
 | beat_ager_maxz | Seconds a stamp may be old before the ping says fail | 3600 | seconds |
+| push_bran_main | Branch `wo push` works on; anything else is blocked | main | branch name |
+| push_remo_list | Remotes `wo push` pushes to, in order | origin, mirr | text list |
+| push_deny_list | Path prefixes `wo push` never commits | empty | text list |
+| push_quie_secz | A changed file is committed only after it has been idle this long | 120 | seconds |
+| push_file_cntz | More files than this to commit stops the run | 200 | whole number |
+| push_file_maxz | A file bigger than this stops the run | 10485760 | bytes |
+| push_tryz_maxz | Fetch, rebase and push attempts per run | 3 | whole number |
 | ci_bran_main | Branch the CI watchers read | main | branch name |
 | ci_gitl_proj | GitLab project path for the public pipelines API (slash written as %2F) | dinhthimaitrang1%2Fzz-base-home | text |
 | ci_mirr_grac | Seconds GitHub and GitLab main may differ before `wo ci stat` fails | 900 | seconds |
