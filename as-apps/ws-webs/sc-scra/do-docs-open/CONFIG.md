@@ -19,6 +19,9 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | fetc_redi_maxz | Most redirects followed | 5 | 0-16 |
 | rate_host_seco | Seconds between requests to one site | 1 | 0 or more |
 | retr_cont_maxz | Tries before a page goes to the dead-letter list | 3 | 1 or more |
+| shel_text_minz | A page with less visible text than this and a JavaScript-shell marker is a thin shell | 500 | 0 or more |
+| apiz_prob_enab | Look for a free JSON or iframe URL behind a thin shell before paying a vendor | true | true or false |
+| apiz_prob_maxz | Most probe requests per shell page | 8 | 0 turns probing off |
 | revi_star_seco | First recrawl interval | 86400 | between floor and cap |
 | revi_floo_seco | Shortest recrawl interval | 3600 | 1 or more |
 | revi_capz_seco | Longest recrawl interval | 2592000 | at least the floor |

@@ -1,5 +1,8 @@
 # Updates
 
+## 0.2.0 — 2026-11-20
+- Thin JavaScript pages are now detected. scra looks for the free JSON or iframe behind them (WordPress, Next.js, /api/ calls) before spending a vendor credit.
+
 ## 0.1.0 — 2026-11-20
 - First release: fetch, run, export, canary, kill, sync, status.
 - Plain download first; ZenRows, Decodo and Bright Data only on a block and inside free credits.

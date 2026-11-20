@@ -46,6 +46,7 @@ else if (std.mem.eql(u8, path, "/frame")) { var list: std.ArrayList(u8) = .empty
 else if (std.mem.eql(u8, path, "/spapriv")) { try reply(outp, "200 OK", "text/html", "<html><head><title>Priv Shell</title></head><body><div id=\"root\"></div><script>fetch(\"/private/data\")</script></body></html>", ""); }
 else if (std.mem.eql(u8, path, "/private/data")) { try reply(outp, "200 OK", "application/json", "{\"secret\":\"Priv Shell data\"}", ""); }
 else if (std.mem.eql(u8, path, "/spamany")) { try reply(outp, "200 OK", "text/html", "<html><head><title>Many Shell</title></head><body><div id=\"root\"></div><script>[\"/api/n1\",\"/api/n2\",\"/api/n3\",\"/api/n4\",\"/api/n5\",\"/api/n6\",\"/api/n7\",\"/api/n8\",\"/api/n9\",\"/api/n10\",\"/api/n11\",\"/api/n12\"]</script></body></html>", ""); }
+else if (std.mem.eql(u8, path, "/spaoff")) { try reply(outp, "200 OK", "text/html", "<html><head><title>Zebra Corral</title></head><body><div id=\"root\"></div><script>fetch(\"/api/items\")</script></body></html>", ""); }
 else if (std.mem.eql(u8, path, "/spanone")) { try reply(outp, "200 OK", "text/html", "<html><head><title>Nothing Here</title></head><body><div id=\"root\"></div></body></html>", ""); }
 else if (std.mem.eql(u8, path, "/hang")) { std.Io.sleep(self.iozz, .fromMilliseconds(CF.hang), .awake) catch {}; }
 else { try outp.writeAll("HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\nContent-Length: 2\r\nConnection: close\r\n\r\nno"); }

@@ -14,6 +14,8 @@
   "fetc_redi_maxz": 5,
   "rate_host_seco": 1,
   "retr_cont_maxz": 3,
+  "geoz_code_dflt": "",
+  "geoz_host_over": {},
   "shel_text_minz": 500,
   "apiz_prob_enab": true,
   "apiz_prob_maxz": 8,
