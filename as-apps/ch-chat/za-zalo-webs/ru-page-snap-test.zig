@@ -1,0 +1,17 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests for ru-page-snap pure parts: AX parse and find
+// Flo: fixture json > parse > find by role and name
+// I/O: json text > pass or fail
+// Run: zig build test
+// ===================================================================
+const std = @import("std"); const snap = @import("ru-page-snap.zig");
+const FIX = "{\"nodes\":[{\"nodeId\":\"1\",\"ignored\":true,\"role\":{\"type\":\"role\",\"value\":\"none\"},\"backendDOMNodeId\":1},{\"nodeId\":\"2\",\"ignored\":false,\"role\":{\"type\":\"role\",\"value\":\"button\"},\"name\":{\"type\":\"computedString\",\"value\":\"Gửi tin\"},\"backendDOMNodeId\":7},{\"nodeId\":\"3\",\"role\":{\"value\":\"textbox\"},\"name\":{\"value\":\"Tìm kiếm\"},\"value\":{\"value\":\"abc\"},\"backendDOMNodeId\":9},{\"nodeId\":\"4\",\"role\":{\"value\":\"button\"},\"backendDOMNodeId\":11},{\"nodeId\":\"5\",\"role\":{\"value\":\"RootWebArea\"}}]}";
+fn parsed(aren: std.mem.Allocator) ![]snap.Node { const val = try std.json.parseFromSliceLeaky(std.json.Value, aren, FIX, .{}); return snap.parseAx(aren, val); }
+test "parse skips ignored nodes and nodes without a backend id" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const nodes = try parsed(aren.allocator()); try std.testing.expectEqual(@as(usize, 3), nodes.len); try std.testing.expectEqualStrings("button", nodes[0].role); try std.testing.expectEqual(@as(i64, 7), nodes[0].bid); try std.testing.expectEqualStrings("abc", nodes[1].valu); try std.testing.expectEqualStrings("", nodes[2].name); }
+test "find matches role exactly and name by substring, ignoring ASCII case" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const nodes = try parsed(aren.allocator()); try std.testing.expectEqual(@as(i64, 7), snap.findNode(nodes, "BUTTON", "gửi").?.bid); try std.testing.expectEqual(@as(i64, 9), snap.findNode(nodes, "textbox", "Tìm kiếm").?.bid); try std.testing.expect(snap.findNode(nodes, "textbox", "gửi") == null); try std.testing.expect(snap.findNode(nodes, "link", "") == null); }
+test "empty role or name matches anything" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const nodes = try parsed(aren.allocator()); try std.testing.expectEqual(@as(i64, 7), snap.findNode(nodes, "", "").?.bid); try std.testing.expectEqual(@as(i64, 9), snap.findNode(nodes, "", "Tìm").?.bid); const alls = try snap.findAll(aren.allocator(), nodes, "button", ""); try std.testing.expectEqual(@as(usize, 2), alls.len); }
+test "bad shapes are CdpError" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); try std.testing.expectError(error.CdpError, snap.parseAx(aren.allocator(), .null)); const val = try std.json.parseFromSliceLeaky(std.json.Value, aren.allocator(), "{\"nodes\":5}", .{}); try std.testing.expectError(error.CdpError, snap.parseAx(aren.allocator(), val)); }
+test "numF reads ints and floats" { try std.testing.expectEqual(@as(f64, 3), snap.numF(.{ .integer = 3 })); try std.testing.expectEqual(@as(f64, 2.5), snap.numF(.{ .float = 2.5 })); try std.testing.expectEqual(@as(f64, 0), snap.numF(.null)); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
