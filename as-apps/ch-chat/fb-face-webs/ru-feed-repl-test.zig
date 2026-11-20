@@ -1,0 +1,19 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests for replying to comments
+// Flo: two comments get two replies > rerun does nothing > AI draft used when on, template when AI fails or off > max per run > dry-run
+// I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
+// Run: zig build test -Dfile=ru-feed-repl-test.zig
+// ===================================================================
+const std = @import("std"); const rigz = @import("te-rigz-brow.zig"); const task = @import("ru-task-runn.zig"); const repl = @import("ru-feed-repl.zig");
+fn aiOk(ctx: *task.Ctx, prompt: []const u8) anyerror![]const u8 { _ = ctx; if (std.mem.find(u8, prompt, "still available") != null) return "Yes, it is!"; return "Around 2 million."; }
+fn aiBad(ctx: *task.Ctx, prompt: []const u8) anyerror![]const u8 { _ = ctx; _ = prompt; return error.AiFail; }
+fn waitN(rig: *rigz.Rig, kind: []const u8, want: usize) void { var tries: u32 = 0; while (tries < 80 and rig.mock.recNum(kind) < want) : (tries += 1) std.Io.sleep(rig.iozz, .fromMilliseconds(50), .awake) catch {}; }
+test "two comments get two template replies; rerun answers nothing new" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); var cx = rig.ctx(.live); try std.testing.expectEqual(@as(u32, 2), try repl.replRun(&cx, .{})); waitN(&rig, "reply", 2); try std.testing.expectEqual(@as(usize, 2), rig.mock.recNum("reply")); try std.testing.expectEqual(@as(i64, 2), try rig.store.actCnt("comm", 0)); try std.testing.expectEqual(@as(u32, 0), try repl.replRun(&cx, .{})); try std.testing.expectEqual(@as(usize, 2), rig.mock.recNum("reply")); }
+test "max per run limits replies" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); var cx = rig.ctx(.live); try std.testing.expectEqual(@as(u32, 1), try repl.replRun(&cx, .{ .maxn = 1 })); waitN(&rig, "reply", 1); try std.testing.expectEqual(@as(usize, 1), rig.mock.recNum("reply")); }
+test "AI draft is used when on, falls back to templates when it fails" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); rig.conf.smar_mode_enab = true; var cx = rig.ctx(.live); cx.draft = aiOk; try std.testing.expectEqual(@as(u32, 2), try repl.replRun(&cx, .{})); waitN(&rig, "reply", 2); try std.testing.expectEqualStrings("Yes, it is!", rig.mock.recAt(0)["reply|".len..]); try std.testing.expectEqualStrings("Around 2 million.", rig.mock.recAt(1)["reply|".len..]); }
+test "AI failure falls back to a template reply" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); rig.conf.smar_mode_enab = true; var cx = rig.ctx(.live); cx.draft = aiBad; _ = try repl.replRun(&cx, .{ .maxn = 1 }); waitN(&rig, "reply", 1); const got = rig.mock.recFind("reply").?; try std.testing.expect(std.mem.eql(u8, got, "Thank you!") or std.mem.eql(u8, got, "Thanks for asking, I will message you.")); }
+test "AI is ignored when the switch is off" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); var cx = rig.ctx(.dry); cx.draft = aiOk; _ = try repl.replRun(&cx, .{}); try std.testing.expect(std.mem.find(u8, rig.sink.items, "Yes, it is!") == null); try std.testing.expectEqual(@as(usize, 0), rig.mock.recCnt()); }
+test "dry-run previews every comment and sends nothing" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); var cx = rig.ctx(.dry); try std.testing.expectEqual(@as(u32, 2), try repl.replRun(&cx, .{})); try std.testing.expect(std.mem.find(u8, rig.sink.items, "Is this still available?") != null); try std.testing.expect(std.mem.find(u8, rig.sink.items, "How much for the desk?") != null); try std.testing.expectEqual(@as(usize, 0), rig.mock.recCnt()); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

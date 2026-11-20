@@ -1,0 +1,16 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Optional AI adapter: Claude Code CLI then llama.cpp, one chain from config
+// Flo: build prompt from chat tail > run first tool in chain > validate text > next tool on failure > draft or AiFail
+// I/O: Conf chain + prompt (caller) > cleaned draft text; never holds secrets, never sends
+// ===================================================================
+const std = @import("std"); const conf = @import("cf-conf-load.zig"); const data = @import("st-stat-data.zig");
+const CF = .{ .outz = 65536, .maxd = 1000, .head = "You reply for the owner in a chat app. Answer in the chat's language, short, polite, plain text, no markdown. Chat so far:\n", .tail = "Write only the next reply from the owner." };
+pub fn argvOf(aren: std.mem.Allocator, exe: []const u8, args: []const []const u8, prom: []const u8) ![]const []const u8 { var out: std.ArrayList([]const u8) = .empty; try out.append(aren, exe); for (args) |arg| { if (std.mem.eql(u8, arg, "{p}")) { try out.append(aren, prom); } else try out.append(aren, arg); } return out.items; }
+pub fn clean(aren: std.mem.Allocator, raw: []const u8) ![]const u8 { const trm = std.mem.trim(u8, raw, " \r\n\t"); if (trm.len == 0 or trm.len > CF.maxd) return error.AiFail; for (trm) |byt| { if (byt < 0x20 and byt != '\n') return error.AiFail; } if (!std.unicode.utf8ValidateSlice(trm)) return error.AiFail; return aren.dupe(u8, trm); }
+pub fn promptOf(aren: std.mem.Allocator, hist: []const data.Msgz) ![]const u8 { var out: std.ArrayList(u8) = .empty; try out.appendSlice(aren, CF.head); for (hist) |msg| { try out.appendSlice(aren, if (std.mem.eql(u8, msg.who, "me")) "Owner: " else "Them: "); try out.appendSlice(aren, msg.body); try out.append(aren, '\n'); } try out.appendSlice(aren, CF.tail); return out.items; }
+fn runOne(aren: std.mem.Allocator, iozz: std.Io, argv: []const []const u8, secs: u32) ![]const u8 { const res = std.process.run(aren, iozz, .{ .argv = argv, .stdout_limit = .limited(CF.outz), .stderr_limit = .limited(CF.outz), .timeout = .{ .duration = .{ .raw = .fromMilliseconds(@as(i64, secs) * 1000), .clock = .awake } } }) catch return error.AiFail; switch (res.term) { .exited => |code| { if (code != 0) return error.AiFail; }, else => return error.AiFail } return clean(aren, res.stdout); }
+pub fn ask(aren: std.mem.Allocator, iozz: std.Io, cfg: conf.Conf, prom: []const u8) ![]const u8 { for (cfg.smar_chai_orde) |tool| { const claz = std.mem.eql(u8, tool, "clau"); const exe = if (claz) cfg.smar_clau_exec else cfg.smar_llam_exec; const args = if (claz) cfg.smar_clau_argz else cfg.smar_llam_argz; if (exe.len == 0) continue; const argv = try argvOf(aren, exe, args, prom); if (runOne(aren, iozz, argv, cfg.smar_time_secs)) |txt| return txt else |_| continue; } return error.AiFail; }
+pub fn draft(aren: std.mem.Allocator, iozz: std.Io, cfg: conf.Conf, hist: []const data.Msgz) ![]const u8 { if (!cfg.smar_mode_enab) return error.AiFail; return ask(aren, iozz, cfg, try promptOf(aren, hist)); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

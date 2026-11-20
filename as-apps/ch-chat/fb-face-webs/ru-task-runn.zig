@@ -1,0 +1,24 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Safety ladder, caps gate and once-only keys around every write
+// Flo: mode check (read, dry, live, force) > approval for risky acts > quiet hours + warm-up cap > take key > run steps > mark done or leave unsure
+// I/O: Ctx (page, state, config) + kind, key, steps > Out (done, dry, read, dupe); errors QuietHour CapHit NeedApprove Dupe Halted
+// ===================================================================
+const std = @import("std"); const pg = @import("ru-page-snap.zig"); const inpu = @import("ru-huma-inpu.zig"); const pace = @import("ru-huma-pace.zig"); const flow = @import("ru-flow-runz.zig"); const stat = @import("st-stat-main.zig"); const cfgz = @import("cf-conf-load.zig");
+const CF = .{ .dayz = 86400000 };
+pub const Mode = enum { read, dry, live, force };
+pub const Out = enum { done, dry, read, dupe };
+pub const Args = struct { text: []const u8 = "", to: []const u8 = "", url: []const u8 = "", title: []const u8 = "", price: []const u8 = "", desc: []const u8 = "", group: []const u8 = "", photo: []const u8 = "", maxn: u32 = 5 };
+pub const Draft = *const fn (ctx: *Ctx, prompt: []const u8) anyerror![]const u8;
+pub const Ctx = struct { gpaz: std.mem.Allocator, aren: std.mem.Allocator, iozz: std.Io, conf: cfgz.Conf, store: *stat.Stat, mode: Mode, page: *pg.Page, rng: *pace.Rng, base: []const u8, sink: ?*std.ArrayList(u8) = null, now_fix: i64 = 0, draft: ?Draft = null };
+pub fn nowMs(ctx: *Ctx) i64 { if (ctx.now_fix != 0) return ctx.now_fix; return @intCast(std.Io.Clock.real.now(ctx.iozz).toMilliseconds()); }
+pub fn say(ctx: *Ctx, comptime fmtz: []const u8, args: anytype) void { const line = std.fmt.allocPrint(ctx.aren, fmtz ++ "\n", args) catch return; if (ctx.sink) |snk| { snk.appendSlice(ctx.aren, line) catch {}; return; } std.Io.File.stdout().writeStreamingAll(ctx.iozz, line) catch {}; }
+pub fn inEnv(ctx: *Ctx) inpu.Env { return .{ .page = ctx.page, .rng = ctx.rng, .conf = ctx.conf, .aren = ctx.aren }; }
+pub fn hashHex(ctx: *Ctx, byt: []const u8) ![]u8 { return std.fmt.allocPrint(ctx.aren, "{x:0>16}", .{std.hash.Wyhash.hash(0, byt)}); }
+pub fn gate(ctx: *Ctx, kind: pace.Kind) !void { const now = nowMs(ctx); if (pace.quietNow(now, ctx.conf.quie_zone_minu, ctx.conf.quie_hour_rang)) return error.QuietHour; const born = try ctx.store.bornGet(now); const perc = pace.warmPerc(born, now, ctx.conf.warm_dayz_coun); const eff = pace.capEff(pace.capOf(ctx.conf, kind), perc); const used = try ctx.store.actCnt(@tagName(kind), now - CF.dayz); if (used >= eff) return error.CapHit; }
+pub fn execWrite(ctx: *Ctx, kind: pace.Kind, key: []const u8, what: []const u8, risky: bool, steps: []const flow.Step) !Out { say(ctx, "plan [{s}] {s}", .{ @tagName(kind), what }); if (ctx.mode == .read) { say(ctx, "read-only: nothing changed", .{}); return .read; } if (ctx.mode == .dry) { if (gate(ctx, kind)) |_| {} else |err| say(ctx, "note: a live run would stop now ({s})", .{@errorName(err)}); say(ctx, "dry-run: preview only, nothing changed", .{}); return .dry; } if (risky and ctx.mode != .force) { say(ctx, "needs approval: re-run with --live --force after checking the plan", .{}); return error.NeedApprove; } try gate(ctx, kind); const now = nowMs(ctx); switch (try ctx.store.keyTake(key, now)) { .dupe => { say(ctx, "already done earlier, skipped", .{}); return .dupe; }, .unsure => { say(ctx, "an earlier try may have gone through: check Facebook, then run: fb unlock {s}", .{key}); return error.Dupe; }, .go => {} } var run: flow.Run = .{ .env = inEnv(ctx), .store = ctx.store, .base = ctx.base }; flow.runSteps(&run, steps) catch |err| { if (!run.crossed) ctx.store.keyDrop(key) catch {}; ctx.store.logAdd(@tagName(kind), what, false, nowMs(ctx)) catch {}; return err; }; try ctx.store.keyDone(key, nowMs(ctx)); try ctx.store.actAdd(@tagName(kind), key, nowMs(ctx)); try ctx.store.logAdd(@tagName(kind), what, true, nowMs(ctx)); say(ctx, "done", .{}); return .done; }
+pub fn goStep(path: []const u8) flow.Step { return .{ .op = .goto, .text = path }; }
+pub fn jsList(ctx: *Ctx, expr: []const u8) ![]const []const u8 { ctx.page.arm(ctx.conf.brow_time_seco * 1000); const val = try ctx.page.evalVal(ctx.aren, expr); if (val != .array) return &.{}; var out: std.ArrayList([]const u8) = .empty; for (val.array.items) |ite| { if (ite == .string and ite.string.len > 0) try out.append(ctx.aren, ite.string); } return out.items; }
+pub fn visit(ctx: *Ctx, path: []const u8) !void { var run: flow.Run = .{ .env = inEnv(ctx), .store = ctx.store, .base = ctx.base }; const stp = [_]flow.Step{goStep(path)}; try flow.runSteps(&run, &stp); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
