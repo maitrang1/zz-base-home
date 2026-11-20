@@ -37,6 +37,11 @@ Edits to different lines of a doc are merged. If both devices changed the same l
 3. Practice run: `wo beat`. Real run: `wo beat --live` (every 15 minutes). Turn the job work-beat on.
 It pings when the stamps in `beat_chek_list` are fresh, and pings `/fail` when they are stale. If the hub stops, the pings stop and the monitor alerts you.
 
+## Watch the CI from here
+1. Practice run (read-only): `wo ci stat`, `wo ci rele`, `wo ci deps`. Slow ones: `wo ci test`, `wo ci leak`, `wo ci lock`, `wo ci repr`.
+2. The hub runs them: `cicd-stat` every 10 minutes, `cicd-rele` every 30, chain `cicd-nigh` at 02:00, chain `cicd-week` on Sunday 03:00. Red = exit 1 in the job log.
+3. A Verified release says `run wo rels sign TAG --live`; after you sign it says `Verified and signed`.
+
 ## Test that a restore works
 1. Practice run: `wo dril`
 2. Real run: `wo dril --live`

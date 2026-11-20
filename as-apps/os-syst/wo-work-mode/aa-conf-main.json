@@ -32,6 +32,11 @@
   "beat_urlz_file": "",
   "beat_chek_list": ["docs"],
   "beat_ager_maxz": 3600,
+  "ci_bran_main": "main",
+  "ci_gitl_proj": "dinhthimaitrang1%2Fzz-base-home",
+  "ci_mirr_grac": 900,
+  "ci_deps_ager": 604800,
+  "ci_test_list": ["as-apps/os-syst/wo-work-mode/build.zig", "ac-auto-task/build.zig"],
   "bknt_ager_maxz": 100800,
   "kill_step_list": [
     ["gh", "variable", "set", "AGEN_ENAB", "--body", "false"],

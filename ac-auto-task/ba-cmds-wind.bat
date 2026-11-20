@@ -20,6 +20,13 @@ if "%~1"=="work-bkup-stat" call "%CMDS_MISE%" exec -- "%WOZ%" bkup stat --live &
 if "%~1"=="work-bkup-nigh" call "%CMDS_MISE%" exec -- "%WOZ%" bkup nigh --live & call exit /b %%errorlevel%%
 if "%~1"=="work-doct" call "%CMDS_MISE%" exec -- "%WOZ%" doct & call exit /b %%errorlevel%%
 if "%~1"=="work-dril" call "%CMDS_MISE%" exec -- "%WOZ%" dril --live & call exit /b %%errorlevel%%
+if "%~1"=="cicd-stat" call "%CMDS_MISE%" exec -- "%WOZ%" ci stat & call exit /b %%errorlevel%%
+if "%~1"=="cicd-rele" call "%CMDS_MISE%" exec -- "%WOZ%" ci rele & call exit /b %%errorlevel%%
+if "%~1"=="cicd-test" call "%CMDS_MISE%" exec -- "%WOZ%" ci test & call exit /b %%errorlevel%%
+if "%~1"=="cicd-leak" call "%CMDS_MISE%" exec -- "%WOZ%" ci leak & call exit /b %%errorlevel%%
+if "%~1"=="cicd-lock" call "%CMDS_MISE%" exec -- "%WOZ%" ci lock & call exit /b %%errorlevel%%
+if "%~1"=="cicd-repr" call "%CMDS_MISE%" exec -- "%WOZ%" ci repr & call exit /b %%errorlevel%%
+if "%~1"=="cicd-deps" call "%CMDS_MISE%" exec -- "%WOZ%" ci deps & call exit /b %%errorlevel%%
 echo ba-cmds-wind.bat: unknown task id: %~1 1>&2
 exit /b 2
 :conf

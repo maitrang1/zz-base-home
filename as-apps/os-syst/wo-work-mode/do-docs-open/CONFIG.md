@@ -41,6 +41,11 @@
 | beat_urlz_file | File (under your home) whose first line is the https ping address of an outside dead-man monitor such as Healthchecks.io. `wo beat --live` pings it, or pings `/fail` when a check below is stale. If the hub dies the pings stop and the monitor alerts you. Keep the file outside the repo | empty (off) | file path |
 | beat_chek_list | Stamps that must be fresh for a healthy ping (`docs`, `wipz`, `bkup`, `bknt`). Empty = ping only proves the hub runs | docs | text list |
 | beat_ager_maxz | Seconds a stamp may be old before the ping says fail | 3600 | seconds |
+| ci_bran_main | Branch the CI watchers read | main | branch name |
+| ci_gitl_proj | GitLab project path for the public pipelines API (slash written as %2F) | dinhthimaitrang1%2Fzz-base-home | text |
+| ci_mirr_grac | Seconds GitHub and GitLab main may differ before `wo ci stat` fails | 900 | seconds |
+| ci_deps_ager | Age in seconds after which an open Dependabot PR counts as stale | 604800 | seconds |
+| ci_test_list | Build files `wo ci test` runs `zig build test` on, from the repo root | wo + hub | text list |
 | dril_mirr_dirz | Folder of the mirror repo to verify | empty (skipped) | folder path |
 | kill_step_list | Commands `kill` runs, one list per command | gh variable set AGEN_ENAB --body false; sudo -n -u agen claude auth logout | lists of text |
 

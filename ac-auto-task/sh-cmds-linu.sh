@@ -18,6 +18,13 @@ work-bkup-stat) exec "$CMDS_MISE" exec -- "$WOZ" bkup stat --live ;;
 work-bkup-nigh) exec "$CMDS_MISE" exec -- "$WOZ" bkup nigh --live ;;
 work-doct) exec "$CMDS_MISE" exec -- "$WOZ" doct ;;
 work-dril) exec "$CMDS_MISE" exec -- "$WOZ" dril --live ;;
+cicd-stat) exec "$CMDS_MISE" exec -- "$WOZ" ci stat ;;
+cicd-rele) exec "$CMDS_MISE" exec -- "$WOZ" ci rele ;;
+cicd-test) exec "$CMDS_MISE" exec -- "$WOZ" ci test ;;
+cicd-leak) exec "$CMDS_MISE" exec -- "$WOZ" ci leak ;;
+cicd-lock) exec "$CMDS_MISE" exec -- "$WOZ" ci lock ;;
+cicd-repr) exec "$CMDS_MISE" exec -- "$WOZ" ci repr ;;
+cicd-deps) exec "$CMDS_MISE" exec -- "$WOZ" ci deps ;;
 linu-shut-nigh) exec bash "$SSS/ru-shut-guar.sh" tick ;;
 *) echo "sh-cmds-linu.sh: unknown task id: $1" >&2; exit 2 ;;
 esac
