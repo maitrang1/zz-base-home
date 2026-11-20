@@ -1,0 +1,8 @@
+.{
+    .name = .fb,
+    .version = "0.1.0",
+    .fingerprint = 0xd1c2deaadf144231,
+    .minimum_zig_version = "0.17.0",
+    .dependencies = .{},
+    .paths = .{""},
+}

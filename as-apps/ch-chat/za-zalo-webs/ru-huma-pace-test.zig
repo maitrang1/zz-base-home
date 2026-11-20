@@ -1,0 +1,30 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests for ru-huma-pace: delays, quiet hours, warm-up, caps
+// Flo: seeded rng + fake clock > assert ranges, edges, verdicts
+// I/O: numbers > pass or fail
+// Run: zig build test
+// ===================================================================
+const std = @import("std"); const pace = @import("ru-huma-pace.zig");
+const H: i64 = 3600000; const D: i64 = 86400000;
+const LIM: pace.Lims = .{ .hour = 20, .dayz = 120, .newc = 5, .minu = 6, .gapz = 3000, .qfrm = 23, .qtoz = 6, .utcz = 0, .warm = 7 };
+const FULL: i64 = 100 * D + 12 * H;
+test "log-normal delay stays inside the range and is not constant" { var prn = std.Random.DefaultPrng.init(42); var minv: u32 = 9999; var maxv: u32 = 0; var cnt: u32 = 0; while (cnt < 2000) : (cnt += 1) { const val = pace.delayLogn(prn.random(), 90, 260); try std.testing.expect(val >= 90 and val <= 260); minv = @min(minv, val); maxv = @max(maxv, val); } try std.testing.expect(maxv - minv > 60); }
+test "log-normal median sits near the geometric mean" { var prn = std.Random.DefaultPrng.init(7); var below: u32 = 0; var cnt: u32 = 0; while (cnt < 4000) : (cnt += 1) { if (pace.delayLogn(prn.random(), 100, 400) < 200) below += 1; } try std.testing.expect(below > 1700 and below < 2300); }
+test "log-normal degenerate range returns the low bound" { var prn = std.Random.DefaultPrng.init(1); try std.testing.expectEqual(@as(u32, 50), pace.delayLogn(prn.random(), 50, 50)); try std.testing.expectEqual(@as(u32, 50), pace.delayLogn(prn.random(), 50, 10)); }
+test "same seed gives same delays" { var one = std.Random.DefaultPrng.init(9); var two = std.Random.DefaultPrng.init(9); var cnt: u32 = 0; while (cnt < 50) : (cnt += 1) try std.testing.expectEqual(pace.delayLogn(one.random(), 6000, 25000), pace.delayLogn(two.random(), 6000, 25000)); }
+test "hour local honors offset and negative time" { try std.testing.expectEqual(@as(u8, 0), pace.hourLocal(0, 0)); try std.testing.expectEqual(@as(u8, 7), pace.hourLocal(0, 420)); try std.testing.expectEqual(@as(u8, 23), pace.hourLocal(-1, 0)); try std.testing.expectEqual(@as(u8, 17), pace.hourLocal(0, -420)); }
+test "quiet hours wrap past midnight with exact edges" { try std.testing.expect(pace.quietNow(23 * H, 0, 23, 6)); try std.testing.expect(pace.quietNow(0, 0, 23, 6)); try std.testing.expect(pace.quietNow(5 * H + 59 * 60000, 0, 23, 6)); try std.testing.expect(!pace.quietNow(6 * H, 0, 23, 6)); try std.testing.expect(!pace.quietNow(22 * H + 59 * 60000, 0, 23, 6)); }
+test "quiet hours same-day window and empty window" { try std.testing.expect(pace.quietNow(13 * H, 0, 12, 14)); try std.testing.expect(!pace.quietNow(14 * H, 0, 12, 14)); try std.testing.expect(!pace.quietNow(3 * H, 5, 5, 5)); }
+test "warm-up ramps 20 to 100 percent over the days" { try std.testing.expectApproxEqAbs(@as(f64, 0.2), pace.warmFact(D, D, 7), 0.0001); try std.testing.expectApproxEqAbs(@as(f64, 0.6), pace.warmFact(D, D + @divTrunc(7 * D, 2), 7), 0.0001); try std.testing.expectEqual(@as(f64, 1.0), pace.warmFact(D, D + 7 * D, 7)); try std.testing.expectEqual(@as(f64, 1.0), pace.warmFact(D, D + 99 * D, 7)); try std.testing.expectEqual(@as(f64, 1.0), pace.warmFact(0, D, 7)); try std.testing.expectEqual(@as(f64, 1.0), pace.warmFact(D, D, 0)); }
+test "effective cap is never below one" { try std.testing.expectEqual(@as(u32, 4), pace.capEff(20, 0.2)); try std.testing.expectEqual(@as(u32, 1), pace.capEff(2, 0.2)); try std.testing.expectEqual(@as(u32, 20), pace.capEff(20, 1.0)); }
+test "gate go on a fresh account at noon" { const v = pace.gate(LIM, .{ .first_ms = 50 * D }, FULL, .send); try std.testing.expect(v.kind == .go); }
+test "gate denies inside quiet hours even for reads" { const v = pace.gate(LIM, .{}, 100 * D + 2 * H, .read); try std.testing.expect(v.kind == .quie); try std.testing.expectError(error.QuietHrs, pace.gateErr(v)); }
+test "gate hour cap hits exactly at the limit" { var sta: pace.Stat = .{ .first_ms = 10 * D, .hour_cnt = 19, .last_ms = FULL - 60000 }; try std.testing.expect(pace.gate(LIM, sta, FULL, .send).kind == .go); sta.hour_cnt = 20; const v = pace.gate(LIM, sta, FULL, .send); try std.testing.expect(v.kind == .cap); try std.testing.expectError(error.CapHit, pace.gateErr(v)); }
+test "gate day cap and new-contact cap" { try std.testing.expect(pace.gate(LIM, .{ .first_ms = 10 * D, .day_cnt = 120 }, FULL, .send).kind == .cap); try std.testing.expect(pace.gate(LIM, .{ .first_ms = 10 * D, .newc_cnt = 5 }, FULL, .newc).kind == .cap); try std.testing.expect(pace.gate(LIM, .{ .first_ms = 10 * D, .newc_cnt = 4 }, FULL, .newc).kind == .go); try std.testing.expect(pace.gate(LIM, .{ .first_ms = 10 * D, .newc_cnt = 5 }, FULL, .send).kind == .go); }
+test "gate shrinks caps for a new account" { const sta: pace.Stat = .{ .first_ms = FULL - 1000, .hour_cnt = 4 }; try std.testing.expect(pace.gate(LIM, sta, FULL, .send).kind == .cap); try std.testing.expect(pace.gate(LIM, .{ .first_ms = FULL - 1000, .hour_cnt = 3 }, FULL, .send).kind == .go); }
+test "gate waits for the minimum gap between sends" { const v = pace.gate(LIM, .{ .first_ms = 10 * D, .last_ms = FULL - 1000 }, FULL, .send); try std.testing.expect(v.kind == .wait); try std.testing.expectEqual(@as(u32, 2000), v.msec); try std.testing.expect(pace.gate(LIM, .{ .first_ms = 10 * D, .last_ms = FULL - 3000 }, FULL, .send).kind == .go); }
+test "gate waits for the next minute at the per-minute cap" { const now = FULL + 15000; const v = pace.gate(LIM, .{ .first_ms = 10 * D, .minu_cnt = 6, .last_ms = now - 10000 }, now, .send); try std.testing.expect(v.kind == .wait); try std.testing.expectEqual(@as(u32, 45000), v.msec); }
+test "reads skip send caps" { try std.testing.expect(pace.gate(LIM, .{ .first_ms = 10 * D, .hour_cnt = 999, .day_cnt = 999 }, FULL, .read).kind == .go); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
