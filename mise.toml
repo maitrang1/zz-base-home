@@ -6,8 +6,8 @@ locked = true
 minimum_release_age = "7d"
 
 [tools]
-zig = "0.16.0"
-zls = "0.16.1"
+zig = "0.17.0"
+zls = "0.17.0"
 gitleaks = "8.30.1"
 zizmor = "1.32.0"
 restic = "0.19.1"

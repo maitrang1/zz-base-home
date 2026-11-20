@@ -15,7 +15,7 @@ try std.testing.expectEqual(@as(?guar.Kind, null), guar.pathChec("a/console.txt"
 try std.testing.expectEqual(@as(?guar.Kind, null), guar.pathChec("a/b.zig", 10));
 }
 test "path length counts the root" {
-const path = "a" ** 240;
+const path: *const [240]u8 = &@splat('a');
 try std.testing.expectEqual(@as(?guar.Kind, null), guar.pathChec(path, 10));
 try std.testing.expectEqual(@as(?guar.Kind, .long), guar.pathChec(path, 30));
 }
