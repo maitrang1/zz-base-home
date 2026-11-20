@@ -17,9 +17,9 @@ const runz = buil.addRunArtifact(exez); runz.step.dependOn(buil.getInstallStep()
 buil.step("run", "Build and run scra").dependOn(&runz.step);
 const stepDevz = buil.step("dist-dev", "Build windows-x86_64 + linux-x86_64 into zig-out/dist/");
 for (CF.dist) |dist| { const exed = buil.addExecutable(.{ .name = CF.exez, .root_module = modMake(buil, buil.resolveTargetQuery(dist.quer), .safe, CF.root) }); stepDevz.dependOn(&buil.addInstallArtifact(exed, .{ .dest_dir = .{ .override = .{ .custom = dist.dirz } }, .pdb_dir = .disabled }).step); }
-const stepTest = buil.step("test", "Run every *-test.zig");
+const stepTest = buil.step("test", "Run every *-test.zig"); const only = buil.option([]const u8, "file", "run only this test file") orelse "";
 buil.dependOnDirectoryContents(buil.path(".")); const iozz = buil.graph.io; var dirz = buil.root.root_dir.handle.openDir(iozz, buil.root.sub_path, .{ .iterate = true }) catch @panic("project root unreadable"); defer dirz.close(iozz);
-var iter = dirz.iterate(); while (iter.next(iozz) catch @panic("scan project root")) |item| { if (item.kind != .file or !std.mem.endsWith(u8, item.name, CF.tail)) continue; const rela = buil.allocator.dupe(u8, item.name) catch @panic("OOM"); stepTest.dependOn(&buil.addRunArtifact(buil.addTest(.{ .root_module = modMake(buil, targ, .debug, rela) })).step); }
+var iter = dirz.iterate(); while (iter.next(iozz) catch @panic("scan project root")) |item| { if (item.kind != .file or !std.mem.endsWith(u8, item.name, CF.tail)) continue; if (only.len > 0 and !std.mem.eql(u8, item.name, only)) continue; const rela = buil.allocator.dupe(u8, item.name) catch @panic("OOM"); stepTest.dependOn(&buil.addRunArtifact(buil.addTest(.{ .root_module = modMake(buil, targ, .debug, rela) })).step); }
 }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
