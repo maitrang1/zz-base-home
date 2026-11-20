@@ -19,7 +19,7 @@ set "LOGZ=%T%\calls.log" & set "WOX=%T%\as-apps\os-syst\wo-work-mode\zig-out\bin
 >> "%T%\fake-mise.bat" echo exit /b %%FAKE_RC%%
 set "FAKE_RC=0"
 echo -- cmds-wind
-for %%P in ("work-wipz|wipz --live" "work-docs|docs sync --live" "work-beat|beat --live" "work-bkup-stat|bkup stat --live" "work-bkup-nigh|bkup nigh --live" "work-doct|doct" "work-dril|dril --live" "work-push|push --live" "cicd-stat|ci stat" "cicd-rele|ci rele" "cicd-test|ci test" "cicd-leak|ci leak" "cicd-lock|ci lock" "cicd-repr|ci repr" "cicd-deps|ci deps") do for /f "tokens=1,2 delims=|" %%A in ("%%~P") do call :runid "%%A" "%%B"
+for %%P in ("work-wipz|wipz --live" "work-docs|docs sync --live" "work-beat|beat --live" "work-bkup-stat|bkup stat --live" "work-bkup-nigh|bkup nigh --live" "work-doct|doct" "work-dril|dril --live" "work-code|sync --live" "cicd-stat|ci stat" "cicd-rele|ci rele" "cicd-test|ci test" "cicd-leak|ci leak" "cicd-lock|ci lock" "cicd-repr|ci repr" "cicd-deps|ci deps") do for /f "tokens=1,2 delims=|" %%A in ("%%~P") do call :runid "%%A" "%%B"
 set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
 call "%DISP%" work-wipz
 findstr /b /c:"cwd=%T%" "%LOGZ%" >nul && call :ok "task runs from the repo root" || call :bad "task runs from the repo root"

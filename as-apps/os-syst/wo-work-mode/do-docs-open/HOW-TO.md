@@ -37,12 +37,13 @@ Edits to different lines of a doc are merged. If both devices changed the same l
 3. Practice run: `wo beat`. Real run: `wo beat --live` (every 15 minutes). Turn the job work-beat on.
 It pings when the stamps in `beat_chek_list` are fresh, and pings `/fail` when they are stale. If the hub stops, the pings stop and the monitor alerts you.
 
-## Push your code automatically
+
+## Keep all devices on one version of the code
 1. Commit or review anything you do not want published (the job commits every changed file that is not git-ignored and idle for 2 minutes).
-2. Practice run: `wo push` (shows how many files it would commit and how many are held).
-3. Real run once by hand: `wo push --live`. Check both repos.
-4. Turn the job `work-push` on (hourly).
-Red result: a leak, a conflict, diverged remotes, too many or too big files, or a busy git. Nothing is pushed; fix it by hand. If a remote is ahead of you and you have nothing to push, it only says "pull by hand".
+2. Practice run: `wo sync` (shows how many files it would commit and how many are held).
+3. Real run once by hand: `wo sync --live` on each device. Check both repos.
+4. Turn the job `work-code` on (every 10 minutes).
+A clash on the same lines is settled by the newer edit; the older text is in `zz-dele-auto/_code-<time>/` and in git history. The run then exits 3 and lists the files, so you can look. Red result: a leak, a failed merge, too many or too big files, or a busy git. Nothing is lost; fix it by hand. A file you are editing right now is never overwritten: its update waits for the next cycle. Per-device files (secrets, `aa-conf-main.env`) are never synced.
 
 ## Watch the CI from here
 1. Practice run (read-only): `wo ci stat`, `wo ci rele`, `wo ci deps`. Slow ones: `wo ci test`, `wo ci leak`, `wo ci lock`, `wo ci repr`.

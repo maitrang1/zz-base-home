@@ -1,12 +1,13 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo push: parse, message, every gate, commit, rebase, retries
-// Flo: mock git + tmp repo files + fake clock > run push > check argv, facts, exit codes
+// Des: Tests for wo sync: parse, message, every gate, merge, clash, held file, retries, verify
+// Flo: mock git + tmp repo files + fake clock > run sync > check argv, facts, exit codes
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig
 // ===================================================================
 const std = @import("std");
-const push = @import("ct-comm-push.zig");
+const sync = @import("ct-comm-sync.zig");
+const cx = @import("ct-ctrl-ctxz.zig");
 const make = @import("te-ctxz-make.zig");
 const mock = @import("te-mock-runn.zig");
 const cfgz = @import("cf-conf-load.zig");
@@ -36,20 +37,26 @@ try std.Io.Dir.cwd().createDirPath(std.testing.io, try std.fs.path.join(allo, &.
 const info = try std.Io.Dir.cwd().statFile(std.testing.io, try std.fs.path.join(allo, &.{ home, "a/one.txt" }), .{});
 return .{ .home = home, .mtim = info.mtime.toSeconds() };
 }
-const Opt = struct { stat: []const u8 = " M a/one.txt\x00?? b/two.txt\x00", bran: []const u8 = "main\n", lead: []const u8 = "1\n", lagz: []const u8 = "0\n", anci: u8 = 0, commc: u8 = 0, rebc: u8 = 0, pushc: u8 = 0, diff: []const u8 = "" };
+const Opt = struct { stat: []const u8 = " M a/one.txt\x00?? b/two.txt\x00", bran: []const u8 = "main\n", lead: []const u8 = "1\n", anci: u8 = 0, ffwd: bool = false, commc: u8 = 0, mrgc: u8 = 0, pushc: u8 = 0, incoming: []const u8 = "", added: []const u8 = "", unmerged: []const u8 = "", head: []const u8 = "abc\n", remo: []const u8 = "abc\n" };
 fn rules(allo: std.mem.Allocator, home: []const u8, opt: Opt) ![]const mock.Rule {
 var out: std.ArrayList(mock.Rule) = .empty;
 try out.append(allo, .{ .pref = &.{ "git", "rev-parse", "--show-toplevel" }, .outz = home });
 try out.append(allo, .{ .pref = &.{ "git", "rev-parse", "--abbrev-ref" }, .outz = opt.bran });
 try out.append(allo, .{ .pref = &.{ "git", "rev-parse", "--absolute-git-dir" }, .outz = try std.fs.path.join(allo, &.{ home, ".git" }) });
+try out.append(allo, .{ .pref = &.{ "git", "rev-parse", "HEAD" }, .outz = opt.head });
+try out.append(allo, .{ .pref = &.{ "git", "rev-parse" }, .outz = opt.remo });
 try out.append(allo, .{ .pref = &.{ "git", "status" }, .outz = opt.stat });
+if (opt.ffwd) { try out.append(allo, .{ .pref = &.{ "git", "merge-base", "--is-ancestor", "HEAD", "origin/main" } }); try out.append(allo, .{ .pref = &.{ "git", "merge-base", "--is-ancestor", "HEAD", "mirr/main" } }); }
 try out.append(allo, .{ .pref = &.{ "git", "merge-base" }, .code = opt.anci });
-try out.append(allo, .{ .pref = &.{ "git", "rev-list", "--count", "HEAD..origin/main" }, .outz = opt.lagz });
-try out.append(allo, .{ .pref = &.{ "git", "rev-list", "--count", "HEAD..mirr/main" }, .outz = opt.lagz });
 try out.append(allo, .{ .pref = &.{ "git", "rev-list", "--count" }, .outz = opt.lead });
-try out.append(allo, .{ .pref = &.{ "git", "diff", "--name-only" }, .outz = opt.diff });
-try out.append(allo, .{ .pref = &.{ "git", "rebase", "--abort" } });
-try out.append(allo, .{ .pref = &.{ "git", "rebase" }, .code = opt.rebc });
+try out.append(allo, .{ .pref = &.{ "git", "diff", "--name-only", "--diff-filter=A" }, .outz = opt.added });
+try out.append(allo, .{ .pref = &.{ "git", "diff", "--name-only", "--diff-filter=U" }, .outz = opt.unmerged });
+try out.append(allo, .{ .pref = &.{ "git", "diff", "--name-only" }, .outz = opt.incoming });
+try out.append(allo, .{ .pref = &.{ "git", "log", "-1" }, .outz = "100\n" });
+try out.append(allo, .{ .pref = &.{ "git", "ls-files" }, .outz = "" });
+try out.append(allo, .{ .pref = &.{ "git", "merge", "--abort" } });
+try out.append(allo, .{ .pref = &.{ "git", "-c", "commit.gpgsign=false", "merge" }, .code = opt.mrgc, .errz = "CONFLICT" });
+try out.append(allo, .{ .pref = &.{ "git", "-c", "commit.gpgsign=false", "commit", "--no-edit" } });
 try out.append(allo, .{ .pref = &.{ "git", "-c" }, .code = opt.commc, .errz = "hook said no" });
 try out.append(allo, .{ .pref = &.{ "git", "push" }, .code = opt.pushc });
 try out.append(allo, .{ .pref = &.{"git"} });
@@ -60,12 +67,12 @@ mck.* = .{ .rule = try rules(allo, env.home, opt) };
 fakeNow = now;
 var ctxz = make.make(allo, &outb.writer, mck, cfgv, env.home, live, false);
 ctxz.nowf = fakeNowFn;
-return push.comm(&ctxz, &.{});
+return sync.comm(&ctxz, &.{});
 }
 test "entrParse reads paths and skips the old name of a rename" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
-const got = try push.entrParse(arna.allocator(), " M a/x.txt\x00?? new dir/y.txt\x00R  to.txt\x00from.txt\x00A  z.txt\x00");
+const got = try sync.entrParse(arna.allocator(), " M a/x.txt\x00?? new dir/y.txt\x00R  to.txt\x00from.txt\x00A  z.txt\x00");
 try std.testing.expectEqual(@as(usize, 4), got.len);
 try std.testing.expectEqualStrings("a/x.txt", got[0]);
 try std.testing.expectEqualStrings("new dir/y.txt", got[1]);
@@ -75,28 +82,20 @@ try std.testing.expectEqualStrings("z.txt", got[3]);
 test "mesg names the device, the count and at most three top folders" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
-const got = try push.mesg(arna.allocator(), "dev1", &.{ "a/x", "a/y", "b/z", "c/q", "d/w", "root.txt" });
+const got = try sync.mesg(arna.allocator(), "dev1", &.{ "a/x", "a/y", "b/z", "c/q", "d/w", "root.txt" });
 try std.testing.expectEqualStrings("auto(dev1): 6 file(s) · a, b, c", got);
 }
-test "usage: an argument" {
-var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
-defer arna.deinit();
-const allo = arna.allocator();
-var mck: mock.Mock = .{ .rule = &.{} };
-var buff: std.Io.Writer.Allocating = .init(allo);
-const ctxz = make.make(allo, &buff.writer, &mck, .{}, "h", false, false);
-try std.testing.expectError(exit.Erro.Usag, push.comm(&ctxz, &.{"x"}));
-}
-test "git absent is blocked" {
+test "usage: an argument; git absent is blocked" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
 var mck: mock.Mock = .{ .rule = &.{} };
 var buff: std.Io.Writer.Allocating = .init(allo);
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, "h", true, false);
-try std.testing.expectEqual(exit.Code.bloc, try push.comm(&ctxz, &.{}));
+try std.testing.expectError(exit.Erro.Usag, sync.comm(&ctxz, &.{"x"}));
+try std.testing.expectEqual(exit.Code.bloc, try sync.comm(&ctxz, &.{}));
 }
-test "dry-run commits and pushes nothing, says what it would do" {
+test "dry-run commits, merges and pushes nothing, says what it would do" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -106,7 +105,7 @@ const env = try envMake(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
 try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{}, .{}, false, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(!hasCall(&mck, "git add") and !hasCall(&mck, "commit") and !hasCall(&mck, "git push"));
+try std.testing.expect(!hasCall(&mck, "git add") and !hasCall(&mck, "commit") and !hasCall(&mck, "git push") and !hasCall(&mck, "merge"));
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "dry-run: 2 to commit, 0 held") != null);
 }
 test "not on main, or git busy: blocked before anything changes" {
@@ -124,7 +123,7 @@ try filePut(allo, env.home, ".git/MERGE_HEAD", "x");
 try std.testing.expectEqual(exit.Code.bloc, try run(allo, env, .{}, .{}, true, env.mtim + 1000, &buff, &mck));
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "git is busy: MERGE_HEAD") != null and !hasCall(&mck, "git add"));
 }
-test "live: idle files are added, committed with a message, fetched, pushed to both remotes, stamped" {
+test "live, remotes already inside HEAD: commit, push both, verify equal, stamp" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -138,9 +137,11 @@ try std.testing.expect(hasCall(&mck, "git add -A -- a/one.txt b/two.txt"));
 try std.testing.expect(hasCall(&mck, "commit -q -m auto(devb): 2 file(s) · a, b -- a/one.txt b/two.txt"));
 try std.testing.expect(hasCall(&mck, "git fetch origin main") and hasCall(&mck, "git fetch mirr main"));
 try std.testing.expect(hasCall(&mck, "git push origin main") and hasCall(&mck, "git push mirr main"));
-try std.testing.expect(!hasCall(&mck, "rebase"));
+try std.testing.expect(!hasCall(&mck, "git -c commit.gpgsign=false merge") and !hasCall(&mck, "rebase"));
+try std.testing.expect(mck.envz.items.len == 1 and std.mem.startsWith(u8, mck.envz.items[0], "GIT_AUTHOR_DATE=") and std.mem.endsWith(u8, mck.envz.items[0], " +0000"));
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, env.home, true, false);
-try std.testing.expect(ctxz.stamGet("push").?.okay);
+try std.testing.expect(ctxz.stamGet("sync").?.okay);
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "all devices on one version") != null);
 }
 test "quiet window: files edited a moment ago are held, nothing to commit" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
@@ -163,7 +164,7 @@ var tmp = std.testing.tmpDir(.{});
 defer tmp.cleanup();
 const env = try envMake(allo, &tmp);
 var cfgv: cfgz.Conf = .{};
-cfgv.push_deny_list = &.{"b/"};
+cfgv.sync_deny_list = &.{"b/"};
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
 try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{}, cfgv, true, env.mtim + 1000, &buff, &mck));
@@ -179,11 +180,11 @@ const env = try envMake(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
 var big: cfgz.Conf = .{};
-big.push_file_maxz = 1;
+big.sync_file_maxz = 1;
 try std.testing.expectEqual(exit.Code.bloc, try run(allo, env, .{}, big, true, env.mtim + 1000, &buff, &mck));
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "over 1 bytes: b/two.txt") != null and !hasCall(&mck, "git add"));
 var many: cfgz.Conf = .{};
-many.push_file_cntz = 1;
+many.sync_file_cntz = 1;
 try std.testing.expectEqual(exit.Code.bloc, try run(allo, env, .{}, many, true, env.mtim + 1000, &buff, &mck));
 try std.testing.expect(!hasCall(&mck, "git add"));
 }
@@ -199,7 +200,7 @@ var buff: std.Io.Writer.Allocating = .init(allo);
 try std.testing.expectEqual(exit.Code.fail, try run(allo, env, .{ .commc = 1 }, .{}, true, env.mtim + 1000, &buff, &mck));
 try std.testing.expect(hasCall(&mck, "git reset -q -- a/one.txt b/two.txt") and !hasCall(&mck, "git push"));
 }
-test "remotes diverged: fails, pushes nothing" {
+test "a remote ahead (fast-forward): saved undo point, ff-only merge, then push and verify" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -208,10 +209,11 @@ defer tmp.cleanup();
 const env = try envMake(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
-try std.testing.expectEqual(exit.Code.fail, try run(allo, env, .{ .anci = 1 }, .{}, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(std.mem.indexOf(u8, buff.written(), "diverged") != null and !hasCall(&mck, "git push"));
+try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{ .stat = "", .lead = "0\n", .anci = 1, .ffwd = true }, .{}, true, env.mtim + 1000, &buff, &mck));
+try std.testing.expect(hasCall(&mck, "git update-ref refs/wo-sync/pre-devb HEAD"));
+try std.testing.expect(hasCall(&mck, "git merge --ff-only -q origin/main") and hasCall(&mck, "git merge --ff-only -q mirr/main") and !hasCall(&mck, "git push"));
 }
-test "behind with local commits: rebase, then push; a conflict aborts and pushes nothing" {
+test "diverged: a real merge of the remote tip, no clash, pushes the union" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -220,26 +222,29 @@ defer tmp.cleanup();
 const env = try envMake(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
-try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{ .lagz = "2\n" }, .{}, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(hasCall(&mck, "git rebase --autostash mirr/main") and hasCall(&mck, "git push origin main"));
-var mck2: mock.Mock = undefined;
-var buf2: std.Io.Writer.Allocating = .init(allo);
-try std.testing.expectEqual(exit.Code.fail, try run(allo, env, .{ .lagz = "2\n", .rebc = 1 }, .{}, true, env.mtim + 1000, &buf2, &mck2));
-try std.testing.expect(hasCall(&mck2, "git rebase --abort") and !hasCall(&mck2, "git push"));
+const opt: Opt = .{ .stat = "", .anci = 1 };
+try std.testing.expectEqual(exit.Code.okay, try run(allo, env, opt, .{}, true, env.mtim + 1000, &buff, &mck));
+try std.testing.expect(hasCall(&mck, "git -c commit.gpgsign=false merge --no-edit -q origin/main") or hasCall(&mck, "git merge --ff-only -q origin/main"));
+try std.testing.expect(hasCall(&mck, "git push origin main") and hasCall(&mck, "git push mirr main"));
 }
-test "incoming change on a file being edited: fails before the rebase" {
+test "a same-line clash: the newer edit wins, the loser is saved, exit 3 lists the file" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
 var tmp = std.testing.tmpDir(.{});
 defer tmp.cleanup();
 const env = try envMake(allo, &tmp);
+const now = env.mtim + 1000;
+const stmp = try cx.stamTxt(allo, now);
+try filePut(allo, env.home, try std.fmt.allocPrint(allo, "zz-dele-auto/_code-{s}/a/one.txt", .{stmp}), "loser");
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
-try std.testing.expectEqual(exit.Code.fail, try run(allo, env, .{ .lagz = "1\n", .diff = "a/one.txt\n" }, .{}, true, env.mtim + 10, &buff, &mck));
-try std.testing.expect(std.mem.indexOf(u8, buff.written(), "incoming change touches a/one.txt") != null and !hasCall(&mck, "git rebase --autostash"));
+try std.testing.expectEqual(exit.Code.drif, try run(allo, env, .{ .stat = "", .anci = 1, .mrgc = 1, .unmerged = "a/one.txt\x00" }, .{}, true, now, &buff, &mck));
+try std.testing.expect(hasCall(&mck, "git checkout --theirs -- ") and hasCall(&mck, "git add -f --") and hasCall(&mck, "commit --no-edit -q"));
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "resolved 1 file(s): the newer edit wins") != null and std.mem.indexOf(u8, buff.written(), "a/one.txt") != null);
+try std.testing.expect(!hasCall(&mck, "merge --abort"));
 }
-test "behind only, no local commit: never pulls, says so" {
+test "a failed merge with nothing to resolve is aborted and fails" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -248,8 +253,41 @@ defer tmp.cleanup();
 const env = try envMake(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
-try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{ .stat = "", .lead = "0\n", .lagz = "3\n" }, .{}, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(std.mem.indexOf(u8, buff.written(), "behind mirr/main by 3: pull by hand") != null and !hasCall(&mck, "rebase") and !hasCall(&mck, "git push"));
+try std.testing.expectEqual(exit.Code.fail, try run(allo, env, .{ .stat = "", .anci = 1, .mrgc = 1 }, .{}, true, env.mtim + 1000, &buff, &mck));
+try std.testing.expect(hasCall(&mck, "git merge --abort") and !hasCall(&mck, "git push"));
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "nothing lost") != null);
+}
+test "incoming change on a file being edited: skipped, retried later, never overwritten" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const env = try envMake(allo, &tmp);
+var mck: mock.Mock = undefined;
+var buff: std.Io.Writer.Allocating = .init(allo);
+try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{ .anci = 1, .incoming = "a/one.txt\n" }, .{}, true, env.mtim + 10, &buff, &mck));
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "a/one.txt is being edited") != null);
+try std.testing.expect(!hasCall(&mck, "merge --ff-only") and !hasCall(&mck, "merge --no-edit") and !hasCall(&mck, "git push"));
+const ctxz = make.make(allo, &buff.writer, &mck, .{}, env.home, true, false);
+try std.testing.expect(ctxz.stamGet("sync") == null);
+}
+test "a local file an incoming commit would overwrite is copied to zz-dele-auto first" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const env = try envMake(allo, &tmp);
+try filePut(allo, env.home, "c/private.env", "SECRET_LOCAL");
+const now = env.mtim + 1000;
+var mck: mock.Mock = undefined;
+var buff: std.Io.Writer.Allocating = .init(allo);
+try std.testing.expectEqual(exit.Code.drif, try run(allo, env, .{ .stat = "", .anci = 1, .ffwd = true, .added = "c/private.env\n" }, .{}, true, now, &buff, &mck));
+const saved = try std.fs.path.join(allo, &.{ env.home, "zz-dele-auto", try std.fmt.allocPrint(allo, "_code-{s}", .{try cx.stamTxt(allo, now)}), "c/private.env" });
+const data = try std.Io.Dir.cwd().readFileAlloc(std.testing.io, saved, allo, .limited(1024));
+try std.testing.expectEqualStrings("SECRET_LOCAL", data);
+try std.testing.expect(hasCall(&mck, "git merge --ff-only -q origin/main"));
 }
 test "a push that keeps failing is tried three times, then fails" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
@@ -264,7 +302,21 @@ try std.testing.expectEqual(exit.Code.fail, try run(allo, env, .{ .pushc = 1 }, 
 try std.testing.expectEqual(@as(usize, 3), callN(&mck, "git fetch origin main"));
 try std.testing.expectEqual(@as(usize, 1), callN(&mck, "git add"));
 }
-test "nothing changed and nothing ahead: ok, no push" {
+test "after the push a remote that is not at HEAD fails the verify" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const env = try envMake(allo, &tmp);
+var mck: mock.Mock = undefined;
+var buff: std.Io.Writer.Allocating = .init(allo);
+try std.testing.expectEqual(exit.Code.fail, try run(allo, env, .{ .head = "aaa\n", .remo = "bbb\n" }, .{}, true, env.mtim + 1000, &buff, &mck));
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "is not at HEAD after the push") != null);
+const ctxz = make.make(allo, &buff.writer, &mck, .{}, env.home, true, false);
+try std.testing.expect(ctxz.stamGet("sync") == null);
+}
+test "nothing changed and nothing ahead: ok, no push, no commit" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();

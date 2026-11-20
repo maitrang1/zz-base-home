@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 permissions: {}
+concurrency:
+  group: ci-main-${{ github.ref }}
+  cancel-in-progress: true
 cache-mode: read
 jobs:
   boot:

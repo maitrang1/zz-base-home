@@ -2,7 +2,7 @@
 
 {"type":"puls","sche":"5m","id":"work-docs","on":true,"_cmt":"sync docs to the private docs repo"},
 
-{"type":"puls","sche":"60m","id":"work-push","on":false,"_cmt":"commit idle changes, push main to all remotes"},
+{"type":"puls","sche":"10m","id":"work-code","on":false,"_cmt":"sync code: commit idle files, merge, push all remotes"},
 
 {"type":"puls","sche":"10m","id":"cicd-stat","on":true,"lock":"none","_cmt":"GitHub and GitLab CI status, mirror match"},
 

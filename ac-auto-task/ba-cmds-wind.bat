@@ -15,7 +15,7 @@ if not defined CMDS_MISE set "CMDS_MISE=mise"
 cd /d "%R%"
 if "%~1"=="work-wipz" call "%CMDS_MISE%" exec -- "%WOZ%" wipz --live & call exit /b %%errorlevel%%
 if "%~1"=="work-docs" call "%CMDS_MISE%" exec -- "%WOZ%" docs sync --live & call exit /b %%errorlevel%%
-if "%~1"=="work-push" call "%CMDS_MISE%" exec -- "%WOZ%" push --live & call exit /b %%errorlevel%%
+if "%~1"=="work-code" call "%CMDS_MISE%" exec -- "%WOZ%" sync --live & call exit /b %%errorlevel%%
 if "%~1"=="work-beat" call "%CMDS_MISE%" exec -- "%WOZ%" beat --live & call exit /b %%errorlevel%%
 if "%~1"=="work-bkup-stat" call "%CMDS_MISE%" exec -- "%WOZ%" bkup stat --live & call exit /b %%errorlevel%%
 if "%~1"=="work-bkup-nigh" call "%CMDS_MISE%" exec -- "%WOZ%" bkup nigh --live & call exit /b %%errorlevel%%

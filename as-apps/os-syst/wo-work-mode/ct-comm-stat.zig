@@ -9,7 +9,7 @@ const cx = @import("ct-ctrl-ctxz.zig");
 const fcts = @import("ob-fact-rept.zig");
 const exit = @import("ct-exit-code.zig");
 pub const VERS = "0.1.0";
-const NAME = [_][]const u8{ "wipz", "bkup", "bknt", "docs", "rels", "dril" };
+const NAME = [_][]const u8{ "wipz", "bkup", "bknt", "docs", "sync", "rels", "dril" };
 pub fn comm(ctxz: *const cx.Ctxz, args: []const []const u8) !exit.Code {
 _ = args;
 var facts: std.ArrayList(fcts.Fact) = .empty;
