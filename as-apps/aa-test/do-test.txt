@@ -1,1 +1,12 @@
-test for home sync
+test for home sync: li10-edit-test-01
+li10-edit-test-02
+li10-edit-test-03
+li10-edit-test-04
+
+
+
+
+
+li10-edit-test-10
+li10-edit-test-11
+li10-edit-test-12
