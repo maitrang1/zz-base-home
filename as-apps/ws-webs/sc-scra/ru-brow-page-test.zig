@@ -1,0 +1,19 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests for M11: local browser renders shells at $0
+// Flo: mock SPA pages > ladder with Chrome session > assert text, vendor never called, kill on timeout
+// I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
+// Run: zig build test
+// ===================================================================
+const std = @import("std"); const rigz = @import("te-brow-rig.zig"); const chro = @import("nt-brow-chro.zig"); const cfgz = @import("cf-conf-load.zig");
+const allo = std.testing.allocator;
+fn has(rig: *rigz.Rig, path: []const u8, needle: []const u8) !bool { const rec = (try rig.reco(path)) orelse return false; return std.mem.indexOf(u8, rec.body, needle) != null; }
+test "JS-built DOM is rendered locally: vendor never called, $0, vend brow" { var rig: rigz.Rig = undefined; try rig.up(.{}); defer rig.down(); try rig.skipNo(); const out = try rig.go("/dom"); try std.testing.expectEqualStrings("new", out.stat); try std.testing.expectEqualStrings("brow", out.vend); try std.testing.expectEqual(@as(i64, 1), out.tier); try std.testing.expectEqual(@as(u64, 0), out.micr); try std.testing.expectEqual(@as(usize, 0), rig.vmk.calls.items.len); try std.testing.expect(try has(&rig, "/dom", "Rendered by javascript marker alpha")); }
+test "open shadow root text is extracted" { var rig: rigz.Rig = undefined; try rig.up(.{}); defer rig.down(); try rig.skipNo(); const out = try rig.go("/shado"); try std.testing.expectEqualStrings("brow", out.vend); try std.testing.expect(try has(&rig, "/shado", "Open shadow words visible here")); }
+test "closed shadow root text is extracted through DOMSnapshot" { var rig: rigz.Rig = undefined; try rig.up(.{}); defer rig.down(); try rig.skipNo(); const out = try rig.go("/shadc"); try std.testing.expectEqualStrings("brow", out.vend); try std.testing.expect(try has(&rig, "/shadc", "Closed shadow words hidden inside")); }
+test "brow_enab=false: no session, shell goes to the vendor render" { var rig: rigz.Rig = undefined; try rig.up(.{}); defer rig.down(); rig.lad.sess = null; const out = try rig.go("/dom"); try std.testing.expect(out.tier >= 3); try std.testing.expect(!std.mem.eql(u8, out.vend, "brow")); try std.testing.expectEqual(@as(usize, 1), rig.vmk.calls.items.len); }
+test "no Chrome found: ladder continues to the vendor" { var conf: cfgz.Conf = .{}; conf.brow_path_exec = "/no/such/chrome"; var rig: rigz.Rig = undefined; try rig.up(conf); defer rig.down(); try std.testing.expect(!rig.rnd.avail()); const out = try rig.go("/dom"); try std.testing.expect(out.tier >= 3); try std.testing.expectEqual(@as(usize, 1), rig.vmk.calls.items.len); }
+test "a blocked page never goes to the local browser" { var rig: rigz.Rig = undefined; try rig.up(.{}); defer rig.down(); try rig.skipNo(); const out = try rig.go("/blockp"); try std.testing.expect(!std.mem.eql(u8, out.vend, "brow")); try std.testing.expectEqual(@as(u32, 0), rig.rnd.rnds); }
+test "timeout kills the browser: no process left, port closed" { var conf: cfgz.Conf = .{}; conf.brow_time_seco = 1; var rig: rigz.Rig = undefined; try rig.up(conf); defer rig.down(); try rig.skipNo(); _ = try rig.go("/dom"); const port = rig.rnd.brow.?.port; var buf: [64]u8 = undefined; const hang = rig.srv.urlOf(&buf, "/hang"); try std.testing.expectError(error.Timeout, rig.rnd.render(rig.aren.allocator(), hang, 0, "", .{})); try std.testing.expect(rig.rnd.brow == null); var tries: u32 = 0; while (!chro.portDead(allo, std.testing.io, port) and tries < 40) : (tries += 1) std.Io.sleep(std.testing.io, .fromMilliseconds(100), .awake) catch {}; try std.testing.expect(chro.portDead(allo, std.testing.io, port)); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
