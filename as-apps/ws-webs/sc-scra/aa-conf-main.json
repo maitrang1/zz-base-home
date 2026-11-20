@@ -19,6 +19,7 @@
   "shel_text_minz": 500,
   "apiz_prob_enab": true,
   "apiz_prob_maxz": 8,
+  "pdfz_size_maxz": 20971520,
   "revi_star_seco": 86400,
   "revi_floo_seco": 3600,
   "revi_capz_seco": 2592000,

@@ -1,0 +1,19 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Build small PDF fixtures in code for tests only
+// Flo: zlib helper > object writer > plain, flate, object-stream, CMap, encrypted, scanned, bomb files
+// I/O: content text (test) > PDF bytes (caller frees)
+// ===================================================================
+const std = @import("std"); const flate = std.compress.flate;
+pub fn zlibOf(allo: std.mem.Allocator, body: []const u8) ![]u8 { var outw = try std.Io.Writer.Allocating.initCapacity(allo, 1024); defer outw.deinit(); const win = try allo.alloc(u8, flate.max_window_len); defer allo.free(win); var comp = try flate.Compress.init(&outw.writer, win, .zlib, .default); try comp.writer.writeAll(body); try comp.finish(); return outw.toOwnedSlice(); }
+pub const Opt = struct { flate: bool = false, cmap: bool = false, objs: bool = false, root: bool = true, enc: bool = false, nofont: bool = false };
+fn strm(allo: std.mem.Allocator, buf: *std.ArrayList(u8), num: u32, extra: []const u8, body: []const u8, flat: bool) !void { const data = if (flat) try zlibOf(allo, body) else try allo.dupe(u8, body); defer allo.free(data); try buf.print(allo, "{d} 0 obj\n<< /Length {d} {s}{s} >>\nstream\n", .{ num, data.len, if (flat) "/Filter /FlateDecode " else "", extra }); try buf.appendSlice(allo, data); try buf.appendSlice(allo, "\nendstream\nendobj\n"); }
+const CMAP = "/CIDInit /ProcSet findresource begin begincmap 1 begincodespacerange <0000> <FFFF> endcodespacerange 2 beginbfchar <0001> <0048> <0002> <0069> endbfchar 1 beginbfrange <0003> <0005> <0041> endbfrange endcmap end";
+pub fn build(allo: std.mem.Allocator, pages: []const []const u8, opt: Opt) ![]u8 { var buf: std.ArrayList(u8) = .empty; errdefer buf.deinit(allo); try buf.appendSlice(allo, "%PDF-1.5\n"); const fnum: u32 = 5; const cnum: u32 = 6; const first: u32 = 10; var kids: std.ArrayList(u8) = .empty; defer kids.deinit(allo); for (pages, 0..) |_, idx| try kids.print(allo, "{d} 0 R ", .{first + @as(u32, @intCast(idx)) * 2});
+const catd = "<< /Type /Catalog /Pages 2 0 R >>"; const pgsd = try std.fmt.allocPrint(allo, "<< /Type /Pages /Kids [{s}] /Count {d} >>", .{ kids.items, pages.len }); defer allo.free(pgsd);
+if (opt.objs) { var inner: std.ArrayList(u8) = .empty; defer inner.deinit(allo); var head: std.ArrayList(u8) = .empty; defer head.deinit(allo); try head.print(allo, "1 0 2 {d} ", .{catd.len + 1}); try inner.print(allo, "{s} {s}", .{ catd, pgsd }); const extra = try std.fmt.allocPrint(allo, "/Type /ObjStm /N 2 /First {d} ", .{head.items.len}); defer allo.free(extra); const whole = try std.fmt.allocPrint(allo, "{s}{s}", .{ head.items, inner.items }); defer allo.free(whole); try strm(allo, &buf, 9, extra, whole, true); } else { try buf.print(allo, "1 0 obj\n{s}\nendobj\n2 0 obj\n{s}\nendobj\n", .{ catd, pgsd }); }
+if (!opt.nofont) { if (opt.cmap) { try buf.print(allo, "{d} 0 obj\n<< /Type /Font /Subtype /Type0 /BaseFont /X /ToUnicode {d} 0 R >>\nendobj\n", .{ fnum, cnum }); try strm(allo, &buf, cnum, "", CMAP, opt.flate); } else try buf.print(allo, "{d} 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n", .{fnum}); }
+for (pages, 0..) |content, idx| { const pn = first + @as(u32, @intCast(idx)) * 2; try buf.print(allo, "{d} 0 obj\n<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 {d} 0 R >> >> /Contents {d} 0 R >>\nendobj\n", .{ pn, fnum, pn + 1 }); try strm(allo, &buf, pn + 1, "", content, opt.flate); }
+try buf.print(allo, "trailer\n<< {s}/Size 40 {s}>>\n%%EOF\n", .{ if (opt.root) "/Root 1 0 R " else "", if (opt.enc) "/Encrypt 99 0 R " else "" }); return buf.toOwnedSlice(allo); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
