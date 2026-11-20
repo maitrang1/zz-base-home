@@ -1,0 +1,14 @@
+{
+  "capz_usdz_mont": 0,
+  "capz_disk_gbyt": 5,
+  "clou_poli_mode": "purg",
+  "uagt_cont_mail": "",
+  "logi_mode_enab": false,
+  "vend_orde": ["deco", "zenr", "brig"],
+  "fetc_time_seco": 30,
+  "fetc_body_maxz": 5242880,
+  "fetc_redi_maxz": 5,
+  "rate_host_seco": 1,
+  "retr_cont_maxz": 3,
+  "data_dirz_path": "~/.zs-scra-data"
+}

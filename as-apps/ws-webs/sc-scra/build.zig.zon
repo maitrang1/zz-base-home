@@ -1,0 +1,8 @@
+.{
+    .name = .scra,
+    .version = "0.1.0",
+    .fingerprint = 0x35e3efad8535e70b,
+    .minimum_zig_version = "0.16.0",
+    .dependencies = .{},
+    .paths = .{""},
+}

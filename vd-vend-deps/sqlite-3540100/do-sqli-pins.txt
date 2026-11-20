@@ -1,0 +1,6 @@
+SQLite 3.54.1 amalgamation (public domain) · source https://sqlite.org/2026/sqlite-amalgamation-3540100.zip · fetched 2026-11-20
+a.zip sha3-256 92281c86e2957f9b9305890f9ac04204caa7b677cc868dc326d942689df28e30 (matches sqlite.org/download.html)
+a.zip sha256   0a9c8e34352dad46006aa82836d5383bff9dc6bc9ce5a60553c05aa30e6ad1f9
+Used by: as-apps/ws-webs/sc-scra (st-stor-sqli.zig). Never edit the C files.
+0c657666d819f261cc4007526ad57e1669de9949df7a8ea847aa284a2bf0ee52 *sqlite3.c
+d6c84557261893439b341d2e6c35187ae3ea24fbfd843ad94616f72d89242b8c *sqlite3.h
