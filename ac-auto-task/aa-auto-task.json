@@ -1,17 +1,7 @@
 [
 
-{"type":"puls","sche":"5m","id":"work-docs","on":true,"_cmt":"sync docs to the private docs repo"},
+{"type":"chai","sche":"10m","plus":["y","m","d","h","m",[0]],"id":"work-sync","on":true,"tmo":900,"ids":["work-docs","work-code","cicd-stat","cicd-rele","work-beat"]},
 
-{"type":"puls","sche":"10m","id":"work-code","on":true,"_cmt":"sync code: commit idle files, merge, push all remotes"},
-
-{"type":"puls","sche":"10m","id":"cicd-stat","on":true,"lock":"none","_cmt":"GitHub and GitLab CI status, mirror match"},
-
-{"type":"puls","sche":"30m","id":"cicd-rele","on":true,"lock":"none","_cmt":"pending release verified or mismatch"},
-
-{"type":"puls","sche":"15m","id":"work-beat","on":false,"_cmt":"heartbeat ping, off until set"},
-
-{"type":"chai","sche":"0 2 * * *","plus":["y","m","d","h",[2],"s"],"id":"cicd-nigh","on":true,"tmo":3600,"lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock"],"_cmt":"nightly local CI: tests, leaks, workflow lock"},
-
-{"type":"cron","sche":"0 3 * * *","id":"work-doct","on":true,"_cmt":"daily health check, changes nothing"}
+{"type":"chai","sche":"0 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock","work-doct"]}
 
 ]
