@@ -62,5 +62,16 @@ Save a Healthchecks.io ping address in `healthchecks.url` and a Resend key in `r
 | cloud not configured | Fill `clou_endp` and the key files. |
 | cloud storage error / cloud database error | The cloud refused. Your data is safe locally. Run `sync --live` again later. |
 
+## JavaScript pages, PDFs, other countries
+- A page that is only a JavaScript shell: scra first looks for the JSON behind it (free). With `brow_enab` true it then renders the page in your own Chrome (free). Only then does it use a vendor.
+- PDF: fetched like a page, text is stored (record kind `pdft`; `pdfo` = scanned, needs OCR).
+- Another country: `scra.exe fetch <url> --live --geoz us` (needs a vendor; ZenRows prices this as premium).
+- Scroll, load more, cookie walls, forms: `fetch <url> --live --scroll 20`, `--click "load more"`, `--consent`, `--steps steps.json` (ops: goto click clicktext type wait waitsel scroll extract; never types into password fields).
+- Your own logged-in account: set `logi_mode_enab` and `brow_enab` true, run `scra.exe login mine`, log in by hand in the window that opens, close it. Then `fetch <url> --live --account mine`. scra never sees your password. No vendors, one profile per account.
+- Live feeds: `fetch <url> --live --stream sse` (or `poll`, or `ws` for a page that opens a WebSocket).
+- Your own captured request (DevTools HAR or Copy as cURL): `scra.exe replay --spec capture.txt --param page=2 --live`. A 401/403 means the signature expired: capture a fresh one.
+- Test many sites: write `L1 https://...` lines (levels 1-9, two or more per level), then `scra.exe bench --list urls.txt --out notes.txt --live`.
+- Follow links while crawling: `run --follow 50 --live`. Hidden, nofollow and honeypot links are skipped.
+
 ## Next
 [CONFIG.md](CONFIG.md)

@@ -8,7 +8,7 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | capz_disk_gbyt | Local disk cap (not enforced yet) | 5 | 1 or more |
 | clou_poli_mode | At 90% cloud full: delete oldest (`purg`) or only alert (`upgr`) | purg | purg, upgr |
 | uagt_cont_mail | Contact address added to the User-Agent | empty | text |
-| logi_mode_enab | Owner logged-in mode (not built yet) | false | false |
+| logi_mode_enab | Owner logged-in mode: your own accounts, in a scra-only browser profile (also needs brow_enab) | false | true or false |
 | vend_orde | Vendor order | deco, zenr, brig | deco, zenr, brig |
 | vend_free_cred | Free credits per month per vendor | 0 | whole numbers |
 | vend_cred_micr | Price per credit beyond free, in millionths of a dollar | 1000 | whole numbers |
@@ -22,6 +22,21 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | shel_text_minz | A page with less visible text than this and a JavaScript-shell marker is a thin shell | 500 | 0 or more |
 | apiz_prob_enab | Look for a free JSON or iframe URL behind a thin shell before paying a vendor | true | true or false |
 | apiz_prob_maxz | Most probe requests per shell page | 8 | 0 turns probing off |
+| geoz_code_dflt | Country code sent to vendors for every fetch (ZenRows needs premium, so it costs more) | empty | 2 letters or empty |
+| geoz_host_over | Country code per site, for example {"example.com":"us"} | empty | object of 2-letter codes |
+| pdfz_size_maxz | Largest PDF to download, bytes (0 = refuse PDFs) | 20971520 | 0 or more |
+| brow_enab | Use your own Chrome or Edge to render JavaScript pages for free | false | true or false |
+| brow_path_exec | Browser program (empty = look in the usual places) | empty | path |
+| brow_prof_dirz | Folder for the scra-only browser profiles (never your daily profile) | ~/.zs-scra-data/prof | path |
+| brow_time_seco | Seconds one browser page may take, including its actions | 60 | 1 or more |
+| brow_scrl_maxz | Most scroll steps or load-more clicks per page | 30 | 1 or more |
+| brow_step_maxz | Most steps in a steps file | 50 | 1 or more |
+| brow_head_mode | Show the browser window while rendering | false | true or false |
+| cons_sele_list | Buttons clicked to dismiss cookie or consent walls | known list | CSS selectors |
+| strm_time_seco | Seconds to listen to a live feed | 30 | 1 or more |
+| strm_frme_maxz | Most frames kept per feed | 1000 | 1 or more |
+| acct_page_maxz | Pages per day per logged-in account (spaced 3x rate_host_seco) | 200 | 0 or more |
+| ocrz_path_exec | Optional OCR program for scanned PDFs, run as: program file (empty = off) | empty | path |
 | revi_star_seco | First recrawl interval | 86400 | between floor and cap |
 | revi_floo_seco | Shortest recrawl interval | 3600 | 1 or more |
 | revi_capz_seco | Longest recrawl interval | 2592000 | at least the floor |

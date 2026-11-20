@@ -1,5 +1,10 @@
 # Updates
 
+## 0.3.0 — 2026-11-21
+- Free local browser (your own Chrome) renders JavaScript pages; scroll, load more, consent walls, form steps.
+- PDF text, country option per vendor, your own logged-in accounts, live feeds (SSE, WebSocket), replay of your own captures, link-trap skipping, vendor learning, bench command.
+- Still not live-tested: vendor parameter names, real sites.
+
 ## 0.2.0 — 2026-11-20
 - Thin JavaScript pages are now detected. scra looks for the free JSON or iframe behind them (WordPress, Next.js, /api/ calls) before spending a vendor credit.
 
