@@ -39,14 +39,14 @@
 | docs_remo_list | Remotes of the main repo that the docs repo also uses (same host and account, repo name + `-docs`) | origin, mirr | remote names |
 | rels_keyz_file | Public key (under your home) whose private half is loaded in ssh-agent; `wo rels sign TAG --live` signs the verified release hashes with it | .ssh/id_ed25519_sign.pub | file path |
 | beat_urlz_file | File (under your home) whose first line is the https ping address of an outside dead-man monitor such as Healthchecks.io. `wo beat --live` pings it, or pings `/fail` when a check below is stale. If the hub dies the pings stop and the monitor alerts you. Keep the file outside the repo | empty (off) | file path |
-| beat_chek_list | Stamps that must be fresh for a healthy ping (`docs`, `wipz`, `bkup`, `bknt`). Empty = ping only proves the hub runs | docs | text list |
+| beat_chek_list | Stamps that must be fresh for a healthy ping (`docs`, `sync`, `bkup`, `bknt`). Empty = ping only proves the hub runs | docs | text list |
 | beat_ager_maxz | Seconds a stamp may be old before the ping says fail | 3600 | seconds |
 | sync_bran_main | Branch `wo sync` works on; anything else is blocked | main | branch name |
 | sync_remo_list | Remotes `wo sync` merges from and pushes to, in order | origin, mirr | text list |
 | sync_deny_list | Path prefixes `wo sync` never commits | empty | text list |
 | sync_quie_secz | A changed file is committed only after it has been idle this long | 120 | seconds |
 | sync_file_cntz | More files than this to commit stops the run | 200 | whole number |
-| sync_file_maxz | A file bigger than this stops the run | 10485760 | bytes |
+| sync_file_maxz | A file bigger than this is kept out of the commit and reported (the run goes on) | 10485760 | bytes |
 | sync_tryz_maxz | Fetch, merge and push attempts per run | 3 | whole number |
 | ci_bran_main | Branch the CI watchers read | main | branch name |
 | ci_gitl_proj | GitLab project path for the public pipelines API (slash written as %2F) | dinhthimaitrang1%2Fzz-base-home | text |

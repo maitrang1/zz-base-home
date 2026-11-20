@@ -43,11 +43,11 @@ It pings when the stamps in `beat_chek_list` are fresh, and pings `/fail` when t
 2. Practice run: `wo sync` (shows how many files it would commit and how many are held).
 3. Real run once by hand: `wo sync --live` on each device. Check both repos.
 4. Turn the job `work-code` on (every 10 minutes).
-A clash on the same lines is settled by the newer edit; the older text is in `zz-dele-auto/_code-<time>/` and in git history. The run then exits 3 and lists the files, so you can look. Red result: a leak, a failed merge, too many or too big files, or a busy git. Nothing is lost; fix it by hand. A file you are editing right now is never overwritten: its update waits for the next cycle. Per-device files (secrets, `aa-conf-main.env`) are never synced.
+A clash on the same lines is settled by the newer edit; the older text is in `zz-dele-auto/_code-<time>/` and in git history. The run then exits 3 and lists the files, so you can look. Red result: a leak, a failed merge, too many files, or a busy git (a file over the size limit is only kept out and reported). Nothing is lost; fix it by hand. A file you are editing right now is never overwritten: its update waits for the next cycle. Per-device files (secrets, `aa-conf-main.env`) are never synced.
 
 ## Watch the CI from here
 1. Practice run (read-only): `wo ci stat`, `wo ci rele`, `wo ci deps`. Slow ones: `wo ci test`, `wo ci leak`, `wo ci lock`, `wo ci repr`.
-2. The hub runs them: `cicd-stat` every 10 minutes, `cicd-rele` every 30, chain `cicd-nigh` at 02:00, chain `cicd-week` on Sunday 03:00. Red = exit 1 in the job log.
+2. The hub runs `stat` every 10 minutes (`cicd-stat`), `rele` every 30 (`cicd-rele`) and, at 02:00, the chain `cicd-nigh` (`test`, `leak`, `lock`). Red = exit 1 in the job log. `repr` (two builds, same bytes) and `deps` (stale Dependabot PRs) are manual only.
 3. A Verified release says `run wo rels sign TAG --live`; after you sign it says `Verified and signed`.
 
 ## Test that a restore works

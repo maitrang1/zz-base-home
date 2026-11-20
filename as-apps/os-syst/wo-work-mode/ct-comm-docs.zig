@@ -11,7 +11,7 @@ const exit = @import("ct-exit-code.zig");
 const runm = @import("ru-cmdz-runn.zig");
 const bkup = @import("ct-comm-bkup.zig");
 const merg = @import("ct-comm-merg.zig");
-const CF = .{ .leak = 9, .tryz = 3, .futz = 300, .tras = "zz-dele-auto", .base = "zz-base-home", .suff = "-docs", .bran = "main", .keyz = [_][]const u8{ "user.name", "user.email", "core.sshCommand" } };
+const CF = .{ .leak = 9, .tryz = 3, .futz = 300, .base = "zz-base-home", .suff = "-docs", .bran = "main", .keyz = [_][]const u8{ "user.name", "user.email", "core.sshCommand" } };
 pub fn urlMake(allo: std.mem.Allocator, url: []const u8) !?[]const u8 {
 const indx = std.mem.lastIndexOf(u8, url, CF.base) orelse return null;
 const tail = url[indx + CF.base.len ..];

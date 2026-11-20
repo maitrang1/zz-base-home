@@ -170,7 +170,7 @@ var buff: std.Io.Writer.Allocating = .init(allo);
 try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{}, cfgv, true, env.mtim + 1000, &buff, &mck));
 try std.testing.expect(hasCall(&mck, "git add -A -- a/one.txt") and !hasCall(&mck, "b/two.txt"));
 }
-test "a file over the size limit or too many files: blocked, nothing staged" {
+test "a file over the size limit is kept out and reported; too many files blocks, nothing staged" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -181,8 +181,8 @@ var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
 var big: cfgz.Conf = .{};
 big.sync_file_maxz = 1;
-try std.testing.expectEqual(exit.Code.bloc, try run(allo, env, .{}, big, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(std.mem.indexOf(u8, buff.written(), "over 1 bytes: b/two.txt") != null and !hasCall(&mck, "git add"));
+try std.testing.expectEqual(exit.Code.drif, try run(allo, env, .{}, big, true, env.mtim + 1000, &buff, &mck));
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "over 1 bytes kept out, never published: b/two.txt") != null and hasCall(&mck, "git add -A -- a/one.txt") and !hasCall(&mck, "b/two.txt"));
 var many: cfgz.Conf = .{};
 many.sync_file_cntz = 1;
 try std.testing.expectEqual(exit.Code.bloc, try run(allo, env, .{}, many, true, env.mtim + 1000, &buff, &mck));

@@ -64,7 +64,7 @@ while (lines.next()) |line| { const one = cx.trim(line); if (one.len > 0) try ou
 return out.items;
 }
 fn aside(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact), top: []const u8, ref: []const u8) !void {
-const added = try names(ctxz, &.{ "git", "diff", "--name-only", "--diff-filter=A", "HEAD", ref });
+const added = try names(ctxz, &.{ "git", "diff", "--name-only", "--diff-filter=A", try std.fmt.allocPrint(ctxz.allo, "HEAD...{s}", .{ref}) });
 var dest: ?[]const u8 = null;
 for (added) |path| {
 const full = try std.fs.path.join(ctxz.allo, &.{ top, path });
@@ -80,7 +80,7 @@ try facts.append(ctxz.allo, cx.mkfa("keep", .drif, try std.fmt.allocPrint(ctxz.a
 }
 fn mergeIn(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact), top: []const u8, gitd: []const u8, ref: []const u8, rest: []const []const u8) !Mrg {
 if (isAnc(ctxz, ref, "HEAD")) return .done;
-const inco = try names(ctxz, &.{ "git", "diff", "--name-only", "HEAD", ref });
+const inco = try names(ctxz, &.{ "git", "diff", "--name-only", try std.fmt.allocPrint(ctxz.allo, "HEAD...{s}", .{ref}) });
 for (inco) |name| { for (rest) |item| { if (std.mem.eql(u8, name, item)) { try facts.append(ctxz.allo, cx.mkfa("held", .skip, try std.fmt.allocPrint(ctxz.allo, "{s} is being edited and {s} changes it: retry next cycle", .{ item, ref }))); return .held; } } }
 try aside(ctxz, facts, top, ref);
 _ = try ctxz.tool(&.{ "git", "update-ref", try std.fmt.allocPrint(ctxz.allo, "{s}{s}", .{ CF.undo, ctxz.devi }), "HEAD" }, &.{});
@@ -138,12 +138,12 @@ for (entr) |path| {
 if (denied(conf.sync_deny_list, path)) { try rest.append(ctxz.allo, path); continue; }
 const full = try std.fs.path.join(ctxz.allo, &.{ root, path });
 const info = std.Io.Dir.cwd().statFile(ctxz.iozz, full, .{}) catch { try picks.append(ctxz.allo, path); continue; };
-if (info.size > conf.sync_file_maxz) { try bigs.append(ctxz.allo, path); continue; }
+if (info.size > conf.sync_file_maxz) { try bigs.append(ctxz.allo, path); try rest.append(ctxz.allo, path); continue; }
 if (ctxz.nowz() - info.mtime.toSeconds() < conf.sync_quie_secz) { held += 1; try rest.append(ctxz.allo, path); continue; }
 edit = @max(edit, info.mtime.toSeconds());
 try picks.append(ctxz.allo, path);
 }
-if (bigs.items.len > 0) { try facts.append(ctxz.allo, cx.mkfa("bigf", .bloc, try std.fmt.allocPrint(ctxz.allo, "{d} file(s) over {d} bytes: {s}", .{ bigs.items.len, conf.sync_file_maxz, cx.clip(try std.mem.join(ctxz.allo, ", ", bigs.items)) }))); return ctxz.emit(facts.items); }
+if (bigs.items.len > 0) try facts.append(ctxz.allo, cx.mkfa("bigf", .drif, try std.fmt.allocPrint(ctxz.allo, "{d} file(s) over {d} bytes kept out, never published: {s}", .{ bigs.items.len, conf.sync_file_maxz, cx.clip(try std.mem.join(ctxz.allo, ", ", bigs.items)) })));
 if (picks.items.len > conf.sync_file_cntz) { try facts.append(ctxz.allo, cx.mkfa("many", .bloc, try std.fmt.allocPrint(ctxz.allo, "{d} files to commit, limit {d}: commit by hand", .{ picks.items.len, conf.sync_file_cntz }))); return ctxz.emit(facts.items); }
 const note = try std.fmt.allocPrint(ctxz.allo, "{d} to commit, {d} held (edited in the last {d}s), {d} kept out", .{ picks.items.len, held, conf.sync_quie_secz, rest.items.len - held });
 if (!ctxz.ladd.live) { try facts.append(ctxz.allo, cx.mkfa("sync", .okay, try std.fmt.allocPrint(ctxz.allo, "dry-run: {s}", .{note}))); return ctxz.emit(facts.items); }
