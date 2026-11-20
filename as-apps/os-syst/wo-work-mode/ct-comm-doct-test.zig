@@ -58,9 +58,9 @@ test "tool: pinned zig version ok, other version drifts, absent blocks" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
-try std.testing.expectEqual(exit.Code.okay, (try runOne(allo, &.{.{ .pref = &.{"zig"}, .outz = "0.16.0\n" }}, "tool", "h")).code);
+try std.testing.expectEqual(exit.Code.okay, (try runOne(allo, &.{.{ .pref = &.{"zig"}, .outz = "0.17.0\n" }}, "tool", "h")).code);
 try std.testing.expectEqual(exit.Code.drif, (try runOne(allo, &.{.{ .pref = &.{"zig"}, .outz = "0.15.2\n" }}, "tool", "h")).code);
-try std.testing.expectEqual(exit.Code.drif, (try runOne(allo, &.{.{ .pref = &.{"zig"}, .outz = "0.16.0\n", .code = 1 }}, "tool", "h")).code);
+try std.testing.expectEqual(exit.Code.drif, (try runOne(allo, &.{.{ .pref = &.{"zig"}, .outz = "0.17.0\n", .code = 1 }}, "tool", "h")).code);
 try std.testing.expectEqual(exit.Code.bloc, (try runOne(allo, &.{}, "tool", "h")).code);
 }
 test "head: equal ok, different drift, no upstream or no commit blocked" {

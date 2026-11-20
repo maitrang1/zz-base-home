@@ -5,10 +5,31 @@
   "uagt_cont_mail": "",
   "logi_mode_enab": false,
   "vend_orde": ["deco", "zenr", "brig"],
+  "vend_free_cred": { "deco": 0, "zenr": 0, "brig": 0 },
+  "vend_cred_micr": { "deco": 1000, "zenr": 1000, "brig": 1000 },
+  "vend_keyz_dirz": "~/.zz-base-home-secr/scra",
+  "vend_zone_brig": "",
   "fetc_time_seco": 30,
   "fetc_body_maxz": 5242880,
   "fetc_redi_maxz": 5,
   "rate_host_seco": 1,
   "retr_cont_maxz": 3,
-  "data_dirz_path": "~/.zs-scra-data"
+  "revi_star_seco": 86400,
+  "revi_floo_seco": 3600,
+  "revi_capz_seco": 2592000,
+  "data_dirz_path": "~/.zs-scra-data",
+  "clou_stor_orde": ["b2zz", "r2zz", "tigr"],
+  "clou_sqlz_orde": ["turs", "neon", "tidb"],
+  "clou_capz_gbyt": { "b2zz": 10, "r2zz": 10, "tigr": 5 },
+  "clou_sync_batz": 200,
+  "clou_endp": {
+    "b2zz": { "hostz": "", "regn": "us-west-004", "bukt": "" },
+    "r2zz": { "hostz": "", "regn": "auto", "bukt": "" },
+    "tigr": { "hostz": "t3.storage.dev", "regn": "auto", "bukt": "" },
+    "turs": { "hostz": "" },
+    "neon": { "hostz": "" },
+    "tidb": { "hostz": "", "dbnm": "" }
+  },
+  "aler_mail_toxx": "",
+  "aler_mail_from": ""
 }

@@ -6,7 +6,7 @@ One file. Nothing to install. No account, no cloud. Everything stays on your mac
 Type a command, press Run, and watch the output appear line by line. Keep servers running, stop them with one click, and work in several tabs, each with its own folder. Schedule jobs to run at startup, every night, when a file changes, when a drive fills up, and more. Your tabs, output and settings are still there after you close the page or restart the PC.
 
 ## Requirements
-A browser, and Zig 0.16.0 to build it. No runtime, no setup.
+A browser, and Zig 0.17.0 to build it. No runtime, no setup.
 
 ## Quick start
 1. Build once:

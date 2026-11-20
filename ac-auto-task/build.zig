@@ -37,11 +37,11 @@ step.dependOn(&buil.addRunArtifact(buil.addTest(.{ .root_module = tmod })).step)
 pub fn build(buil: *std.Build) void {
 const targ = buil.standardTargetOptions(.{});
 const flag = buil.option(Opti, "optimize", "Debug | ReleaseSafe (default) | ReleaseFast | ReleaseSmall");
-const opti: Opti = flag orelse switch (buil.release_mode) { .fast => .ReleaseFast, .small => .ReleaseSmall, else => .ReleaseSafe };
+const opti: Opti = flag orelse switch (buil.graph.release_mode) { .fast => .ReleaseFast, .small => .ReleaseSmall, else => .ReleaseSafe };
 const opte: Opti = flag orelse .Debug;
 const embe = buil.option(bool, "embed", "Embed the UI files into the exe (default: false native, true dist)") orelse false;
 const exez = buil.addExecutable(.{ .name = CF.exez, .root_module = moduRoot(buil, targ, opti, embe) }); buil.installArtifact(exez);
-const runz = buil.addRunArtifact(exez); runz.step.dependOn(buil.getInstallStep()); if (buil.args) |args| runz.addArgs(args);
+const runz = buil.addRunArtifact(exez); runz.step.dependOn(buil.getInstallStep()); runz.addPassthruArgs();
 const stepRunz = buil.step("run", "Build and run auto-task"); stepRunz.dependOn(&runz.step);
 const stepDist = buil.step("dist", "Build every target into zig-out/dist/<os>-<arch>/"); const stepDevz = buil.step("dist-dev", "Build only windows-x86_64 + linux-x86_64 into zig-out/dist/");
 for (CF.dist, 0..) |dist, indx| { const exed = buil.addExecutable(.{ .name = CF.exez, .root_module = moduRoot(buil, buil.resolveTargetQuery(dist.quer), .ReleaseSafe, true) }); const inst = buil.addInstallArtifact(exed, .{ .dest_dir = .{ .override = .{ .custom = dist.dirz } }, .pdb_dir = .disabled }); stepDist.dependOn(&inst.step); if (indx == CF.dev0 or indx == CF.dev1) stepDevz.dependOn(&inst.step); }
@@ -53,7 +53,7 @@ for (list) |spec| testAddz(buil, targ, opte, stepTest, spec);
 fn modAsse(buil: *std.Build, targ: Targ, opti: Opti, embe: bool) *Modu {
 const writ = buil.addWriteFiles();
 var code: std.ArrayList(u8) = .empty; code.appendSlice(buil.allocator, "pub const File = struct { name: []const u8, data: []const u8 };\npub const files = [_]File{\n") catch @panic("OOM");
-if (embe) { const iozz = buil.graph.io; var dirz = buil.build_root.handle.openDir(iozz, ".", .{ .iterate = true }) catch @panic("project root unreadable"); defer dirz.close(iozz); var iter = dirz.iterate(); while (iter.next(iozz) catch @panic("scan project root")) |item| { if (item.kind != .file) continue; const extn = std.fs.path.extension(item.name); const okay = std.mem.eql(u8, extn, ".html") or std.mem.eql(u8, extn, ".css") or std.mem.eql(u8, extn, ".js") or std.mem.eql(u8, extn, ".ico"); if (!okay or std.mem.endsWith(u8, item.name, "-test.js")) continue; const rela = buil.allocator.dupe(u8, item.name) catch @panic("OOM"); _ = writ.addCopyFile(buil.path(rela), rela); code.appendSlice(buil.allocator, buil.fmt("    .{{ .name = \"{s}\", .data = @embedFile(\"{s}\") }},\n", .{ rela, rela })) catch @panic("OOM"); } }
+if (embe) { const iozz = buil.graph.io; var dirz = buil.root.openDir(iozz, ".", .{ .iterate = true }) catch @panic("project root unreadable"); defer dirz.close(iozz); var iter = dirz.iterate(); while (iter.next(iozz) catch @panic("scan project root")) |item| { if (item.kind != .file) continue; const extn = std.fs.path.extension(item.name); const okay = std.mem.eql(u8, extn, ".html") or std.mem.eql(u8, extn, ".css") or std.mem.eql(u8, extn, ".js") or std.mem.eql(u8, extn, ".ico"); if (!okay or std.mem.endsWith(u8, item.name, "-test.js")) continue; const rela = buil.allocator.dupe(u8, item.name) catch @panic("OOM"); _ = writ.addCopyFile(buil.path(rela), rela); code.appendSlice(buil.allocator, buil.fmt("    .{{ .name = \"{s}\", .data = @embedFile(\"{s}\") }},\n", .{ rela, rela })) catch @panic("OOM"); } }
 code.appendSlice(buil.allocator, "};\n") catch @panic("OOM");
 return buil.createModule(.{ .root_source_file = writ.add("assets.zig", code.items), .target = targ, .optimize = opti });
 }

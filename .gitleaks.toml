@@ -1,0 +1,6 @@
+# Default rules + allowlist for vendored third-party code (pinned, not ours)
+[extend]
+useDefault = true
+[[allowlists]]
+description = "vendored third-party sources"
+paths = ['''^vd-vend-deps/''']

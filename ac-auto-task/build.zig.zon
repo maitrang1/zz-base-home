@@ -1,7 +1,7 @@
 .{
     .name = .auto_task,
     .version = "0.2.0",
-    .minimum_zig_version = "0.16.0",
+    .minimum_zig_version = "0.17.0",
     .fingerprint = 0x615d0b29054c3d4e,
     .dependencies = .{},
     .paths = .{

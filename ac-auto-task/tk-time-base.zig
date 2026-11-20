@@ -4,11 +4,23 @@
 // Flo: libc localtime > Local fields; days/civil conversions; leap + month length
 // I/O: unix time or minute stamp > Local, civil date
 // ===================================================================
-const std = @import("std"); const libc = @cImport({ @cInclude("time.h"); });
+const std = @import("std");
+// libc time shim (no @cImport in 0.17); Windows struct tm has no gmtoff/zone
+const libc = struct {
+const win = @import("builtin").os.tag == .windows;
+pub const time_t = i64;
+pub const struct_tm = if (win) extern struct { tm_sec: c_int, tm_min: c_int, tm_hour: c_int, tm_mday: c_int, tm_mon: c_int, tm_year: c_int, tm_wday: c_int, tm_yday: c_int, tm_isdst: c_int } else extern struct { tm_sec: c_int, tm_min: c_int, tm_hour: c_int, tm_mday: c_int, tm_mon: c_int, tm_year: c_int, tm_wday: c_int, tm_yday: c_int, tm_isdst: c_int, tm_gmtoff: c_long, tm_zone: ?[*:0]const u8 };
+extern "c" fn time(?*time_t) time_t;
+extern "c" fn localtime_r(*const time_t, *struct_tm) ?*struct_tm;
+extern "c" fn _time64(?*time_t) time_t;
+extern "c" fn _localtime64(*const time_t) ?*struct_tm;
+pub fn nowz() time_t { return if (win) _time64(null) else time(null); }
+pub fn loca(src: *const time_t, out: *struct_tm) bool { if (win) { const ptrz = _localtime64(src) orelse return false; out.* = ptrz.*; return true; } return localtime_r(src, out) != null; }
+};
 pub const CF = .{ .trim = " \t", .cron_minz = [5]i64{ 0, 0, 1, 1, 0 }, .cron_maxz = [5]i64{ 59, 23, 31, 12, 7 }, .scan = 366 * 4 * 1440 };
 pub const Local = struct { year: u16, month: u8, day: u8, hour: u8, minute: u8, second: u8, weekday: u8, minute_stamp: i64 };
-pub fn localNow() Local { return locaFrom(libc.time(null)); }
-pub fn locaFrom(unix: libc.time_t) Local { var copy = unix; var btim: libc.struct_tm = undefined; const okzz = if (@import("builtin").os.tag == .windows) blk: { const ptrz = libc.localtime(&copy) orelse break :blk false; btim = ptrz.*; break :blk true; } else libc.localtime_r(&copy, &btim) != null; if (!okzz) return .{ .year = 1970, .month = 1, .day = 1, .hour = 0, .minute = 0, .second = 0, .weekday = 4, .minute_stamp = 0 }; const year: u16 = @intCast(btim.tm_year + 1900); const mont: u8 = @intCast(btim.tm_mon + 1); const dayz: u8 = @intCast(btim.tm_mday); const hour: u8 = @intCast(btim.tm_hour); const minu: u8 = @intCast(btim.tm_min); return .{ .year = year, .month = mont, .day = dayz, .hour = hour, .minute = minu, .second = @intCast(btim.tm_sec), .weekday = @intCast(btim.tm_wday), .minute_stamp = daysFromCivil(year, mont, dayz) * 1440 + @as(i64, hour) * 60 + @as(i64, minu) }; }
+pub fn localNow() Local { return locaFrom(libc.nowz()); }
+pub fn locaFrom(unix: libc.time_t) Local { var copy = unix; var btim: libc.struct_tm = undefined; const okzz = libc.loca(&copy, &btim); if (!okzz) return .{ .year = 1970, .month = 1, .day = 1, .hour = 0, .minute = 0, .second = 0, .weekday = 4, .minute_stamp = 0 }; const year: u16 = @intCast(btim.tm_year + 1900); const mont: u8 = @intCast(btim.tm_mon + 1); const dayz: u8 = @intCast(btim.tm_mday); const hour: u8 = @intCast(btim.tm_hour); const minu: u8 = @intCast(btim.tm_min); return .{ .year = year, .month = mont, .day = dayz, .hour = hour, .minute = minu, .second = @intCast(btim.tm_sec), .weekday = @intCast(btim.tm_wday), .minute_stamp = daysFromCivil(year, mont, dayz) * 1440 + @as(i64, hour) * 60 + @as(i64, minu) }; }
 pub fn daysFromCivil(year: u16, mont: u8, dayz: u8) i64 { var yezz: i64 = year; if (mont <= 2) yezz -= 1; const eraz = @divFloor(yezz, 400); const yoez = yezz - eraz * 400; const mpzz: i64 = @mod(@as(i64, mont) + 9, 12); const doyz = @divFloor(153 * mpzz + 2, 5) + @as(i64, dayz) - 1; const doez = yoez * 365 + @divFloor(yoez, 4) - @divFloor(yoez, 100) + doyz; return eraz * 146097 + doez - 719468; }
 pub fn yearLeap(year: u16) bool { return (year % 4 == 0 and year % 100 != 0) or year % 400 == 0; }
 pub fn montDays(year: u16, mont: u8) u8 { return switch (mont) { 1, 3, 5, 7, 8, 10, 12 => 31, 4, 6, 9, 11 => 30, 2 => if (yearLeap(year)) 29 else 28, else => 30 }; }

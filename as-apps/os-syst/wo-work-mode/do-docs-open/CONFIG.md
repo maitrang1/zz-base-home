@@ -4,7 +4,7 @@
 - File: `wo.exe` (Linux/macOS: `wo`)
 - Run: `wo <command>`
 - Output: lines on screen (or JSON with `--json`)
-- Built with: Zig 0.16.0
+- Built with: Zig 0.17.0
 
 ## Settings (file `aa-conf-main.json`, found in the current folder or in `wo-work-mode`)
 | Name | Does | Default | Allowed |
@@ -12,7 +12,7 @@
 | apps_data_loca | Folder in your home for wo's own files | .wo-work-mode | any folder name |
 | secr_home_loca | Folder in your home for secrets | .zz-base-home-secr | any folder name |
 | hook_path_main | Hooks folder the repo must use | ci-flow-sync | any path |
-| zigz_vers_pinz | Zig version the device must have | 0.16.0 | any version text |
+| zigz_vers_pinz | Zig version the device must have | 0.17.0 | any version text |
 | wipz_ager_maxz | Longest allowed gap since the last saved work (seconds) | 1800 | whole number |
 | sync_ager_maxz | Longest allowed gap since the last good `wo sync` (seconds) | 1800 | whole number |
 | bkup_ager_maxz | Longest allowed gap since the last backup (seconds) | 1800 | whole number |

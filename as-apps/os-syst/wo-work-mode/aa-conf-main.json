@@ -2,7 +2,7 @@
   "apps_data_loca": ".wo-work-mode",
   "secr_home_loca": ".zz-base-home-secr",
   "hook_path_main": "ci-flow-sync",
-  "zigz_vers_pinz": "0.16.0",
+  "zigz_vers_pinz": "0.17.0",
   "wipz_ager_maxz": 1800,
   "sync_ager_maxz": 1800,
   "bkup_ager_maxz": 1800,

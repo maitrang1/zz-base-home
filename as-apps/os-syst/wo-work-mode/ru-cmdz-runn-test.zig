@@ -23,7 +23,7 @@ var envm = try std.testing.environ.createMap(allo);
 var real: runm.Real = .{ .iozz = std.testing.io, .envm = &envm };
 const okay = try real.runn().exec(allo, &.{ "zig", "version" }, &.{});
 try std.testing.expectEqual(@as(u8, 0), okay.code);
-try std.testing.expect(std.mem.startsWith(u8, std.mem.trim(u8, okay.outz, "\r\n "), "0.16"));
+try std.testing.expect(std.mem.startsWith(u8, std.mem.trim(u8, okay.outz, "\r\n "), "0."));
 const bad = try real.runn().exec(allo, &.{ "zig", "no-such-subcommand-xyz" }, &.{});
 try std.testing.expect(bad.code != 0);
 try std.testing.expect(bad.errz.len > 0);

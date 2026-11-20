@@ -15,7 +15,7 @@ const exez = buil.addExecutable(.{ .name = CF.exez, .root_module = modMake(buil,
 buil.installArtifact(exez);
 const runz = buil.addRunArtifact(exez);
 runz.step.dependOn(buil.getInstallStep());
-if (buil.args) |args| runz.addArgs(args);
+runz.addPassthruArgs();
 buil.step("run", "Build and run wo").dependOn(&runz.step);
 const stepDist = buil.step("dist", "Build every target (ReleaseFast) into zig-out/dist/<os>-<arch>/");
 const stepDevz = buil.step("dist-dev", "Build only windows-x86_64 + linux-x86_64 into zig-out/dist/");
