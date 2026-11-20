@@ -14,7 +14,7 @@ const stat = @import("st-stat-file.zig");
 const exit = @import("ct-exit-code.zig");
 const STMP = "20231114-221320";
 const GTOP: mock.Rule = .{ .pref = &.{ "git", "rev-parse" }, .outz = "top\n" };
-const GLST: mock.Rule = .{ .pref = &.{ "git", "-C" }, .outz = "do-core-plan/\x00ac-auto-task/do-docs-deve/\x00aa-todo-note/\x00CLAUDE.md\x00ac-auto-task/CLAUDE.md\x00zig-out/\x00as-apps/ai-mind/ag-agen-code/\x00node_modules/\x00" };
+const GLST: mock.Rule = .{ .pref = &.{ "git", "-C" }, .outz = "do-plan-core/\x00ac-auto-task/do-docs-deve/\x00aa-todo-note/\x00CLAUDE.md\x00ac-auto-task/CLAUDE.md\x00zig-out/\x00as-apps/ai-mind/ag-agen-code/\x00node_modules/\x00" };
 fn hasCall(mck: *const mock.Mock, pref: []const u8) bool {
 for (mck.call.items) |line| { if (std.mem.startsWith(u8, line, pref)) return true; }
 return false;
@@ -73,7 +73,7 @@ try std.testing.expect(std.mem.indexOf(u8, line, "--skip-if-unchanged --exclude 
 try std.testing.expect(std.mem.indexOf(u8, line, "--use-fs-snapshot") == null);
 const dirz = try stat.dirzOf(allo, home, ".wo-work-mode");
 const resl = try std.Io.Dir.cwd().readFileAlloc(std.testing.io, try std.fs.path.join(allo, &.{ dirz, "bkup-files.txt" }), allo, .limited(4096));
-try std.testing.expect(std.mem.startsWith(u8, resl, home) and std.mem.indexOf(u8, resl, "config.json") != null and std.mem.indexOf(u8, resl, "top") != null and std.mem.indexOf(u8, resl, "do-core-plan") != null and std.mem.indexOf(u8, resl, "CLAUDE.md") != null and std.mem.indexOf(u8, resl, "zig-out") == null and std.mem.indexOf(u8, resl, "node_modules") == null);
+try std.testing.expect(std.mem.startsWith(u8, resl, home) and std.mem.indexOf(u8, resl, "config.json") != null and std.mem.indexOf(u8, resl, "top") != null and std.mem.indexOf(u8, resl, "do-plan-core") != null and std.mem.indexOf(u8, resl, "CLAUDE.md") != null and std.mem.indexOf(u8, resl, "zig-out") == null and std.mem.indexOf(u8, resl, "node_modules") == null);
 const stam = stat.stamRead(allo, std.testing.io, try stat.pathOf(allo, dirz, "bkup")).?;
 try std.testing.expect(stam.okay and stam.when == make.NOWZ);
 var mck2: mock.Mock = .{ .rule = &.{ GTOP, GLST, .{ .pref = &.{"restic"} } } };
