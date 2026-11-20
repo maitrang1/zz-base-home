@@ -1,0 +1,20 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Load and check aa-conf-main.json, defaults if missing
+// Flo: read file > parse JSON (unknown keys ignored) > check values > return Conf
+// I/O: file path (aa-conf-main.json) > Conf struct (arena owned)
+// ===================================================================
+const std = @import("std");
+const CF = .{ .maxz = 65536, .micr = 1000000.0, .vend = @as([]const []const u8, &.{ "deco", "zenr", "brig" }), .mods = @as([]const []const u8, &.{ "purg", "upgr" }), .stor = @as([]const []const u8, &.{ "b2zz", "r2zz", "tigr" }), .sqlz = @as([]const []const u8, &.{ "turs", "neon", "tidb" }) };
+pub const Vmap = struct { deco: u32 = 0, zenr: u32 = 0, brig: u32 = 0 };
+pub const Endp = struct { hostz: []const u8 = "", regn: []const u8 = "auto", bukt: []const u8 = "", dbnm: []const u8 = "", usrz: []const u8 = "" };
+pub const Emap = struct { b2zz: Endp = .{ .regn = "us-west-004" }, r2zz: Endp = .{}, tigr: Endp = .{ .hostz = "t3.storage.dev" }, turs: Endp = .{}, neon: Endp = .{}, tidb: Endp = .{} };
+pub const Gmap = struct { b2zz: u32 = 10, r2zz: u32 = 10, tigr: u32 = 5 };
+pub const Conf = struct { clou_endp: Emap = .{}, clou_capz_gbyt: Gmap = .{}, clou_stor_orde: []const []const u8 = &.{ "b2zz", "r2zz", "tigr" }, clou_sqlz_orde: []const []const u8 = &.{ "turs", "neon", "tidb" }, clou_sync_batz: u32 = 200, aler_mail_toxx: []const u8 = "", aler_mail_from: []const u8 = "", revi_star_seco: u32 = 86400, revi_floo_seco: u32 = 3600, revi_capz_seco: u32 = 2592000, vend_free_cred: Vmap = .{}, vend_cred_micr: Vmap = .{ .deco = 1000, .zenr = 1000, .brig = 1000 }, vend_keyz_dirz: []const u8 = "~/.zz-base-home-secr/scra", vend_zone_brig: []const u8 = "", capz_usdz_mont: f64 = 0, capz_disk_gbyt: u32 = 5, clou_poli_mode: []const u8 = "purg", uagt_cont_mail: []const u8 = "", logi_mode_enab: bool = false, vend_orde: []const []const u8 = &.{ "deco", "zenr", "brig" }, fetc_time_seco: u32 = 30, fetc_body_maxz: u32 = 5242880, fetc_redi_maxz: u8 = 5, rate_host_seco: u32 = 1, retr_cont_maxz: u8 = 3, data_dirz_path: []const u8 = "~/.zs-scra-data" };
+pub fn confLoad(allo: std.mem.Allocator, iozz: std.Io, path: []const u8) !Conf { const byte = std.Io.Dir.cwd().readFileAlloc(iozz, path, allo, .limited(CF.maxz)) catch |err| { if (err == error.FileNotFound) return .{}; return err; }; return confParse(allo, byte); }
+pub fn confParse(allo: std.mem.Allocator, byte: []const u8) !Conf { const conf = std.json.parseFromSliceLeaky(Conf, allo, byte, .{ .ignore_unknown_fields = true, .allocate = .alloc_always }) catch return error.BadConfig; try confChek(conf); return conf; }
+pub fn confChek(conf: Conf) !void { if (!std.math.isFinite(conf.capz_usdz_mont) or conf.capz_usdz_mont < 0) return error.BadConfig; if (conf.capz_disk_gbyt == 0 or conf.fetc_time_seco == 0 or conf.fetc_body_maxz == 0 or conf.retr_cont_maxz == 0) return error.BadConfig; if (!inLis(CF.mods, conf.clou_poli_mode)) return error.BadConfig; if (conf.vend_orde.len == 0 or conf.revi_floo_seco == 0 or conf.revi_floo_seco > conf.revi_capz_seco or conf.revi_star_seco < conf.revi_floo_seco or conf.revi_star_seco > conf.revi_capz_seco) return error.BadConfig; for (conf.vend_orde) |vend| if (!inLis(CF.vend, vend)) return error.BadConfig; for (conf.clou_stor_orde) |item| if (!inLis(CF.stor, item)) return error.BadConfig; for (conf.clou_sqlz_orde) |item| if (!inLis(CF.sqlz, item)) return error.BadConfig; if (conf.clou_sync_batz == 0) return error.BadConfig; }
+fn inLis(list: []const []const u8, item: []const u8) bool { for (list) |each| if (std.mem.eql(u8, each, item)) return true; return false; }
+pub fn capzMicr(conf: Conf) u64 { return @intFromFloat(@round(conf.capz_usdz_mont * CF.micr)); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

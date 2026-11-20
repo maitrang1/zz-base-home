@@ -4,15 +4,16 @@
 // Flo: open (WAL, busy timeout) > exec or prepare > bind > step > read columns > finalize > close
 // I/O: SQL text + bound values (caller) > rows, counts, user_version (SQLite file)
 // ===================================================================
-const std = @import("std"); const c = @cImport(@cInclude("sqlite3.h"));
+const std = @import("std");
+const c = struct { pub const sqlite3 = opaque {}; pub const sqlite3_stmt = opaque {}; pub const SQLITE_OK: c_int = 0; pub const SQLITE_ROW: c_int = 100; pub const SQLITE_DONE: c_int = 101; pub extern fn sqlite3_open(path: [*:0]const u8, out: *?*sqlite3) c_int; pub extern fn sqlite3_close(hnd: ?*sqlite3) c_int; pub extern fn sqlite3_busy_timeout(hnd: ?*sqlite3, mill: c_int) c_int; pub extern fn sqlite3_exec(hnd: ?*sqlite3, sqlz: [*:0]const u8, back: ?*const anyopaque, arg: ?*anyopaque, errz: ?*?[*:0]u8) c_int; pub extern fn sqlite3_prepare_v2(hnd: ?*sqlite3, sqlz: [*:0]const u8, lenz: c_int, out: *?*sqlite3_stmt, tail: ?*?[*:0]const u8) c_int; pub extern fn sqlite3_bind_text(stm: ?*sqlite3_stmt, indx: c_int, text: [*]const u8, lenz: c_int, dest: ?*const anyopaque) c_int; pub extern fn sqlite3_bind_int64(stm: ?*sqlite3_stmt, indx: c_int, valu: i64) c_int; pub extern fn sqlite3_bind_null(stm: ?*sqlite3_stmt, indx: c_int) c_int; pub extern fn sqlite3_step(stm: ?*sqlite3_stmt) c_int; pub extern fn sqlite3_column_text(stm: ?*sqlite3_stmt, indx: c_int) ?[*]const u8; pub extern fn sqlite3_column_bytes(stm: ?*sqlite3_stmt, indx: c_int) c_int; pub extern fn sqlite3_column_int64(stm: ?*sqlite3_stmt, indx: c_int) i64; pub extern fn sqlite3_reset(stm: ?*sqlite3_stmt) c_int; pub extern fn sqlite3_clear_bindings(stm: ?*sqlite3_stmt) c_int; pub extern fn sqlite3_finalize(stm: ?*sqlite3_stmt) c_int; pub extern fn sqlite3_changes(hnd: ?*sqlite3) c_int; pub extern fn sqlite3_last_insert_rowid(hnd: ?*sqlite3) i64; };
 const CF = .{ .busy = 5000, .walz = "PRAGMA journal_mode=WAL;PRAGMA synchronous=NORMAL;PRAGMA foreign_keys=ON;" };
-const TRAN: c.sqlite3_destructor_type = @ptrFromInt(std.math.maxInt(usize));
+const TRAN: ?*const anyopaque = @ptrFromInt(std.math.maxInt(usize));
 pub const Stmt = struct { hand: ?*c.sqlite3_stmt = null,
 pub fn bindText(self: *Stmt, indx: c_int, text: []const u8) !void { if (c.sqlite3_bind_text(self.hand, indx, text.ptr, @intCast(text.len), TRAN) != c.SQLITE_OK) return error.SqliBind; }
 pub fn bindInt(self: *Stmt, indx: c_int, valu: i64) !void { if (c.sqlite3_bind_int64(self.hand, indx, valu) != c.SQLITE_OK) return error.SqliBind; }
 pub fn bindNull(self: *Stmt, indx: c_int) !void { if (c.sqlite3_bind_null(self.hand, indx) != c.SQLITE_OK) return error.SqliBind; }
 pub fn step(self: *Stmt) !bool { const retn = c.sqlite3_step(self.hand); if (retn == c.SQLITE_ROW) return true; if (retn == c.SQLITE_DONE) return false; return error.SqliStep; }
-pub fn colText(self: *Stmt, indx: c_int) []const u8 { const ptrz = c.sqlite3_column_text(self.hand, indx); if (ptrz == null) return ""; const lenz: usize = @intCast(c.sqlite3_column_bytes(self.hand, indx)); return ptrz[0..lenz]; }
+pub fn colText(self: *Stmt, indx: c_int) []const u8 { const ptrz = c.sqlite3_column_text(self.hand, indx) orelse return ""; const lenz: usize = @intCast(c.sqlite3_column_bytes(self.hand, indx)); return ptrz[0..lenz]; }
 pub fn colInt(self: *Stmt, indx: c_int) i64 { return c.sqlite3_column_int64(self.hand, indx); }
 pub fn reset(self: *Stmt) void { _ = c.sqlite3_reset(self.hand); _ = c.sqlite3_clear_bindings(self.hand); }
 pub fn fini(self: *Stmt) void { if (self.hand != null) _ = c.sqlite3_finalize(self.hand); self.hand = null; } };
