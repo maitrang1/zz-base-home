@@ -1,2 +1,0 @@
-const std = @import("std"); const rigz = @import("te-brow-rig.zig"); const chro = @import("nt-brow-chro.zig");
-test "dbg" { var rig: rigz.Rig = undefined; try rig.up(.{}); defer rig.down(); try rig.skipNo(); var buf: [64]u8 = undefined; const urlz = rig.srv.urlOf(&buf, "/dom"); const rnd = rig.rnd.render(rig.aren.allocator(), urlz, 0, "", .{}) catch |err| { std.debug.print("ERR {s}\n", .{@errorName(err)}); return err; }; std.debug.print("HTML {s}\n", .{rnd.html}); }
