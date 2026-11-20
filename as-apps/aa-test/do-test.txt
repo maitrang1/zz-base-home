@@ -1,12 +1,15 @@
-test for home sync: li10-edit-test-01
-li10-edit-test-02
-li10-edit-test-03
-li10-edit-test-04
+test for home sync: wi10-edit-test-01
+wi10-edit-test-02
+wi10-edit-test-03
+wi10-edit-test-04
+wi10-edit-test-05
+wi10-edit-test-06
+wi10-edit-test-07
+wi10-edit-test-08
+wi10-edit-test-09
 
 
 
-
-
-li10-edit-test-10
-li10-edit-test-11
-li10-edit-test-12
+wi10-edit-test-13
+wi10-edit-test-14
+wi10-edit-test-15
