@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Chain triggers by link, supervise loops
 // Flo: link: parent finishes > push done onto ring > next tick matches filter + depth cap > fire | loop: own thread > respawn on exit > backoff 1s doubling to 60s, reset after healthy run | stop: kill via registry by task id, never a raw pid
-// I/O: "after:<parentId>[:ok|:fail]" (task sche) > LinkSpec; loop task (id, cmd, cwd, shell) > Supe; done ring (drop oldest, depth cap stops A>B>A loops; skip = exit 75 no-op member) > ticker
+// I/O: "after:<parentId>[:ok|:fail]" (task sche) > LinkSpec; loop task (id, cmd, cwd, shell) > Supe; done ring (drop oldest, depth cap stops A>B>A loops; skip = exit 4 no-op member) > ticker
 // ===================================================================
 const std = @import("std"); const builtin = @import("builtin"); const spawn = @import("spawn"); const registry = @import("registry");
 pub const CF = .{ .back_minz_msec = 1000, .back_maxz_msec = 60_000, .heal_runz_msec = 60_000, .done_ring = 64, .maxz_casc_dept = 8, .wait_step_msec = 20, .pref = "after:", .trim = " \t" };
