@@ -6,6 +6,14 @@
 
 {"type":"cron","sche":"15 3 * * *","id":"scra-run","on":false,"tmo":7200,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe run --seed-file %USERPROFILE%\\.zs-scra-data\\seeds.txt --live","_cmt":"scra daily crawl: own GET first, vendors only inside free credits (add --force for paid). Enable after keys + seeds exist."},
 
-{"type":"cron","sche":"0 4 * * 1","id":"scra-cana","on":false,"tmo":1800,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe canary --live","_cmt":"scra weekly canary: exit 3 = page layout drift. Add baselines first: scra canary --add <url> --live."}
+{"type":"cron","sche":"0 4 * * 1","id":"scra-cana","on":false,"tmo":1800,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe canary --live","_cmt":"scra weekly canary: exit 3 = page layout drift. Add baselines first: scra canary --add <url> --live."},
+
+{"type":"cron","sche":"20 9,15 * * *","id":"fb-reply","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe run reply --live --max 5","_cmt":"fb: reply to new comments at human pace. Enable after the owner ran fb login and checked a dry-run (fb run reply). Exit 4 = blocked (quiet hours, cap, Facebook challenge)."},
+
+{"type":"cron","sche":"0 8 * * *","id":"fb-renew","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe run renewall --live","_cmt":"fb: renew Marketplace listings once a day. Enable after the live check (M9). Exit 4 = blocked."},
+
+{"type":"cron","sche":"10 9,15 * * *","id":"za-reply","on":false,"tmo":1800,"kind":"shell","lock":"za","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\za-zalo-webs\\zig-out\\bin\\za.exe run reply --live","_cmt":"za: answer new price questions in Zalo at human pace (needs reci_pric_text or AI). Enable after za login + a dry run (za run reply) + M8 live check. Exit 4 = blocked (quiet hours, cap, Zalo challenge)."},
+
+{"type":"cron","sche":"30 7 * * 1","id":"za-cana","on":false,"tmo":900,"kind":"shell","lock":"za","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\za-zalo-webs\\zig-out\\bin\\za.exe run canary --read","_cmt":"za weekly canary (read-only): exit 3 = a Zalo label changed, fix labl_* keys in aa-conf-main.json."}
 
 ]
