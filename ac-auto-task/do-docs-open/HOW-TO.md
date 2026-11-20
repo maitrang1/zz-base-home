@@ -51,7 +51,7 @@ wrap (wrap long lines) · ansi (colors) · ts (time per line) · A- / A+ (text s
 - Add one: SCHEDULE → + task → pick the type (boot, cron, ...) → fill the field (the hint shows the format) → type the full command path → Save. It shows up at once.
 - A favorite can be scheduled with the clock icon next to it.
 - try = run again this many times after a failure. out = stop it after this many seconds. Both apply to scheduled runs only.
-- You can also edit aa-auto-task.json by hand. The change is picked up in about 2 seconds.
+- You can also edit aa-auto-task-wi01.json by hand. The change is picked up in about 2 seconds.
 
 ## Stop auto-task
 Press Ctrl+C in its console. Any command still running stops with it.

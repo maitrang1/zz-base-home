@@ -6,7 +6,7 @@
 ' Run: wscript.exe "E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-star-wind.vbs" [tr|hub]
 ' ===================================================================
 Option Explicit
-Const CODE_OPEN = True : Const TR_PORT = 4000 : Const WAIT_SECO = 3 : Const PAUS_FOLD = 1000 : Const STIC_APPID = "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App"
+Const CODE_OPEN = True : Const TR_PORT = 4000 : Const TR_JOBS = "aa-auto-task-wi01.json" : Const WAIT_SECO = 3 : Const PAUS_FOLD = 1000 : Const STIC_APPID = "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App"
 Dim sh, fso, waitms, root : Set sh = CreateObject("WScript.Shell") : Set fso = CreateObject("Scripting.FileSystemObject") : waitms = WAIT_SECO * 1000
 root = fso.GetParentFolderName(fso.GetParentFolderName(fso.GetParentFolderName(fso.GetParentFolderName(WScript.ScriptFullName))))
 Dim WIFI_NAME, VSCO_BINA, HUBZ_BINA, HUBZ_PORT, TR_EXEC, FOLD_LIST, PROF_LIST, EXTR_LIST : WIFI_NAME = "" : VSCO_BINA = "" : HUBZ_BINA = "" : HUBZ_PORT = 3030 : TR_EXEC = root & "\ac-auto-task\zig-out\bin\auto-task.exe" : FOLD_LIST = Array(root, "%USERPROFILE%\Downloads") : PROF_LIST = Array("Default") : EXTR_LIST = Array()
@@ -114,7 +114,7 @@ If TR_EXEC = "" Then Exit Sub
 js = TrPing()
 If js = "" Then
 If Not fso.FileExists(TR_EXEC) Then Warn "auto-task (tr) not found: " & TR_EXEC, "tr Warning" : Exit Sub
-sh.Run """" & TR_EXEC & """ " & TR_PORT, 0, False
+sh.Run """" & TR_EXEC & """ " & TR_PORT & " " & TR_JOBS, 0, False
 For i = 1 To 20 : WScript.Sleep 500 : js = TrPing() : If js <> "" Then Exit For
 Next
 If js = "" Then Warn "tr did not answer on port " & TR_PORT, "tr Warning" : Exit Sub

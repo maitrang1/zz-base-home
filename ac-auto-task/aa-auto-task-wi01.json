@@ -1,0 +1,7 @@
+[
+
+{"type":"chai","sche":"10m","plus":["y","m","d","h","m",[0]],"id":"home-sync","on":true,"tmo":900,"ids":["home-docs","home-code","cicd-stat","cicd-rele","home-beat"]},
+
+{"type":"chai","sche":"0 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]}
+
+]

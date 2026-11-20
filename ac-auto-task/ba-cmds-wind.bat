@@ -13,14 +13,14 @@ set "WOZ=%R%\as-apps\os-syst\wo-work-mode\zig-out\bin\wo.exe"
 call :conf
 if not defined CMDS_MISE set "CMDS_MISE=mise"
 cd /d "%R%"
-if "%~1"=="work-wipz" call "%CMDS_MISE%" exec -- "%WOZ%" wipz --live & call exit /b %%errorlevel%%
-if "%~1"=="work-docs" call "%CMDS_MISE%" exec -- "%WOZ%" docs sync --live & call exit /b %%errorlevel%%
-if "%~1"=="work-code" call "%CMDS_MISE%" exec -- "%WOZ%" sync --live & call exit /b %%errorlevel%%
-if "%~1"=="work-beat" call "%CMDS_MISE%" exec -- "%WOZ%" beat --live & call exit /b %%errorlevel%%
-if "%~1"=="work-bkup-stat" call "%CMDS_MISE%" exec -- "%WOZ%" bkup stat --live & call exit /b %%errorlevel%%
-if "%~1"=="work-bkup-nigh" call "%CMDS_MISE%" exec -- "%WOZ%" bkup nigh --live & call exit /b %%errorlevel%%
-if "%~1"=="work-doct" call "%CMDS_MISE%" exec -- "%WOZ%" doct & call exit /b %%errorlevel%%
-if "%~1"=="work-dril" call "%CMDS_MISE%" exec -- "%WOZ%" dril --live & call exit /b %%errorlevel%%
+if "%~1"=="home-wipz" call "%CMDS_MISE%" exec -- "%WOZ%" wipz --live & call exit /b %%errorlevel%%
+if "%~1"=="home-docs" call "%CMDS_MISE%" exec -- "%WOZ%" docs sync --live & call exit /b %%errorlevel%%
+if "%~1"=="home-code" call "%CMDS_MISE%" exec -- "%WOZ%" sync --live & call exit /b %%errorlevel%%
+if "%~1"=="home-beat" call "%CMDS_MISE%" exec -- "%WOZ%" beat --live & call exit /b %%errorlevel%%
+if "%~1"=="home-bkup-stat" call "%CMDS_MISE%" exec -- "%WOZ%" bkup stat --live & call exit /b %%errorlevel%%
+if "%~1"=="home-bkup-nigh" call "%CMDS_MISE%" exec -- "%WOZ%" bkup nigh --live & call exit /b %%errorlevel%%
+if "%~1"=="home-doct" call "%CMDS_MISE%" exec -- "%WOZ%" doct & call exit /b %%errorlevel%%
+if "%~1"=="home-dril" call "%CMDS_MISE%" exec -- "%WOZ%" dril --live & call exit /b %%errorlevel%%
 if "%~1"=="cicd-stat" call "%CMDS_MISE%" exec -- "%WOZ%" ci stat & call exit /b %%errorlevel%%
 if "%~1"=="cicd-rele" call "%CMDS_MISE%" exec -- "%WOZ%" ci rele & call exit /b %%errorlevel%%
 if "%~1"=="cicd-test" call "%CMDS_MISE%" exec -- "%WOZ%" ci test & call exit /b %%errorlevel%%

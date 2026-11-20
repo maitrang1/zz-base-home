@@ -34,7 +34,7 @@ Edits to different lines of a doc are merged. If both devices changed the same l
 ## Get an alarm when the hub dies
 1. Make a free check at an outside monitor (for example Healthchecks.io): period 15 minutes, grace 15 minutes, with an email alert.
 2. Put its https ping address, alone on one line, in a file under your home (outside the repo) and name that file in `beat_urlz_file`.
-3. Practice run: `wo beat`. Real run: `wo beat --live` (every 15 minutes). Turn the job work-beat on.
+3. Practice run: `wo beat`. Real run: `wo beat --live` (every 15 minutes). Turn the job home-beat on.
 It pings when the stamps in `beat_chek_list` are fresh, and pings `/fail` when they are stale. If the hub stops, the pings stop and the monitor alerts you.
 
 
@@ -42,12 +42,12 @@ It pings when the stamps in `beat_chek_list` are fresh, and pings `/fail` when t
 1. Commit or review anything you do not want published (the job commits every changed file that is not git-ignored and idle for 2 minutes).
 2. Practice run: `wo sync` (shows how many files it would commit and how many are held).
 3. Real run once by hand: `wo sync --live` on each device. Check both repos.
-4. The hub step `work-code` (inside the chain `work-sync`, every 10 minutes) then keeps going by itself.
+4. The hub step `home-code` (inside the chain `home-sync`, every 10 minutes) then keeps going by itself.
 A clash on the same lines is settled by the newer edit; the older text is in `zz-dele-auto/_code-<time>/` and in git history. The run then exits 3 and lists the files, so you can look. Red result: a leak, a failed merge, too many files, or a busy git (a file over the size limit is only kept out and reported). Nothing is lost; fix it by hand. A file you are editing right now is never overwritten: its update waits for the next cycle. Per-device files (secrets, `aa-conf-main.env`) are never synced.
 
 ## Watch the CI from here
 1. Practice run (read-only): `wo ci stat`, `wo ci rele`, `wo ci deps`. Slow ones: `wo ci test`, `wo ci leak`, `wo ci lock`, `wo ci repr`.
-2. The hub runs them in two chains. `work-sync` every 10 minutes: docs sync, code sync, `ci stat`, `ci rele`, then the heartbeat. `cicd-dail` at 08:00 and 14:00: `ci test`, `ci leak`, `ci lock`, then the daily `doct` health check. Red = exit 1 in the job log. `repr` (two builds, same bytes) and `deps` (stale Dependabot PRs) are manual only.
+2. The hub runs them in two chains. `home-sync` every 10 minutes: docs sync, code sync, `ci stat`, `ci rele`, then the heartbeat. `cicd-dail` at 08:00 and 14:00: `ci test`, `ci leak`, `ci lock`, then the daily `doct` health check. Red = exit 1 in the job log. `repr` (two builds, same bytes) and `deps` (stale Dependabot PRs) are manual only.
 3. A Verified release says `run wo rels sign TAG --live`; after you sign it says `Verified and signed`.
 
 ## Test that a restore works

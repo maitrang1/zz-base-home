@@ -11,14 +11,14 @@ if [[ -r $dirz/aa-conf-main.env ]]; then while IFS='=' read -r key val; do case 
 [[ -z ${WO_DEVI_NAME-} ]] || export WO_DEVI_NAME
 cd "$R" || exit 1
 case "$1" in
-work-wipz) exec "$CMDS_MISE" exec -- "$WOZ" wipz --live ;;
-work-docs) exec "$CMDS_MISE" exec -- "$WOZ" docs sync --live ;;
-work-code) exec "$CMDS_MISE" exec -- "$WOZ" sync --live ;;
-work-beat) exec "$CMDS_MISE" exec -- "$WOZ" beat --live ;;
-work-bkup-stat) exec "$CMDS_MISE" exec -- "$WOZ" bkup stat --live ;;
-work-bkup-nigh) exec "$CMDS_MISE" exec -- "$WOZ" bkup nigh --live ;;
-work-doct) exec "$CMDS_MISE" exec -- "$WOZ" doct ;;
-work-dril) exec "$CMDS_MISE" exec -- "$WOZ" dril --live ;;
+home-wipz) exec "$CMDS_MISE" exec -- "$WOZ" wipz --live ;;
+home-docs) exec "$CMDS_MISE" exec -- "$WOZ" docs sync --live ;;
+home-code) exec "$CMDS_MISE" exec -- "$WOZ" sync --live ;;
+home-beat) exec "$CMDS_MISE" exec -- "$WOZ" beat --live ;;
+home-bkup-stat) exec "$CMDS_MISE" exec -- "$WOZ" bkup stat --live ;;
+home-bkup-nigh) exec "$CMDS_MISE" exec -- "$WOZ" bkup nigh --live ;;
+home-doct) exec "$CMDS_MISE" exec -- "$WOZ" doct ;;
+home-dril) exec "$CMDS_MISE" exec -- "$WOZ" dril --live ;;
 cicd-stat) exec "$CMDS_MISE" exec -- "$WOZ" ci stat ;;
 cicd-rele) exec "$CMDS_MISE" exec -- "$WOZ" ci rele ;;
 cicd-test) exec "$CMDS_MISE" exec -- "$WOZ" ci test ;;

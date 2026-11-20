@@ -1,6 +1,7 @@
 # Updates
 
 ## 2026-11-20
+- Changed: the Windows login now starts the hub with this PC's job file: `auto-task 4000 aa-auto-task-wi01.json` (the constant `TR_JOBS` in `ru-star-wind.vbs`).
 - Changed: if `aa-conf-main.env` is missing, the Windows login now says so by name. It used to fall back silently and then report "VSCode not found". The `tr` and hub shortcuts stay quiet.
 - Changed: the shutdown console looks like the old one again: no extra "save your work" line, and the save step shows only `work saved.` (or the full error).
 

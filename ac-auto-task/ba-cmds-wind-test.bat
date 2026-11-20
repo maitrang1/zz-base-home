@@ -19,15 +19,15 @@ set "LOGZ=%T%\calls.log" & set "WOX=%T%\as-apps\os-syst\wo-work-mode\zig-out\bin
 >> "%T%\fake-mise.bat" echo exit /b %%FAKE_RC%%
 set "FAKE_RC=0"
 echo -- cmds-wind
-for %%P in ("work-wipz|wipz --live" "work-docs|docs sync --live" "work-beat|beat --live" "work-bkup-stat|bkup stat --live" "work-bkup-nigh|bkup nigh --live" "work-doct|doct" "work-dril|dril --live" "work-code|sync --live" "cicd-stat|ci stat" "cicd-rele|ci rele" "cicd-test|ci test" "cicd-leak|ci leak" "cicd-lock|ci lock" "cicd-repr|ci repr" "cicd-deps|ci deps") do for /f "tokens=1,2 delims=|" %%A in ("%%~P") do call :runid "%%A" "%%B"
+for %%P in ("home-wipz|wipz --live" "home-docs|docs sync --live" "home-beat|beat --live" "home-bkup-stat|bkup stat --live" "home-bkup-nigh|bkup nigh --live" "home-doct|doct" "home-dril|dril --live" "home-code|sync --live" "cicd-stat|ci stat" "cicd-rele|ci rele" "cicd-test|ci test" "cicd-leak|ci leak" "cicd-lock|ci lock" "cicd-repr|ci repr" "cicd-deps|ci deps") do for /f "tokens=1,2 delims=|" %%A in ("%%~P") do call :runid "%%A" "%%B"
 set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
-call "%DISP%" work-wipz
+call "%DISP%" home-wipz
 findstr /b /c:"cwd=%T%" "%LOGZ%" >nul && call :ok "task runs from the repo root" || call :bad "task runs from the repo root"
 call "%DISP%" nope-nope 2>"%T%\err.txt"
 if errorlevel 2 (call :ok "unknown id exits 2") else (call :bad "unknown id exits 2")
 findstr /c:"unknown task id: nope-nope" "%T%\err.txt" >nul && call :ok "unknown id says so" || call :bad "unknown id says so"
 set "FAKE_RC=7"
-call "%DISP%" work-doct
+call "%DISP%" home-doct
 if "%errorlevel%"=="7" (call :ok "exit code passes through") else (call :bad "exit code passes through")
 set "FAKE_RC=0"
 set "CMDS_MISE=" & set "WO_DEVI_NAME="
@@ -35,12 +35,12 @@ set "CMDS_MISE=" & set "WO_DEVI_NAME="
 >> "%T%\ac-auto-task\aa-conf-main.env" echo WO_DEVI_NAME=dev9
 >> "%T%\ac-auto-task\aa-conf-main.env" echo CMDS_MISE=%T%\fake-mise.bat
 type nul > "%LOGZ%"
-call "%DISP%" work-wipz
+call "%DISP%" home-wipz
 findstr /x /c:"dev=dev9" "%LOGZ%" >nul && call :ok "aa-conf-main.env sets the device name" || call :bad "aa-conf-main.env sets the device name"
 findstr /b /c:"mise exec -- " "%LOGZ%" >nul && call :ok "aa-conf-main.env sets the mise command" || call :bad "aa-conf-main.env sets the mise command"
 set "CMDS_MISE=" & set "WO_DEVI_NAME=envwins"
 type nul > "%LOGZ%"
-call "%DISP%" work-wipz
+call "%DISP%" home-wipz
 findstr /x /c:"dev=envwins" "%LOGZ%" >nul && call :ok "env var beats the file" || call :bad "env var beats the file"
 echo.
 echo %PASSZ% passed, %FAILZ% failed

@@ -2,6 +2,8 @@
 What changed, newest first.
 
 ## 2026-11-20
+Changed: this PC's job file is now `aa-auto-task-wi01.json` (was `aa-auto-task.json`); `aa-auto-task-li01.json` (Dev 02) is a copy of it. The startup script `ru-star-wind.vbs` starts the hub as `auto-task 4000 aa-auto-task-wi01.json`. Without a file name the hub still reads `aa-auto-task.json`.
+Changed: the repo's own task ids `work-*` are now `home-*` (for example `home-sync`, `home-code`). Old log files were copied to the new names. A device that keeps its own jobs file must rename the ids there too.
 Changed: the task files (`aa-auto-task.json`, `aa-auto-task-li01.json`) now use the old hub layout: one compact task per line, a blank line between tasks, a fixed key order. The content did not change.
 Changed: the seven `wo-*` task ids are now `work-*` (every id word has 4 letters), for example `work-wipz`. Old log files were copied to the new names. A device that runs its own task file keeps its old history under the old name.
 Added: `do-docs-deve/ta-task-writ.txt`, the rules for writing tasks.

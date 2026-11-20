@@ -25,7 +25,7 @@ Another port: add it after the file name, for example `E:\zz-base-home\ac-auto-t
 ## Key behavior
 - It listens on your own machine only. Nothing leaves it.
 - Closing the page does not stop a running command. Stopping a command also stops everything it started.
-- Scheduled jobs are listed in `aa-auto-task.json`. A job with a mistake is skipped and shown with the reason.
+- Scheduled jobs are listed in `aa-auto-task-wi01.json`. A job with a mistake is skipped and shown with the reason.
 
 ## License
 PolyForm Noncommercial 1.0.0: free for personal use, a paid license for commercial use. Full text: LICENSE.

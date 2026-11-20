@@ -1,19 +1,7 @@
 [
 
-{"type":"puls","sche":"5m","id":"work-wipz","on":true,"_cmt":"save work to private backup refs"},
+{"type":"chai","sche":"10m","plus":["y","m","d","h","m",[0]],"id":"home-sync","on":true,"tmo":900,"ids":["home-docs","home-code","cicd-stat","cicd-rele","home-beat"]},
 
-{"type":"puls","sche":"4m","id":"work-docs","on":true,"_cmt":"sync docs to the private docs repo"},
-
-{"type":"puls","sche":"15m","id":"work-beat","on":false,"_cmt":"heartbeat ping, off until set"},
-
-{"type":"puls","sche":"5m","id":"work-bkup-stat","on":false,"_cmt":"restic backup of static files"},
-
-{"type":"cron","sche":"0 2 * * *","id":"work-bkup-nigh","on":false,"_cmt":"nightly database backup and integrity check"},
-
-{"type":"cron","sche":"0 3 * * *","id":"work-doct","on":true,"_cmt":"daily health check, changes nothing"},
-
-{"type":"cron","sche":"0 4 1 * *","id":"work-dril","on":false,"_cmt":"monthly restore drill"},
-
-{"type":"cron","sche":"00,15,30,45 23,00,01,02 * * *","id":"linu-shut-nigh","on":false,"try":1,"tmo":120,"lock":"none","_cmt":"night guard: power off when jobs idle"}
+{"type":"chai","sche":"0 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]}
 
 ]
