@@ -18,7 +18,7 @@ var iter = std.mem.splitScalar(u8, text, 0);
 while (iter.next()) |tok| {
 if (tok.len < 4) continue;
 try out.append(allo, tok[3..]);
-if (tok[0] == 'R' or tok[0] == 'C' or tok[1] == 'R' or tok[1] == 'C') _ = iter.next();
+if (tok[0] == 'R' or tok[0] == 'C' or tok[1] == 'R' or tok[1] == 'C') { const from = iter.next() orelse continue; if (tok[0] == 'R' or tok[1] == 'R') try out.append(allo, from); }
 }
 return out.items;
 }
@@ -133,11 +133,12 @@ var picks: std.ArrayList([]const u8) = .empty;
 var rest: std.ArrayList([]const u8) = .empty;
 var bigs: std.ArrayList([]const u8) = .empty;
 var held: u32 = 0;
+var gone: std.ArrayList([]const u8) = .empty;
 var edit: i64 = 0;
 for (entr) |path| {
 if (denied(conf.sync_deny_list, path)) { try rest.append(ctxz.allo, path); continue; }
 const full = try std.fs.path.join(ctxz.allo, &.{ root, path });
-const info = std.Io.Dir.cwd().statFile(ctxz.iozz, full, .{}) catch { try picks.append(ctxz.allo, path); continue; };
+const info = std.Io.Dir.cwd().statFile(ctxz.iozz, full, .{}) catch { try picks.append(ctxz.allo, path); try gone.append(ctxz.allo, path); continue; };
 if (info.size > conf.sync_file_maxz) { try bigs.append(ctxz.allo, path); try rest.append(ctxz.allo, path); continue; }
 if (ctxz.nowz() - info.mtime.toSeconds() < conf.sync_quie_secz) { held += 1; try rest.append(ctxz.allo, path); continue; }
 edit = @max(edit, info.mtime.toSeconds());
@@ -150,7 +151,14 @@ if (!ctxz.ladd.live) { try facts.append(ctxz.allo, cx.mkfa("sync", .okay, try st
 if (conf.sync_remo_list.len == 0) { try facts.append(ctxz.allo, cx.mkfa("remo", .bloc, "sync_remo_list is empty")); return ctxz.emit(facts.items); }
 if (picks.items.len > 0) {
 const msg = try mesg(ctxz.allo, ctxz.devi, picks.items);
-if (!try okay(ctxz, &facts, "add", try cat(ctxz.allo, &.{ "git", "add", "-A", "--" }, picks.items))) return ctxz.emit(facts.items);
+var live: std.ArrayList([]const u8) = .empty;
+for (picks.items) |item| {
+var isgone = false;
+for (gone.items) |old| { if (std.mem.eql(u8, old, item)) isgone = true; }
+if (!isgone) try live.append(ctxz.allo, item);
+}
+if (live.items.len > 0 and !try okay(ctxz, &facts, "add", try cat(ctxz.allo, &.{ "git", "add", "-A", "--" }, live.items))) return ctxz.emit(facts.items);
+if (gone.items.len > 0 and !try okay(ctxz, &facts, "drop", try cat(ctxz.allo, &.{ "git", "rm", "--cached", "--ignore-unmatch", "-q", "--" }, gone.items))) return ctxz.emit(facts.items);
 const when = if (edit > 0 and edit <= ctxz.nowz() + merg.CF.futz) edit else ctxz.nowz();
 const envc = try ctxz.allo.alloc(runm.Envp, 1);
 envc[0] = .{ "GIT_AUTHOR_DATE", try std.fmt.allocPrint(ctxz.allo, "{d} +0000", .{when}) };

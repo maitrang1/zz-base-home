@@ -72,12 +72,14 @@ return sync.comm(&ctxz, &.{});
 test "entrParse reads paths and skips the old name of a rename" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
-const got = try sync.entrParse(arna.allocator(), " M a/x.txt\x00?? new dir/y.txt\x00R  to.txt\x00from.txt\x00A  z.txt\x00");
-try std.testing.expectEqual(@as(usize, 4), got.len);
+const got = try sync.entrParse(arna.allocator(), " M a/x.txt\x00?? new dir/y.txt\x00R  to.txt\x00from.txt\x00C  cp.txt\x00orig.txt\x00A  z.txt\x00");
+try std.testing.expectEqual(@as(usize, 6), got.len);
 try std.testing.expectEqualStrings("a/x.txt", got[0]);
 try std.testing.expectEqualStrings("new dir/y.txt", got[1]);
 try std.testing.expectEqualStrings("to.txt", got[2]);
-try std.testing.expectEqualStrings("z.txt", got[3]);
+try std.testing.expectEqualStrings("from.txt", got[3]);
+try std.testing.expectEqualStrings("cp.txt", got[4]);
+try std.testing.expectEqualStrings("z.txt", got[5]);
 }
 test "mesg names the device, the count and at most three top folders" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
@@ -142,6 +144,20 @@ try std.testing.expect(mck.envz.items.len == 1 and std.mem.startsWith(u8, mck.en
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, env.home, true, false);
 try std.testing.expect(ctxz.stamGet("sync").?.okay);
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "all devices on one version") != null);
+}
+test "a staged rename or a deleted file: the old path is dropped from the index and committed, never git-added" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const env = try envMake(allo, &tmp);
+var mck: mock.Mock = undefined;
+var buff: std.Io.Writer.Allocating = .init(allo);
+try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{ .stat = "R  a/one.txt\x00old/gone.txt\x00D  old/two.txt\x00" }, .{}, true, env.mtim + 1000, &buff, &mck));
+try std.testing.expect(hasCall(&mck, "git add -A -- a/one.txt") and !hasCall(&mck, "add -A -- a/one.txt old"));
+try std.testing.expect(hasCall(&mck, "git rm --cached --ignore-unmatch -q -- old/gone.txt old/two.txt"));
+try std.testing.expect(hasCall(&mck, "-- a/one.txt old/gone.txt old/two.txt"));
 }
 test "quiet window: files edited a moment ago are held, nothing to commit" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);

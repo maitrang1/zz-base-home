@@ -1,7 +1,0 @@
-[
-
-{"type":"chai","sche":"10m","plus":["y","m","d","h","m",[0]],"id":"work-sync","on":true,"tmo":900,"ids":["work-docs","work-code","cicd-stat","cicd-rele","work-beat"]},
-
-{"type":"chai","sche":"0 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock","work-doct"]}
-
-]
