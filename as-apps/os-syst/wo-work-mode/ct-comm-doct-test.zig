@@ -76,6 +76,20 @@ try std.testing.expectEqual(exit.Code.drif, (try runOne(allo, diff, "head", "h")
 try std.testing.expectEqual(exit.Code.bloc, (try runOne(allo, noup, "head", "h")).code);
 try std.testing.expectEqual(exit.Code.bloc, (try runOne(allo, nohd, "head", "h")).code);
 }
+test "sync age: never drifts, fresh ok, exactly at limit ok, one second over drifts" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const home = try make.homeOf(allo, &tmp);
+try std.testing.expectEqual(exit.Code.drif, (try runOne(allo, &.{}, "sync", home)).code);
+const dirz = try stat.dirzOf(allo, home, ".wo-work-mode");
+try stat.stamWrit(allo, std.testing.io, dirz, try stat.pathOf(allo, dirz, "sync"), .{ .when = NOWZ - 1800, .okay = true });
+try std.testing.expectEqual(exit.Code.okay, (try runOne(allo, &.{}, "sync", home)).code);
+try stat.stamWrit(allo, std.testing.io, dirz, try stat.pathOf(allo, dirz, "sync"), .{ .when = NOWZ - 1801, .okay = true });
+try std.testing.expectEqual(exit.Code.drif, (try runOne(allo, &.{}, "sync", home)).code);
+}
 test "wipz / bkup age: fresh ok, exactly at limit ok, one second over drifts, missing per check" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();

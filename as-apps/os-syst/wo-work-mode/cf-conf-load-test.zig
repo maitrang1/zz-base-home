@@ -53,7 +53,7 @@ try std.testing.expectError(error.FileNotFound, cfgz.confLoad(arna.allocator(), 
 test "the shipped aa-conf-main.json equals the built-in defaults" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
-const file = try cfgz.confLoad(arna.allocator(), std.testing.io, "aa-conf-main.json");
+const file = cfgz.confLoad(arna.allocator(), std.testing.io, "aa-conf-main.json") catch try cfgz.confLoad(arna.allocator(), std.testing.io, "as-apps/os-syst/wo-work-mode/aa-conf-main.json");
 const defa: cfgz.Conf = .{};
 try std.testing.expectEqualStrings(defa.apps_data_loca, file.apps_data_loca);
 try std.testing.expectEqualStrings(defa.secr_home_loca, file.secr_home_loca);

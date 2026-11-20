@@ -14,6 +14,7 @@
 | hook_path_main | Hooks folder the repo must use | ci-flow-sync | any path |
 | zigz_vers_pinz | Zig version the device must have | 0.16.0 | any version text |
 | wipz_ager_maxz | Longest allowed gap since the last saved work (seconds) | 1800 | whole number |
+| sync_ager_maxz | Longest allowed gap since the last good `wo sync` (seconds) | 1800 | whole number |
 | bkup_ager_maxz | Longest allowed gap since the last backup (seconds) | 1800 | whole number |
 | dril_ager_maxz | Longest allowed gap since the last restore test (seconds) | 3024000 | whole number |
 | dril_rtoz_maxz | Longest allowed restore time (seconds) | 900 | whole number |
@@ -25,7 +26,7 @@
 | bknt_ager_maxz | Longest allowed gap since the nightly database copy (seconds) | 100800 | whole number |
 | devi_name_main | Device name used in backup branch names. The environment variable `WO_DEVI_NAME` overrides it, so each device can keep its own name | empty (uses the computer name) | text |
 | prof_main | Check set used when you give no `--prof` | t0 | t0, box, ci |
-| chek_t0_list | Checks for the full profile | hook, head, tool, cpuz, wipz, bkup, bknt, dril, tail, tsfl, lock, patc, esus | those names |
+| chek_t0_list | Checks for the full profile | hook, head, tool, cpuz, sync, bkup, bknt, dril, tail, tsfl, lock, patc, esus | those names |
 | chek_box_list | Checks for the box profile | same, with clfl instead of esus | those names |
 | chek_ci_list | Checks for the CI profile | hook, tool, cpuz | those names |
 | wipz_remo_list | PRIVATE remotes to push saved work to. Never a public repo: saved work is readable by anyone who can read the remote. Add the same remote names on every device (`git remote add NAME URL`) | none (ships with wipg, wipl) | remote names |

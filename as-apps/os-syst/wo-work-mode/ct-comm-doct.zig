@@ -112,6 +112,7 @@ if (std.mem.eql(u8, name, "hook")) return chekHook(ctxz);
 if (std.mem.eql(u8, name, "head")) return chekHead(ctxz);
 if (std.mem.eql(u8, name, "tool")) return chekTool(ctxz);
 if (std.mem.eql(u8, name, "wipz")) return chekAger(ctxz, "wipz", ctxz.conf.wipz_ager_maxz, "never pushed", .drif);
+if (std.mem.eql(u8, name, "sync")) return chekAger(ctxz, "sync", ctxz.conf.sync_ager_maxz, "never synced", .drif);
 if (std.mem.eql(u8, name, "bkup")) return chekAger(ctxz, "bkup", ctxz.conf.bkup_ager_maxz, "no backup job yet", .bloc);
 if (std.mem.eql(u8, name, "bknt")) return chekAger(ctxz, "bknt", ctxz.conf.bknt_ager_maxz, "no nightly copy yet", .bloc);
 if (std.mem.eql(u8, name, "dril")) return chekDril(ctxz);
