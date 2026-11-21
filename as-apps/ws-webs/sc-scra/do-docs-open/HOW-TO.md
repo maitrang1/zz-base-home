@@ -71,6 +71,7 @@ Save a Healthchecks.io ping address in `healthchecks.url` and a Resend key in `r
 - Live feeds: `fetch <url> --live --stream sse` (or `poll`, or `ws` for a page that opens a WebSocket).
 - Your own captured request (DevTools HAR or Copy as cURL): `scra.exe replay --spec capture.txt --param page=2 --live`. A 401/403 means the signature expired: capture a fresh one.
 - Test many sites: write `L1 https://...` lines (levels 1-9, two or more per level), then `scra.exe bench --list urls.txt --out notes.txt --live`.
+- Different settings per site or group: write rules in `site_rule_list` and `grup_rule_mapz` (CONFIG.md, "Site rules"). Check them with `scra.exe site --check`; see what a URL gets with `scra.exe site <url>`.
 - Follow links while crawling: `run --follow 50 --live`. Hidden, nofollow and honeypot links are skipped.
 
 ## Next

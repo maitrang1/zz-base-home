@@ -49,6 +49,59 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | aler_mail_from | Alert email sender | empty | email |
 | aler_mail_toxx | Alert email recipient | empty | email |
 
+## Site rules (per group, per site, per path)
+Order: global settings, then the group, then the site rule, then matching path rules. Later wins. Check with `scra.exe site --check`. See what a URL gets with `scra.exe site https://shop.com/api/x`.
+```
+"grup_rule_mapz": { "retail": { "rate_host_seco": 5, "geoz_code_dflt": "us" } },
+"site_rule_list": [ {
+  "name": "shop", "host": ["shop.com", "*.shop.com"], "grup": "retail", "enab": true, "note": "",
+  "tier_maxz": 3, "vend_bann_list": ["brig"], "cons_sele_list_adds": ["#my-banner-ok"],
+  "path_rule_list": [ { "path": "/api/*", "brow_enab": true, "judg_must_list": ["price"] } ]
+} ]
+```
+- Host: `name.tld` is exact. `*.name.tld` matches subdomains only, not `name.tld`. Exact beats wildcard.
+- Path: `*` any text, `?` one character.
+- A list key replaces the earlier value. Add `_adds` to a list key to append instead.
+- A rule can only lower caps, never raise them: `retr_cont_maxz fetc_time_seco fetc_body_maxz fetc_redi_maxz pdfz_size_maxz tier_maxz apiz_prob_maxz brow_time_seco brow_scrl_maxz brow_step_maxz acct_page_maxz strm_time_seco strm_frme_maxz`. `capz_cred_pagz` must stay between 1 and the global value when the global is set.
+- Never allowed in a rule: robots.txt, User-Agent, keys and paid-credit settings, TLS and private-address checks.
+- A mistake in any rule stops scra at start with the rule and key named.
+
+| Key | Does | Default |
+|---|---|---|
+| rate_host_seco | Seconds between requests | 1 |
+| rate_jitt_pctz | Random extra wait, percent of the gap | 0 |
+| rate_429z_pctz | Percent of Retry-After to wait after 429 or 503 | 100 |
+| retr_afte_enab | Honor Retry-After | true |
+| retr_back_seco | First retry delay (0 = global) | 0 |
+| retr_code_list | Only these HTTP statuses are retried, others go to the dead list (empty = all) | empty |
+| retr_cont_maxz · fetc_time_seco · fetc_body_maxz · fetc_redi_maxz · pdfz_size_maxz | As in Settings | global |
+| tier_star | Start at: own, brow, plain, rend, prem | own |
+| tier_maxz | Highest vendor tier allowed (1 = no vendors) | 4 |
+| tier_skip_list | Tiers to skip, for example ["own"] | empty |
+| tier_t1fz | Own-GET failures in a row before skipping it | 3 |
+| tier_ages | Days before the remembered tier steps down | 7 |
+| vend_orde · vend_bann_list | Vendor order, vendors never used here | global, empty |
+| capz_cred_pagz | Most credits one page may cost (0 = no cap) | 0 |
+| geoz_code_dflt | Country code | global |
+| apiz_prob_enab · apiz_prob_maxz | API probe on or off, most probes | true, 8 |
+| apiz_path_list | Extra paths to probe, for example ["/api/items"] | empty |
+| shel_text_minz · shel_mark_list | Thin-page limit, extra shell markers | 500, empty |
+| judg_bloc_list | Phrases that make a page a block | empty |
+| judg_must_list | Phrases that must be on the page | empty |
+| judg_text_minz | Least visible text | 0 |
+| judg_fiel_requ | JSON fields that must be present and not empty | empty |
+| brow_enab · brow_time_seco · brow_scrl_maxz · brow_step_maxz · cons_sele_list | Browser use and limits | global |
+| brow_wait_msec · brow_sele_wait | Default wait and selector (forces a render) | 0, empty |
+| brow_clic_text · brow_step_file | Default "load more" text and steps file | empty |
+| brow_blok_resz | Skip images, fonts and media in the browser | false |
+| acct_page_maxz · acct_gapz_mult | Pages per day and spacing multiplier for logged-in accounts | 200, 3 |
+| strm_time_seco · strm_frme_maxz | Feed limits | global |
+| foll_maxz | Most links followed per page (0 = no limit) | 0 |
+| foll_incl_list · foll_excl_list | Path globs to follow or skip | empty |
+| revi_star_seco · revi_floo_seco · revi_capz_seco | Recrawl timing | global |
+| extr_pref_list | Record order: ldjs, next, text | ldjs, next, text |
+| ocrz_enab | Allow OCR for scanned PDFs when ocrz_path_exec is set | true |
+
 ## Files
 | File | Holds |
 |---|---|

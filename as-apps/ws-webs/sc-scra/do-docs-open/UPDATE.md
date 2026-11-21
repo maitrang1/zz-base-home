@@ -1,5 +1,8 @@
 # Updates
 
+## 0.4.0 — 2026-11-21
+- Site rules: settings per group, per site (exact or *.domain) and per path. About 50 keys: pace, retries, tiers, vendors, judging, browser, follow, extraction. Rules can only lower caps. New command: scra site.
+
 ## 0.3.0 — 2026-11-21
 - Free local browser (your own Chrome) renders JavaScript pages; scroll, load more, consent walls, form steps.
 - PDF text, country option per vendor, your own logged-in accounts, live feeds (SSE, WebSocket), replay of your own captures, link-trap skipping, vendor learning, bench command.
