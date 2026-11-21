@@ -4,9 +4,9 @@
 // Flo: mode gate > halt+pace gate > open chat > click reminder button > type title + time > click create > log
 // I/O: Sess + chat + title + time text (caller) > reminder dialog filled in the page; preview in dry mode
 // ===================================================================
-const std = @import("std"); const sess = @import("ru-sess-ctxz.zig"); const rd = @import("ru-chat-read.zig"); const priv = @import("ru-safe-priv.zig");
+const std = @import("std"); const sess = @import("ru-sess-ctxz.zig"); const rd = @import("ru-chat-read.zig"); const priv = @import("ru-safe-priv.zig"); const opn = @import("ru-chat-open.zig");
 pub fn remind(ses: *sess.Sess, chat: []const u8, title: []const u8, whenz: []const u8) !bool { const ttl = std.mem.trim(u8, title, " \r\n\t"); const wht = std.mem.trim(u8, whenz, " \r\n\t"); if (chat.len == 0 or ttl.len == 0 or wht.len == 0) return error.BadJob; if (ses.mode == .read) return error.BadUsage; if (ses.mode == .dry) { try ses.pre(.read); const note = try std.fmt.allocPrint(ses.aren, "PREVIEW remind {s} at {s}: {s}", .{ chat, wht, priv.bodyLog(ses.aren, ttl, ses.cfg.logz_body_enab) }); ses.logz("info", note); return false; }
-try ses.pre(.read); _ = try rd.openChat(ses, chat); const btn = try ses.findKey("remi_butt"); try ses.clickNode(btn); ses.readPause();
+try ses.pre(.read); _ = try opn.openChat(ses, chat); const btn = try ses.findKey("remi_butt"); try ses.clickNode(btn); ses.readPause();
 const tbx = try ses.findKey("rtit_boxz"); try ses.clickNode(tbx); try ses.typeIn(ttl); const wbx = try ses.findKey("rtim_boxz"); try ses.clickNode(wbx); try ses.typeIn(wht); ses.readPause(); const okz = try ses.findKey("crea_butt"); try ses.clickNode(okz);
 const note = try std.fmt.allocPrint(ses.aren, "reminder set {s} at {s}: {s}", .{ chat, wht, priv.bodyLog(ses.aren, ttl, ses.cfg.logz_body_enab) }); ses.logz("info", note); ses.pause(); return true; }
 // =======================___THIS_IS_THE_END___=======================

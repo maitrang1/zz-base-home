@@ -4,12 +4,12 @@
 // Flo: mode gate > halt+pace gate > open chat > find button by label > human click > log
 // I/O: Sess + chat name + Act (caller) > page state change, log row; preview only in dry mode
 // ===================================================================
-const std = @import("std"); const sess = @import("ru-sess-ctxz.zig"); const rd = @import("ru-chat-read.zig");
+const std = @import("std"); const sess = @import("ru-sess-ctxz.zig"); const rd = @import("ru-chat-read.zig"); const opn = @import("ru-chat-open.zig");
 pub const Act = enum { pin, mute, forw, grop };
 fn labelOf(act: Act) []const u8 { return switch (act) { .pin => "pinz_butt", .mute => "mute_butt", .forw => "forw_butt", .grop => "grou_butt" }; }
 pub fn actName(act: Act) []const u8 { return @tagName(act); }
 pub fn chatAct(ses: *sess.Sess, act: Act, chat: []const u8, extra: []const u8) !bool { if (ses.mode == .read) return error.BadUsage; if (chat.len == 0 and act != .grop) return error.BadJob; if ((act == .grop or act == .forw) and ses.mode == .live) return error.NeedForce; if (ses.mode == .dry) { try ses.pre(.read); const note = try std.fmt.allocPrint(ses.aren, "PREVIEW {s} {s} {s}", .{ actName(act), chat, extra }); ses.logz("info", note); return false; }
-try ses.pre(if (act == .grop) .newc else .read); if (act != .grop) _ = try rd.openChat(ses, chat); const btn = try ses.findKey(labelOf(act)); try ses.clickNode(btn);
+try ses.pre(if (act == .grop) .newc else .read); if (act != .grop) _ = try opn.openChat(ses, chat); const btn = try ses.findKey(labelOf(act)); try ses.clickNode(btn);
 if (act == .grop and extra.len > 0) { const box = try ses.findKey("gnam_boxz"); try ses.clickNode(box); try ses.typeIn(extra); ses.readPause(); const okz = try ses.findKey("crea_butt"); try ses.clickNode(okz); }
 if (act == .forw and extra.len > 0) { const chats = try rd.listChats(ses); for (chats) |cht| { if (std.ascii.eqlIgnoreCase(cht.name, extra)) { try ses.clickNode(cht.node); break; } } else return error.NoElem; ses.readPause(); const sendb = try ses.findKey("send_butt"); try ses.clickNode(sendb); }
 if (act == .grop) try ses.sto.actAdd(ses.now(), "newc"); const note = try std.fmt.allocPrint(ses.aren, "{s} {s} {s}", .{ actName(act), chat, extra }); ses.logz("info", note); ses.pause(); return true; }
