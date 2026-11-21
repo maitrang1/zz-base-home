@@ -125,11 +125,17 @@ if (std.mem.eql(u8, name, "patc")) return chekPatc(ctxz);
 if (std.mem.eql(u8, name, "esus")) return chekEsus(ctxz);
 return cx.mkfa(name, .fail, "unknown check name in config");
 }
+fn chekAcpt(ctxz: *const cx.Ctxz, name: []const u8) !fcts.Fact {
+const fact = try chekRun(ctxz, name);
+if (fact.stat != .drif and fact.stat != .bloc) return fact;
+for (ctxz.conf.doct_acpt_list) |acpt| if (std.mem.eql(u8, acpt, name)) return cx.mkfa(name, .okay, try std.fmt.allocPrint(ctxz.allo, "accepted risk: {s}", .{fact.note}));
+return fact;
+}
 pub fn comm(ctxz: *const cx.Ctxz, args: []const []const u8) !exit.Code {
 _ = args;
 const list = if (std.mem.eql(u8, ctxz.prof, "ci")) ctxz.conf.chek_ci_list else if (std.mem.eql(u8, ctxz.prof, "box")) ctxz.conf.chek_box_list else ctxz.conf.chek_t0_list;
 var facts: std.ArrayList(fcts.Fact) = .empty;
-for (list) |name| try facts.append(ctxz.allo, try chekRun(ctxz, name));
+for (list) |name| try facts.append(ctxz.allo, try chekAcpt(ctxz, name));
 return ctxz.emit(facts.items);
 }
 // =======================___THIS_IS_THE_END___=======================

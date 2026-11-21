@@ -6,7 +6,7 @@
 // ===================================================================
 const std = @import("std"); const sqli = @import("st-stor-sqli.zig"); const stor = @import("sy-clou-stor.zig"); const sqlz = @import("sy-clou-sqlz.zig"); const outb = @import("sy-clou-outb.zig"); const inde = @import("st-page-inde.zig"); const file = @import("st-stor-file.zig"); const hash = @import("ut-hash-dedu.zig"); const s3v4 = @import("sy-clou-s3v4.zig"); const cfgz = @import("cf-conf-load.zig");
 const CF = .{ .magi = "SCRAPK1\n", .bodz = 60000, .maxp = 64 << 20, .rawd = "raw" };
-pub const Sync = struct { iozz: std.Io, dbzz: *sqli.Dbzz, dirz: []const u8, conf: cfgz.Conf, store: stor.Store, sql2: sqlz.Sqlz };
+pub const Sync = struct { iozz: std.Io, dbzz: *sqli.Dbzz, dirz: []const u8, conf: cfgz.Conf, store: stor.Stor, sql2: sqlz.Sqlz };
 pub const Sres = struct { recs: u32 = 0, fil2: u32 = 0, pac2: u64 = 0, fail: u32 = 0, pack: []const u8 = "" };
 fn urlh(aren: std.mem.Allocator, urlz: []const u8) ![]const u8 { return aren.dupe(u8, &hash.hashHexz(urlz)); }
 fn cutz(text: []const u8) []const u8 { if (text.len <= CF.bodz) return text; var endz: usize = CF.bodz; while (endz > 0 and (text[endz] & 0xC0) == 0x80) endz -= 1; return text[0..endz]; }

@@ -29,6 +29,22 @@ const code = try doct.comm(&ctxz, &.{});
 return .{ .code = code, .text = buff.written() };
 }
 fn has(text: []const u8, part: []const u8) bool { return std.mem.indexOf(u8, text, part) != null; }
+test "accepted risk turns drift and blocked into okay, keeps the reason, ignores other checks" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var mck: mock.Mock = .{ .rule = &.{} };
+var buff: std.Io.Writer.Allocating = .init(allo);
+var cfgv: cfgz.Conf = .{};
+cfgv.chek_t0_list = &.{ "esus", "tsfl" };
+cfgv.doct_acpt_list = &.{"esus"};
+var ctxz = make.make(allo, &buff.writer, &mck, cfgv, "h", false, false);
+ctxz.ostg = .windows;
+const code = try doct.comm(&ctxz, &.{});
+try std.testing.expectEqual(exit.Code.bloc, code);
+try std.testing.expect(has(buff.written(), "accepted risk: ConsumerESU key absent"));
+try std.testing.expect(has(buff.written(), "bloc\ttsfl"));
+}
 test "tailscale floor: above, equal, below, absent, junk" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();

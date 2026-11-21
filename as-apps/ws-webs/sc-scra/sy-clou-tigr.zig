@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tigris adapter: S3 endpoint and region for the shared client
+// Des: Tigris adapter: S3zz endpoint and region for the shared client
 // Flo: pick host from config or the vendor default > fixed region rule > build SigV4 credentials
 // I/O: Endp config + key pair (sync) > s3v4.Cred
 // ===================================================================

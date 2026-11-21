@@ -18,6 +18,7 @@
   "chek_t0_list": ["hook", "head", "tool", "cpuz", "sync", "bkup", "bknt", "dril", "tail", "tsfl", "lock", "patc", "esus"],
   "chek_box_list": ["hook", "head", "tool", "cpuz", "sync", "bkup", "bknt", "dril", "tail", "tsfl", "lock", "patc", "clfl"],
   "chek_ci_list": ["hook", "tool", "cpuz"],
+  "doct_acpt_list": ["patc", "esus"],
   "wipz_remo_list": ["wipg", "wipl"],
   "wipz_file_maxz": 10485760,
   "wipz_rest_tagz": "wipz-held",

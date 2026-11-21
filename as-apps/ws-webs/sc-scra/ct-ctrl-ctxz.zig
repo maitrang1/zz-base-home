@@ -13,6 +13,6 @@ pub fn outz(ctx2: *const Ctxz, text: []const u8) !void { const line = try std.fm
 pub fn dbzzHave(ctx2: *const Ctxz) bool { const path = std.fs.path.join(ctx2.allo, &.{ ctx2.dirz, CF.dbfi }) catch return false; _ = std.Io.Dir.cwd().statFile(ctx2.iozz, path, .{}) catch return false; return true; }
 pub fn dbzzOpen(ctx2: *const Ctxz) !sqli.Dbzz { return inde.pageOpen(ctx2.allo, ctx2.iozz, ctx2.dirz); }
 pub fn realMake(ctx2: *const Ctxz) !live.Real { const keyd = pexp.pathExpa(ctx2.allo, ctx2.home, ctx2.conf.vend_keyz_dirz) catch return error.BadConfig; return .{ .gpaz = ctx2.init.gpa, .conf = ctx2.conf, .keyd = keyd, .live = .{ .time_mill = ctx2.conf.fetc_time_seco * 1000 } }; }
-pub fn jsonOrzz(ctx2: *const Ctxz, valu: anytype, plain: []const u8) ![]const u8 { if (ctx2.args.json) return std.json.Stringify.valueAlloc(ctx2.allo, valu, .{}); return plain; }
+pub fn jsonOrzz(ctx2: *const Ctxz, valu: anytype, plai: []const u8) ![]const u8 { if (ctx2.args.json) return std.json.Stringify.valueAlloc(ctx2.allo, valu, .{}); return plai; }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

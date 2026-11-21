@@ -22,7 +22,7 @@ pub fn open(path: [:0]const u8) !Dbzz { var hand: ?*chrz.sqlite3 = null; if (chr
 pub fn close(self: *Dbzz) void { if (self.hand != null) _ = chrz.sqlite3_close(self.hand); self.hand = null; }
 pub fn exec(self: *Dbzz, sqlz: [:0]const u8) !void { if (chrz.sqlite3_exec(self.hand, sqlz.ptr, null, null, null) != chrz.SQLITE_OK) return error.SqliExec; }
 pub fn prep(self: *Dbzz, sqlz: [:0]const u8) !Stmt { var hand: ?*chrz.sqlite3_stmt = null; if (chrz.sqlite3_prepare_v2(self.hand, sqlz.ptr, -1, &hand, null) != chrz.SQLITE_OK) return error.SqliPrep; return .{ .hand = hand }; }
-pub fn changes(self: *Dbzz) i64 { return chrz.sqlite3_changes(self.hand); }
+pub fn cha2(self: *Dbzz) i64 { return chrz.sqlite3_changes(self.hand); }
 pub fn lastRowz(self: *Dbzz) i64 { return chrz.sqlite3_last_insert_rowid(self.hand); }
 pub fn verzGetz(self: *Dbzz) !i64 { var stmt = try self.prep("PRAGMA user_version;"); defer stmt.fini(); if (!try stmt.step()) return 0; return stmt.colzIntz(0); }
 pub fn migr(self: *Dbzz, allo: std.mem.Allocator, ste2: []const [:0]const u8) !void { const done = try self.verzGetz(); var indx: usize = @intCast(done); while (indx < ste2.len) : (indx += 1) { try self.exec("BEGIN IMMEDIATE;"); errdefer self.exec("ROLLBACK;") catch {}; try self.exec(ste2[indx]); const sqlz = try std.fmt.allocPrintSentinel(allo, "PRAGMA user_version={d};", .{indx + 1}, 0); defer allo.free(sqlz); try self.exec(sqlz); try self.exec("COMMIT;"); } } };

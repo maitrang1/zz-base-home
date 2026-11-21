@@ -15,9 +15,8 @@ A browser, and Zig 0.17.0 to build it. No runtime, no setup.
 2. Start it:
    E:\zz-base-home\ac-auto-task\zig-out\bin\auto-task.exe
    You see:
-     auto-task  ─ local command runner
-     listening →  http://127.0.0.1:4000
-     open the URL above in your browser.
+     auto-task listening http://127.0.0.1:4000
+     ui <folder> · <os>
 3. Open this in your browser:
    http://127.0.0.1:4000
 Another port: add it after the file name, for example `E:\zz-base-home\ac-auto-task\zig-out\bin\auto-task.exe 8080`.
