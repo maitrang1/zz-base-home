@@ -2,22 +2,6 @@
 
 {"type":"chai","sche":"10m","plus":["y","m","d","h","m",[8]],"id":"home-sync","on":true,"tmo":900,"kind":"shell","ids":["home-docs","home-code","cicd-stat","cicd-rele","home-beat"]},
 
-{"type":"chai","sche":"0 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"kind":"shell","lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
-
-{"type":"cron","sche":"15 3 * * *","id":"scra-run","on":false,"tmo":7200,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe run --seed-file E:\\.zz-base-home-tena\\as-apps\\ws-webs\\sc-scra\\seeds.txt --live","_cmt":"scra daily crawl: own GET first, vendors only inside free credits (add --force for paid). Enable after keys + seeds exist."},
-
-{"type":"cron","sche":"0 4 * * 1","id":"scra-cana","on":false,"tmo":1800,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe canary --live","_cmt":"scra weekly canary: exit 3 = page layout drift. Add baselines first: scra canary --add <url> --live."},
-
-{"type":"cron","sche":"20 9,15 * * *","id":"fb-reply","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe run reply --live --max 5","_cmt":"fb: reply to new comments at human pace. Enable after the owner ran fb login and checked a dry-run (fb run reply). Exit 4 = blocked (quiet hours, cap, Facebook challenge)."},
-
-{"type":"cron","sche":"0 8 * * *","id":"fb-renew","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe run renewall --live","_cmt":"fb: renew Marketplace listings once a day. Enable after the live check (M17). Exit 4 = blocked."},
-
-{"type":"cron","sche":"30 9 * * *","id":"fb-flow-morning","on":false,"tmo":3600,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe flow run morning --live","_cmt":"fb: the 'morning' routine from aa-conf-main.json flow_list. Runs by itself, waits if Facebook needs the owner, skips unapproved risky items (fb plan morning, fb approve all). Enable after fb setup --yes, fb doctor green, live smoke (M17). Exit 4 = blocked or resting."},
-
-{"type":"cron","sche":"0 5 * * 1","id":"fb-doctor","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe doctor","_cmt":"fb weekly canary (read-only): exit 3 = a button name changed on Facebook, fix labl_over. Enable after the first real fb doctor run."},
-
-{"type":"cron","sche":"10 9,15 * * *","id":"za-reply","on":false,"tmo":1800,"kind":"shell","lock":"za","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\za-zalo-webs\\zig-out\\bin\\za.exe run reply --live","_cmt":"za: answer new price questions in Zalo at human pace (needs reci_pric_text or AI). Enable after za login + a dry run (za run reply) + M8 live check. Exit 4 = blocked (quiet hours, cap, Zalo challenge)."},
-
-{"type":"cron","sche":"30 7 * * 1","id":"za-cana","on":false,"tmo":900,"kind":"shell","lock":"za","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\za-zalo-webs\\zig-out\\bin\\za.exe run canary --read","_cmt":"za weekly canary (read-only): exit 3 = a Zalo label changed, fix labl_* keys in aa-conf-main.json."}
+{"type":"chai","sche":"04 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"kind":"shell","lock":"cicd","catc":1,"ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]}
 
 ]

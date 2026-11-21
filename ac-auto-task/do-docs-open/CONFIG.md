@@ -66,7 +66,7 @@ Optional per job:
 | tmo | stop the job after this many seconds | time_limi_seco | up to 86400 (24 h) |
 | dela | minutes to wait before a boot job, or before a chai's first job | 0 | whole number |
 | lock | jobs with the same lock never run together | main | a name of 1-32 characters · none = run beside anything |
-| catchup | if the PC was off when a cron or once job was due, run it one time when it is back | none | none · once |
+| catc | if the PC was off when a cron, once or chai job was due, run the missed slots when it is back, up to this many (once and chai: at most 1) | 0 (none) | 0-9 · the old `"catchup":"once"` still loads as `1` |
 | ids | chai only: the ids to run in order. An id with no job line runs the auto-run script. A failed step does not stop the chain | — | 1-32 distinct ids |
 | plus | chai only: the wait between jobs, six positions [years, months, days, hours, mins, secs]. A list picks one at random, one letter = default 0 | — | whole numbers, up to 64 per list |
 | cwd | folder to run in | the program folder | a folder path |

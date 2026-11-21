@@ -2,6 +2,7 @@
 What changed, newest first.
 
 ## 2026-11-21
+Changed: the job key `catchup` (`none` or `once`) is now `catc`, a number 0-9: how many missed runs to make up when the PC comes back. `1` is the old `once`. Cron jobs can make up several missed slots; once and chai jobs make up at most one. An old file with `"catchup":"once"` still loads and is saved as `"catc":1`.
 Changed: the data folder moved out of `~\.ac-auto-task` to the tena root: Windows `E:\.zz-base-home-tena\ac-auto-task`, Linux/macOS `~/.zz-base-home-tena/ac-auto-task`. The setting `apps_data_loca` is now two settings, `apps_data_loca_wind` and `apps_data_loca_unix`, and accepts a full path. To keep your history, tabs and job state, copy the old folder to the new place.
 
 ## 2026-11-20

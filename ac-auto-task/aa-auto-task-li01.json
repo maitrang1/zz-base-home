@@ -2,7 +2,7 @@
 
 {"type":"chai","sche":"10m","plus":["y","m","d","h","m",[8]],"id":"home-sync","on":true,"tmo":900,"kind":"shell","ids":["home-docs","home-code","cicd-stat","cicd-rele","home-beat"]},
 
-{"type":"chai","sche":"0 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"kind":"shell","lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
+{"type":"chai","sche":"04 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"kind":"shell","lock":"cicd","catc":1,"ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
 
 {"type":"cron","sche":"00,15,30,45 23,00,01,02 * * *","id":"linu-shut-nigh","on":true}
 
