@@ -33,8 +33,27 @@ Missing keys use the defaults below. Times are in milliseconds (msec) or seconds
 | smar_llam_exec · smar_llam_argz | llama.cpp command and arguments | llama-cli · ["-p","{p}",...] | command |
 | smar_time_secs | AI wait | 60 | 1 or more |
 | rand_seed_fixd | Fixed random seed (0 = random) | 0 | number |
-| labl_* | Names of Zalo buttons and boxes (search, message box, send, unread mark, QR page, pin, mute, forward, group, reminder fields, chat role, message role, own-message prefix) | Vietnamese guesses | text |
-| halt_word_list | Words that stop za | captcha, xác minh, bị khóa, … | list of text |
+| labl_file_path | Your own label file instead of the built-in `so-labl-zalo.json` ("" = built-in) | "" | file |
+| halt_word_list | Extra words that stop za (the built-in Vietnamese and English lists always apply) | [] | list of text |
+| lang_main_code | Language of messages | vi | vi, en |
+| capz_reac_dayz | Reactions per day | 60 | 1 or more |
+| capz_upld_dayz | File uploads per day (also count as sends) | 30 | 1 or more |
+| outb_dirz_path | Folder za may send files from ("" = `<data root>/outb`) | "" | folder |
+| file_size_maxz | Biggest file in bytes | 104857600 | 1 or more |
+| scrl_step_maxz | Most scroll steps when looking for a chat or old messages | 40 | 1 or more |
+| noti_chai_orde | How za tells you something needs you | ["toast","hubz","file"] | toast, hubz, file |
+| wait_dead_mins | Minutes to wait for you before parking | 30 | 1 or more |
+| wait_sett_mins | Minutes to settle after you cleared a check | 15 | 0 or more |
+| cool_hour_coun | Hours of calm pace after a check | 24 | 1 or more |
+| fail_strk_maxz | Failed sends in a row that stop everything | 3 | 1 or more |
+| msgs_keep_days | Days to keep chat text (0 = forever) | 30 | 0 or more |
+| logz_body_enab | Keep chat text in the log (off = hashed) | false | true, false |
+| inbx_chek_mins | Minutes between inbox checks in `za watch` | 10 | 1 or more |
+| sess_actv_mins · sess_brek_mins | Work session and break length | [20,60] · [5,20] | two numbers |
+| watc_chek_maxz · watc_deadl_mins · watc_repl_enab | Watch limits (0 = no check limit) and price replies while watching | 0 · 600 · false | numbers, true/false |
+| smar_calls_dayz | AI replies per day before the template is used | 20 | 0 or more |
+| brow_vers_minz | Oldest Chrome version the canary accepts | 120 | number |
+| flow_list | Named routines: `[{"name":"morning","items":["read","send Mom hi"]}]` | [] | list |
 | reci_pric_word | Words that mark a price question | price, giá, bao nhiêu | list of text |
 | reci_pric_text | Your price reply ("" = none) | "" | text |
 | reci_bulk_maxz | Replies at once before `--force` | 5 | 0 or more |
@@ -49,5 +68,8 @@ Text or `--json` on screen. Exit code: 0 ok · 1 failed · 2 wrong use · 3 find
 | File | What |
 |---|---|
 | <data root>/stat/za-stat.db | Counts, sent messages, chats, log |
-| <data root>/stat/za-alert.txt | Last alert (halt or login needed) |
+| <data root>/stat/alerts.txt · za-alert.txt | What needed you, and when |
+| <data root>/stat/probe · export · report · backup | Page dumps (text hashed) · your data · support bundle · database copies |
+| <data root>/outb | The only folder za sends files from |
 | <data root>/prof | Browser profile with your Zalo login |
+| so-labl-zalo.json | Zalo button names in Vietnamese and English, per job; fix it when a label changes |

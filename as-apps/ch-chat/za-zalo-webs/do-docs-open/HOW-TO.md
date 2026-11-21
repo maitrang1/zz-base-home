@@ -1,61 +1,64 @@
 # How to use za
 
-Short form: `E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe` = `za` below. Flags: no flag = preview only · `--read` = look only · `--live` = do it · `--live --force` = also groups, forwards, big batches · `--json` = machine output.
+Short form: `E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe` = `za` below. Flags: no flag = preview only · `--read` = look only · `--live` = do it · `--live --force` = also risky actions · `--json` = machine output. Put names with spaces in quotes. `Anna#group` or `Anna#person` picks between two chats with the same name.
 
-## Log in
-1. Run `za login`.
-2. A browser window opens. Scan the QR code with the Zalo phone app and approve.
-3. `za` prints "logged in". You do this once; the session stays in the za profile.
+## Set up once
+1. `za setup --yes` checks Chrome, makes the folders, records that you accept the Zalo risk.
+2. `za login`: a window opens. Scan the QR code with the Zalo phone app and approve. The session stays in the za profile.
 
-## Read new chats
-```
-za run read --read
-```
-It opens each unread chat and saves the new messages.
+## Read and search
+`za run read --read` reads unread chats. `za run summ` lists the last message of each unread chat. `za run profile --live` opens your account info.
 
-## Send a message
-Preview: `za run send Mom "See you at 7"`. Real send: add `--live`. Sending the same text to the same chat twice is skipped.
+## Send
+- Text: `za run send Mom "See you at 7"` (preview) then add `--live`. Same text to the same chat twice is skipped.
+- Mention: `za run send "Team A#group" "hello @Mom please call" --live`.
+- File or image: put it in the `outb` folder (see CONFIG), then `za run file Mom report.pdf --live`.
+- Sticker: `za run sticker Mom "Cười" --live`. Note to yourself: `za run cloud "buy milk" --live`.
 
-## Set a reminder
-```
-za run remind Mom 20:00 "Call back" --live
-```
+## Reply, react, take back
+`za run quote Mom "Dinner at 7" "yes, 7 is fine" --live` · `za run react Mom "Dinner at 7" "👍" --live` · `za run pinmsg Mom "Dinner at 7" --live` · `za run recall Mom "oops" --live --force` · `za undo last --live --force` · `za run download Mom report.pdf --live`.
 
-## Pin or mute a chat
-`za run pin Boss --live` · `za run mute Boss --live`
+## Chats
+`za run pin Boss --live` · `mute` · `archive` · `hide` · `unread` · `alias` · `za run block Boss --live --force`.
 
-## Group or forward (needs --force)
-`za run group "Family" --live --force` · `za run forward Mom Boss --live --force`
+## Reminders, polls, notes, labels, quick messages
+`za run remind Mom 20:00 "Call back" --live` · `za run poll "Team A" "Lunch?" "Pho" "Bun" --live` · `za run note "Team A" "bring the report" --live` · `za run label Mom family --live` · `za run quick hi "Hello, how can I help?" --live` · `za run usequick Mom hi --live`.
+
+## Friends and groups (risky ones need --force)
+`za run friend 0900000009 --live --force` · `za run accept Lan --live` · `za run ignore Lan --live` · `za run reqaccept Zed --live --force` · `za run group "Family" --live --force` · `za run forward Mom Boss --live --force` · `za run rename "Team A" "Team B" --live` · `za run addmember "Team A" Lan --live --force` · `deputy` · `delmember` · `leave`.
 
 ## Say it in plain words
-`za run say "remind Mom at 8 to buy milk" --live` · `za run say "send Mom: hello" --live` · `za run say "summarize unread"`
+`za run say "remind Mom at 8 to buy milk" --live` · `za run say "send Mom: hello" --live` · `za run say "summarize unread"`.
 
 ## Answer price questions
-1. Put your reply in `aa-conf-main.json` as `reci_pric_text`.
-2. `za run reply` shows the plan. `za run reply --live` sends it (more than 5 chats needs `--force`).
+Put your reply in `aa-conf-main.json` as `reci_pric_text` (`{name}` becomes the chat name). `za run reply` shows the plan, `za run reply --live` sends it.
 
-## Check limits and status
-`za status` · `za caps` · `za log`
+## Run a whole list by itself
+1. `za plan "read" "send Mom good morning" "group Family"` prints the list and what needs approval.
+2. `za approve all` (or `za approve 2`). Not approved = skipped, never blocking.
+3. `za go --live` runs it. If Zalo asks for you (QR, captcha) it tells you, waits up to 30 minutes, then continues by itself and keeps a calm pace for 24 hours. If Zalo shows a lock or warning it stops and does not continue by itself.
+4. A routine from `flow_list`: `za flow run morning --live`. A parked item: `za retry 3` then `za go --live`.
+5. Check inbox now and then: `za watch --live`.
 
-## Stop everything
-`za stop` (or `za pause`): running jobs stop at the next action. `za resume` lets them go again.
-
-## Check that Zalo did not change (read only)
-`za run canary --read`. Exit 3 means a label changed: fix the `labl_*` names in CONFIG.
+## Look after it
+`za status` · `za caps` · `za log` · `za matrix` (every job and its quality level) · `za export` · `za backup` · `za purge` · `za report` (a safe bundle for support, no chat text) · `za stop` (stops at the next action) · `za resume`.
 
 ## First live check (do once, with a test account)
-1. `za login`.
-2. `za run canary --read`. Every line must say "ok".
-3. `za run read --read`, then `za run send <friend> "test"` (preview), then add `--live`.
-4. If a step says "element missing", open Zalo, read the real label of that button, and put it in `aa-conf-main.json`.
+1. `za login`, then `za run canary --read`. Every line must say "ok".
+2. `za probe chat-list`, `za probe chat-open`: saves a hashed dump of the page. Use it to find the real button names and put them in `so-labl-zalo.json`.
+3. Try one job at a time: preview, then `--live` on a test chat.
+4. If a step says "element missing", open Zalo, read the real label, fix it in `so-labl-zalo.json`.
 
 ## Errors
 | Message | Fix |
 |---|---|
-| error: quiet hours | Run later, or change `quie_hour_rang`. |
-| error: cap reached | Wait for the hour or day to pass. Do not raise caps fast. |
-| error: halted | Open Zalo yourself, clear the check, run `za resume`. |
-| error: login needed | Run `za login` and scan the QR. |
-| error: element missing | A label changed. Run the canary, fix the `labl_*` name. |
-| error: needs force | Check the preview, then add `--live --force`. |
-| error: browser start timeout | Close other windows that use the za profile, then retry. |
+| đang giờ nghỉ / quiet hours | Run later, or change `quie_hour_rang`. |
+| hết hạn mức / cap reached | Wait. Do not raise caps fast. |
+| đã dừng / halted | Open Zalo, clear the check, run `za resume`. |
+| cần đăng nhập / login needed | Run `za login`, scan the QR. |
+| không thấy nút / element missing | A label changed. Run the canary, fix `so-labl-zalo.json`. |
+| tên trùng / ambiguous name | Add `#group` or `#person`. |
+| cần xác nhận thêm / needs force | Check the preview, then `--live --force`. |
+| chưa đồng ý rủi ro / risk not accepted | Run `za setup --yes`. |
+| cửa sổ lạ / unknown popup | Close it by hand, run again. |
+| đang chạy / already running | Another za is running. Wait or run `za status`. |
