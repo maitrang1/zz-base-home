@@ -25,7 +25,7 @@ Windows or Linux, 64-bit. Zig 0.17.0 to build it. Vendor accounts and keys only 
 - Every command that touches the network does nothing until you add `--live`.
 - Vendors are used only after a plain download is blocked, and only inside free credits. Paid use needs `--live --force` and a spending cap.
 - `scra kill --on` stops all vendor use at once.
-- Your data lives in `.zs-scra-data` in your user folder.
+- Your data lives in the tena folder: `E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra` (Windows) or `~/.zz-base-home-tena/as-apps/ws-webs/sc-scra`.
 
 ## License
 PolyForm Noncommercial 1.0.0. See LICENSE.

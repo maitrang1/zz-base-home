@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Scheduler core: Sche struct; method parts in tk-tick-*.zig
 // Flo: own thread 1s tick (accept loop would only tick on page loads) > reload on mtime > collect due under mutex (guards load+arme only, never held while a task runs) > queue > worker pool (same lock never overlaps) > retry requeue > log + link/chain next tick | probes sense on their own thread (blocking connect)
-// I/O: aa-auto-task.json (stor) > Sche state read by routes (counters, last runs, queue, chains), task logs in ~/.ac-auto-task/task-log, NDJSON discarded
+// I/O: aa-auto-task.json (stor) > Sche state read by routes (counters, last runs, queue, chains), task logs in data folder/task-log, NDJSON discarded
 // ===================================================================
 const std = @import("std"); const stor = @import("taskstore"); const time = @import("tasktime"); const armz = @import("taskarm"); const spaw = @import("spawn"); const regi = @import("registry"); const supe = @import("tasksuper"); const prob = @import("taskprobe"); const conf = @import("store"); const stre = @import("stream");
 const base = @import("tk-tick-base.zig"); const chaipart = @import("tk-tick-chai.zig"); const looppart = @import("tk-tick-loop.zig"); const workpart = @import("tk-tick-work.zig"); const logzpart = @import("tk-tick-logz.zig");

@@ -38,8 +38,8 @@ File: `aa-conf-main.env` next to the scripts. One `KEY=value` per line. `~` mean
 | GUAR_STAL | 3 | hours after that hour when an old arm is dropped, not acted on |
 | GUAR_SELF | linu-shut-nigh | the guard's own job id; never counted as busy |
 | GUAR_TERM | gnome-terminal -- | terminal that runs `ru-shut-linu.sh` (so the cancel key works) |
-| GUAR_FLAG | ~/.ac-auto-task/shutdown-armed | arm flag file |
-| GUAR_STAT | ~/.ac-auto-task/task-state | chain state folder; a chain waiting for its next step counts as a running job |
+| GUAR_FLAG | ~/.zz-base-home-tena/ac-auto-task/shutdown-armed | arm flag file |
+| GUAR_STAT | ~/.zz-base-home-tena/ac-auto-task/task-state | chain state folder; a chain waiting for its next step counts as a running job |
 
 Allowed: numbers are whole numbers with no leading zero. A wrong key or number, or an empty `POWE_CMDZ`, stops the script and names the line.
 

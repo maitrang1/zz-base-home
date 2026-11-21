@@ -1,6 +1,9 @@
 # Updates
 What changed, newest first.
 
+## 2026-11-21
+Changed: the data folder moved out of `~\.ac-auto-task` to the tena root: Windows `E:\.zz-base-home-tena\ac-auto-task`, Linux/macOS `~/.zz-base-home-tena/ac-auto-task`. The setting `apps_data_loca` is now two settings, `apps_data_loca_wind` and `apps_data_loca_unix`, and accepts a full path. To keep your history, tabs and job state, copy the old folder to the new place.
+
 ## 2026-11-20
 Changed: this PC's job file is now `aa-auto-task-wi01.json` (was `aa-auto-task.json`); `aa-auto-task-li01.json` (Dev 02) is a copy of it. The startup script `ru-star-wind.vbs` starts the hub as `auto-task 4000 aa-auto-task-wi01.json`. Without a file name the hub still reads `aa-auto-task.json`.
 Changed: the repo's own task ids `work-*` are now `home-*` (for example `home-sync`, `home-code`). Old log files were copied to the new names. A device that keeps its own jobs file must rename the ids there too.

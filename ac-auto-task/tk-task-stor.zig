@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Task list load and save; re-exports store parts
 // Flo: taskPath > read file > parse tasks > validate each > drop bad ones
-// I/O: aa-auto-task.json beside exe (hand-edited, hostile) > Load{ aren, task, reje }; never errors on a bad file; latches in ~/.ac-auto-task/task-state
+// I/O: aa-auto-task.json beside exe (hand-edited, hostile) > Load{ aren, task, reje }; never errors on a bad file; latches in data folder/task-state
 // ===================================================================
 const std = @import("std"); const builtin = @import("builtin"); const stor = @import("store");
 const tkstorbase = @import("tk-stor-base.zig"); const tkstorvali = @import("tk-stor-vali.zig"); const tkstorchai = @import("tk-stor-chai.zig"); const tkstorstat = @import("tk-stor-stat.zig"); 

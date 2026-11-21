@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Newest-first deduped capped command history file
 // Flo: lock > read entries > prepend new > drop older dupes > cap history > atomic rewrite (stream tail cap 8 KB: UI cuts at 5 KB, uncapped file hit 464 KB)
-// I/O: cmd + stdout, stderr, code, elapsed, cwd, shell (POST /save) > ~/.ac-auto-task/history.txt ("####"-separated entries)
+// I/O: cmd + stdout, stderr, code, elapsed, cwd, shell (POST /save) > data folder/history.txt ("####"-separated entries)
 // ===================================================================
 const std = @import("std"); const store = @import("store");
 // libc time shim (no @cImport in 0.17); Windows struct tm has no gmtoff/zone

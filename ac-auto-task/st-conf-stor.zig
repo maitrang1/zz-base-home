@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Atomic JSON blob persistence for config files
 // Flo: dirzData once > load file or "{}" > save via unique temp + fsync + rename
-// I/O: file name + raw JSON body (UI, serve) > blob in ~/.ac-auto-task; load never errors, "{}" on failure
+// I/O: file name + raw JSON body (UI, serve) > blob in data folder; load never errors, "{}" on failure
 // ===================================================================
 const std = @import("std"); const builtin = @import("builtin"); const fres = @import("st-envi-fres.zig");
 const CF = .{ .maxz = 8 * 1024 * 1024, .empt = "{}", .envw = "USERPROFILE", .envp = "HOME", .bakz = ".bak", .part = ".bak.part", .conf_file = "aa-conf-main.json", .conf_maxz = 64 * 1024, .data_maxz = 260 };

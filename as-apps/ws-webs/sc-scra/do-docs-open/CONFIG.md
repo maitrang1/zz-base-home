@@ -27,7 +27,7 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | pdfz_size_maxz | Largest PDF to download, bytes (0 = refuse PDFs) | 20971520 | 0 or more |
 | brow_enab | Use your own Chrome or Edge to render JavaScript pages for free | false | true or false |
 | brow_path_exec | Browser program (empty = look in the usual places) | empty | path |
-| brow_prof_dirz | Folder for the scra-only browser profiles (never your daily profile) | ~/.zs-scra-data/prof | path |
+| brow_prof_dirz | Folder for the scra-only browser profiles (never your daily profile). Empty = prof/ inside the data folder | empty | path |
 | brow_time_seco | Seconds one browser page may take, including its actions | 60 | 1 or more |
 | brow_scrl_maxz | Most scroll steps or load-more clicks per page | 30 | 1 or more |
 | brow_step_maxz | Most steps in a steps file | 50 | 1 or more |
@@ -40,7 +40,8 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | revi_star_seco | First recrawl interval | 86400 | between floor and cap |
 | revi_floo_seco | Shortest recrawl interval | 3600 | 1 or more |
 | revi_capz_seco | Longest recrawl interval | 2592000 | at least the floor |
-| data_dirz_path | Where data is kept | ~/.zs-scra-data | path |
+| data_dirz_wind | Where data is kept on Windows | E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra | path |
+| data_dirz_unix | Where data is kept on Linux and macOS | ~/.zz-base-home-tena/as-apps/ws-webs/sc-scra | path |
 | clou_stor_orde | Object store order | b2zz, r2zz, tigr | b2zz, r2zz, tigr |
 | clou_sqlz_orde | Cloud database order | turs, neon, tidb | turs, neon, tidb |
 | clou_capz_gbyt | Cloud size cap per store, GB | b2zz 10, r2zz 10, tigr 5 | whole numbers |
@@ -105,8 +106,8 @@ Order: global settings, then the group, then the site rule, then matching path r
 ## Files
 | File | Holds |
 |---|---|
-| ~/.zs-scra-data/scra-index.db | page list, log, queue, records, spend, upload queue |
-| ~/.zs-scra-data/raw/ab/cd/<hash>.gz | stored pages, once per content |
+| <data folder>/scra-index.db | page list, log, queue, records, spend, upload queue |
+| <data folder>/raw/ab/cd/<hash>.gz | stored pages, once per content |
 | ~/.zz-base-home-secr/as-apps/ws-webs/sc-scra/<name>.key | vendor and cloud keys, line 1 |
 
 ## Exit codes

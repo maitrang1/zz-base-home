@@ -13,11 +13,11 @@ Shows kill switch, month spend against your cap, pages stored and queue size.
 Words in the answer: `new` stored, `same` same content as before, `notm` not modified, `http` the site answered with an error (not stored), `bloc` block page (not stored), `empt` empty page, `jbad` broken JSON.
 
 ## Crawl a list of pages
-1. Put one address per line in a file, for example `C:\Users\<you>\.zs-scra-data\seeds.txt`. Lines starting with # are ignored.
+1. Put one address per line in a file, for example `E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt`. Lines starting with # are ignored.
 2. Preview:
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe run --seed-file C:\Users\<you>\.zs-scra-data\seeds.txt
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe run --seed-file E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt
 3. Run:
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe run --seed-file C:\Users\<you>\.zs-scra-data\seeds.txt --live
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe run --seed-file E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt --live
 Add `--sitemap https://example.com/` to read the site's sitemap first. Add `--decl 120` if the site says it has 120 items: a shorter result is flagged (exit code 3).
 scra reads robots.txt, waits between requests to the same site, retries failures, and stops the run if too many pages fail.
 

@@ -4,7 +4,7 @@
 
 {"type":"chai","sche":"0 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"kind":"shell","lock":"cicd","catchup":"once","ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
 
-{"type":"cron","sche":"15 3 * * *","id":"scra-run","on":false,"tmo":7200,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe run --seed-file %USERPROFILE%\\.zs-scra-data\\seeds.txt --live","_cmt":"scra daily crawl: own GET first, vendors only inside free credits (add --force for paid). Enable after keys + seeds exist."},
+{"type":"cron","sche":"15 3 * * *","id":"scra-run","on":false,"tmo":7200,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe run --seed-file E:\\.zz-base-home-tena\\as-apps\\ws-webs\\sc-scra\\seeds.txt --live","_cmt":"scra daily crawl: own GET first, vendors only inside free credits (add --force for paid). Enable after keys + seeds exist."},
 
 {"type":"cron","sche":"0 4 * * 1","id":"scra-cana","on":false,"tmo":1800,"kind":"shell","lock":"scra","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ws-webs\\sc-scra\\zig-out\\bin\\scra.exe canary --live","_cmt":"scra weekly canary: exit 3 = page layout drift. Add baselines first: scra canary --add <url> --live."},
 
