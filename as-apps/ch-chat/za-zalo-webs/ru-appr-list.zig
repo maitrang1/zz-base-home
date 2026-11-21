@@ -7,7 +7,7 @@
 const std = @import("std"); const data = @import("st-stat-data.zig"); const flo = @import("st-flow-data.zig"); const jobs = @import("ru-jobs-main.zig"); const rec = @import("ru-reci-main.zig");
 const SEP = "\x1f";
 pub const Parsed = struct { job: []const u8, args: []const []const u8 };
-pub fn riskOf(job: []const u8) []const u8 { if (std.mem.eql(u8, job, "group") or std.mem.eql(u8, job, "forward")) return "ask"; return "low"; }
+pub fn riskOf(job: []const u8) []const u8 { return if (jobs.isAsk(job)) "ask" else "low"; }
 pub fn parseItem(aren: std.mem.Allocator, text: []const u8) !Parsed { const trm = std.mem.trim(u8, text, " \r\n\t"); if (trm.len == 0) return error.BadJob; var itr = std.mem.tokenizeScalar(u8, trm, ' '); const first = itr.next() orelse return error.BadJob; if (rec.parse(trm)) |_| { const arr0 = try aren.alloc([]const u8, 1); arr0[0] = trm; return .{ .job = "say", .args = arr0 }; } else |_| {} if (jobs.known(first) and !std.mem.eql(u8, first, "say")) { var words: std.ArrayList([]const u8) = .empty; while (itr.next()) |wrd| try words.append(aren, wrd); return .{ .job = first, .args = words.items }; } const body = if (std.mem.eql(u8, first, "say")) std.mem.trim(u8, trm[3..], " ") else trm; _ = rec.parse(body) catch return error.BadJob; const arr = try aren.alloc([]const u8, 1); arr[0] = body; return .{ .job = "say", .args = arr }; }
 pub fn pack(aren: std.mem.Allocator, words: []const []const u8) ![]u8 { return std.mem.join(aren, SEP, words); }
 pub fn unpack(aren: std.mem.Allocator, text: []const u8) ![]const []const u8 { var out: std.ArrayList([]const u8) = .empty; if (text.len == 0) return out.items; var itr = std.mem.splitSequence(u8, text, SEP); while (itr.next()) |wrd| try out.append(aren, wrd); return out.items; }
