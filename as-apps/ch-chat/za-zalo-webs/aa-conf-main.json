@@ -25,6 +25,7 @@
   "smar_clau_exec": "claude",
   "smar_llam_exec": "llama-cli",
   "smar_time_secs": 60,
+  "flow_list": [],
   "noti_chai_orde": ["toast", "hubz", "file"],
   "wait_dead_mins": 30,
   "wait_sett_mins": 15,
