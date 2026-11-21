@@ -21,6 +21,7 @@ pub const CHKP = HEAD ++ "<h1>Confirm your identity</h1><p>We need to check it i
 pub const LOGI = HEAD ++ "<h1>Log in to Facebook</h1><p>Email or phone</p>" ++ TAIL;
 pub const BLOK = HEAD ++ "<h1>Action Blocked</h1><p>You're temporarily blocked from using this feature.</p>" ++ TAIL;
 pub const RATE = HEAD ++ "<h1>Home</h1><div role=\"dialog\"><p>You're going too fast. Please slow down.</p></div>" ++ TAIL;
+pub const SOLV = HEAD ++ "<h1>Confirm your identity</h1><p>We need to check it is you.</p><script>setTimeout(function(){location.href='/people/9'},2500)</script>" ++ TAIL;
 pub const CKIE = HEAD ++ "<h1>Cookie page</h1><div role=\"dialog\" id=\"ck\"><p>We use cookies</p></div>" ++ TAIL;
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
