@@ -7,43 +7,62 @@ Missing keys use the defaults below.
 | Name | Does | Default | Allowed |
 |---|---|---|---|
 | base_urlz_main | Facebook address | https://www.facebook.com | http(s) address |
+| base_bizz_main | Business Suite address | https://business.facebook.com | http(s) address |
+| path_* | Page paths jobs use (home, notifications, friends, messages, selling, events, stories, reels, profile) | Facebook defaults | paths |
 | data_loca_wind | Where fb keeps everything on Windows | E:\.zz-base-home-tena\as-apps\ch-chat\fb-face-webs | folder |
 | data_loca_unix | Same on Linux and macOS | ~/.zz-base-home-tena/as-apps/ch-chat/fb-face-webs | folder |
 | brow_exec_path | Chrome or Edge file ("" = find it) | "" | file |
 | brow_head_mode | Hide the browser window | false | true/false |
 | brow_time_seco | Seconds to wait for one step | 60 | 1 and up |
+| brow_vers_minz | Oldest Chrome version fb accepts | 120 | number |
+| lang_main_code | Language of messages | vi | vi, en |
 | type_dely_msec | Time between keys (min, max) | [90, 260] | numbers |
 | acti_dely_secs | Pause between actions (min, max) | [8, 40] | numbers |
 | mous_step_coun | Steps of one mouse move | 18 | 1 to 200 |
 | time_scal_perc | Speed of waits (100 = normal, 0 = none, tests only) | 100 | 0 to 1000 |
 | rand_seed_numb | Fixed randomness (0 = random) | 0 | number |
 | capz_post_dayz | Posts per 24 hours | 3 | 0 and up |
-| capz_comm_dayz | Comments and replies per 24 hours | 30 | 0 and up |
-| capz_mark_dayz | Marketplace actions per 24 hours | 2 | 0 and up |
-| capz_grou_dayz | Group posts and joins per 24 hours | 5 | 0 and up |
-| capz_frie_dayz | Friend requests per 24 hours | 5 | 0 and up |
-| capz_dmsg_dayz | Messages per 24 hours | 30 | 0 and up |
-| capz_reac_dayz | Reactions per 24 hours (reserved) | 60 | 0 and up |
+| capz_comm_dayz | Comments and replies | 30 | 0 and up |
+| capz_mark_dayz | Marketplace actions | 2 | 0 and up |
+| capz_grou_dayz | Group posts, joins, listing shares | 5 | 0 and up |
+| capz_frie_dayz | Friend actions | 5 | 0 and up |
+| capz_dmsg_dayz | Messages | 30 | 0 and up |
+| capz_reac_dayz | Reactions and saves | 60 | 0 and up |
+| capz_shar_dayz | Shares | 10 | 0 and up |
+| capz_admn_dayz | Group admin and page actions | 60 | 0 and up |
+| capz_evnt_dayz | Event actions | 3 | 0 and up |
+| capz_stor_dayz | Stories and reels | 5 | 0 and up |
+| capz_prof_dayz | Profile edits | 3 | 0 and up |
 | quie_hour_rang | Quiet hours (from, to) | [23, 6] | hours 0 to 23 |
 | quie_zone_minu | Minutes from UTC to your time | 420 | -840 to 840 |
 | warm_dayz_coun | Days to reach full limits | 14 | 0 and up |
 | retr_coun_maxz | Tries to find a button | 3 | 1 to 10 |
+| wait_maxx_minu | Minutes fb waits for you during a check | 30 | 1 and up |
+| sett_wait_minu | Minutes fb waits after you finish a check | 15 | 0 and up |
+| cool_hour_coun | Hours of slow pace after a check | 24 | 1 and up |
+| cool_perc_caps | Limits during slow pace (percent) | 50 | 1 to 100 |
+| noti_chai_orde | How fb tells you (popup, file) | ["toas","file"] | toas, file |
+| msgs_keep_days | Days to keep logs | 30 | 1 and up |
+| logz_body_enab | Keep readable text in logs | false | true/false |
 | smar_mode_enab | Let AI write replies | false | true/false |
 | smar_chai_orde | AI tools in order | ["clau","llam"] | clau, llam |
 | smar_clau_exec | Claude command | claude | command |
 | smar_llam_urlz | Local llama.cpp address | http://127.0.0.1:8080 | local http address |
 | smar_time_seco | Seconds to wait for AI | 90 | 1 and up |
+| smar_call_dayz | AI calls per 24 hours | 20 | 0 and up |
 | repl_temp_list | Reply texts when AI is off | 2 short thanks | list of text |
-| path_* | Facebook page paths used by jobs | Facebook defaults | paths |
-| labl_* | Button and box names (English + Vietnamese) | built in | lists of text |
+| inqu_temp_list | Texts for Marketplace buyers | 2 short answers | list of text |
+| labl_over | Your own button names, by key (see `fb doctor`) | {} | key → list of names |
+| labl_* | Older button and box names (English + Vietnamese) | built in | lists of text |
+| flow_list | Routines: name and jobs (`job`, `text`, `url`, `maxn`, ...) | one `morning` example | list |
 
 ## Input
-Words on the command line (see HOW-TO). Nothing is read from Facebook except the pages the job opens.
+Words on the command line (see HOW-TO). Nothing is read from Facebook except the pages a job opens.
 
 ## Output
 Text on screen (or `--json` for status, log, ledger). Exit code: 0 ok · 1 failed · 2 wrong command · 3 page looks different · 4 blocked.
 
-## Files
-- `stat/fb-state.db` inside that folder: limits counters, once-only keys, ledger, log.
-- `prof/` inside that folder: the browser profile with your Facebook login.
-This is the only folder fb uses outside its program folder.
+## Files (all inside the data folder)
+- `stat/fb-state.db`: limits counters, once-only keys, ledger, log, routines.
+- `stat/alerts.txt`: what fb told you. `stat/snaps/`, `report/`, `backup/`, `export/`: made by `fb snap`, `report`, `backup`, `export`.
+- `prof/`: the browser profile with your Facebook login. This is the only folder fb uses outside its program folder.

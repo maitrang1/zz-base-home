@@ -10,7 +10,11 @@
 
 {"type":"cron","sche":"20 9,15 * * *","id":"fb-reply","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe run reply --live --max 5","_cmt":"fb: reply to new comments at human pace. Enable after the owner ran fb login and checked a dry-run (fb run reply). Exit 4 = blocked (quiet hours, cap, Facebook challenge)."},
 
-{"type":"cron","sche":"0 8 * * *","id":"fb-renew","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe run renewall --live","_cmt":"fb: renew Marketplace listings once a day. Enable after the live check (M9). Exit 4 = blocked."},
+{"type":"cron","sche":"0 8 * * *","id":"fb-renew","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe run renewall --live","_cmt":"fb: renew Marketplace listings once a day. Enable after the live check (M17). Exit 4 = blocked."},
+
+{"type":"cron","sche":"30 9 * * *","id":"fb-flow-morning","on":false,"tmo":3600,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe flow run morning --live","_cmt":"fb: the 'morning' routine from aa-conf-main.json flow_list. Runs by itself, waits if Facebook needs the owner, skips unapproved risky items (fb plan morning, fb approve all). Enable after fb setup --yes, fb doctor green, live smoke (M17). Exit 4 = blocked or resting."},
+
+{"type":"cron","sche":"0 5 * * 1","id":"fb-doctor","on":false,"tmo":1800,"kind":"shell","lock":"fb","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\fb-face-webs\\zig-out\\bin\\fb.exe doctor","_cmt":"fb weekly canary (read-only): exit 3 = a button name changed on Facebook, fix labl_over. Enable after the first real fb doctor run."},
 
 {"type":"cron","sche":"10 9,15 * * *","id":"za-reply","on":false,"tmo":1800,"kind":"shell","lock":"za","catchup":"none","run":"E:\\zz-base-home\\as-apps\\ch-chat\\za-zalo-webs\\zig-out\\bin\\za.exe run reply --live","_cmt":"za: answer new price questions in Zalo at human pace (needs reci_pric_text or AI). Enable after za login + a dry run (za run reply) + M8 live check. Exit 4 = blocked (quiet hours, cap, Zalo challenge)."},
 
