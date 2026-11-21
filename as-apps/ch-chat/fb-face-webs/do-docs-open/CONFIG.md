@@ -7,8 +7,8 @@ Missing keys use the defaults below.
 | Name | Does | Default | Allowed |
 |---|---|---|---|
 | base_urlz_main | Facebook address | https://www.facebook.com | http(s) address |
-| prof_dirz_path | Browser profile folder | ~/.fb-prof | folder |
-| stat_dirz_path | Where fb keeps its notes | ~/.fb-state | folder |
+| data_loca_wind | Where fb keeps everything on Windows | E:\.zz-base-home-tena\as-apps\ch-chat\fb-face-webs | folder |
+| data_loca_unix | Same on Linux and macOS | ~/.zz-base-home-tena/as-apps/ch-chat/fb-face-webs | folder |
 | brow_exec_path | Chrome or Edge file ("" = find it) | "" | file |
 | brow_head_mode | Hide the browser window | false | true/false |
 | brow_time_seco | Seconds to wait for one step | 60 | 1 and up |
@@ -44,5 +44,6 @@ Words on the command line (see HOW-TO). Nothing is read from Facebook except the
 Text on screen (or `--json` for status, log, ledger). Exit code: 0 ok · 1 failed · 2 wrong command · 3 page looks different · 4 blocked.
 
 ## Files
-- `fb-state.db` in `stat_dirz_path`: limits counters, once-only keys, ledger, log.
-- Browser profile in `prof_dirz_path`: your Facebook login.
+- `stat/fb-state.db` inside that folder: limits counters, once-only keys, ledger, log.
+- `prof/` inside that folder: the browser profile with your Facebook login.
+This is the only folder fb uses outside its program folder.

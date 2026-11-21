@@ -1,6 +1,6 @@
 {
-  "prof_dirz_path": "~/.za-prof",
-  "stat_dirz_path": "~/.za-state",
+  "data_loca_wind": "E:\\.zz-base-home-tena\\as-apps\\ch-chat\\za-zalo-webs",
+  "data_loca_unix": "~/.zz-base-home-tena/as-apps/ch-chat/za-zalo-webs",
   "brow_exec_path": "",
   "brow_head_mode": false,
   "pipe_mode_enab": false,

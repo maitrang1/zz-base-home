@@ -1,7 +1,7 @@
 {
   "base_urlz_main": "https://www.facebook.com",
-  "prof_dirz_path": "~/.fb-prof",
-  "stat_dirz_path": "~/.fb-state",
+  "data_loca_wind": "E:\\.zz-base-home-tena\\as-apps\\ch-chat\\fb-face-webs",
+  "data_loca_unix": "~/.zz-base-home-tena/as-apps/ch-chat/fb-face-webs",
   "brow_exec_path": "",
   "brow_head_mode": false,
   "brow_time_seco": 60,

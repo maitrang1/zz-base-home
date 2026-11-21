@@ -6,8 +6,8 @@ Missing keys use the defaults below. Times are in milliseconds (msec) or seconds
 ## Settings
 | Name | Does | Default | Allowed |
 |---|---|---|---|
-| prof_dirz_path | Browser profile folder | ~/.za-prof | folder |
-| stat_dirz_path | Where za keeps its notes | ~/.za-state | folder |
+| data_loca_wind | Data root on Windows (profile in `prof`, notes in `stat`) | E:\.zz-base-home-tena\as-apps\ch-chat\za-zalo-webs | folder |
+| data_loca_unix | Data root on Linux and macOS | ~/.zz-base-home-tena/as-apps/ch-chat/za-zalo-webs | folder |
 | brow_exec_path | Chrome or Edge file ("" = find it) | "" | file |
 | brow_head_mode | true = hidden browser window | false | true, false |
 | pipe_mode_enab | Reserved, no effect | false | true, false |
@@ -48,6 +48,6 @@ Text or `--json` on screen. Exit code: 0 ok · 1 failed · 2 wrong use · 3 find
 ## Files
 | File | What |
 |---|---|
-| ~/.za-state/za-stat.db | Counts, sent messages, chats, log |
-| ~/.za-state/za-alert.txt | Last alert (halt or login needed) |
-| ~/.za-prof | Browser profile with your Zalo login |
+| <data root>/stat/za-stat.db | Counts, sent messages, chats, log |
+| <data root>/stat/za-alert.txt | Last alert (halt or login needed) |
+| <data root>/prof | Browser profile with your Zalo login |
