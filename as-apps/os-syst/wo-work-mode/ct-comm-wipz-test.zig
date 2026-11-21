@@ -95,7 +95,7 @@ try std.testing.expectEqual(want.len, mck.call.items.len);
 for (want, 0..) |line, indx| try std.testing.expectEqualStrings(line, mck.call.items[indx]);
 try std.testing.expectEqual(@as(usize, 3), mck.envz.items.len);
 for (mck.envz.items) |envl| try std.testing.expect(std.mem.startsWith(u8, envl, "GIT_INDEX_FILE=") and std.mem.endsWith(u8, envl, "wipz.idx"));
-const dirz = try stat.dirzOf(allo, home, ".wo-work-mode");
+const dirz = try stat.dirzOf(allo, home, "as-apps/os-syst/wo-work-mode");
 const stam = stat.stamRead(allo, std.testing.io, try stat.pathOf(allo, dirz, "wipz")).?;
 try std.testing.expectEqual(make.NOWZ, stam.when);
 try std.testing.expect(stam.okay);
@@ -110,7 +110,7 @@ const allo = arna.allocator();
 var tmp = std.testing.tmpDir(.{});
 defer tmp.cleanup();
 const home = try make.homeOf(allo, &tmp);
-const dirz = try stat.dirzOf(allo, home, ".wo-work-mode");
+const dirz = try stat.dirzOf(allo, home, "as-apps/os-syst/wo-work-mode");
 try stat.stamWrit(allo, std.testing.io, dirz, try stat.pathOf(allo, dirz, "wipzd"), .{ .when = make.NOWZ - 600, .okay = true, .note = MARK });
 const rul = rules(.{ .prev = true, .ptre = SHAB });
 var mck: mock.Mock = .{ .rule = &rul };
@@ -177,7 +177,7 @@ try std.testing.expect(hasCall(&mck, "git bundle create "));
 try std.testing.expect(std.mem.indexOf(u8, mck.call.items[mck.call.items.len - 2], "^HEAD") != null);
 try std.testing.expect(std.mem.startsWith(u8, mck.call.items[mck.call.items.len - 1], "restic backup --tag wipz-held "));
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "LEAK found") != null);
-const dirz = try stat.dirzOf(allo, home, ".wo-work-mode");
+const dirz = try stat.dirzOf(allo, home, "as-apps/os-syst/wo-work-mode");
 try std.testing.expect(stat.stamRead(allo, std.testing.io, try stat.pathOf(allo, dirz, "wipz")) == null);
 }
 test "gitleaks error (not a leak) and gitleaks missing both abort the push" {
@@ -215,7 +215,7 @@ const ctxz = make.make(allo, &buff.writer, &mck, conf2(), home, true, false);
 try std.testing.expectEqual(exit.Code.fail, try wipz.comm(&ctxz, &.{}));
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "denied") != null);
 try std.testing.expect(!hasCall(&mck, "git update-ref " ++ MARK));
-const dirz = try stat.dirzOf(allo, home, ".wo-work-mode");
+const dirz = try stat.dirzOf(allo, home, "as-apps/os-syst/wo-work-mode");
 try std.testing.expect(stat.stamRead(allo, std.testing.io, try stat.pathOf(allo, dirz, "wipz")) == null);
 }
 test "a garbage tree sha stops the run before commit" {

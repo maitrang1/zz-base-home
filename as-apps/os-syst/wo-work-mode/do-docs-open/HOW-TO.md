@@ -53,7 +53,7 @@ A clash on the same lines is settled by the newer edit; the older text is in `zz
 ## Test that a restore works
 1. Practice run: `wo dril`
 2. Real run: `wo dril --live`
-It restores your latest backup into a new folder in `.wo-work-mode`, checks every database in it and times it. Over 15 minutes counts as a failure. Old drill folders stay; move them away by hand.
+It restores your latest backup into a new folder in the wo data folder, checks every database in it and times it. Over 15 minutes counts as a failure. Old drill folders stay; move them away by hand.
 
 ## Switch the agents off
 1. Practice run: `wo kill`

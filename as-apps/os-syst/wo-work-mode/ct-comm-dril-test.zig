@@ -27,13 +27,13 @@ ctxz.nowf = edgeNow;
 return dril.comm(&ctxz, &.{});
 }
 fn plant(allo: std.mem.Allocator, home: []const u8, name: []const u8) !void {
-const scra = try std.fmt.allocPrint(allo, "{s}/.wo-work-mode/dril-20231114-221320", .{home});
+const scra = try std.fmt.allocPrint(allo, "{s}/as-apps/os-syst/wo-work-mode/dril-20231114-221320", .{home});
 try std.Io.Dir.cwd().createDirPath(std.testing.io, scra);
 const path = try std.fmt.allocPrint(allo, "{s}/{s}", .{ scra, name });
 try std.Io.Dir.cwd().writeFile(std.testing.io, .{ .sub_path = path, .data = "x" });
 }
 fn stamOf(allo: std.mem.Allocator, home: []const u8) ?stat.Stam {
-const dirz = stat.dirzOf(allo, home, ".wo-work-mode") catch return null;
+const dirz = stat.dirzOf(allo, home, "as-apps/os-syst/wo-work-mode") catch return null;
 return stat.stamRead(allo, std.testing.io, stat.pathOf(allo, dirz, "dril") catch return null);
 }
 test "dry-run touches nothing: no tool call, no scratch dir, no stamp" {

@@ -1,7 +1,7 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: wo bkup: restic state job and nightly SQLite copies
-// Flo: stat: read list > resolve under home > restic backup --files-from, no *.db > stamp | nigh: VACUUM INTO per db > integrity > restic backup > stamp
+// Flo: stat: read list > resolve under the tena root > restic backup --files-from, no *.db > stamp | nigh: VACUUM INTO per db > integrity > restic backup > stamp
 // I/O: Ctxz + optional stat|nigh (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================
 const std = @import("std");
@@ -44,7 +44,7 @@ return pick;
 }
 fn statRun(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact)) !void {
 const data = std.Io.Dir.cwd().readFileAlloc(ctxz.iozz, ctxz.conf.bkup_list_file, ctxz.allo, .limited(CF.maxz)) catch { try facts.append(ctxz.allo, cx.mkfa("list", .fail, try std.fmt.allocPrint(ctxz.allo, "cannot read {s}", .{ctxz.conf.bkup_list_file}))); return; };
-const path = (try listParse(ctxz.allo, ctxz.home, data)) orelse { try facts.append(ctxz.allo, cx.mkfa("list", .fail, "list holds an absolute or .. path")); return; };
+const path = (try listParse(ctxz.allo, try ctxz.tenaRoot(), data)) orelse { try facts.append(ctxz.allo, cx.mkfa("list", .fail, "list holds an absolute or .. path")); return; };
 const docs = (try docsFind(ctxz, facts)) orelse return;
 const allp = try std.mem.concat(ctxz.allo, []const u8, &.{ path, docs });
 if (allp.len == 0) { try facts.append(ctxz.allo, cx.mkfa("list", .fail, "list is empty")); return; }

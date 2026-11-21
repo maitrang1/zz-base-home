@@ -7,7 +7,9 @@
 const std = @import("std");
 const CF = .{ .maxz = 1024 * 1024, .name = "aa-conf-main.json", .nest = "as-apps/os-syst/wo-work-mode/aa-conf-main.json" };
 pub const Conf = struct {
-apps_data_loca: []const u8 = ".wo-work-mode",
+apps_data_loca: []const u8 = "as-apps/os-syst/wo-work-mode",
+tena_loca_wind: []const u8 = "E:\\.zz-base-home-tena",
+tena_loca_unix: []const u8 = ".zz-base-home-tena",
 secr_home_loca: []const u8 = ".zz-base-home-secr",
 hook_path_main: []const u8 = "ci-flow-sync",
 zigz_vers_pinz: []const u8 = "0.17.0",

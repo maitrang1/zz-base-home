@@ -9,7 +9,9 @@
 ## Settings (file `aa-conf-main.json`, found in the current folder or in `wo-work-mode`)
 | Name | Does | Default | Allowed |
 |---|---|---|---|
-| apps_data_loca | Folder in your home for wo's own files | .wo-work-mode | any folder name |
+| apps_data_loca | Folder for wo's own files, under the tena root | as-apps/os-syst/wo-work-mode | relative folder |
+| tena_loca_wind | The tena root on Windows | E:\.zz-base-home-tena | absolute path, or a folder under your home |
+| tena_loca_unix | The tena root on Linux and macOS | .zz-base-home-tena | same |
 | secr_home_loca | Folder in your home for secrets | .zz-base-home-secr | any folder name |
 | hook_path_main | Hooks folder the repo must use | ci-flow-sync | any path |
 | zigz_vers_pinz | Zig version the device must have | 0.17.0 | any version text |
@@ -33,7 +35,7 @@
 | wipz_remo_list | PRIVATE remotes to push saved work to. Never a public repo: saved work is readable by anyone who can read the remote. Add the same remote names on every device (`git remote add NAME URL`) | none (ships with wipg, wipl) | remote names |
 | wipz_file_maxz | Files bigger than this many bytes stay out of the saved work | 10485760 | whole number |
 | wipz_rest_tagz | Restic label for work that held a secret | wipz-held | text |
-| bkup_list_file | List of state files the 5-minute backup saves | mo-modu/mo-core/bk-back-modu/bk-stat-list.txt | file path |
+| bkup_list_file | List of state files the 5-minute backup saves (paths under the tena root) | mo-modu/mo-core/bk-back-modu/bk-stat-list.txt | file path |
 | bkup_dbzz_list | SQLite files copied every night | none | file paths (under your home, or absolute) |
 | bkup_docs_list | Name starts of git-ignored docs that the 5-minute backup also saves | do-, aa-todo-, ag-agen, rn-rena-hist, CLAUDE.md, AGENTS.md | text list |
 | bkup_tagz_stat / bkup_tagz_nigh | Restic labels for the two backup jobs | stat / nigh | text |
@@ -65,9 +67,10 @@ Command line flags: `--json` `--live` `--force` `--conf FILE` `--prof t0|box|ci`
 Lines of `state<TAB>name<TAB>note`. States: okay · drif (drifted) · bloc (could not run) · fail · skip.
 
 ## Files
-- `~/.wo-work-mode/wipz.json`, `wipzd.json`, `bkup.json`, `bknt.json`, `dril.json`: when each job last ran
-- `~/.wo-work-mode/held-<date>.bundle`: work that held a secret (kept here and in restic, never pushed)
-- `~/.wo-work-mode/nigh/<date>/`: the nightly database copies
-- `~/.wo-work-mode/wipz.idx`: temporary work file
-- `~/.wo-work-mode/dril-<date>/`: restored files from a drill
+`<wo data>` = `as-apps/os-syst/wo-work-mode` under the tena root (apps_data_loca).
+- `<wo data>/wipz.json`, `wipzd.json`, `bkup.json`, `bknt.json`, `dril.json`: when each job last ran
+- `<wo data>/held-<date>.bundle`: work that held a secret (kept here and in restic, never pushed)
+- `<wo data>/nigh/<date>/`: the nightly database copies
+- `<wo data>/wipz.idx`: temporary work file
+- `<wo data>/dril-<date>/`: restored files from a drill
 - `~/.zz-base-home-secr/`: created by `wo secr init --live`

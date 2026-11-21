@@ -32,7 +32,7 @@ const allo = arna.allocator();
 var tmp = std.testing.tmpDir(.{});
 defer tmp.cleanup();
 const home = try make.homeOf(allo, &tmp);
-const dirz = try stat.dirzOf(allo, home, ".wo-work-mode");
+const dirz = try stat.dirzOf(allo, home, "as-apps/os-syst/wo-work-mode");
 try stat.stamWrit(allo, std.testing.io, dirz, try stat.pathOf(allo, dirz, "wipz"), .{ .when = make.NOWZ - 42, .okay = true });
 try stat.stamWrit(allo, std.testing.io, dirz, try stat.pathOf(allo, dirz, "dril"), .{ .when = make.NOWZ - 7, .okay = false });
 var mck: mock.Mock = .{ .rule = &.{} };

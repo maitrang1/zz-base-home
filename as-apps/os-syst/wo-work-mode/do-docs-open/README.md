@@ -28,7 +28,7 @@ One small command that keeps your work safe: it checks your device is healthy, s
 ## Key behavior
 - Exit code 0 = fine · 3 = something drifted · 4 = a check could not run · 1 = failed · 2 = wrong command.
 - Nothing changes until you add `--live`.
-- State is kept in a folder named `.wo-work-mode` in your home folder.
+- State is kept in `as-apps/os-syst/wo-work-mode` under the tena root (Windows `E:\.zz-base-home-tena`, other systems `~/.zz-base-home-tena`).
 
 ## Next
 - [HOW-TO.md](HOW-TO.md): every command, step by step

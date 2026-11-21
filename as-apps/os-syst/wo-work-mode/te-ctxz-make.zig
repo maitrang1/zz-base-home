@@ -11,7 +11,8 @@ const mock = @import("te-mock-runn.zig");
 pub const NOWZ: i64 = 1_700_000_000;
 pub fn fixdNow(iozz: std.Io) i64 { _ = iozz; return NOWZ; }
 pub fn make(allo: std.mem.Allocator, outw: *std.Io.Writer, mck: *mock.Mock, cfgv: cfgz.Conf, home: []const u8, live: bool, json: bool) cx.Ctxz {
-return .{ .allo = allo, .iozz = std.testing.io, .runn = mck.runn(), .conf = cfgv, .home = home, .devi = "devb", .ladd = .{ .live = live, .json = json }, .prof = "t0", .outw = outw, .nowf = fixdNow };
+var cfg = cfgv; cfg.tena_loca_wind = ""; cfg.tena_loca_unix = "";
+return .{ .allo = allo, .iozz = std.testing.io, .runn = mck.runn(), .conf = cfg, .home = home, .devi = "devb", .ladd = .{ .live = live, .json = json }, .prof = "t0", .outw = outw, .nowf = fixdNow };
 }
 pub fn homeOf(allo: std.mem.Allocator, tmp: *const std.testing.TmpDir) ![]u8 { return std.fmt.allocPrint(allo, ".zig-cache/tmp/{s}", .{tmp.sub_path}); }
 // =======================___THIS_IS_THE_END___=======================

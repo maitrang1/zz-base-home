@@ -11,7 +11,7 @@ test "empty object gives every default" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const cfgv = try cfgz.confParse(arna.allocator(), "{}");
-try std.testing.expectEqualStrings(".wo-work-mode", cfgv.apps_data_loca);
+try std.testing.expectEqualStrings("as-apps/os-syst/wo-work-mode", cfgv.apps_data_loca);
 try std.testing.expectEqualStrings("ci-flow-sync", cfgv.hook_path_main);
 try std.testing.expectEqual(@as(i64, 1800), cfgv.wipz_ager_maxz);
 try std.testing.expectEqual(@as(i64, 3024000), cfgv.dril_ager_maxz);

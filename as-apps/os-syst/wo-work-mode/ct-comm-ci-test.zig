@@ -125,7 +125,7 @@ try std.testing.expectEqual(exit.Code.fail, try runCi(allo, &.{.{ .pref = &.{"gh
 try std.testing.expectEqual(exit.Code.fail, try runCi(allo, &.{.{ .pref = &.{"gh"}, .outz = "oops" }}, "h", "deps", &buff, &mck));
 }
 fn binPut(allo: std.mem.Allocator, home: []const u8, run: []const u8, sub: []const u8, body: []const u8) !void {
-const path = try std.fs.path.join(allo, &.{ home, ".wo-work-mode", "repr", run, "dist", sub });
+const path = try std.fs.path.join(allo, &.{ home, "as-apps", "os-syst", "wo-work-mode", "repr", run, "dist", sub });
 try std.Io.Dir.cwd().createDirPath(std.testing.io, std.fs.path.dirname(path).?);
 try std.Io.Dir.cwd().writeFile(std.testing.io, .{ .sub_path = path, .data = body });
 }

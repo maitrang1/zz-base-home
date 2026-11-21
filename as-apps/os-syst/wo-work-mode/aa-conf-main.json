@@ -1,5 +1,7 @@
 {
-  "apps_data_loca": ".wo-work-mode",
+  "apps_data_loca": "as-apps/os-syst/wo-work-mode",
+  "tena_loca_wind": "E:\\.zz-base-home-tena",
+  "tena_loca_unix": ".zz-base-home-tena",
   "secr_home_loca": ".zz-base-home-secr",
   "hook_path_main": "ci-flow-sync",
   "zigz_vers_pinz": "0.17.0",
