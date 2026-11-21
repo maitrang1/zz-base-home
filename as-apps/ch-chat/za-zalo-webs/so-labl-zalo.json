@@ -63,6 +63,7 @@
     "self_pref": {"vi": ["me: ", "Bạn: "], "en": ["You: "]},
     "strn_mark": {"vi": ["người lạ"], "en": ["stranger"]},
     "qrcd_page": {"vi": ["Đăng nhập tài khoản Zalo"], "en": ["Log in to Zalo"]},
+    "upld_busy": {"vi": ["đang tải", "đang gửi"], "en": ["uploading", "sending"]},
     "halt_need": {"vi": ["captcha", "xác minh", "đăng nhập ở nơi khác"], "en": ["captcha", "verify", "logged in elsewhere"]},
     "halt_unsf": {"vi": ["bị khóa", "bị khoá", "tạm khóa", "tạm khoá", "hạn chế", "bất thường", "cảnh báo"], "en": ["locked", "suspended", "restricted", "unusual activity", "warning"]}
   },

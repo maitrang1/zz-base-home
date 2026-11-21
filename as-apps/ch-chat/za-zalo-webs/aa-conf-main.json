@@ -32,6 +32,8 @@
   "cool_hour_coun": 24,
   "fail_strk_maxz": 3,
   "scrl_step_maxz": 40,
+  "outb_dirz_path": "",
+  "file_size_maxz": 104857600,
   "msgs_keep_days": 30,
   "logz_body_enab": false,
   "smar_clau_argz": ["-p", "{p}"],
