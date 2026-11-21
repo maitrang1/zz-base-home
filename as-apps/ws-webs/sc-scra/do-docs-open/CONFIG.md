@@ -12,7 +12,7 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | vend_orde | Vendor order | deco, zenr, brig | deco, zenr, brig |
 | vend_free_cred | Free credits per month per vendor | 0 | whole numbers |
 | vend_cred_micr | Price per credit beyond free, in millionths of a dollar | 1000 | whole numbers |
-| vend_keyz_dirz | Folder with key files | ~/.zz-base-home-secr/scra | path |
+| vend_keyz_dirz | Folder with key files | ~/.zz-base-home-secr/as-apps/ws-webs/sc-scra | path |
 | vend_zone_brig | Bright Data zone name | empty | text |
 | fetc_time_seco | Seconds before a download is given up | 30 | 1 or more |
 | fetc_body_maxz | Largest page in bytes (after unzip) | 5242880 | 1 or more |
@@ -107,7 +107,7 @@ Order: global settings, then the group, then the site rule, then matching path r
 |---|---|
 | ~/.zs-scra-data/scra-index.db | page list, log, queue, records, spend, upload queue |
 | ~/.zs-scra-data/raw/ab/cd/<hash>.gz | stored pages, once per content |
-| ~/.zz-base-home-secr/scra/<name>.key | vendor and cloud keys, line 1 |
+| ~/.zz-base-home-secr/as-apps/ws-webs/sc-scra/<name>.key | vendor and cloud keys, line 1 |
 
 ## Exit codes
 0 ok · 1 failed · 2 wrong use · 3 layout changed or run incomplete · 4 blocked

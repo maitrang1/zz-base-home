@@ -12,7 +12,7 @@
   "retr_cont_maxz": 3,
   "vend_cred_micr": { "deco": 1000, "zenr": 1000, "brig": 1000 },
   "vend_zone_brig": "",
-  "vend_keyz_dirz": "~/.zz-base-home-secr/scra",
+  "vend_keyz_dirz": "~/.zz-base-home-secr/as-apps/ws-webs/sc-scra",
   "data_dirz_path": "~/.zs-scra-data",
   "logi_mode_enab": false,
   "tier_star": "own",
