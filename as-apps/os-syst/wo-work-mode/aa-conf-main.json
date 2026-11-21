@@ -25,7 +25,7 @@
   "dril_mirr_dirz": "",
   "bkup_list_file": "mo-modu/mo-core/bk-back-modu/bk-stat-list.txt",
   "bkup_dbzz_list": [],
-  "bkup_docs_list": ["do-", "aa-todo-", "ag-agen", "CLAUDE.md", "AGENTS.md"],
+  "bkup_docs_list": ["do-", "aa-todo-", "ag-agen", "rn-rena-hist", "CLAUDE.md", "AGENTS.md"],
   "bkup_tagz_stat": "stat",
   "bkup_tagz_nigh": "nigh",
   "docs_gitd_name": ".zz-base-home-docs.git",

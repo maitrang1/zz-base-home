@@ -2,13 +2,12 @@
 AGENTS.md
 CLAUDE.md
 aa-todo-*/
-ag-agen*/
+ag-agen-*/
 do-*/
 !do-docs-open/
 .claude/settings.local.json
 .claude/*.local.*
-.ac-auto-task/
-.zz-base-home-tena/
+rn-rena-*
 zz-dele-auto/
 zzzz-dele-*/
 

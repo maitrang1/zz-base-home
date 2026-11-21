@@ -35,7 +35,7 @@
 | wipz_rest_tagz | Restic label for work that held a secret | wipz-held | text |
 | bkup_list_file | List of state files the 5-minute backup saves | mo-modu/mo-core/bk-back-modu/bk-stat-list.txt | file path |
 | bkup_dbzz_list | SQLite files copied every night | none | file paths (under your home, or absolute) |
-| bkup_docs_list | Name starts of git-ignored docs that the 5-minute backup also saves | do-, aa-todo-, ag-agen, CLAUDE.md, AGENTS.md | text list |
+| bkup_docs_list | Name starts of git-ignored docs that the 5-minute backup also saves | do-, aa-todo-, ag-agen, rn-rena-hist, CLAUDE.md, AGENTS.md | text list |
 | bkup_tagz_stat / bkup_tagz_nigh | Restic labels for the two backup jobs | stat / nigh | text |
 | docs_gitd_name | Folder (under your home) holding the hidden git data of the private docs repo. `wo docs init` creates it, `wo docs sync` keeps the git-ignored docs (same name starts as `bkup_docs_list`) in step across devices | .zz-base-home-docs.git | folder name |
 | docs_remo_list | Remotes of the main repo that the docs repo also uses (same host and account, repo name + `-docs`) | origin, mirr | remote names |
