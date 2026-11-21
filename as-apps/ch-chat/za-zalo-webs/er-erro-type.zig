@@ -4,7 +4,7 @@
 // Flo: error set > map error to exit code 0-4 > map error to 3-line message
 // I/O: anyerror (caller) > u8 exit code + Mesg (stderr text)
 // ===================================================================
-const std = @import("std"); const vi = @import("er-erro-vi.zig");
+const std = @import("std"); const vi = @import("er-erro-viet.zig");
 const CF = .{ .okay = 0, .fail = 1, .usag = 2, .find = 3, .bloc = 4 };
 pub const Erro = error{ NoConsent, ChatFailed, Busy, UnknownModal, Ambiguous, NeedForce, BadUsage, BadConfig, Halted, CapHit, QuietHrs, NoElem, NeedLogin, NoBrowser, BrowFail, Timeout, Closed, BadHandshake, BadFrame, CdpError, TooBig, LaunchTimeout, NoPage, DupSend, BadJob, SqliOpen, SqliExec, SqliPrep, SqliBind, SqliStep, AiFail, Fail };
 pub const Mesg = vi.Mesg;
