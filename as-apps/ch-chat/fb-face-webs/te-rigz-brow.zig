@@ -13,6 +13,9 @@ pub fn base(self: *Rig) []const u8 { return self.bseu[0..self.bsel]; }
 pub fn env(self: *Rig) inpu.Env { return .{ .page = &self.page, .rng = &self.rng, .conf = self.conf, .aren = self.aren.allocator() }; }
 pub fn ctx(self: *Rig, mode: task.Mode) task.Ctx { return .{ .gpaz = self.allo, .aren = self.aren.allocator(), .iozz = self.iozz, .conf = self.conf, .store = &self.store, .mode = mode, .page = &self.page, .rng = &self.rng, .base = self.base(), .sink = &self.sink }; }
 pub fn go(self: *Rig, path: []const u8) !void { self.page.arm(CF.step); var buf: [160]u8 = undefined; const urlz = try std.fmt.bufPrint(&buf, "{s}{s}", .{ self.base(), path }); try self.page.navigate(self.aren.allocator(), urlz); }
+pub fn hasRec(self: *Rig, prefix: []const u8) bool { var ix: usize = 0; while (ix < self.mock.recCnt()) : (ix += 1) { if (std.mem.startsWith(u8, self.mock.recAt(ix), prefix)) return true; } return false; }
+pub fn waitPre(self: *Rig, prefix: []const u8, mill: u32) bool { var tries: u32 = 0; while (tries < mill / 50) : (tries += 1) { if (self.hasRec(prefix)) return true; std.Io.sleep(self.iozz, .fromMilliseconds(50), .awake) catch {}; } return false; }
+pub fn absOf(self: *Rig, rel: []const u8) ![]u8 { const cwd = try std.process.currentPathAlloc(self.iozz, self.aren.allocator()); return std.fs.path.join(self.aren.allocator(), &.{ cwd, ".zig-cache", "tmp", &self.tmpz.sub_path, rel }); }
 pub fn waitRec(self: *Rig, kind: []const u8, mill: u32) ?[]const u8 { var tries: u32 = 0; while (tries < mill / 50) : (tries += 1) { if (self.mock.recFind(kind)) |rec| return rec; std.Io.sleep(self.iozz, .fromMilliseconds(50), .awake) catch {}; } return null; } };
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

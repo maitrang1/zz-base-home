@@ -7,8 +7,9 @@
 const std = @import("std");
 const CF = .{ .built = @embedFile("so-labl-zalo.json"), .maxz = 1 << 20 };
 pub const Ent = struct { role: []const u8 = "", vi: []const []const u8 = &.{}, en: []const []const u8 = &.{} };
+pub const Ext = struct { msg_sel: []const u8 = "", id_atr: []const u8 = "", dir_atr: []const u8 = "", kind_atr: []const u8 = "", time_atr: []const u8 = "", quot_atr: []const u8 = "", scrl_sel: []const u8 = "", list_sel: []const u8 = "", chat_sel: []const u8 = "", chat_nam_atr: []const u8 = "", chat_unr_atr: []const u8 = "", chat_fri_atr: []const u8 = "", chat_grp_atr: []const u8 = "" };
 pub const Jobk = struct { rest: []const []const u8 = &.{}, chat: []const []const u8 = &.{} };
-pub const Reg = struct { keys: std.json.ArrayHashMap(Ent) = .{}, jobs: std.json.ArrayHashMap(Jobk) = .{},
+pub const Reg = struct { keys: std.json.ArrayHashMap(Ent) = .{}, jobs: std.json.ArrayHashMap(Jobk) = .{}, ext: Ext = .{},
 pub fn get(self: *const Reg, key: []const u8) ?Ent { return self.keys.map.get(key); }
 pub fn names(self: *const Reg, aren: std.mem.Allocator, key: []const u8) ![]const []const u8 { const ent = self.get(key) orelse return error.NoElem; var out: std.ArrayList([]const u8) = .empty; for (ent.vi) |nam| try out.append(aren, nam); for (ent.en) |nam| try out.append(aren, nam); return out.items; }
 pub fn jobKeys(self: *const Reg, job: []const u8) ?Jobk { return self.jobs.map.get(job); } };
