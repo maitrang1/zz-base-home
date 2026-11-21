@@ -42,7 +42,7 @@ var ctxz = make.make(allo, &buff.writer, &mck, cfgv, "h", false, false);
 ctxz.ostg = .windows;
 const code = try doct.comm(&ctxz, &.{});
 try std.testing.expectEqual(exit.Code.bloc, code);
-try std.testing.expect(has(buff.written(), "accepted risk: ConsumerESU key absent"));
+try std.testing.expect(has(buff.written(), "okay\tesus\taccepted risk: reg.exe absent"));
 try std.testing.expect(has(buff.written(), "bloc\ttsfl"));
 }
 test "tailscale floor: above, equal, below, absent, junk" {

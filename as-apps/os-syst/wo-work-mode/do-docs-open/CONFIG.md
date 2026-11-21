@@ -29,6 +29,7 @@
 | chek_t0_list | Checks for the full profile | hook, head, tool, cpuz, sync, bkup, bknt, dril, tail, tsfl, lock, patc, esus | those names |
 | chek_box_list | Checks for the box profile | same, with clfl instead of esus | those names |
 | chek_ci_list | Checks for the CI profile | hook, tool, cpuz | those names |
+| doct_acpt_list | Checks whose drift or blocked result you accept: shown as okay, reason kept ("accepted risk: ...") | none | those names |
 | wipz_remo_list | PRIVATE remotes to push saved work to. Never a public repo: saved work is readable by anyone who can read the remote. Add the same remote names on every device (`git remote add NAME URL`) | none (ships with wipg, wipl) | remote names |
 | wipz_file_maxz | Files bigger than this many bytes stay out of the saved work | 10485760 | whole number |
 | wipz_rest_tagz | Restic label for work that held a secret | wipz-held | text |
