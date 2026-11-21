@@ -6,7 +6,7 @@
 // ===================================================================
 const std = @import("std"); const cfgz = @import("cf-conf-load.zig");
 const CF = .{ .golz = 0x9E3779B97F4A7C15, .mix1 = 0xBF58476D1CE4E5B9, .mix2 = 0x94D049BB133111EB, .dayz = 86400000, .minz = 60000, .warm_floo = 20, .sigm_div = 4.0 };
-pub const Kind = enum { post, comm, mark, grou, frie, dmsg, reac };
+pub const Kind = enum { post, comm, mark, grou, frie, dmsg, reac, shar, admn, evnt, stor, prof };
 pub const Rng = struct { sta: u64,
 pub fn init(seed: u64) Rng { return .{ .sta = seed }; }
 pub fn next(self: *Rng) u64 { self.sta +%= CF.golz; var zed = self.sta; zed = (zed ^ (zed >> 30)) *% CF.mix1; zed = (zed ^ (zed >> 27)) *% CF.mix2; return zed ^ (zed >> 31); }
@@ -17,7 +17,7 @@ pub fn logn(rng: *Rng, lo: u64, hi: u64) u64 { if (hi <= lo or lo == 0) return l
 pub fn scaled(ms: u64, perc: u32) u64 { return ms * perc / 100; }
 pub fn warmPerc(born: i64, now: i64, days: u32) u32 { if (days == 0 or now <= born) return if (days == 0) 100 else CF.warm_floo; const age: u64 = @intCast(now - born); const full: u64 = @as(u64, days) * CF.dayz; if (age >= full) return 100; return @intCast(CF.warm_floo + (100 - CF.warm_floo) * age / full); }
 pub fn capEff(base: u32, perc: u32) u32 { if (base == 0) return 0; return @max(1, @as(u32, @intCast(@as(u64, base) * perc / 100))); }
-pub fn capOf(conf: cfgz.Conf, kind: Kind) u32 { return switch (kind) { .post => conf.capz_post_dayz, .comm => conf.capz_comm_dayz, .mark => conf.capz_mark_dayz, .grou => conf.capz_grou_dayz, .frie => conf.capz_frie_dayz, .dmsg => conf.capz_dmsg_dayz, .reac => conf.capz_reac_dayz }; }
+pub fn capOf(conf: cfgz.Conf, kind: Kind) u32 { return switch (kind) { .post => conf.capz_post_dayz, .comm => conf.capz_comm_dayz, .mark => conf.capz_mark_dayz, .grou => conf.capz_grou_dayz, .frie => conf.capz_frie_dayz, .dmsg => conf.capz_dmsg_dayz, .reac => conf.capz_reac_dayz, .shar => conf.capz_shar_dayz, .admn => conf.capz_admn_dayz, .evnt => conf.capz_evnt_dayz, .stor => conf.capz_stor_dayz, .prof => conf.capz_prof_dayz }; }
 pub fn hourLocal(now: i64, zone: i32) u8 { const mins = @divFloor(now, CF.minz) + zone; return @intCast(@divFloor(@mod(mins, 1440), 60)); }
 pub fn quietNow(now: i64, zone: i32, rang: [2]u8) bool { if (rang[0] == rang[1]) return false; const hor = hourLocal(now, zone); if (rang[0] < rang[1]) return hor >= rang[0] and hor < rang[1]; return hor >= rang[0] or hor < rang[1]; }
 pub fn dayStart(now: i64) i64 { return now - @mod(now, @as(i64, CF.dayz)); }
