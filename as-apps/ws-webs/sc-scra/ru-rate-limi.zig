@@ -12,6 +12,6 @@ pub fn deinit(self: *Rate) void { var iter = self.nexz.keyIterator(); while (ite
 pub fn wait(self: *Rate, host: []const u8, nowz: i64) i64 { const nexz = self.nexz.get(host) orelse return 0; return if (nexz > nowz) nexz - nowz else 0; }
 fn slot(self: *Rate, host: []const u8, valu: i64) !void { if (self.nexz.getPtr(host)) |ptr| { ptr.* = valu; return; } const key2 = try self.gpaz.dupe(u8, host); errdefer self.gpaz.free(key2); try self.nexz.put(self.gpaz, key2, valu); }
 pub fn mark(self: *Rate, host: []const u8, nowz: i64, gap2: i64) !void { const jit2: i64 = if (gap2 >= CF.jitz) @intCast(self.prng.random().uintLessThan(u64, @intCast(@divTrunc(gap2, CF.jitz) + 1))) else 0; try self.slot(host, nowz + gap2 + jit2); }
-pub fn hold(self: *Rate, host: []const u8, nowz: i64, retr_ms: i64) !void { const till = nowz + @min(@max(retr_ms, 0), CF.holz); const curr = self.nexz.get(host) orelse 0; try self.slot(host, @max(curr, till)); } };
+pub fn hold(self: *Rate, host: []const u8, nowz: i64, retr_mill: i64) !void { const till = nowz + @min(@max(retr_mill, 0), CF.holz); const curr = self.nexz.get(host) orelse 0; try self.slot(host, @max(curr, till)); } };
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
