@@ -7,7 +7,7 @@
 const std = @import("std");
 const CF = .{ .built = @embedFile("so-labl-zalo.json"), .maxz = 1 << 20 };
 pub const Ent = struct { role: []const u8 = "", vi: []const []const u8 = &.{}, en: []const []const u8 = &.{} };
-pub const Ext = struct { msg_sel: []const u8 = "", id_atr: []const u8 = "", dir_atr: []const u8 = "", kind_atr: []const u8 = "", time_atr: []const u8 = "", quot_atr: []const u8 = "", scrl_sel: []const u8 = "", list_sel: []const u8 = "", chat_sel: []const u8 = "", chat_nam_atr: []const u8 = "", chat_unr_atr: []const u8 = "", chat_fri_atr: []const u8 = "", chat_grp_atr: []const u8 = "" };
+pub const Ext = struct { msg_sel: []const u8 = "", id_atr: []const u8 = "", dir_atr: []const u8 = "", kind_atr: []const u8 = "", time_atr: []const u8 = "", quot_atr: []const u8 = "", scrl_sel: []const u8 = "", list_sel: []const u8 = "", chat_sel: []const u8 = "", chat_nam_atr: []const u8 = "", chat_unr_atr: []const u8 = "", chat_fri_atr: []const u8 = "", chat_grp_atr: []const u8 = "", comp_sel: []const u8 = "", fail_atr: []const u8 = "" };
 pub const Jobk = struct { rest: []const []const u8 = &.{}, chat: []const []const u8 = &.{} };
 pub const Reg = struct { keys: std.json.ArrayHashMap(Ent) = .{}, jobs: std.json.ArrayHashMap(Jobk) = .{}, ext: Ext = .{},
 pub fn get(self: *const Reg, key: []const u8) ?Ent { return self.keys.map.get(key); }
