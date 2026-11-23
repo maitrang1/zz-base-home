@@ -39,7 +39,7 @@
         "ct-comm-stat-test.zig",
         "ct-comm-conf-test.zig",
         "do-docs-deve",
-        "do-docs-open",
+        "do-documents",
         "CLAUDE.md",
     },
 }
