@@ -1,18 +1,18 @@
 # Litestream v0.5 config template (D17). All values come from env refs, never from this file. Start: litestream replicate -config <this file>
 # Retention is deletion (D17): keep these values, log changes, never shorten by an agent. Versioning on the bucket + restic VACUUM INTO copy are the guards.
 snapshot:
-  interval: 24h
-  retention: 720h
+    interval: 24h
+    retention: 720h
 retention:
-  enabled: true
+    enabled: true
 dbs:
-  - path: ${LITE_DB_MAIN}
-    replica:
-      type: s3
-      bucket: ${LITE_BUCKET}
-      path: ${LITE_PREFIX}
-      endpoint: ${LITE_ENDPOINT}
-      region: ${LITE_REGION}
-      access-key-id: ${LITE_KEY_ID}
-      secret-access-key: ${LITE_KEY_SECRET}
-      sync-interval: 1s
+    - path: ${LITE_DB_MAIN}
+      replica:
+          type: s3
+          bucket: ${LITE_BUCKET}
+          path: ${LITE_PREFIX}
+          endpoint: ${LITE_ENDPOINT}
+          region: ${LITE_REGION}
+          access-key-id: ${LITE_KEY_ID}
+          secret-access-key: ${LITE_KEY_SECRET}
+          sync-interval: 1s

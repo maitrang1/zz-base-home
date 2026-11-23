@@ -1,67 +1,67 @@
 name: ci-main-flow
 on:
-  pull_request:
-  push:
-    branches: [main]
+    pull_request:
+    push:
+        branches: [main]
 permissions: {}
 concurrency:
-  group: ci-main-${{ github.ref }}
-  cancel-in-progress: true
+    group: ci-main-${{ github.ref }}
+    cancel-in-progress: true
 cache-mode: read
 jobs:
-  boot:
-    name: boot-${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    permissions:
-      contents: read
-    steps:
-      - if: runner.os == 'Linux'
-        uses: step-security/harden-runner@v2.22.4
-        with:
-          egress-policy: audit
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-      - name: bootstrap
-        if: runner.os != 'Windows'
-        run: sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
-      - name: bootstrap
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: ./mo-modu/mo-core/bs-boot-modu/ps-boot-stra.ps1
-  lock:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-      - name: workflow lock is current
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh extension install github/gh-actions-lock --pin v0.4.1
-          gh actions-lock --no-fix
-  leak:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: step-security/harden-runner@v2.22.4
-        with:
-          egress-policy: audit
-      - uses: actions/checkout@v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: bootstrap
-        run: sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
-      - name: gitleaks over the whole history
-        run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          mise exec -- gitleaks git --redact --no-banner
+    boot:
+        name: boot-${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ubuntu-latest, windows-latest, macos-latest]
+        runs-on: ${{ matrix.os }}
+        permissions:
+            contents: read
+        steps:
+            - if: runner.os == 'Linux'
+              uses: step-security/harden-runner@v2.22.4
+              with:
+                  egress-policy: audit
+            - uses: actions/checkout@v7.0.1
+              with:
+                  persist-credentials: false
+            - name: bootstrap
+              if: runner.os != 'Windows'
+              run: sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
+            - name: bootstrap
+              if: runner.os == 'Windows'
+              shell: pwsh
+              run: ./mo-modu/mo-core/bs-boot-modu/ps-boot-stra.ps1
+    lock:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            - uses: actions/checkout@v7.0.1
+              with:
+                  persist-credentials: false
+            - name: workflow lock is current
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: |
+                  gh extension install github/gh-actions-lock --pin v0.4.1
+                  gh actions-lock --no-fix
+    leak:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            - uses: step-security/harden-runner@v2.22.4
+              with:
+                  egress-policy: audit
+            - uses: actions/checkout@v7.0.1
+              with:
+                  fetch-depth: 0
+                  persist-credentials: false
+            - name: bootstrap
+              run: sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
+            - name: gitleaks over the whole history
+              run: |
+                  export PATH="$HOME/.local/bin:$PATH"
+                  mise exec -- gitleaks git --redact --no-banner

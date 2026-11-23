@@ -1,9 +1,9 @@
 {
-  "port": 4000,
-  "jobs_same_time": 4,
-  "cmds_hist_maxz": 64,
-  "time_limi_seco": 86400,
-  "apps_data_loca_wind": "E:\\.zz-base-home-tena\\ac-auto-task",
-  "apps_data_loca_unix": "~/.zz-base-home-tena/ac-auto-task",
-  "envi_mode": "fresh"
+    "port": 4000,
+    "jobs_same_time": 4,
+    "cmds_hist_maxz": 64,
+    "time_limi_seco": 86400,
+    "apps_data_loca_wind": "E:\\.zz-base-home-tena\\ac-auto-task",
+    "apps_data_loca_unix": "~/.zz-base-home-tena/ac-auto-task",
+    "envi_mode": "fresh"
 }

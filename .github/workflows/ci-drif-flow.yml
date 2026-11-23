@@ -1,22 +1,22 @@
 name: ci-drif-flow
 on:
-  schedule:
-    - cron: '17 3 * * 1'
-  workflow_dispatch:
+    schedule:
+        - cron: '17 3 * * 1'
+    workflow_dispatch:
 permissions: {}
 cache-mode: read
 jobs:
-  lock:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-      - name: bootstrap
-        run: sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
-      - name: mise on PATH
-        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: lock has no drift
-        run: mise lock && git diff --exit-code mise.lock
+    lock:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            - uses: actions/checkout@v7.0.1
+              with:
+                  persist-credentials: false
+            - name: bootstrap
+              run: sh mo-modu/mo-core/bs-boot-modu/sh-boot-stra.sh
+            - name: mise on PATH
+              run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+            - name: lock has no drift
+              run: mise lock && git diff --exit-code mise.lock
