@@ -21,6 +21,8 @@
         "se-scan-text.zig",
         "se-scan-walk.zig",
         "pl-plan-buil.zig",
+        "te-mach-fake.zig",
+        "te-ctxz-make.zig",
         "ct-exit-code-test.zig",
         "ct-safe-ladd-test.zig",
         "cf-conf-load-test.zig",
