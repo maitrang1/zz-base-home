@@ -21,7 +21,7 @@ bind="${WO_MISE_DIR:-$HOME/.local/bin}"
 hash256() { if command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" | cut -d' ' -f1; else shasum -a 256 "$1" | cut -d' ' -f1; fi; }
 if ! [ -x "$bind/mise" ] || ! "$bind/mise" --version 2>/dev/null | grep -q "^$MISE_VERS "; then
 tmpd="$(mktemp -d)"
-curl -fsSL -o "$tmpd/mise.tgz" "https://github.com/jdx/mise/releases/download/v$MISE_VERS/mise-v$MISE_VERS-$plat.tar.gz"
+curl -fsSL --retry 3 --retry-delay 5 --retry-all-errors -o "$tmpd/mise.tgz" "https://github.com/jdx/mise/releases/download/v$MISE_VERS/mise-v$MISE_VERS-$plat.tar.gz"
 got="$(hash256 "$tmpd/mise.tgz")"
 if [ "$got" != "$want" ]; then echo "bs: mise sha256 mismatch ($got): refusing to run it" >&2; exit 1; fi
 tar -xzf "$tmpd/mise.tgz" -C "$tmpd"
