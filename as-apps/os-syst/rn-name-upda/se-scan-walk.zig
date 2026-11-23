@@ -40,14 +40,15 @@ outc.wst.filz += 1;
 for (conf.skip_path_list) |skip| { if (osys.eqlz(osy, full, skip)) return; }
 if (extSkip(osy, osys.baseOf(full), conf.scan_skip_ext)) { outc.wst.bina += 1; return; }
 const nati = try osys.natiForm(scra, osy, full);
-const info = std.Io.Dir.cwd().statFile(iozz, nati, .{}) catch { outc.wst.errz += 1; return; };
-if (info.size > conf.scan_maxz * CF.mbyt) { outc.wst.bigz += 1; return; }
-const raww = std.Io.Dir.cwd().readFileAlloc(iozz, nati, scra, .limited(conf.scan_maxz * CF.mbyt)) catch { outc.wst.errz += 1; return; };
+const raww = std.Io.Dir.cwd().readFileAlloc(iozz, nati, scra, .limited(conf.scan_maxz * CF.mbyt)) catch |err| {
+if (std.mem.eql(u8, @errorName(err), "StreamTooLong")) outc.wst.bigz += 1 else outc.wst.errz += 1;
+return;
+};
 const load = ldz.loadz(scra, raww) catch { outc.wst.errz += 1; return; };
 const binz = load.enc == .binz;
 if (binz) {
 outc.wst.bina += 1;
-if (info.size > conf.scan_binz_maxz * CF.mbyt) return;
+if (raww.len > conf.scan_binz_maxz * CF.mbyt) return;
 } else outc.wst.scan += 1;
 const pmask = risk.pathMask(osy, conf, targ.home, full);
 const hits = try stex.scanText(scra, osy, load.text, if (binz) targ.bolds else olds, if (binz) targ.bnews else news);

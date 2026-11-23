@@ -5,7 +5,7 @@
 // I/O: none (constants) > Job rows (find by name, list for `fb jobs`, class A/G/H, area)
 // ===================================================================
 const std = @import("std"); const t = @import("ru-jobs-type.zig"); const acct = @import("ru-jobs-acct.zig"); const sett = @import("ru-jobs-sett.zig"); const mone = @import("ru-jobs-mone.zig"); const acce = @import("ru-jobs-acce.zig"); const core = @import("ru-jobs-core.zig"); const help = @import("ru-jobs-help.zig");
-pub const Risk = t.Risk; pub const Area = t.Area; pub const Src = t.Src; pub const Arg = t.Arg; pub const T = t.T; pub const Job = t.Job; pub const classOf = t.classOf;
+pub const Risk = t.Risk; pub const Area = t.Area; pub const Src = t.Src; pub const Arg = t.Arg; pub const T = t.T; pub const Job = t.Job; pub const classOf = t.classOf; pub const readOnly = t.readOnly;
 const g = t.g; const c = t.c; const cm = t.cm; const cf = t.cf; const cl = t.cl; const ty = t.ty; const tyi = t.tyi; const ck = t.ck; const up = t.up; const ex = t.ex; const sl = t.sl; const hv = t.hv; const mi = t.mi; const en = t.en;
 const BASE = [_]Job{
 .{ .name = "post-photo", .kind = .post, .risk = .w, .src = .home, .need = &.{ .text, .photo }, .steps = &.{ g(), c("post_open"), up(.photo), ty("post_boxz", .text), cm("post_subm"), ex(.text) } },
@@ -46,6 +46,7 @@ const BASE = [_]Job{
 .{ .name = "profile-bio", .kind = .prof, .risk = .w, .src = .prof, .need = &.{.text}, .steps = &.{ g(), c("prof_edit"), ck("prof_bioz"), ty("prof_bioz", .text), cm("prof_save") } },
 };
 pub const JOBS = BASE ++ acct.ROWS ++ sett.ROWS ++ mone.ROWS ++ acce.ROWS ++ core.ROWS ++ help.ROWS;
+pub const AREAS = [_][]const Job{ &acct.ROWS, &sett.ROWS, &mone.ROWS, &acce.ROWS, &core.ROWS, &help.ROWS };
 pub fn find(name: []const u8) ?*const Job { for (&JOBS) |*jb| { if (std.mem.eql(u8, jb.name, name)) return jb; } return null; }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

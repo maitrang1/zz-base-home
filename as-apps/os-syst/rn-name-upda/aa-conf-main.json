@@ -3,6 +3,7 @@
     "tena_loca_wind": "E:\\.zz-base-home-tena",
     "tena_loca_unix": ".zz-base-home-tena",
     "scan_root_list": [],
+    "scan_alls_driv": true,
     "scan_maxz": 64,
     "scan_deep": 96,
     "scan_skip_list": ["/proc", "/sys", "/dev", "C:/Windows", "System Volume Information", "$Recycle.Bin", "zz-dele-auto", ".zig-cache", ".git/objects", "node_modules"],

@@ -61,5 +61,22 @@ try std.testing.expect(!boun.okMatc(.fwds, "see x/a/old now", 5, 6));
 try std.testing.expect(!boun.okMatc(.fwds, "see /a/old2 now", 4, 6));
 try std.testing.expect(boun.okMatc(.fwds, "/a/old", 0, 6));
 }
+test "utf16: the unit before and after decide, by its low byte" {
+const pat = "/\x00a\x00";
+const ok = "x\x00 \x00" ++ pat ++ " \x00y\x00";
+try std.testing.expect(boun.okMatc(.u16l, ok, 4, pat.len));
+const bad_before = "x\x00" ++ pat;
+try std.testing.expect(!boun.okMatc(.u16l, bad_before, 2, pat.len));
+const bad_after = pat ++ "z\x00";
+try std.testing.expect(!boun.okMatc(.u16l, bad_after, 0, pat.len));
+try std.testing.expect(boun.okMatc(.u16l, pat, 0, pat.len));
+}
+test "utf16: a big unit (high byte set) is never a name char; sentence dot allowed, dot+name blocked" {
+const pat = "/\x00a\x00";
+try std.testing.expect(boun.okMatc(.u16l, pat ++ "\x00\x30", 0, pat.len));
+try std.testing.expect(boun.okMatc(.u16l, pat ++ ".\x00 \x00", 0, pat.len));
+try std.testing.expect(!boun.okMatc(.u16l, pat ++ ".\x00t\x00", 0, pat.len));
+try std.testing.expect(boun.okMatc(.u16l, pat ++ "/\x00b\x00", 0, pat.len));
+}
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

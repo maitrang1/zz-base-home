@@ -26,7 +26,7 @@ pub const ROWS = [_]Job{
 .{ .name = "data-download-request", .area = .data, .kind = .data, .risk = .w, .src = .cfgp, .pkey = "path_down_info", .rep = true, .need = &.{}, .steps = &.{ g(), c("down_crea"), cm("down_subm"), exk("down_done") } },
 .{ .name = "data-download-get", .area = .data, .kind = .data, .risk = .w, .src = .cfgp, .pkey = "path_down_info", .rep = true, .dl = true, .need = &.{}, .steps = &.{ g(), c("down_tabz"), cm("down_getz") } },
 .{ .name = "data-saved-list", .area = .data, .kind = .help, .risk = .w, .src = .cfgp, .pkey = "path_save_main", .rep = true, .need = &.{}, .steps = &.{ g(), exk("save_list") } },
-.{ .name = "data-album-create", .area = .data, .kind = .data, .risk = .w, .src = .cfgp, .pkey = "path_albu_main", .need = &.{ .title, .photo }, .steps = &.{ g(), c("albu_new"), ty("albu_name", .title), up(.photo), cm("albu_subm"), ex(.title) } },
+.{ .name = "data-album-create", .area = .data, .kind = .data, .risk = .w, .src = .cfgp, .pkey = "path_albu_main", .need = &.{ .title, .photo }, .steps = &.{ g(), c("albu_newz"), ty("albu_name", .title), up(.photo), cm("albu_subm"), ex(.title) } },
 .{ .name = "data-album-delete", .area = .data, .kind = .data, .risk = .x, .src = .cfgp, .pkey = "path_albu_main", .need = &.{.title}, .steps = &.{ g(), cl(.title), c("albu_more"), c("albu_dele"), cf("conf_butt") } },
 .{ .name = "data-memories", .area = .data, .kind = .help, .risk = .w, .src = .cfgp, .pkey = "path_memo_main", .rep = true, .need = &.{}, .steps = &.{ g(), exk("memo_list") } },
 };

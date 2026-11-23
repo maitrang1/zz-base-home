@@ -141,5 +141,27 @@ const hits = try scan(arna.allocator(), NIX, "/a/old:/a/old", "/a/old", "/a/new"
 try std.testing.expectEqual(@as(usize, 2), hits.len);
 try std.testing.expectEqual(@as(usize, 7), hits[1].offz);
 }
+test "utf16 forms are found inside binary bytes and keep their own new text" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+const olds = try vari.u16Vari(allo, try vari.absVari(allo, NIX, "/a/old"));
+const news = try vari.u16Vari(allo, try vari.absVari(allo, NIX, "/a/new"));
+const data = "HDR\x00\x00/\x00a\x00/\x00o\x00l\x00d\x00\x00\x00tail";
+const hits = try stex.scanText(allo, NIX, data, olds, news);
+try std.testing.expectEqual(@as(usize, 1), hits.len);
+try std.testing.expectEqual(vari.Kind.u16l, hits[0].kind);
+try std.testing.expectEqual(@as(usize, 5), hits[0].offz);
+try std.testing.expectEqualSlices(u8, "/\x00a\x00/\x00n\x00e\x00w\x00", hits[0].newz);
+}
+test "utf16 near-miss (old2) is not a hit" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+const olds = try vari.u16Vari(allo, try vari.absVari(allo, NIX, "/a/old"));
+const news = try vari.u16Vari(allo, try vari.absVari(allo, NIX, "/a/new"));
+const hits = try stex.scanText(allo, NIX, "/\x00a\x00/\x00o\x00l\x00d\x002\x00", olds, news);
+try std.testing.expectEqual(@as(usize, 0), hits.len);
+}
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

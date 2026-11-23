@@ -103,5 +103,28 @@ const news = try vari.relaVari(arna.allocator(), WIN, "E:/p", "E:/p/brand");
 try std.testing.expectEqual(olds.len, news.len);
 for (olds, news) |left, righ| try std.testing.expectEqual(left.kind, righ.kind);
 }
+test "utf16 forms: windows gives native + forward, unix gives forward only, bytes are LE" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+const wl = try vari.absVari(allo, WIN, "E:/p/old");
+const wide = try vari.u16Vari(allo, wl);
+try std.testing.expectEqual(@as(usize, 2), wide.len);
+try std.testing.expectEqual(vari.Kind.u16l, wide[0].kind);
+try std.testing.expectEqualSlices(u8, "E\x00:\x00\\\x00p\x00\\\x00o\x00l\x00d\x00", wide[0].text);
+try std.testing.expectEqualSlices(u8, "E\x00:\x00/\x00p\x00/\x00o\x00l\x00d\x00", wide[1].text);
+const ul = try vari.absVari(allo, NIX, "/p/old");
+const uw = try vari.u16Vari(allo, ul);
+try std.testing.expectEqual(@as(usize, 1), uw.len);
+try std.testing.expectEqualSlices(u8, "/\x00p\x00/\x00o\x00l\x00d\x00", uw[0].text);
+}
+test "utf16 forms of old and new keep the same order" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+const olds = try vari.u16Vari(allo, try vari.absVari(allo, WIN, "E:/p/old"));
+const news = try vari.u16Vari(allo, try vari.absVari(allo, WIN, "E:/p/new"));
+try std.testing.expectEqual(olds.len, news.len);
+}
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

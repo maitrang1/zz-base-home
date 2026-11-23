@@ -8,6 +8,7 @@ za is a helper that uses Zalo Web the way you do. It reads your new chats, repli
 - Sets reminders, pins, mutes, archives and hides chats. Makes polls, notes, labels and quick messages.
 - Handles friend requests, message requests and group admin. Risky actions (new group, forward, delete, block, add friend, leave) need `--force`.
 - Runs a whole list of jobs by itself (`za plan`, `za go`) and stops to wait only when Zalo needs you (QR, captcha).
+- Handles account pages too: log out, logged-in devices, notification and language settings, storage, help, feedback. `za flows` lists every Zalo Web action and who does it. Passwords, SMS codes and QR scans stay yours; za never types them.
 - Stops by itself when Zalo shows a lock, warning or "logged in elsewhere" page.
 - Shows a preview first. Nothing changes until you add `--live`.
 - Messages and help are in Vietnamese by default (English: set `lang_main_code` to `en`).

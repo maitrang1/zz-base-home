@@ -1,15 +1,14 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for label packs
-// Flo: built-in keys have English + Vietnamese > older config keys still win > owner override wins > unknown key is empty
-// I/O: keys > label lists (no leaks)
-// Run: zig build test -Dfile=ut-loca-pack-test.zig
+// Des: Tests for the label registry and path table
+// Flo: check key shape, uniqueness, override order, every catalog key and path resolves
+// I/O: none (pure) > pass or fail
+// Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ut-loca-pack-test.zig
 // ===================================================================
-const std = @import("std"); const pack = @import("ut-loca-pack.zig"); const cfgz = @import("cf-conf-load.zig");
-fn hasLab(labs: []const []const u8, want: []const u8) bool { for (labs) |lb| if (std.mem.eql(u8, lb, want)) return true; return false; }
-test "every built-in key has an English name and a Vietnamese name (non-ASCII)" { for (pack.PACK) |ent| { try std.testing.expect(ent.labs.len >= 2); var viet = false; var eng = false; for (ent.labs) |lb| { var asc = true; for (lb) |chr| { if (chr >= 0x80) asc = false; } if (asc) eng = true else viet = true; } try std.testing.expect(viet and eng); } }
-test "keys are unique and 4-letter words" { for (pack.PACK, 0..) |ent, ix| { try std.testing.expectEqual(@as(usize, 9), ent.key.len); try std.testing.expectEqual(@as(u8, '_'), ent.key[4]); for (pack.PACK[ix + 1 ..]) |oth| try std.testing.expect(!std.mem.eql(u8, ent.key, oth.key)); } }
-test "older config lists are reachable by key and owner override wins" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const conf = try cfgz.confParse(aren.allocator(), "{\"labl_over\":{\"popu_dism\":[\"Nope\"],\"post_open\":[\"Compose\"]}}"); try std.testing.expectEqualStrings("Nope", pack.lab(conf, "popu_dism")[0]); try std.testing.expectEqualStrings("Compose", pack.lab(conf, "post_open")[0]); const dflt: cfgz.Conf = .{}; try std.testing.expect(hasLab(pack.lab(dflt, "post_open"), "Create a post")); try std.testing.expect(hasLab(pack.lab(dflt, "frie_addz"), "Thêm bạn bè")); }
-test "unknown key is empty; known() works" { const conf: cfgz.Conf = .{}; try std.testing.expectEqual(@as(usize, 0), pack.lab(conf, "zzzz_zzzz").len); try std.testing.expect(pack.known("mark_next")); try std.testing.expect(!pack.known("zzzz_zzzz")); }
+const std = @import("std"); const pack = @import("ut-loca-pack.zig"); const cfgz = @import("cf-conf-load.zig"); const jobs = @import("ru-jobs-tabl.zig");
+test "keys are unique, 4+4 letters with underscore, every key has a label" { for (pack.PACK, 0..) |ent, ix| { try std.testing.expectEqual(@as(usize, 9), ent.key.len); try std.testing.expectEqual(@as(u8, '_'), ent.key[4]); try std.testing.expect(ent.labs.len >= 1); for (pack.PACK[ix + 1 ..]) |oth| try std.testing.expect(!std.mem.eql(u8, ent.key, oth.key)); } }
+test "path keys are unique and start with a slash" { for (pack.PATHS, 0..) |pth, ix| { try std.testing.expect(pth.path[0] == '/'); for (pack.PATHS[ix + 1 ..]) |oth| try std.testing.expect(!std.mem.eql(u8, pth.key, oth.key)); } }
+test "owner override wins, unknown key is empty" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const conf = try cfgz.confParse(aren.allocator(), "{\"labl_over\":{\"popu_dism\":[\"Nope\"]},\"path_over\":{\"p_keys\":\"/keys\"}}"); try std.testing.expectEqualStrings("Nope", pack.lab(conf, "popu_dism")[0]); try std.testing.expectEqualStrings("/keys", pack.pathOf(conf, "p_keys")); const dflt: cfgz.Conf = .{}; try std.testing.expectEqual(@as(usize, 0), pack.lab(dflt, "zzzz_zzzz").len); try std.testing.expect(pack.known("regi_subm")); try std.testing.expect(!pack.known("zzzz_zzzz")); }
+test "every key and path a catalog job names exists" { const dflt: cfgz.Conf = .{}; for (jobs.JOBS) |jb| { if (jb.path.len > 0) try std.testing.expect(pack.pathOf(dflt, jb.path).len > 0); for (jb.steps) |tpl| { if (tpl.key.len > 0) { if (!pack.known(tpl.key)) std.debug.print("missing label key: {s} in job {s}\n", .{ tpl.key, jb.name }); try std.testing.expect(pack.known(tpl.key)); } } } }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

@@ -33,7 +33,13 @@ return switch (bad) {
 };
 }
 pub fn rootsOf(ctxz: *const cx.Ctxz, old: []const u8) ![]const []const u8 {
-if (ctxz.conf.scan_root_list.len == 0) return try ctxz.allo.dupe([]const u8, &.{osys.rootOf(old)});
+if (ctxz.conf.scan_root_list.len == 0) {
+if (ctxz.osy.wind and ctxz.conf.scan_alls_driv) {
+const drvs = try osys.drivesFixed(ctxz.allo);
+if (drvs.len > 0) return @ptrCast(drvs);
+}
+return try ctxz.allo.dupe([]const u8, &.{osys.rootOf(old)});
+}
 var list: std.ArrayList([]const u8) = .empty;
 for (ctxz.conf.scan_root_list) |raww| try list.append(ctxz.allo, try ctxz.absOf(raww));
 return list.toOwnedSlice(ctxz.allo);

@@ -9,6 +9,18 @@ const builtin = @import("builtin");
 pub const Osys = struct { wind: bool, caze: bool };
 pub const host: Osys = .{ .wind = builtin.os.tag == .windows, .caze = builtin.os.tag == .windows or builtin.os.tag == .macos };
 pub const Erro = error{NotAbsolute};
+const kern = if (builtin.os.tag == .windows) struct { extern "kernel32" fn GetDriveTypeW(root: [*:0]const u16) callconv(.winapi) u32; } else struct {};
+pub fn drivesFixed(allo: std.mem.Allocator) ![][]u8 {
+var list: std.ArrayList([]u8) = .empty;
+errdefer list.deinit(allo);
+if (builtin.os.tag != .windows) return list.toOwnedSlice(allo);
+var letr: u8 = 'A';
+while (letr <= 'Z') : (letr += 1) {
+const wide: [4:0]u16 = .{ letr, ':', '\\', 0 };
+if (kern.GetDriveTypeW(&wide) == 3) try list.append(allo, try std.fmt.allocPrint(allo, "{c}:/", .{letr}));
+}
+return list.toOwnedSlice(allo);
+}
 pub fn lowr(osy: Osys, byte: u8) u8 { return if (osy.caze) std.ascii.toLower(byte) else byte; }
 pub fn eqlz(osy: Osys, left: []const u8, righ: []const u8) bool {
 if (left.len != righ.len) return false;

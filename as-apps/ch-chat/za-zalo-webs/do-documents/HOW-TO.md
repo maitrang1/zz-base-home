@@ -41,7 +41,7 @@ Put your reply in `aa-conf-main.json` as `reci_pric_text` (`{name}` becomes the 
 5. Check inbox now and then: `za watch --live`.
 
 ## Look after it
-`za status` · `za caps` · `za log` · `za matrix` (every job and its quality level) · `za export` · `za backup` · `za purge` · `za report` (a safe bundle for support, no chat text) · `za stop` (stops at the next action) · `za resume`.
+`za status` · `za caps` · `za log` · `za matrix` (every job and its quality level) · `za flows` (every Zalo Web action: built, gap, hand = yours, out) · `za run devices --read` · `za run notify on --live` · `za run lang en --live` · `za run logout --live --force` · `za export` · `za backup` · `za purge` · `za report` (a safe bundle for support, no chat text) · `za stop` (stops at the next action) · `za resume`.
 
 ## First live check (do once, with a test account)
 1. `za login`, then `za run canary --read`. Every line must say "ok".

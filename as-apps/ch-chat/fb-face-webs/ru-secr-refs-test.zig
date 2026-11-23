@@ -1,0 +1,14 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests for secret refs: acct.json read, missing and broken files, no values in the status text
+// Flo: scratch folder > write acct.json > load > count fields > status lists names only
+// I/O: scratch dir (no real secrets) > pass or fail (no leaks)
+// Run: zig build test -Dfile=ru-secr-refs-test.zig
+// ===================================================================
+const std = @import("std"); const secr = @import("ru-secr-refs.zig"); const cfgz = @import("cf-conf-load.zig");
+fn dirOf(tmp: *std.testing.TmpDir, aren: std.mem.Allocator) ![]u8 { return std.fmt.allocPrint(aren, ".zig-cache/tmp/{s}", .{tmp.sub_path}); }
+test "acct.json fields load; unknown fields are ignored; count counts only filled fields" { var tmp = std.testing.tmpDir(.{}); defer tmp.cleanup(); var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const dir = try dirOf(&tmp, aren.allocator()); try std.Io.Dir.cwd().writeFile(std.testing.io, .{ .sub_path = try std.fmt.allocPrint(aren.allocator(), "{s}/acct.json", .{dir}), .data = "{\"login\":\"a@b.test\",\"pass\":\"pw-secret-1\",\"zzzz\":1}" }); const sc = secr.load(aren.allocator(), std.testing.io, dir); try std.testing.expectEqualStrings("a@b.test", sc.login); try std.testing.expectEqualStrings("pw-secret-1", sc.pass); try std.testing.expectEqual(@as(u32, 2), secr.count(sc)); }
+test "a missing folder, missing file or broken JSON gives empty secrets, never an error" { var tmp = std.testing.tmpDir(.{}); defer tmp.cleanup(); var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const dir = try dirOf(&tmp, aren.allocator()); try std.testing.expectEqual(@as(u32, 0), secr.count(secr.load(aren.allocator(), std.testing.io, dir))); try std.testing.expectEqual(@as(u32, 0), secr.count(secr.load(aren.allocator(), std.testing.io, "no-such-folder-zz"))); try std.testing.expectEqual(@as(u32, 0), secr.count(secr.load(aren.allocator(), std.testing.io, ""))); try std.Io.Dir.cwd().writeFile(std.testing.io, .{ .sub_path = try std.fmt.allocPrint(aren.allocator(), "{s}/acct.json", .{dir}), .data = "not json" }); try std.testing.expectEqual(@as(u32, 0), secr.count(secr.load(aren.allocator(), std.testing.io, dir))); }
+test "the secrets folder comes from config and expands the home folder" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const conf: cfgz.Conf = .{}; const dir = try secr.dirOf(aren.allocator(), "/home/u", conf); try std.testing.expectEqualStrings("/home/u/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs", dir); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

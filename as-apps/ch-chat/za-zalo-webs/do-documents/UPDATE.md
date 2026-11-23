@@ -1,5 +1,10 @@
 # Updates
 
+## 2026-11-23 (account and settings)
+Added: `za flows` shows every Zalo Web action and who does it: built, gap (not checked on real Zalo yet), hand (you: QR, SMS code, password, captcha) or out (Zalo Web does not have it).
+Added: jobs `logout`, `devices`, `devout <device>`, `notify on|off`, `lang vi|en`, `storage`, `help`, `feedback <text>`, `passwd`, `unfriend <name>`. Log out, remote log out, feedback and unfriend ask for `--live --force`.
+Added: `passwd` opens the change-password page and stops; za never types a password or a code. New stop pages: "too many requests", "session expired", "browser not supported".
+
 ## 2026-11-21 (second build)
 Added: send files and images (only from the outbox folder), stickers, replies, mentions, reactions, recall, delete, pin message, download, archive, hide, mark unread, alias, block.
 Added: polls, notes, labels, quick messages, friend requests, message requests, group admin (rename, members, deputy, leave), profile read, My Cloud.

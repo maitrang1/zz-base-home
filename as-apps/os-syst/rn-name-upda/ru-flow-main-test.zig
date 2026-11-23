@@ -148,5 +148,39 @@ try std.testing.expectEqual(exit.Code.okay, rsl.code);
 try std.testing.expectEqualStrings("no ref now\n", try fake.readz(allo, &tmp, "p/c.txt"));
 try std.testing.expectEqual(@as(usize, 3), rsl.patched);
 }
+test "a blocked file stops the run: exit blocked, every file restored, old name back" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const fxt = try seed.seed(allo, &tmp);
+const before = try seed.dumpOld(allo, &tmp);
+var aw: std.Io.Writer.Allocating = .init(allo);
+const ctxz = try make.make(allo, &aw.writer, fxt.root, .{}, false);
+var tck: tick.Tick = .{ .left = 1, .err = @import("rn-refs-patc.zig").Erro.Blocked };
+const rsl = try flow.runFlow(&ctxz, fxt.old, fxt.new, .{ .tck = &tck });
+try std.testing.expectEqual(exit.Code.bloc, rsl.code);
+try std.testing.expectEqualStrings("Blocked", rsl.note);
+try std.testing.expectEqualSlices(u8, before, try seed.dumpOld(allo, &tmp));
+try std.testing.expect(!fake.hasz(&tmp, "p/new/x.txt"));
+}
+test "with force the blocked file is skipped, the rest finishes, its refs are left over" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const fxt = try seed.seed(allo, &tmp);
+var aw: std.Io.Writer.Allocating = .init(allo);
+const ctxz = try make.make(allo, &aw.writer, fxt.root, .{}, false);
+var tck: tick.Tick = .{ .left = 1, .err = @import("rn-refs-patc.zig").Erro.Blocked, .once = true };
+const rsl = try flow.runFlow(&ctxz, fxt.old, fxt.new, .{ .force = true, .tck = &tck });
+try std.testing.expectEqual(exit.Code.find, rsl.code);
+try std.testing.expect(rsl.left >= 1);
+try std.testing.expectEqual(@as(usize, 4), rsl.patched + rsl.left);
+try std.testing.expect(fake.hasz(&tmp, "p/new/x.txt"));
+try std.testing.expectEqual(jour.State.done, try stateOf(allo, &ctxz, rsl.id));
+}
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
