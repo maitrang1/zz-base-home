@@ -8,6 +8,8 @@
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");
 const exit = @import("ct-exit-code.zig");
+const stor = @import("st-runz-stor.zig");
+const jour = @import("lg-jour-writ.zig");
 pub const CF = .{ .vers = "0.1.0" };
 const Skip = struct { bina: bool, arch: bool, sign_hash: bool, othe_user: bool, syst_owne: bool, runn_proc: bool, sync_remo: bool, pack_mana: bool, comp_part: bool, urls_exte: bool, enco_vari: bool, gitz_hist: bool };
 const Outz = struct { vers: []const u8, osys: []const u8, data: []const u8, skip: Skip };
@@ -25,6 +27,12 @@ return .okay;
 try ctxz.outw.print("rn {s} · {s} · data {s}\nskip on:", .{ CF.vers, osnm, data });
 inline for (@typeInfo(Skip).@"struct".field_names) |name| { if (@field(skip, name)) try ctxz.outw.print(" {s}", .{name}); }
 try ctxz.outw.print("\n", .{});
+const last = (try stor.idLast(ctxz)) orelse return .okay;
+const pth = try stor.pthsOf(ctxz, last);
+const ents = jour.readAll(ctxz.allo, ctxz.iozz, pth.jfil) catch return .okay;
+const stav = jour.stateOf(ents);
+try ctxz.outw.print("last run {s}: {s}\n", .{ last, @tagName(stav) });
+if (stav == .open) { try ctxz.outw.print("open run: rn undo {s} --live --force\n", .{last}); return .find; }
 return .okay;
 }
 // =======================___THIS_IS_THE_END___=======================

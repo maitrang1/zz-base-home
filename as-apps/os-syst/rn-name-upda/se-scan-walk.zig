@@ -14,6 +14,14 @@ const CF = .{ .binz = 8192, .mbyt = 1024 * 1024 };
 pub const Wstat = struct { dirs: usize = 0, filz: usize = 0, scan: usize = 0, bina: usize = 0, bigz: usize = 0, errz: usize = 0 };
 pub const Targ = struct { osy: osys.Osys, old: []const u8, new: []const u8, olds: []const vari.Vari, news: []const vari.Vari };
 const Node = struct { path: []const u8, deep: u32 };
+pub const Pair = struct { olds: []const vari.Vari, news: []const vari.Vari };
+pub fn variDir(sara: std.mem.Allocator, targ: Targ, dirz: []const u8) !Pair {
+const inzd = osys.insid(targ.osy, dirz, targ.old) or osys.insid(targ.osy, dirz, targ.new);
+const rela = if (inzd) &[_]vari.Vari{} else try vari.relaVari(sara, targ.osy, dirz, targ.old);
+const relb = if (inzd) &[_]vari.Vari{} else try vari.relaVari(sara, targ.osy, dirz, targ.new);
+if (rela.len != relb.len) return stex.Erro.ShapeMismatch;
+return .{ .olds = try std.mem.concat(sara, vari.Vari, &.{ targ.olds, rela }), .news = try std.mem.concat(sara, vari.Vari, &.{ targ.news, relb }) };
+}
 pub fn skipDir(osy: osys.Osys, name: []const u8, path: []const u8, skps: []const []const u8) bool {
 for (skps) |skip| {
 if (std.mem.indexOfScalar(u8, skip, '/') == null) { if (osys.eqlz(osy, name, skip)) return true; continue; }
@@ -51,12 +59,9 @@ const sara = scra.allocator();
 wst.dirs += 1;
 var dirz = std.Io.Dir.cwd().openDir(iozz, try osys.natiForm(sara, targ.osy, node.path), .{ .iterate = true }) catch { wst.errz += 1; continue; };
 defer dirz.close(iozz);
-const inzd = osys.insid(targ.osy, node.path, targ.old);
-const rela = if (inzd) &[_]vari.Vari{} else try vari.relaVari(sara, targ.osy, node.path, targ.old);
-const relb = if (inzd) &[_]vari.Vari{} else try vari.relaVari(sara, targ.osy, node.path, targ.new);
-if (rela.len != relb.len) return stex.Erro.ShapeMismatch;
-const olds = try std.mem.concat(sara, vari.Vari, &.{ targ.olds, rela });
-const news = try std.mem.concat(sara, vari.Vari, &.{ targ.news, relb });
+const pair = try variDir(sara, targ, node.path);
+const olds = pair.olds;
+const news = pair.news;
 const slsh: []const u8 = if (node.path[node.path.len - 1] == '/') "" else "/";
 var iter = dirz.iterate();
 while (iter.next(iozz) catch { wst.errz += 1; break; }) |entr| {

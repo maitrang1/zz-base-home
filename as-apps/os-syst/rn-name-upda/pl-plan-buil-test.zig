@@ -18,12 +18,19 @@ try std.testing.expectEqual(plan.Clas.enco, plan.clasOf(.urlz));
 try std.testing.expectEqual(plan.Clas.comp, plan.clasOf(.bare));
 }
 test "safe is never skipped, even if every key is true" {
-const conf: cfgz.Conf = .{};
+var conf: cfgz.Conf = .{};
+conf.skip_enco_vari = true;
 try std.testing.expect(!plan.skipOf(conf, .safe));
 try std.testing.expect(plan.skipOf(conf, .comp) and plan.skipOf(conf, .enco));
 }
-test "flipping a key to false applies that class only" {
+test "defaults: bare name skipped, encoded forms applied (D12)" {
+const conf: cfgz.Conf = .{};
+try std.testing.expect(plan.skipOf(conf, .comp));
+try std.testing.expect(!plan.skipOf(conf, .enco));
+}
+test "flipping a key applies that class only" {
 var conf: cfgz.Conf = .{};
+conf.skip_enco_vari = true;
 conf.skip_comp_part = false;
 try std.testing.expect(!plan.skipOf(conf, .comp));
 try std.testing.expect(plan.skipOf(conf, .enco));

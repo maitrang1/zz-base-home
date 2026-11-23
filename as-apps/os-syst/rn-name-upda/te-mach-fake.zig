@@ -16,5 +16,17 @@ try tmp.dir.writeFile(std.testing.io, .{ .sub_path = sub, .data = data });
 }
 pub fn dirz(tmp: *std.testing.TmpDir, sub: []const u8) !void { try tmp.dir.createDirPath(std.testing.io, sub); }
 pub fn readz(allo: std.mem.Allocator, tmp: *std.testing.TmpDir, sub: []const u8) ![]u8 { return tmp.dir.readFileAlloc(std.testing.io, sub, allo, .limited(1024 * 1024)); }
+pub fn dumpz(allo: std.mem.Allocator, tmp: *std.testing.TmpDir, rels: []const []const u8) ![]u8 {
+var outz: std.ArrayList(u8) = .empty;
+for (rels) |rel| {
+try outz.appendSlice(allo, rel);
+try outz.append(allo, 0);
+const data = readz(allo, tmp, rel) catch { try outz.appendSlice(allo, "<none>"); try outz.append(allo, 0); continue; };
+try outz.appendSlice(allo, data);
+try outz.append(allo, 0);
+}
+return outz.toOwnedSlice(allo);
+}
+pub fn hasz(tmp: *std.testing.TmpDir, rel: []const u8) bool { return if (tmp.dir.statFile(std.testing.io, rel, .{})) |_| true else |_| false; }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

@@ -13,12 +13,16 @@ const osys = @import("ut-osys-adap.zig");
 const exit = @import("ct-exit-code.zig");
 const plan = @import("ct-comm-plan.zig");
 const stat = @import("ct-comm-stat.zig");
-const CF = .{ .bufz = 8192, .usag = "usage: rn [--conf FILE] [--json] [--live [--force]] plan OLD NEW | stat\n" };
+const runz = @import("ct-comm-runz.zig");
+const undo = @import("ct-comm-undo.zig");
+const CF = .{ .bufz = 8192, .usag = "usage: rn [--conf FILE] [--json] [--live [--force]] plan OLD NEW | runz OLD NEW | undo ID|last | stat\n" };
 fn dispatch(ctxz: *const cx.Ctxz, rest: []const []const u8) !exit.Code {
 if (rest.len == 0) return exit.Erro.Usag;
 const comm = rest[0];
 const tail = rest[1..];
 if (std.mem.eql(u8, comm, "plan")) return plan.comm(ctxz, tail);
+if (std.mem.eql(u8, comm, "runz") or std.mem.eql(u8, comm, "run")) return runz.comm(ctxz, tail);
+if (std.mem.eql(u8, comm, "undo")) return undo.comm(ctxz, tail);
 if (std.mem.eql(u8, comm, "stat")) return stat.comm(ctxz, tail);
 return exit.Erro.Usag;
 }
@@ -32,7 +36,7 @@ const pars = ladz.parse(allo, args.items) catch |err| { std.debug.print("rn: {s}
 const cfgv = cfgz.confLoad(allo, init.io, pars.conf) catch |err| { std.debug.print("rn: config unreadable: {s}\n", .{@errorName(err)}); return .fail; };
 const home = init.environ_map.get("USERPROFILE") orelse init.environ_map.get("HOME") orelse { std.debug.print("rn: no HOME or USERPROFILE in the environment\n", .{}); return .fail; };
 const cwdz = std.process.currentPathAlloc(init.io, allo) catch |err| { std.debug.print("rn: cannot read the current folder: {s}\n", .{@errorName(err)}); return .fail; };
-const ctxz: cx.Ctxz = .{ .allo = allo, .iozz = init.io, .conf = cfgv, .ladd = pars.ladd, .outw = outw, .osy = osys.host, .home = home, .cwdz = cwdz };
+const ctxz: cx.Ctxz = .{ .allo = allo, .gpaz = init.gpa, .iozz = init.io, .conf = cfgv, .ladd = pars.ladd, .outw = outw, .osy = osys.host, .home = home, .cwdz = cwdz, .nowf = cx.realNow };
 return dispatch(&ctxz, pars.rest) catch |err| switch (err) {
 exit.Erro.Usag => { std.debug.print(CF.usag, .{}); return .usag; },
 else => { std.debug.print("rn: failed: {s}\n", .{@errorName(err)}); return .fail; },

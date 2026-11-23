@@ -11,7 +11,7 @@ const exit = @import("ct-exit-code.zig");
 const cfgz = @import("cf-conf-load.zig");
 const fake = @import("te-mach-fake.zig");
 const make = @import("te-ctxz-make.zig");
-const names = [_][]const u8{ "bina", "arch", "sign_hash", "othe_user", "syst_owne", "runn_proc", "sync_remo", "pack_mana", "comp_part", "urls_exte", "enco_vari", "gitz_hist" };
+const names = [_][]const u8{ "bina", "arch", "sign_hash", "othe_user", "syst_owne", "runn_proc", "sync_remo", "pack_mana", "comp_part", "urls_exte", "gitz_hist" };
 test "text lists the version and every skip key that is on" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
@@ -39,7 +39,7 @@ var aw: std.Io.Writer.Allocating = .init(allo);
 const ctxz = try make.make(allo, &aw.writer, root, conf, false);
 _ = try stat.comm(&ctxz, &.{});
 try std.testing.expect(std.mem.indexOf(u8, aw.written(), "gitz_hist") == null);
-try std.testing.expect(std.mem.indexOf(u8, aw.written(), "enco_vari") != null);
+try std.testing.expect(std.mem.indexOf(u8, aw.written(), "comp_part") != null);
 }
 test "json carries the skip flags" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
@@ -52,6 +52,7 @@ var aw: std.Io.Writer.Allocating = .init(allo);
 const ctxz = try make.make(allo, &aw.writer, root, .{}, true);
 _ = try stat.comm(&ctxz, &.{});
 try std.testing.expect(std.mem.indexOf(u8, aw.written(), "\"gitz_hist\":true") != null);
+try std.testing.expect(std.mem.indexOf(u8, aw.written(), "\"enco_vari\":false") != null);
 try std.testing.expect(std.mem.indexOf(u8, aw.written(), "\"vers\":\"0.1.0\"") != null);
 }
 test "stat takes no args" {

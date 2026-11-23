@@ -18,18 +18,19 @@ const left = try std.json.Stringify.valueAlloc(allo, fromFile, .{});
 const righ = try std.json.Stringify.valueAlloc(allo, dflt, .{});
 try std.testing.expectEqualStrings(righ, left);
 }
-test "every skip key defaults to true" {
+test "every skip key defaults to true except enco_vari (D12)" {
 const dflt: cfgz.Conf = .{};
 try std.testing.expect(dflt.skip_bina and dflt.skip_arch and dflt.skip_sign_hash and dflt.skip_othe_user);
 try std.testing.expect(dflt.skip_syst_owne and dflt.skip_runn_proc and dflt.skip_sync_remo and dflt.skip_pack_mana);
-try std.testing.expect(dflt.skip_comp_part and dflt.skip_urls_exte and dflt.skip_enco_vari and dflt.skip_gitz_hist);
+try std.testing.expect(dflt.skip_comp_part and dflt.skip_urls_exte and dflt.skip_gitz_hist);
+try std.testing.expect(!dflt.skip_enco_vari);
 }
 test "a partial file overrides only what it names" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const conf = try cfgz.confParse(arna.allocator(), "{\"skip_comp_part\": false, \"scan_maxz\": 7}");
 try std.testing.expect(!conf.skip_comp_part);
-try std.testing.expect(conf.skip_enco_vari);
+try std.testing.expect(conf.skip_gitz_hist);
 try std.testing.expectEqual(@as(u64, 7), conf.scan_maxz);
 try std.testing.expectEqual(@as(u32, 96), conf.scan_deep);
 }

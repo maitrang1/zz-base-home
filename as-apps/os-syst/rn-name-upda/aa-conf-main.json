@@ -16,7 +16,7 @@
     "skip_pack_mana": true,
     "skip_comp_part": true,
     "skip_urls_exte": true,
-    "skip_enco_vari": true,
+    "skip_enco_vari": false,
     "skip_gitz_hist": true,
     "skip_path_list": [],
     "skip_glob_list": [],
