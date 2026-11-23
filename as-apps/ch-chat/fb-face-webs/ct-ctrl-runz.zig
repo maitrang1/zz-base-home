@@ -5,7 +5,7 @@
 // I/O: Ctx + Args (caller) > text or JSON lines on stdout (sink in tests), exit code 0 on success
 // ===================================================================
 const std = @import("std"); const task = @import("ru-task-runn.zig"); const targ = @import("ct-ctrl-args.zig"); const pace = @import("ru-huma-pace.zig"); const disp = @import("ru-jobs-disp.zig"); const reci = @import("ru-reci-main.zig"); const smar = @import("ru-smar-adap.zig"); const queu = @import("ru-flow-queu.zig"); const appr = @import("ru-appr-list.zig"); const wait = @import("ru-wait-hand.zig"); const doct = @import("ru-doct-main.zig"); const snap = @import("ru-snap-main.zig"); const setu = @import("ct-comm-setu.zig"); const misc = @import("ct-comm-misc.zig"); const rdm = @import("ru-read-main.zig");
-const KINDS = [_]pace.Kind{ .post, .comm, .mark, .grou, .frie, .dmsg, .reac, .shar, .admn, .evnt, .stor, .prof };
+const KINDS = [_]pace.Kind{ .post, .comm, .mark, .grou, .frie, .dmsg, .reac, .shar, .admn, .evnt, .stor, .prof, .acct, .data, .mone, .help };
 const CF = .{ .dayz = 86400000, .nlog = 20 };
 pub fn needBrow(args: targ.Args) bool { const cmd = args.cmdz; const names = [_][]const u8{ "login", "setup", "run", "ask", "doctor", "snap", "read" }; for (names) |nam| if (std.mem.eql(u8, nam, cmd)) return true; return std.mem.eql(u8, cmd, "flow") and std.mem.eql(u8, args.subz, "run"); }
 const CapRow = struct { kind: []const u8, used: i64, cap: u32 };

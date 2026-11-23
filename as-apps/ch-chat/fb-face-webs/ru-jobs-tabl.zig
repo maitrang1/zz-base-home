@@ -1,30 +1,13 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Job catalog as data: each job = name, cap kind, risk, page, steps with label keys
+// Des: Job catalog as data: base rows here, area tables (account, settings, money, access, core, help) joined at compile time
 // Flo: one row per job > steps name a label key (ut-loca-pack) and an argument slot > the runner turns rows into flow steps
-// I/O: none (constants) > Job rows (find by name, list for `fb jobs`)
+// I/O: none (constants) > Job rows (find by name, list for `fb jobs`, class A/G/H, area)
 // ===================================================================
-const std = @import("std"); const pace = @import("ru-huma-pace.zig"); const flow = @import("ru-flow-runz.zig");
-pub const Risk = enum { w, x };
-pub const Src = enum { none, url, home, noti, frie_requ, birt, msgr, msgr_requ, mark_sell, evnt_crea, stor_crea, reel_crea, prof, bizz, dmsg_thre };
-pub const Arg = enum { none, text, to, url, title, price, desc, group, photo, opt, date, time };
-pub const T = struct { op: flow.Op, role: []const u8 = "", key: []const u8 = "", larg: Arg = .none, arg: Arg = .none, lit: []const u8 = "", commit: bool = false, idx: bool = false };
-pub const Job = struct { name: []const u8, kind: pace.Kind, risk: Risk, src: Src, need: []const Arg, each: bool = false, steps: []const T };
-fn g() T { return .{ .op = .goto }; }
-fn c(key: []const u8) T { return .{ .op = .click, .key = key }; }
-fn cm(key: []const u8) T { return .{ .op = .click, .key = key, .commit = true }; }
-fn cf(key: []const u8) T { return .{ .op = .confirm, .key = key, .commit = true }; }
-fn cl(arg: Arg) T { return .{ .op = .click, .larg = arg }; }
-fn ty(key: []const u8, arg: Arg) T { return .{ .op = .typez, .key = key, .arg = arg }; }
-fn tyi(key: []const u8, arg: Arg) T { return .{ .op = .typez, .key = key, .arg = arg, .idx = true }; }
-fn ck(key: []const u8) T { return .{ .op = .clear, .key = key }; }
-fn up(arg: Arg) T { return .{ .op = .upload, .arg = arg }; }
-fn ex(arg: Arg) T { return .{ .op = .expect, .arg = arg }; }
-fn sl(key: []const u8, arg: Arg) T { return .{ .op = .select, .key = key, .arg = arg, .role = "button" }; }
-fn hv(key: []const u8) T { return .{ .op = .hover, .key = key }; }
-fn mi(arg: Arg, key: []const u8) T { return .{ .op = .click, .key = key, .larg = arg, .role = "menuitem", .commit = true }; }
-fn en() T { return .{ .op = .key, .lit = "Enter", .commit = true }; }
-pub const JOBS = [_]Job{
+const std = @import("std"); const t = @import("ru-jobs-type.zig"); const acct = @import("ru-jobs-acct.zig"); const sett = @import("ru-jobs-sett.zig"); const mone = @import("ru-jobs-mone.zig"); const acce = @import("ru-jobs-acce.zig"); const core = @import("ru-jobs-core.zig"); const help = @import("ru-jobs-help.zig");
+pub const Risk = t.Risk; pub const Area = t.Area; pub const Src = t.Src; pub const Arg = t.Arg; pub const T = t.T; pub const Job = t.Job; pub const classOf = t.classOf;
+const g = t.g; const c = t.c; const cm = t.cm; const cf = t.cf; const cl = t.cl; const ty = t.ty; const tyi = t.tyi; const ck = t.ck; const up = t.up; const ex = t.ex; const sl = t.sl; const hv = t.hv; const mi = t.mi; const en = t.en;
+const BASE = [_]Job{
 .{ .name = "post-photo", .kind = .post, .risk = .w, .src = .home, .need = &.{ .text, .photo }, .steps = &.{ g(), c("post_open"), up(.photo), ty("post_boxz", .text), cm("post_subm"), ex(.text) } },
 .{ .name = "post-audience", .kind = .post, .risk = .w, .src = .home, .need = &.{ .text, .opt }, .steps = &.{ g(), c("post_open"), sl("audi_btnz", .opt), ty("post_boxz", .text), cm("post_subm"), ex(.text) } },
 .{ .name = "post-poll", .kind = .post, .risk = .w, .src = .home, .need = &.{ .text, .title, .desc }, .steps = &.{ g(), c("post_open"), c("poll_addz"), ty("post_boxz", .text), ty("poll_opt1", .title), ty("poll_opt2", .desc), cm("post_subm"), ex(.text) } },
@@ -62,6 +45,7 @@ pub const JOBS = [_]Job{
 .{ .name = "reel-create", .kind = .stor, .risk = .w, .src = .reel_crea, .need = &.{.photo}, .steps = &.{ g(), up(.photo), ty("mark_desc", .text), cm("reel_publ") } },
 .{ .name = "profile-bio", .kind = .prof, .risk = .w, .src = .prof, .need = &.{.text}, .steps = &.{ g(), c("prof_edit"), ck("prof_bioz"), ty("prof_bioz", .text), cm("prof_save") } },
 };
+pub const JOBS = BASE ++ acct.ROWS ++ sett.ROWS ++ mone.ROWS ++ acce.ROWS ++ core.ROWS ++ help.ROWS;
 pub fn find(name: []const u8) ?*const Job { for (&JOBS) |*jb| { if (std.mem.eql(u8, jb.name, name)) return jb; } return null; }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

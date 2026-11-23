@@ -8,6 +8,7 @@ const std = @import("std");
 const cfgz = @import("cf-conf-load.zig");
 const ladz = @import("ct-safe-ladd.zig");
 const osys = @import("ut-osys-adap.zig");
+const runm = @import("ru-cmdz-runn.zig");
 pub const Ctxz = struct {
 allo: std.mem.Allocator,
 gpaz: std.mem.Allocator,
@@ -19,6 +20,7 @@ osy: osys.Osys,
 home: []const u8,
 cwdz: []const u8,
 nowf: *const fn (iozz: std.Io) i64,
+runn: runm.Runn,
 pub fn nowz(self: *const Ctxz) i64 { return self.nowf(self.iozz); }
 pub fn absOf(self: *const Ctxz, raww: []const u8) ![]u8 {
 if (osys.isAbso(self.osy, raww)) return osys.normPath(self.allo, self.osy, raww);

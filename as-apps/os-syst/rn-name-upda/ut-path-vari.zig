@@ -6,12 +6,22 @@
 // ===================================================================
 const std = @import("std");
 const osys = @import("ut-osys-adap.zig");
-pub const Kind = enum { nati, fwds, dbls, urlz, rela, bare };
+pub const Kind = enum { nati, fwds, dbls, urlz, rela, bare, u16l };
 pub const Vari = struct { kind: Kind, text: []const u8 };
 fn sepSwap(allo: std.mem.Allocator, text: []const u8, with: []const u8) ![]u8 {
 var outz: std.ArrayList(u8) = .empty;
 errdefer outz.deinit(allo);
 for (text) |byte| { if (byte == '/') try outz.appendSlice(allo, with) else try outz.append(allo, byte); }
+return outz.toOwnedSlice(allo);
+}
+pub fn u16Vari(allo: std.mem.Allocator, list: []const Vari) ![]Vari {
+var outz: std.ArrayList(Vari) = .empty;
+errdefer outz.deinit(allo);
+for (list) |item| {
+if (item.kind != .nati and item.kind != .fwds) continue;
+const wide = try std.unicode.utf8ToUtf16LeAlloc(allo, item.text);
+try outz.append(allo, .{ .kind = .u16l, .text = std.mem.sliceAsBytes(wide) });
+}
 return outz.toOwnedSlice(allo);
 }
 pub fn absVari(allo: std.mem.Allocator, osy: osys.Osys, norm: []const u8) ![]Vari {

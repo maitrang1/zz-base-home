@@ -14,6 +14,7 @@ const take = @import("bk-snap-take.zig");
 const rest = @import("bk-snap-rest.zig");
 const rena = @import("rn-rena-appl.zig");
 const patc = @import("rn-refs-patc.zig");
+const loca = @import("sy-loca-list.zig");
 const CF = .{ .mbyt = 1024 * 1024 };
 pub const Erro = error{ NoJournal, AlreadyUndone };
 pub const Opts = struct { live: bool = false, force: bool = false };
@@ -24,6 +25,11 @@ if (cancl(ents)) return null;
 var indx: usize = ents.len;
 while (indx > 0) { indx -= 1; if (std.mem.eql(u8, ents[indx].op, "rena")) return ents[indx]; }
 return null;
+}
+fn mapPath(ctxz: *const cx.Ctxz, path: []const u8, pend: ?jour.Jent) ![]const u8 {
+const ren = pend orelse return path;
+if (!osys.insid(ctxz.osy, path, ren.a)) return path;
+return std.fmt.allocPrint(ctxz.allo, "{s}{s}", .{ ren.b, path[ren.a.len..] });
 }
 fn pathNow(ctxz: *const cx.Ctxz, ent: jour.Jent, pend: ?jour.Jent) ![]const u8 {
 const ren = pend orelse return ent.a;
@@ -44,6 +50,17 @@ const orig = rest.getz(sara, ctxz.iozz, pth.snap, ent.b, ent.h0, maxz) catch { r
 if (live) try patc.writeRetry(ctxz, nat, orig);
 rsl.restd += 1;
 }
+fn undoLoca(ctxz: *const cx.Ctxz, pth: stor.Pths, ent: jour.Jent, id: []const u8, pend: ?jour.Jent, live: bool, force: bool, rsl: *Rslt) !void {
+const kind = loca.kindOf(ent.a) orelse { rsl.conf += 1; return; };
+const name = if (kind == .link) try mapPath(ctxz, ent.b, pend) else ent.b;
+const cur = loca.current(ctxz, kind, name) catch { rsl.conf += 1; return; };
+const hcur = take.hashHex(cur);
+if (std.mem.eql(u8, &hcur, ent.h0)) { rsl.skip += 1; return; }
+if (!std.mem.eql(u8, &hcur, ent.h1) and !force) { rsl.conf += 1; return; }
+const orig = rest.getz(ctxz.allo, ctxz.iozz, pth.snap, ent.note, ent.h0, ctxz.conf.scan_maxz * CF.mbyt) catch { rsl.conf += 1; return; };
+if (live) try loca.setz(ctxz, kind, name, orig, id);
+rsl.restd += 1;
+}
 fn pass(ctxz: *const cx.Ctxz, id: []const u8, pth: stor.Pths, ents: []const jour.Jent, live: bool, force: bool) !Rslt {
 var rsl: Rslt = .{ .code = .okay };
 const ren = lastRena(ents);
@@ -62,6 +79,7 @@ else if (hasa and !hasb) rsl.skip += 1
 else rsl.conf += 1;
 continue;
 }
+if (std.mem.eql(u8, ent.op, "loca")) { try undoLoca(ctxz, pth, ent, id, pend, live, force, &rsl); continue; }
 if (std.mem.eql(u8, ent.op, "patch")) try undoPatch(ctxz, pth, ent, try pathNow(ctxz, ent, pend), live, force, &rsl);
 }
 if (rsl.conf > 0) rsl.code = .bloc;

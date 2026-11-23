@@ -1,8 +1,8 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Scan stage shared by plan, run and verify
-// Flo: check old/new pair > roots + skip list > build forms > walk roots > items
-// I/O: normalized old/new + Ctxz > checked pair, Item list, Wstat counts
+// Flo: check old/new pair > roots + skip list > build forms (text + binary) > walk roots > locations > items + lrefs
+// I/O: normalized old/new + Ctxz > checked pair, Scan {items, lrefs, counts}
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");
@@ -10,7 +10,9 @@ const osys = @import("ut-osys-adap.zig");
 const vari = @import("ut-path-vari.zig");
 const walk = @import("se-scan-walk.zig");
 const plan = @import("pl-plan-buil.zig");
+const loca = @import("sy-loca-list.zig");
 pub const Bad = enum { none, oldz_miss, newz_exis, sibl_only, same_name };
+pub const Scan = struct { items: []plan.Item, lrefs: []plan.Lref, wst: walk.Wstat };
 pub fn checkPair(ctxz: *const cx.Ctxz, old: []const u8, new: []const u8) Bad {
 const osy = ctxz.osy;
 if (!ctxz.exists(old)) return .oldz_miss;
@@ -42,13 +44,19 @@ for (ctxz.conf.scan_skip_list) |item| try list.append(ctxz.allo, item);
 try list.append(ctxz.allo, try ctxz.dirzData());
 return list.toOwnedSlice(ctxz.allo);
 }
-pub fn targOf(ctxz: *const cx.Ctxz, old: []const u8, new: []const u8) !walk.Targ { return .{ .osy = ctxz.osy, .old = old, .new = new, .olds = try vari.absVari(ctxz.allo, ctxz.osy, old), .news = try vari.absVari(ctxz.allo, ctxz.osy, new) }; }
-pub fn collect(ctxz: *const cx.Ctxz, old: []const u8, new: []const u8, wst: *walk.Wstat) ![]plan.Item {
+pub fn targOf(ctxz: *const cx.Ctxz, old: []const u8, new: []const u8) !walk.Targ {
+const olds = try vari.absVari(ctxz.allo, ctxz.osy, old);
+const news = try vari.absVari(ctxz.allo, ctxz.osy, new);
+const home = osys.normPath(ctxz.allo, ctxz.osy, ctxz.home) catch "";
+return .{ .osy = ctxz.osy, .old = old, .new = new, .olds = olds, .news = news, .bolds = try std.mem.concat(ctxz.allo, vari.Vari, &.{ olds, try vari.u16Vari(ctxz.allo, olds) }), .bnews = try std.mem.concat(ctxz.allo, vari.Vari, &.{ news, try vari.u16Vari(ctxz.allo, news) }), .home = home };
+}
+pub fn collect(ctxz: *const cx.Ctxz, old: []const u8, new: []const u8) !Scan {
 const targ = try targOf(ctxz, old, new);
-var items: std.ArrayList(plan.Item) = .empty;
+var outc: walk.Outc = .{};
 const skps = try skipsOf(ctxz);
-for (try rootsOf(ctxz, old)) |root| try walk.walkRoot(ctxz.allo, ctxz.gpaz, ctxz.iozz, ctxz.conf, targ, root, skps, &items, wst);
-return items.toOwnedSlice(ctxz.allo);
+for (try rootsOf(ctxz, old)) |root| try walk.walkRoot(ctxz.allo, ctxz.gpaz, ctxz.iozz, ctxz.conf, targ, root, skps, &outc);
+try loca.collect(ctxz, targ, &outc);
+return .{ .items = try outc.items.toOwnedSlice(ctxz.allo), .lrefs = try outc.lrefs.toOwnedSlice(ctxz.allo), .wst = outc.wst };
 }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

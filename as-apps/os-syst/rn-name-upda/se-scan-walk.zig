@@ -1,8 +1,8 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Walk the roots and collect every plan item from text files
-// Flo: stack of dirs > skip listed dirs > per dir build relative forms > per file stat, read, scan > items
-// I/O: roots + Conf + Targ > Item list + Wstat counts (never follows links, never writes)
+// Des: Walk the roots and collect plan items from files and links
+// Flo: stack of dirs > skip listed dirs > per dir build relative forms > per file load, scan, classify > links read and scanned > items
+// I/O: roots + Conf + Targ > Outc {items, lrefs, counts} (never follows links, never writes)
 // ===================================================================
 const std = @import("std");
 const osys = @import("ut-osys-adap.zig");
@@ -10,9 +10,12 @@ const vari = @import("ut-path-vari.zig");
 const stex = @import("se-scan-text.zig");
 const plan = @import("pl-plan-buil.zig");
 const cfgz = @import("cf-conf-load.zig");
-const CF = .{ .binz = 8192, .mbyt = 1024 * 1024 };
-pub const Wstat = struct { dirs: usize = 0, filz: usize = 0, scan: usize = 0, bina: usize = 0, bigz: usize = 0, errz: usize = 0 };
-pub const Targ = struct { osy: osys.Osys, old: []const u8, new: []const u8, olds: []const vari.Vari, news: []const vari.Vari };
+const risk = @import("ut-risk-clas.zig");
+const ldz = @import("ut-file-load.zig");
+const CF = .{ .mbyt = 1024 * 1024, .linz = 4096, .nprf = "\\??\\" };
+pub const Wstat = struct { dirs: usize = 0, filz: usize = 0, scan: usize = 0, bina: usize = 0, bigz: usize = 0, errz: usize = 0, link: usize = 0 };
+pub const Targ = struct { osy: osys.Osys, old: []const u8, new: []const u8, olds: []const vari.Vari, news: []const vari.Vari, bolds: []const vari.Vari = &.{}, bnews: []const vari.Vari = &.{}, home: []const u8 = "" };
+pub const Outc = struct { items: std.ArrayList(plan.Item) = .empty, lrefs: std.ArrayList(plan.Lref) = .empty, wst: Wstat = .{} };
 const Node = struct { path: []const u8, deep: u32 };
 pub const Pair = struct { olds: []const vari.Vari, news: []const vari.Vari };
 pub fn variDir(sara: std.mem.Allocator, targ: Targ, dirz: []const u8) !Pair {
@@ -30,24 +33,58 @@ if (path.len > skip.len and path[path.len - skip.len - 1] == '/' and osys.hasSuf
 }
 return false;
 }
-fn fileScan(perm: std.mem.Allocator, scra: std.mem.Allocator, iozz: std.Io, conf: cfgz.Conf, osy: osys.Osys, full: []const u8, olds: []const vari.Vari, news: []const vari.Vari, out: *std.ArrayList(plan.Item), wst: *Wstat) !void {
-wst.filz += 1;
+fn extSkip(osy: osys.Osys, name: []const u8, list: []const []const u8) bool { for (list) |ext| { if (osys.hasSuf(osy, name, ext)) return true; } return false; }
+fn fileScan(perm: std.mem.Allocator, scra: std.mem.Allocator, iozz: std.Io, conf: cfgz.Conf, targ: Targ, full: []const u8, olds: []const vari.Vari, news: []const vari.Vari, outc: *Outc) !void {
+const osy = targ.osy;
+outc.wst.filz += 1;
 for (conf.skip_path_list) |skip| { if (osys.eqlz(osy, full, skip)) return; }
+if (extSkip(osy, osys.baseOf(full), conf.scan_skip_ext)) { outc.wst.bina += 1; return; }
 const nati = try osys.natiForm(scra, osy, full);
-const info = std.Io.Dir.cwd().statFile(iozz, nati, .{}) catch { wst.errz += 1; return; };
-if (info.size > conf.scan_maxz * CF.mbyt) { wst.bigz += 1; return; }
-const text = std.Io.Dir.cwd().readFileAlloc(iozz, nati, scra, .limited(conf.scan_maxz * CF.mbyt)) catch { wst.errz += 1; return; };
-if (std.mem.indexOfScalar(u8, text[0..@min(text.len, CF.binz)], 0) != null) { wst.bina += 1; return; }
-wst.scan += 1;
-const hits = try stex.scanText(scra, osy, text, olds, news);
+const info = std.Io.Dir.cwd().statFile(iozz, nati, .{}) catch { outc.wst.errz += 1; return; };
+if (info.size > conf.scan_maxz * CF.mbyt) { outc.wst.bigz += 1; return; }
+const raww = std.Io.Dir.cwd().readFileAlloc(iozz, nati, scra, .limited(conf.scan_maxz * CF.mbyt)) catch { outc.wst.errz += 1; return; };
+const load = ldz.loadz(scra, raww) catch { outc.wst.errz += 1; return; };
+const binz = load.enc == .binz;
+if (binz) {
+outc.wst.bina += 1;
+if (info.size > conf.scan_binz_maxz * CF.mbyt) return;
+} else outc.wst.scan += 1;
+const pmask = risk.pathMask(osy, conf, targ.home, full);
+const hits = try stex.scanText(scra, osy, load.text, if (binz) targ.bolds else olds, if (binz) targ.bnews else news);
 if (hits.len == 0) return;
 const pdup = try perm.dupe(u8, full);
 for (hits) |hit| {
-const clas = plan.clasOf(hit.kind);
-try out.append(perm, .{ .path = pdup, .line = hit.line, .offz = hit.offz, .lenz = hit.lenz, .kind = hit.kind, .clas = clas, .skip = plan.skipOf(conf, clas), .newz = try perm.dupe(u8, hit.newz) });
+const decd = plan.decide(conf, pmask, hit.kind, binz, hit.newz.len == hit.lenz);
+try outc.items.append(perm, .{ .path = pdup, .line = hit.line, .offz = hit.offz, .lenz = hit.lenz, .kind = hit.kind, .clas = decd.clas, .mask = decd.mask, .skip = decd.skip, .newz = try perm.dupe(u8, hit.newz) });
 }
 }
-pub fn walkRoot(perm: std.mem.Allocator, back: std.mem.Allocator, iozz: std.Io, conf: cfgz.Conf, targ: Targ, root: []const u8, skps: []const []const u8, out: *std.ArrayList(plan.Item), wst: *Wstat) !void {
+fn linkScan(perm: std.mem.Allocator, sara: std.mem.Allocator, iozz: std.Io, conf: cfgz.Conf, targ: Targ, dirz: std.Io.Dir, name: []const u8, full: []const u8, olds: []const vari.Vari, news: []const vari.Vari, outc: *Outc) !void {
+var buff: [CF.linz]u8 = undefined;
+const lenz = dirz.readLink(iozz, name, &buff) catch { outc.wst.errz += 1; return; };
+outc.wst.link += 1;
+const whol = buff[0..lenz];
+const pref: []const u8 = if (std.mem.startsWith(u8, whol, CF.nprf)) whol[0..CF.nprf.len] else "";
+const tgt = whol[pref.len..];
+const hits = try stex.scanText(sara, targ.osy, tgt, olds, news);
+if (hits.len == 0) return;
+const pmask = risk.pathMask(targ.osy, conf, targ.home, full);
+var mask: u16 = pmask;
+var skip = false;
+var outz: std.ArrayList(u8) = .empty;
+var curz: usize = 0;
+try outz.appendSlice(sara, pref);
+for (hits) |hit| {
+const decd = plan.decide(conf, pmask, hit.kind, false, true);
+mask |= decd.mask;
+if (decd.skip) skip = true;
+try outz.appendSlice(sara, tgt[curz..hit.offz]);
+try outz.appendSlice(sara, hit.newz);
+curz = hit.offz + hit.lenz;
+}
+try outz.appendSlice(sara, tgt[curz..]);
+try outc.lrefs.append(perm, .{ .kind = .link, .name = try perm.dupe(u8, full), .oldv = try perm.dupe(u8, whol), .newv = try perm.dupe(u8, outz.items), .clas = plan.firstOf(mask), .mask = mask, .skip = skip });
+}
+pub fn walkRoot(perm: std.mem.Allocator, back: std.mem.Allocator, iozz: std.Io, conf: cfgz.Conf, targ: Targ, root: []const u8, skps: []const []const u8, outc: *Outc) !void {
 var stak: std.ArrayList(Node) = .empty;
 defer { for (stak.items) |node| back.free(node.path); stak.deinit(back); }
 try stak.append(back, .{ .path = try back.dupe(u8, root), .deep = 0 });
@@ -56,19 +93,18 @@ defer back.free(node.path);
 var scra = std.heap.ArenaAllocator.init(back);
 defer scra.deinit();
 const sara = scra.allocator();
-wst.dirs += 1;
-var dirz = std.Io.Dir.cwd().openDir(iozz, try osys.natiForm(sara, targ.osy, node.path), .{ .iterate = true }) catch { wst.errz += 1; continue; };
+outc.wst.dirs += 1;
+var dirz = std.Io.Dir.cwd().openDir(iozz, try osys.natiForm(sara, targ.osy, node.path), .{ .iterate = true }) catch { outc.wst.errz += 1; continue; };
 defer dirz.close(iozz);
 const pair = try variDir(sara, targ, node.path);
-const olds = pair.olds;
-const news = pair.news;
 const slsh: []const u8 = if (node.path[node.path.len - 1] == '/') "" else "/";
 var iter = dirz.iterate();
-while (iter.next(iozz) catch { wst.errz += 1; break; }) |entr| {
+while (iter.next(iozz) catch { outc.wst.errz += 1; break; }) |entr| {
 const full = try std.fmt.allocPrint(sara, "{s}{s}{s}", .{ node.path, slsh, entr.name });
 switch (entr.kind) {
 .directory => { if (node.deep + 1 > conf.scan_deep or skipDir(targ.osy, entr.name, full, skps)) continue; try stak.append(back, .{ .path = try back.dupe(u8, full), .deep = node.deep + 1 }); },
-.file => { var fara = std.heap.ArenaAllocator.init(back); defer fara.deinit(); try fileScan(perm, fara.allocator(), iozz, conf, targ.osy, full, olds, news, out, wst); },
+.file => { var fara = std.heap.ArenaAllocator.init(back); defer fara.deinit(); try fileScan(perm, fara.allocator(), iozz, conf, targ, full, pair.olds, pair.news, outc); },
+.sym_link => try linkScan(perm, sara, iozz, conf, targ, dirz, entr.name, full, pair.olds, pair.news, outc),
 else => {},
 }
 }

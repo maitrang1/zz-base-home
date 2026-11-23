@@ -10,6 +10,7 @@ const cx = @import("ct-ctrl-ctxz.zig");
 const cfgz = @import("cf-conf-load.zig");
 const ladz = @import("ct-safe-ladd.zig");
 const osys = @import("ut-osys-adap.zig");
+const runm = @import("ru-cmdz-runn.zig");
 const exit = @import("ct-exit-code.zig");
 const plan = @import("ct-comm-plan.zig");
 const stat = @import("ct-comm-stat.zig");
@@ -36,7 +37,8 @@ const pars = ladz.parse(allo, args.items) catch |err| { std.debug.print("rn: {s}
 const cfgv = cfgz.confLoad(allo, init.io, pars.conf) catch |err| { std.debug.print("rn: config unreadable: {s}\n", .{@errorName(err)}); return .fail; };
 const home = init.environ_map.get("USERPROFILE") orelse init.environ_map.get("HOME") orelse { std.debug.print("rn: no HOME or USERPROFILE in the environment\n", .{}); return .fail; };
 const cwdz = std.process.currentPathAlloc(init.io, allo) catch |err| { std.debug.print("rn: cannot read the current folder: {s}\n", .{@errorName(err)}); return .fail; };
-const ctxz: cx.Ctxz = .{ .allo = allo, .gpaz = init.gpa, .iozz = init.io, .conf = cfgv, .ladd = pars.ladd, .outw = outw, .osy = osys.host, .home = home, .cwdz = cwdz, .nowf = cx.realNow };
+var real: runm.Real = .{ .iozz = init.io, .envm = init.environ_map };
+const ctxz: cx.Ctxz = .{ .allo = allo, .gpaz = init.gpa, .iozz = init.io, .conf = cfgv, .ladd = pars.ladd, .outw = outw, .osy = osys.host, .home = home, .cwdz = cwdz, .nowf = cx.realNow, .runn = real.runn() };
 return dispatch(&ctxz, pars.rest) catch |err| switch (err) {
 exit.Erro.Usag => { std.debug.print(CF.usag, .{}); return .usag; },
 else => { std.debug.print("rn: failed: {s}\n", .{@errorName(err)}); return .fail; },

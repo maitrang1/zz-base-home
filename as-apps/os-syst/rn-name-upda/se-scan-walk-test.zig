@@ -20,9 +20,10 @@ const new = try std.fmt.allocPrint(allo, "{s}/proj/new", .{root});
 return .{ .root = root, .old = old, .new = new, .targ = .{ .osy = osys.host, .old = old, .new = new, .olds = try vari.absVari(allo, osys.host, old), .news = try vari.absVari(allo, osys.host, new) } };
 }
 fn go(allo: std.mem.Allocator, conf: cfgz.Conf, rg: Rigz, skps: []const []const u8, wst: *walk.Wstat) ![]plan.Item {
-var items: std.ArrayList(plan.Item) = .empty;
-try walk.walkRoot(allo, std.testing.allocator, std.testing.io, conf, rg.targ, rg.root, skps, &items, wst);
-return items.toOwnedSlice(allo);
+var outc: walk.Outc = .{};
+try walk.walkRoot(allo, std.testing.allocator, std.testing.io, conf, rg.targ, rg.root, skps, &outc);
+wst.* = outc.wst;
+return outc.items.toOwnedSlice(allo);
 }
 fn countz(items: []const plan.Item, suff: []const u8, kind: vari.Kind) usize {
 var cntz: usize = 0;

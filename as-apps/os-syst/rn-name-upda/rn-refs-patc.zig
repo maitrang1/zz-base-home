@@ -1,7 +1,7 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Patch the refs inside one text file, safely
-// Flo: read > re-scan now > snapshot + journal first > write in place > read back and compare hash
+// Des: Patch the refs inside one file (text, UTF-16 text, or same-length binary), safely
+// Flo: read > load as text or binary > re-scan now > snapshot + journal first > write in place > read back and compare hash
 // I/O: file path + Targ + run paths > file rewritten, snapshot + journal line; count of refs patched
 // ===================================================================
 const std = @import("std");
@@ -14,6 +14,8 @@ const stor = @import("st-runz-stor.zig");
 const take = @import("bk-snap-take.zig");
 const jour = @import("lg-jour-writ.zig");
 const tick = @import("ut-faul-tick.zig");
+const risk = @import("ut-risk-clas.zig");
+const ldz = @import("ut-file-load.zig");
 const CF = .{ .mbyt = 1024 * 1024, .waitms = 200 };
 pub const Erro = error{ Blocked, VerifyFail };
 fn writeOnce(ctxz: *const cx.Ctxz, nat: []const u8, body: []const u8) !void {
@@ -38,29 +40,33 @@ defer scra.deinit();
 const sara = scra.allocator();
 const nat = try ctxz.nati(path);
 const maxz = ctxz.conf.scan_maxz * CF.mbyt;
-const text = std.Io.Dir.cwd().readFileAlloc(ctxz.iozz, nat, sara, .limited(maxz)) catch return Erro.Blocked;
+const raww = std.Io.Dir.cwd().readFileAlloc(ctxz.iozz, nat, sara, .limited(maxz)) catch return Erro.Blocked;
+const load = try ldz.loadz(sara, raww);
+const binz = load.enc == .binz;
 const pair = try walk.variDir(sara, targ, osys.dirOf(path));
-const hits = try stex.scanText(sara, ctxz.osy, text, pair.olds, pair.news);
+const pmask = risk.pathMask(ctxz.osy, ctxz.conf, targ.home, path);
+const hits = try stex.scanText(sara, ctxz.osy, load.text, if (binz) targ.bolds else pair.olds, if (binz) targ.bnews else pair.news);
 var outz: std.ArrayList(u8) = .empty;
 var curz: usize = 0;
 var cntz: usize = 0;
 for (hits) |hit| {
-if (plan.skipOf(ctxz.conf, plan.clasOf(hit.kind))) continue;
-try outz.appendSlice(sara, text[curz..hit.offz]);
+if (plan.decide(ctxz.conf, pmask, hit.kind, binz, hit.newz.len == hit.lenz).skip) continue;
+try outz.appendSlice(sara, load.text[curz..hit.offz]);
 try outz.appendSlice(sara, hit.newz);
 curz = hit.offz + hit.lenz;
 cntz += 1;
 }
 if (cntz == 0) return 0;
-try outz.appendSlice(sara, text[curz..]);
-const hold = take.hashHex(text);
-const hnew = take.hashHex(outz.items);
+try outz.appendSlice(sara, load.text[curz..]);
+const body = try ldz.encode(sara, load.enc, outz.items);
+const hold = take.hashHex(raww);
+const hnew = take.hashHex(body);
 const name = try std.fmt.allocPrint(sara, "{d}.bak", .{seqn});
-try take.putz(sara, ctxz.iozz, pth.snap, name, text);
+try take.putz(sara, ctxz.iozz, pth.snap, name, raww);
 try jour.appd(sara, ctxz.iozz, pth.jour, pth.jfil, .{ .op = "patch", .a = path, .b = name, .h0 = &hold, .h1 = &hnew });
 try tck.step();
-try writeRetry(ctxz, nat, outz.items);
-const back = std.Io.Dir.cwd().readFileAlloc(ctxz.iozz, nat, sara, .limited(outz.items.len + 1)) catch return Erro.VerifyFail;
+try writeRetry(ctxz, nat, body);
+const back = std.Io.Dir.cwd().readFileAlloc(ctxz.iozz, nat, sara, .limited(body.len + 1)) catch return Erro.VerifyFail;
 const hbak = take.hashHex(back);
 if (!std.mem.eql(u8, &hbak, &hnew)) return Erro.VerifyFail;
 return cntz;
