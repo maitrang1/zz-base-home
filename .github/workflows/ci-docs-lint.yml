@@ -15,5 +15,5 @@ jobs:
                   persist-credentials: false
             - name: docs are txt only
               run: |
-                  bad=$(git ls-files '*.md' | grep -v -E '(^|/)(CLAUDE|AGENTS)\.md$|(^|/)do-docs-open/' || true)
+                  bad=$(git ls-files '*.md' | grep -v -E '(^|/)(CLAUDE|AGENTS)\.md$|(^|/)do-documents/' || true)
                   if [ -n "$bad" ]; then echo "$bad"; exit 1; fi

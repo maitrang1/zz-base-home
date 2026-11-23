@@ -4,7 +4,7 @@ CLAUDE.md
 aa-todo-*/
 ag-agen-*/
 do-*/
-!do-docs-open/
+!do-documents/
 .claude/settings.local.json
 .claude/*.local.*
 rn-rena-*
