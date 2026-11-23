@@ -5,7 +5,7 @@
 // I/O: Ctx (state + folder) > files in <stat>/report, backup, export; printed paths and counts; never includes cookies, profile data or private text
 // ===================================================================
 const std = @import("std"); const builtin = @import("builtin"); const task = @import("ru-task-runn.zig"); const priv = @import("ru-safe-priv.zig");
-pub const VERS = "0.2.0";
+pub const VERS = "0.3.0";
 const CF = .{ .dbfi = "fb-state.db", .nlog = 50, .nala = 20, .maxz = 1 << 20 };
 const Safe = struct { base_urlz_main: []const u8, capz_post_dayz: u32, capz_comm_dayz: u32, capz_mark_dayz: u32, capz_grou_dayz: u32, capz_frie_dayz: u32, capz_dmsg_dayz: u32, capz_reac_dayz: u32, capz_shar_dayz: u32, capz_admn_dayz: u32, capz_evnt_dayz: u32, capz_stor_dayz: u32, capz_prof_dayz: u32, quie_hour_rang: [2]u8, quie_zone_minu: i32, warm_dayz_coun: u32, retr_coun_maxz: u32, smar_mode_enab: bool, lang_main_code: []const u8, brow_vers_minz: u32, msgs_keep_days: u32, wait_maxx_minu: u32, noti_chai_orde: []const []const u8 };
 fn put(ctx: *task.Ctx, dir: []const u8, name: []const u8, data: []const u8) !void { const path = try std.fs.path.join(ctx.aren, &.{ dir, name }); try std.Io.Dir.cwd().writeFile(ctx.iozz, .{ .sub_path = path, .data = data }); }

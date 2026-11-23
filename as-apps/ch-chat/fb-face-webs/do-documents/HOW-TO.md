@@ -9,6 +9,29 @@ Every command shows a preview by default. Add `--live` to do it for real. See ev
 2. Read the risk note, then `fb setup --yes`.
 3. `fb doctor`: checks the buttons fb needs. If a line says MISSING, see "Fix a button name" below.
 
+## Start from zero (only a login and a password)
+1. Create the secrets file `acct.json` in `~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs/` (Windows: your user folder). Only the fields you need, for example `{"login":"you@mail.com","pass":"your password"}`. Other fields: `newp` (new password), `firs` and `last` (name), `mail`, `birt` (birthday, YYYY-MM-DD).
+2. `fb secret` shows which fields are filled (never the values).
+3. `fb setup --yes` once (risk note), then `fb start --live`: it logs in, checks the buttons and maps the site's pages. If Facebook asks for a code or approval, you do that in the browser window; fb waits and continues.
+4. `fb gaps`: shows buttons that changed and new buttons no job knows. `fb gaps matrix` lists every job by area.
+fb never types your password on the command line and never prints it. A wrong password stops fb (no retry loop).
+
+## Account, settings, data, money, access, help
+Every job shows in `fb jobs`: **A** runs by itself, **G** is guarded (needs your OK: `--force` or `fb approve`), **H** assist: fb prepares the page, then stops for the step only you can do (codes, card entry, the final delete or pay click) and continues after.
+```
+fb run acct-pass-change --live --force
+fb run acct-2fa-setup --live --force
+fb run sett-audience-default --opt Friends --live
+fb run data-download-request --live
+fb run data-download-get --live
+fb run mone-billing --live
+fb run acce-role-add --to "Ann Lee" --opt Editor --live --force
+fb run help-search --text "recover account" --live
+```
+- Deactivate and delete (`acct-deactivate`, `acct-delete`) open the exact page and wait: you press the last button yourself.
+- Money jobs are off until you set `capz_mone_dayz` and a budget limit `mone_spen_capz` in your settings. Ads, boosts and payments always stop for you before the final click.
+- Sign-up (`acct-signup`) is only for your own new account, one try per run; you enter the code Facebook sends.
+
 ## Run a routine by itself (recommended)
 A routine is a list of jobs in your settings (`flow_list`). The example `morning` replies to comments and messages and renews your listings.
 1. See what it will do: `fb plan morning`
@@ -77,6 +100,9 @@ fb ask "reply to my comments" --live
 fb ask "renew my listings" --live
 fb ask "mark Red bike sold" --live
 ```
+
+## Map the site
+`fb map` visits a short list of Facebook pages (settings, Accounts Center, activity log and more), slowly, and saves the names of their buttons and boxes in your data folder (`stat/map/<date>/`). It never clicks or types. `fb gaps` then compares that map with the jobs.
 
 ## Check things
 ```

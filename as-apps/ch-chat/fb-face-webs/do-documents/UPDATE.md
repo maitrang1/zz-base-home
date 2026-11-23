@@ -1,5 +1,14 @@
 # Updates
 
+## 2026-11-24
+Added: 125 more jobs (178 in all, see `fb jobs`): account (login, logout, sign-up, password, two-factor, passkey, sessions, contact info, name, language, deactivate, delete, profile photo, cover, work, school, city, links, featured, life events), settings (privacy, search, tags, notifications, block, apps, ad choices), data (activity log, download your information, saved, albums, memories), money (billing, invoices, payment methods, Meta Verified, ads, boost), access (page, business and ad roles, partners, group admins, developer console, connected accounts), help and support, and more core jobs (friend lists, group and page create and edit, post tag, check-in, feeling, hide, report, pin, comment edit and delete, story, reel, event edit, Messenger extras).
+Added: job classes in `fb jobs`: A runs by itself, G needs your OK, H assist (stops for codes, card entry and the final delete, deactivate or pay click, then continues).
+Added: `fb start --live` (zero start from a login and password in a secrets file), `fb secret`, `fb map` (read-only map of the site), `fb gaps` (changed buttons, new buttons, `matrix` job list).
+Added: fb logs in again by itself once when the session ends; known cookie and save-login popups are closed; short error pages are retried.
+Added: new limits `capz_acct_dayz`, `capz_data_dayz`, `capz_mone_dayz` (0 = money off), `capz_help_dayz`, `mone_spen_capz`.
+Changed: `fb doctor` also checks toggles. Read-only jobs and login always run; setting jobs run once a day.
+This version is tested on a practice copy of Facebook only. Every new button name and menu path is a guess until you run `fb map` on your own account.
+
 ## 2026-11-21 (later)
 Added: 36 more jobs: photo, audience and poll posts, edit and delete posts, comments, reactions, shares, saves, Business Suite scheduling, friend accept, decline, follow, unfriend and block, birthday wishes, notifications, Messenger reply, files and requests, buyer replies, group admin (approve, decline, remove), page switch and hide, Marketplace wizard (category, condition, location), edit, available, relist, delete and share to groups, sale scan, events, stories, reels and profile bio. See `fb jobs`.
 Added: attended routines: `fb plan`, `fb approve`, `fb flow run`. A routine runs by itself, stops only when it needs you, waits while you finish a Facebook check, then continues. A second check within 24 hours, or a Facebook warning, stops it and rests 24 hours.

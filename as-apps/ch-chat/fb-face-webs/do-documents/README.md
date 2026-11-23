@@ -8,6 +8,8 @@ fb is a helper that uses Facebook the way you do. It posts, comments, reacts, se
 - Accepts friend requests, follows, and more. Anything you cannot undo (delete, unfriend, block) needs your OK first.
 - Lists, renews and marks Marketplace items as sold, with a ledger of title, group and time.
 - Runs a whole routine by itself (for example "morning") and stops only when it truly needs you, for example a Facebook security check. When you finish the check, it continues on its own.
+- Does account jobs too: log in from a secrets file, password, two-factor, sessions, profile parts, settings, activity log, download your data, billing, ads, page and group roles, help and support. Money, security and delete jobs are guarded: you approve them, and you press the last button yourself.
+- Maps the site (`fb map`) and reports changed buttons (`fb gaps`).
 - Stops and rests when Facebook warns or limits your account.
 - Shows a preview first. Nothing happens until you add `--live`.
 

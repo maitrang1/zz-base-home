@@ -33,6 +33,18 @@ Missing keys use the defaults below.
 | capz_evnt_dayz | Event actions | 3 | 0 and up |
 | capz_stor_dayz | Stories and reels | 5 | 0 and up |
 | capz_prof_dayz | Profile edits | 3 | 0 and up |
+| capz_acct_dayz | Account, security and settings changes | 12 | 0 and up |
+| capz_data_dayz | Downloads, activity-log clean-up, albums | 5 | 0 and up |
+| capz_mone_dayz | Money: payment methods, Meta Verified, ads (0 = off) | 0 | 0 and up |
+| capz_help_dayz | Reads, support messages, map pages | 40 | 0 and up |
+| mone_spen_capz | Biggest budget a spend job may use (0 = none) | 0 | 0 and up |
+| secr_loca_main | Folder with your secrets file `acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs | folder |
+| base_deve_main | Developer console address | https://developers.facebook.com | http(s) address |
+| map_page_maxx | Pages `fb map` visits per run | 25 | 1 to 200 |
+| map_deep_maxx | How many link steps from a start page | 2 | 0 to 3 |
+| map_seed_list | Pages `fb map` starts from | settings, Accounts Center, activity log, ... | list of paths |
+| map_allo_list | Only paths starting like this are visited | settings, accountscenter, privacy, ... | list of paths |
+| path_*, pbiz_*, pdev_* | Page paths jobs use (account, settings, billing on the business site, developer console, help, ...). Change one if Facebook moves a page | Facebook defaults | paths |
 | quie_hour_rang | Quiet hours (from, to) | [23, 6] | hours 0 to 23 |
 | quie_zone_minu | Minutes from UTC to your time | 420 | -840 to 840 |
 | warm_dayz_coun | Days to reach full limits | 14 | 0 and up |
@@ -64,5 +76,6 @@ Text on screen (or `--json` for status, log, ledger). Exit code: 0 ok · 1 faile
 
 ## Files (all inside the data folder)
 - `stat/fb-state.db`: limits counters, once-only keys, ledger, log, routines.
+- `stat/map/<date>/`: pages and controls saved by `fb map` (redacted).
 - `stat/alerts.txt`: what fb told you. `stat/snaps/`, `report/`, `backup/`, `export/`: made by `fb snap`, `report`, `backup`, `export`.
 - `prof/`: the browser profile with your Facebook login. This is the only folder fb uses outside its program folder.
