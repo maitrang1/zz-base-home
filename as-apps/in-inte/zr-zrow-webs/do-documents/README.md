@@ -1,9 +1,9 @@
 # zr: ZenRows helper
 
-`zr` does the clicking in your ZenRows dashboard for you, at a human pace, in your own browser. Start with just an email and a password. It can sign up, log in, make API keys, run a scrape, show usage, change plans, and more.
+`zr` does the clicking in your ZenRows dashboard for you, at a human pace, in your own browser. You log in once by hand. Then it can make API keys, run a scrape, show usage, change plans, and more.
 
 ## What it does
-- Signs up and logs in. You read the 6-digit email code once.
+- Does everything after login. You log in by hand once in its window (the Cloudflare check and the email code are yours).
 - Creates and manages API keys, webhooks, team invites and alerts.
 - Runs a page scrape, a crawl or a batch, and saves the answer.
 - Shows usage, invoices and your plan. Risky acts (pay, cancel, delete) always wait for your OK.
@@ -12,17 +12,18 @@
 ## You need
 - Windows, Linux or macOS.
 - Google Chrome or Edge.
-- A ZenRows email and password (or a new email to sign up).
+- A ZenRows account, or an email to sign up with.
 
 ## Quick start
-1. Save your login once (it stays on this PC):
-   `printf 'you@example.com\nyour-password\n' | C:\zz\zr.exe secret`
-2. See what it would do (nothing is sent yet):
-   `C:\zz\zr.exe run login`
-3. Turn on real runs once, after you read the risk note:
+1. Log in by hand, once. A Chrome window opens on ZenRows. Tick the Cloudflare box, then sign up or log in there (you read the 6-digit email code yourself):
+   `C:\zz\zr.exe login`
+2. Turn on real runs once, after you read the risk note:
    `C:\zz\zr.exe setup --yes`
+3. See what a job would do (nothing is sent yet):
+   `C:\zz\zr.exe run usage-view`
 4. Do it for real:
-   `C:\zz\zr.exe run login --live`
+   `C:\zz\zr.exe run usage-view --live`
+The login stays in zr's own browser profile, so later runs need no login until the session expires.
 
 ## Key behavior
 - Default is a preview. Add `--live` to act. Add `--force` too for risky acts.

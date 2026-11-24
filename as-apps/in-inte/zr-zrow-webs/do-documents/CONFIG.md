@@ -17,7 +17,7 @@
 | data_loca_wind / data_loca_unix | Data folder | tena root of this app | path, `~` ok |
 | secr_loca_main | Secret folder | `~/.zz-base-home-secr/as-apps/in-inte/zr-zrow-webs` | path |
 | brow_exec_path | Chrome path | empty (auto) | path |
-| brow_head_mode | Show the window | false | true, false |
+| brow_head_mode | Hide the window (headless) | false | true, false |
 | brow_time_seco | Page wait | 60 | 1 and up |
 | brow_vers_minz | Oldest Chrome | 120 | number |
 | type_dely_msec | Gap between keys | [90, 260] | low ≤ high |

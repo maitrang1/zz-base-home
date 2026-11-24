@@ -2,9 +2,16 @@
 
 Commands below use `C:\zz\zr.exe`. Use your own path.
 
-## Save your login
-1. Run: `printf 'you@example.com\nyour-password\n' | C:\zz\zr.exe secret`
-2. It prints `saved`. It never prints your password.
+## Log in or sign up (by hand, once)
+1. Run: `C:\zz\zr.exe login`
+2. A Chrome window opens on ZenRows. Tick the Cloudflare box.
+3. Sign up or log in there. Type the 6-digit email code yourself.
+4. The terminal prints `logged in` and ends. The login stays in zr's own profile.
+5. Do not use `--head` here: it hides the window.
+If Cloudflare keeps looping in the window, stop and tell the developer.
+
+## Optional: let zr fill the login form
+Only if Cloudflare lets it through. Save the login first (`printf 'you@example.com\nyour-password\n' | C:\zz\zr.exe secret`), then `C:\zz\zr.exe run login --live`. Sign-up: `run signup --live`, then `run verify-email --text 123456 --live`. Prefer the by-hand way above.
 
 ## Several accounts
 Save each login under its own name (email on line 1, password on line 2), for example `printf 'a@x.com\nPASS\n' | zr secret --acct team1`, then `zr secret list` shows the ids. The old one-login file still works.
@@ -17,15 +24,8 @@ Save each login under its own name (email on line 1, password on line 2), for ex
 
 ## Turn on real runs
 1. Run: `C:\zz\zr.exe setup`
-2. Log in by hand in the window if it asks.
+2. Log in by hand in the window (Cloudflare tick, password, email code).
 3. Read the risk note. Then run: `C:\zz\zr.exe setup --yes`
-
-## Sign up a new account
-1. Save the login you want (see above).
-2. Run: `C:\zz\zr.exe run signup --live`
-3. Open your mailbox. Copy the 6-digit code.
-4. Run: `C:\zz\zr.exe run verify-email --text 123456 --live`
-5. Run: `C:\zz\zr.exe run login --live`
 
 ## Make an API key
 1. Run: `C:\zz\zr.exe run key-create --title my-key --live`
@@ -70,7 +70,7 @@ It pauses when it needs you and goes on by itself.
 ## Errors
 | Message | Fix |
 |---|---|
-| no login on file | Run `zr secret`. |
+| no login on file | Only for the optional form-fill jobs: run `zr secret`. |
 | no consent on file | Run `zr setup --yes`. |
 | needs your approval | Add `--live --force`. |
 | button or box not found | Run `zr map`, then fix `labl_over`. |
