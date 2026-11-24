@@ -22,6 +22,7 @@ fn writeOnce(ctxz: *const cx.Ctxz, nat: []const u8, body: []const u8) !void {
 var file = try std.Io.Dir.cwd().createFile(ctxz.iozz, nat, .{ .truncate = true });
 defer file.close(ctxz.iozz);
 try file.writePositionalAll(ctxz.iozz, body, 0);
+try file.sync(ctxz.iozz);
 }
 pub fn writeRetry(ctxz: *const cx.Ctxz, nat: []const u8, body: []const u8) !void {
 var tryz: u32 = 0;

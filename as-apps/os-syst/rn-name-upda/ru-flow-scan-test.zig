@@ -104,6 +104,41 @@ for (targ.olds, 0..) |item, indx| try std.testing.expectEqualStrings(item.text, 
 try std.testing.expectEqual(vari.Kind.u16l, targ.bolds[targ.bolds.len - 1].kind);
 try std.testing.expectEqualStrings(root, targ.home);
 }
+test "config path lists written with backslashes are normalized on Windows, left alone elsewhere" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+const win: osys.Osys = .{ .wind = true, .caze = true };
+const nix: osys.Osys = .{ .wind = false, .caze = false };
+const lst = [_][]const u8{ "C:\\Users\\me\\a.txt", "node_modules", "/x/y" };
+const wout = try scan.normList(allo, win, &lst);
+try std.testing.expectEqualStrings("C:/Users/me/a.txt", wout[0]);
+try std.testing.expectEqualStrings("node_modules", wout[1]);
+try std.testing.expectEqualStrings("/x/y", wout[2]);
+const nout = try scan.normList(allo, nix, &lst);
+try std.testing.expectEqualStrings("C:\\Users\\me\\a.txt", nout[0]);
+try std.testing.expectEqual(@as(usize, 0), (try scan.normList(allo, win, &.{})).len);
+}
+test "a skip_path_list file written with backslashes is really skipped during the scan" {
+if (!osys.host.wind) return error.SkipZigTest;
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const root = try fake.rootOf(allo, &tmp);
+const body = try std.fmt.allocPrint(allo, "{s}/p/old\n", .{root});
+try fake.putz(&tmp, "a.txt", body);
+try fake.putz(&tmp, "b.txt", body);
+var conf: cfgz.Conf = .{};
+const skipf = try osys.natiForm(allo, osys.host, try std.fmt.allocPrint(allo, "{s}/a.txt", .{root}));
+conf.skip_path_list = &.{skipf};
+var aw: std.Io.Writer.Allocating = .init(allo);
+const ctxz = try make.make(allo, &aw.writer, root, conf, false);
+const scn = try scan.collect(&ctxz, try std.fmt.allocPrint(allo, "{s}/p/old", .{root}), try std.fmt.allocPrint(allo, "{s}/p/new", .{root}));
+try std.testing.expectEqual(@as(usize, 1), scn.items.len);
+try std.testing.expect(std.mem.endsWith(u8, scn.items[0].path, "b.txt"));
+}
 test "pair messages are the documented sentences" {
 try std.testing.expectEqualStrings("", scan.badText(.none));
 try std.testing.expectEqualStrings("rn: old path not found. Check the spelling and run again.\n", scan.badText(.oldz_miss));

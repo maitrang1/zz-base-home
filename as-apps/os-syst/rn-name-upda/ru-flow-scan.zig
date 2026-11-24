@@ -44,9 +44,18 @@ var list: std.ArrayList([]const u8) = .empty;
 for (ctxz.conf.scan_root_list) |raww| try list.append(ctxz.allo, try ctxz.absOf(raww));
 return list.toOwnedSlice(ctxz.allo);
 }
+pub fn normList(allo: std.mem.Allocator, osy: osys.Osys, list: []const []const u8) ![]const []const u8 {
+const outz = try allo.alloc([]const u8, list.len);
+for (list, 0..) |item, indx| {
+const dupe = try allo.dupe(u8, item);
+if (osy.wind) std.mem.replaceScalar(u8, dupe, '\\', '/');
+outz[indx] = dupe;
+}
+return outz;
+}
 pub fn skipsOf(ctxz: *const cx.Ctxz) ![]const []const u8 {
 var list: std.ArrayList([]const u8) = .empty;
-for (ctxz.conf.scan_skip_list) |item| try list.append(ctxz.allo, item);
+for (try normList(ctxz.allo, ctxz.osy, ctxz.conf.scan_skip_list)) |item| try list.append(ctxz.allo, item);
 try list.append(ctxz.allo, try ctxz.dirzData());
 return list.toOwnedSlice(ctxz.allo);
 }
@@ -60,7 +69,9 @@ pub fn collect(ctxz: *const cx.Ctxz, old: []const u8, new: []const u8) !Scan {
 const targ = try targOf(ctxz, old, new);
 var outc: walk.Outc = .{};
 const skps = try skipsOf(ctxz);
-for (try rootsOf(ctxz, old)) |root| try walk.walkRoot(ctxz.allo, ctxz.gpaz, ctxz.iozz, ctxz.conf, targ, root, skps, &outc);
+var conf = ctxz.conf;
+conf.skip_path_list = try normList(ctxz.allo, ctxz.osy, ctxz.conf.skip_path_list);
+for (try rootsOf(ctxz, old)) |root| try walk.walkRoot(ctxz.allo, ctxz.gpaz, ctxz.iozz, conf, targ, root, skps, &outc);
 try loca.collect(ctxz, targ, &outc);
 return .{ .items = try outc.items.toOwnedSlice(ctxz.allo), .lrefs = try outc.lrefs.toOwnedSlice(ctxz.allo), .wst = outc.wst };
 }

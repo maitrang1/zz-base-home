@@ -46,6 +46,18 @@ var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 try std.testing.expectError(error.FileNotFound, cfgz.confLoad(arna.allocator(), std.testing.io, ".zig-cache/no-such-conf.json"));
 }
+test "config is looked up next to the exe first, then the app root above zig-out/bin, then repo-relative; never the bare cwd" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const cand = try cfgz.candList(arna.allocator(), "X/rn/zig-out/bin");
+try std.testing.expectEqual(@as(usize, 3), cand.len);
+try std.testing.expect(std.mem.startsWith(u8, cand[0], "X"));
+try std.testing.expect(std.mem.endsWith(u8, cand[0], "aa-conf-main.json"));
+try std.testing.expect(std.mem.indexOf(u8, cand[1], "..") != null);
+try std.testing.expectEqualStrings("as-apps/os-syst/rn-name-upda/aa-conf-main.json", cand[2]);
+const none = try cfgz.candList(arna.allocator(), null);
+try std.testing.expectEqual(@as(usize, 1), none.len);
+}
 test "default skip list holds the pseudo dirs" {
 const dflt: cfgz.Conf = .{};
 var hasProc = false;

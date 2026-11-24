@@ -9,6 +9,7 @@ const builtin = @import("builtin");
 pub const Osys = struct { wind: bool, caze: bool };
 pub const host: Osys = .{ .wind = builtin.os.tag == .windows, .caze = builtin.os.tag == .windows or builtin.os.tag == .macos };
 pub const Erro = error{NotAbsolute};
+pub const privz: std.Io.File.Permissions = if (builtin.os.tag == .windows) .default_file else @fromBackingInt(0o600);
 const kern = if (builtin.os.tag == .windows) struct { extern "kernel32" fn GetDriveTypeW(root: [*:0]const u16) callconv(.winapi) u32; } else struct {};
 pub fn drivesFixed(allo: std.mem.Allocator) ![][]u8 {
 var list: std.ArrayList([]u8) = .empty;

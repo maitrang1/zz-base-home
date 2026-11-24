@@ -6,6 +6,7 @@
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");
+const osys = @import("ut-osys-adap.zig");
 const walk = @import("se-scan-walk.zig");
 const stex = @import("se-scan-text.zig");
 const plan = @import("pl-plan-buil.zig");
@@ -42,10 +43,11 @@ const dirz = try ctxz.dirzData();
 const tmpd = try ctxz.nati(try std.fmt.allocPrint(ctxz.allo, "{s}/tmp", .{dirz}));
 try std.Io.Dir.cwd().createDirPath(ctxz.iozz, tmpd);
 const path = try std.fmt.allocPrint(ctxz.allo, "{s}{c}cron-{s}.txt", .{ tmpd, std.fs.path.sep, tag });
-var file = try std.Io.Dir.cwd().createFile(ctxz.iozz, path, .{ .truncate = true });
+var file = try std.Io.Dir.cwd().createFile(ctxz.iozz, path, .{ .truncate = true, .permissions = osys.privz });
 {
 defer file.close(ctxz.iozz);
 try file.writePositionalAll(ctxz.iozz, text, 0);
+try file.sync(ctxz.iozz);
 }
 const outp = try ctxz.runn.exec(ctxz.allo, &.{ "crontab", path }, &.{});
 if (outp.code != 0) return Erro.CronFail;

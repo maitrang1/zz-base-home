@@ -1,7 +1,7 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Load aa-conf-main.json into typed settings with built-in defaults
-// Flo: pick path (flag > ./ > ./as-apps/os-syst/rn-name-upda/) > read > parse JSON > fill missing keys with defaults
+// Flo: pick path (flag > next to the exe > app root two levels above zig-out/bin > repo-relative) > read > parse JSON > fill missing keys with defaults
 // I/O: optional path > Conf struct; an explicit bad path is an error, a missing default file is not
 // ===================================================================
 const std = @import("std");
@@ -48,12 +48,21 @@ if (path) |explicit| {
 const data = try std.Io.Dir.cwd().readFileAlloc(iozz, explicit, allo, .limited(CF.maxz));
 return confParse(allo, data);
 }
-const cand = [_][]const u8{ CF.name, CF.nest };
-for (cand) |item| {
+const exed: ?[]const u8 = std.process.executableDirPathAlloc(iozz, allo) catch null;
+for (try candList(allo, exed)) |item| {
 const data = std.Io.Dir.cwd().readFileAlloc(iozz, item, allo, .limited(CF.maxz)) catch continue;
 return confParse(allo, data);
 }
 return .{};
+}
+pub fn candList(allo: std.mem.Allocator, exed: ?[]const u8) ![]const []const u8 {
+var list: std.ArrayList([]const u8) = .empty;
+if (exed) |dirz| {
+try list.append(allo, try std.fs.path.join(allo, &.{ dirz, CF.name }));
+try list.append(allo, try std.fs.path.join(allo, &.{ dirz, "..", "..", CF.name }));
+}
+try list.append(allo, CF.nest);
+return list.toOwnedSlice(allo);
 }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
