@@ -16,7 +16,7 @@ pub const SPECS = [_]Spec{
 .{ .path = "/verify", .title = "Verify", .boxes = &.{.{ .lab = "Code" }}, .btns = &.{"Verify=>Welcome to your Dashboard"} },
 .{ .path = "/login", .title = "Log in", .boxes = &.{ .{ .lab = "Email" }, .{ .lab = "Password" } }, .btns = &.{ "Log in=>Welcome to your Dashboard", "Continue with Google=>Opening Google", "Continue with GitHub=>Opening GitHub" } },
 .{ .path = "/forgot-password", .title = "Reset password", .boxes = &.{.{ .lab = "Email" }}, .btns = &.{"Send reset link=>Check your email: reset link sent"} },
-.{ .path = "/", .pre = false, .title = "Dashboard Documentation API key", .btns = &.{ "Account menu", "Log out=>Log in to your account" }, .boxes = &.{.{ .lab = "Search" }} },
+.{ .path = "/", .pre = false, .title = "Dashboard Documentation API key", .btns = &.{ "Account menu", "Log out=>Log in to your account" }, .boxes = &.{.{ .lab = "Search" }}, .links = &.{ .{ .href = "/usage", .lab = "Usage page", .text = "Usage" }, .{ .href = "/billing?x=1", .lab = "Billing page", .text = "Billing" }, .{ .href = "/logout", .lab = "Exit page", .text = "Exit" }, .{ .href = "https://other.example/x", .lab = "Outside", .text = "Outside" } } },
 .{ .path = "/dashboard", .title = "Dashboard Welcome" },
 .{ .path = "/settings/account", .title = "Account", .boxes = &.{ .{ .lab = "Name", .init = "Old Name" }, .{ .lab = "Email", .init = "old@example.com" } }, .btns = &.{ "Save=>Changes saved", "Change email", "Delete account", "Delete=>Account deleted" } },
 .{ .path = "/settings/security", .title = "Security Password", .boxes = &.{ .{ .lab = "Current password" }, .{ .lab = "New password" } }, .btns = &.{"Change password=>Password saved"}, .togs = &.{"Two-factor authentication"} },
