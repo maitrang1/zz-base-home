@@ -1,5 +1,10 @@
 # Updates
 
+## 2026-11-24 (accounts)
+Added: several accounts in one `user-acct.json`, picked with `--acct <id>` or run all with `--acct all` (one at a time, rotating order, random wait between accounts). Each account has its own browser profile, database, limits, warm-up and safety rest under `acct/<id>/`. Two accounts resting = all rest. New settings `acct_maxx_coun`, `acct_gap_secs`. Routine items can name an account.
+Changed: your existing profile and data move into `acct/main/` the first time you run this version (moved, nothing deleted). `fb secret` lists every account. `fb status` shows the account. The file is now named `user-acct.json`.
+Tested with a fake runner and the practice site only: the full `--acct all` run with real browsers has not been tried.
+
 ## 2026-11-24
 Added: 125 more jobs (178 in all, see `fb jobs`): account (login, logout, sign-up, password, two-factor, passkey, sessions, contact info, name, language, deactivate, delete, profile photo, cover, work, school, city, links, featured, life events), settings (privacy, search, tags, notifications, block, apps, ad choices), data (activity log, download your information, saved, albums, memories), money (billing, invoices, payment methods, Meta Verified, ads, boost), access (page, business and ad roles, partners, group admins, developer console, connected accounts), help and support, and more core jobs (friend lists, group and page create and edit, post tag, check-in, feeling, hide, report, pin, comment edit and delete, story, reel, event edit, Messenger extras).
 Added: job classes in `fb jobs`: A runs by itself, G needs your OK, H assist (stops for codes, card entry and the final delete, deactivate or pay click, then continues).

@@ -30,6 +30,8 @@
     "capz_mone_dayz": 0,
     "capz_help_dayz": 40,
     "mone_spen_capz": 0,
+    "acct_maxx_coun": 5,
+    "acct_gap_secs": [300, 1200],
     "secr_loca_main": "~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs",
     "base_deve_main": "https://developers.facebook.com",
     "map_page_maxx": 25,

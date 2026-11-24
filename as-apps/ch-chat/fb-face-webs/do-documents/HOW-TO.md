@@ -16,6 +16,15 @@ Every command shows a preview by default. Add `--live` to do it for real. See ev
 4. `fb gaps`: shows buttons that changed and new buttons no job knows. `fb gaps matrix` lists every job by area.
 fb never types your password on the command line and never prints it. A wrong password stops fb (no retry loop).
 
+## Several accounts
+Put every account in `user-acct.json`: `{"main":"shop1","accs":[{"id":"shop1","login":"a@mail.com","pass":"..."},{"id":"shop2","login":"b@mail.com","pass":"...","lang":"en","scal":50}]}` (`scal` = percent of the daily limits, optional). The old one-account file still works.
+- One account: add `--acct shop2` to any command, for example `fb start --live --acct shop2`.
+- All accounts: `--acct all`, for example `fb flow run morning --live --acct all`. fb runs them one at a time, in a different order each day, and waits 5 to 20 minutes between accounts.
+- Each account has its own browser window profile, limits, warm-up and safety rest, in `acct/<id>/` inside your data folder. Never log two accounts into one window.
+- If one account gets a Facebook warning, only that account rests. If two do, every account rests.
+- Limit: 5 accounts (`acct_maxx_coun`, at most 20). Use only accounts you own. Facebook allows one personal account per person: use Pages for extra presence.
+- In a routine, an item can name an account: `{"job":"renewall","acct":"shop2"}`.
+
 ## Account, settings, data, money, access, help
 Every job shows in `fb jobs`: **A** runs by itself, **G** is guarded (needs your OK: `--force` or `fb approve`), **H** assist: fb prepares the page, then stops for the step only you can do (codes, card entry, the final delete or pay click) and continues after.
 ```
