@@ -15,6 +15,9 @@ Missing keys use the defaults below. Times are in milliseconds (msec) or seconds
 | type_dely_msec | Pause between keys | [90, 260] | two numbers, low ≤ high |
 | acti_dely_secs | Pause between actions | [6, 25] | two numbers, low ≥ 1 |
 | read_dely_msec | Pause after opening a chat | [800, 3500] | two numbers |
+| acct_maxx_coun | Most accounts in `user-acct.json` | 5 | 1 to 20 |
+| acct_gap_secs | Wait between accounts with `--acct all` (min, max seconds) | [300, 1200] | numbers |
+| secr_loca_main | Folder with `user-acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/za-zalo-webs | folder |
 | capz_send_hour | Sends per hour | 20 | 1 or more, ≤ day cap |
 | capz_send_dayz | Sends per day | 120 | 1 or more |
 | capz_newc_dayz | New-contact actions per day | 5 | 0 or more |

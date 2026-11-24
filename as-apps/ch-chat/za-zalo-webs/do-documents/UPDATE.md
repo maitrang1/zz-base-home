@@ -1,5 +1,10 @@
 # Updates
 
+## 2026-11-24 (accounts)
+Added: several accounts in one `user-acct.json` (names only, no passwords), picked with `--acct <id>` or run all with `--acct all` (one at a time, rotating order, random wait between accounts). Each account has its own browser profile, database, limits and stop state under `acct/<id>/`. Two accounts stopped for safety = nothing runs. `za secret` lists the accounts. New settings `acct_maxx_coun`, `acct_gap_secs`, `secr_loca_main`. A routine can name an account.
+Changed: your existing profile and data move into `acct/main/` the first time you run this version (moved, nothing deleted).
+Tested with a fake runner and the mock page only: the full `--acct all` run with real browsers has not been tried.
+
 ## 2026-11-23 (account and settings)
 Added: `za flows` shows every Zalo Web action and who does it: built, gap (not checked on real Zalo yet), hand (you: QR, SMS code, password, captcha) or out (Zalo Web does not have it).
 Added: jobs `logout`, `devices`, `devout <device>`, `notify on|off`, `lang vi|en`, `storage`, `help`, `feedback <text>`, `passwd`, `unfriend <name>`. Log out, remote log out, feedback and unfriend ask for `--live --force`.

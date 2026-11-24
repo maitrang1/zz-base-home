@@ -13,6 +13,8 @@ za is a helper that uses Zalo Web the way you do. It reads your new chats, repli
 - Shows a preview first. Nothing changes until you add `--live`.
 - Messages and help are in Vietnamese by default (English: set `lang_main_code` to `en`).
 
+- Runs several Zalo accounts you own, one at a time, each in its own browser profile (`--acct shop1` or `--acct all`).
+
 ## What you need
 - Windows, Linux or macOS with Google Chrome or Microsoft Edge.
 - A Zalo account you own, and the Zalo app on your phone for the QR login.

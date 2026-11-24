@@ -6,6 +6,16 @@ Short form: `E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe` = 
 1. `za setup --yes` checks Chrome, makes the folders, records that you accept the Zalo risk.
 2. `za login`: a window opens. Scan the QR code with the Zalo phone app and approve. The session stays in the za profile.
 
+## Several accounts
+List the accounts you own in `user-acct.json` in your secrets folder (`~/.zz-base-home-secr/as-apps/ch-chat/za-zalo-webs/`): `{"main":"shop1","accs":[{"id":"shop1","label":"Shop","phone":"0912345678"},{"id":"home","label":"Home","lang":"en","scal":50}]}` (`scal` = percent of the daily limits, optional). It holds no passwords. `za secret` shows the list (phone masked).
+- Scan each account's QR once, in its own window: `za login --acct shop1`, then `za login --acct home`.
+- One account: add `--acct home` to any command, for example `za run reply --live --acct home`.
+- All accounts: `--acct all`, for example `za flow run morning --live --acct all`. za runs them one at a time, in a different order each day, and waits 5 to 20 minutes between accounts.
+- Each account has its own browser profile, limits, warm-up and stop state, in `acct/<id>/` inside your data folder. Never log two accounts into one window.
+- If Zalo stops one account, only that account stops (clear it with `za resume --acct <id>` after you checked). If two stop, nothing runs.
+- Limit: 5 accounts (`acct_maxx_coun`, at most 20). Use only accounts you own.
+- A routine can be for one account: `{"name":"morning","items":[...],"acct":"shop1"}`.
+
 ## Read and search
 `za run read --read` reads unread chats. `za run summ` lists the last message of each unread chat. `za run profile --live` opens your account info.
 
