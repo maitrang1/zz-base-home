@@ -22,6 +22,8 @@
     "capz_acce_dayz": 30,
     "capz_sett_dayz": 30,
     "capz_help_dayz": 30,
+    "acct_maxx_coun": 3,
+    "acct_gap_secs": [300, 1200],
     "quie_hour_rang": [0, 0],
     "quie_zone_minu": 0,
     "warm_dayz_coun": 0,

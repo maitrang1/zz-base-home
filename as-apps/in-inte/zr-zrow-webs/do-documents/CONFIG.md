@@ -25,6 +25,8 @@
 | mous_step_coun | Mouse steps | 18 | 1 to 200 |
 | time_scal_perc | Speed of all waits | 100 | 0 to 1000 |
 | rand_seed_numb | Fixed random seed | 0 (random) | number |
+| acct_maxx_coun | Most accounts in `user-acct.json` | 3 | 1 to 20 |
+| acct_gap_secs | Wait between accounts with `--acct all` (min, max seconds) | [300, 1200] | numbers |
 | capz_acct_dayz | Account acts per day | 10 | number |
 | capz_prod_dayz | Product runs per day | 200 | number |
 | capz_data_dayz | Data views per day | 300 | number |
@@ -62,4 +64,5 @@ Lines on screen. Exit code: 0 ok, 1 failed, 2 usage, 3 page changed, 4 blocked.
 | `<data>/prof/` | Chrome profile |
 | `<data>/stat/alerts.txt` | Alerts to you |
 | `<data>/stat/report`, `backup`, `export`, `snaps` | Support, backup, export, page copies |
-| `<secret>/zr-login.json` | Your email and password |
+| `<secret>/user-acct.json` | Your ZenRows logins (one or many accounts) |
+| `<data>/acct/<id>/` | Browser profile and state of one account |

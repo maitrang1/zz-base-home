@@ -6,6 +6,15 @@ Commands below use `C:\zz\zr.exe`. Use your own path.
 1. Run: `printf 'you@example.com\nyour-password\n' | C:\zz\zr.exe secret`
 2. It prints `saved`. It never prints your password.
 
+## Several accounts
+Save each login under its own name (email on line 1, password on line 2), for example `printf 'a@x.com\nPASS\n' | zr secret --acct team1`, then `zr secret list` shows the ids. The old one-login file still works.
+- One account: add `--acct team1` to any command.
+- All accounts: `--acct all`, for example `zr flow run morning --live --acct all`. zr runs them one at a time, in a different order each day, and waits 5 to 20 minutes between accounts.
+- Each account has its own browser profile, limits and safety rest, in `acct/<id>/` inside your data folder. Never log two accounts into one window.
+- If one account is warned or limited, only it rests. If two are, every account rests.
+- Limit: 3 accounts (`acct_maxx_coun`, at most 20). Use only accounts you own, for example separate teams. Never open accounts to get more free credits.
+- In a routine, an item can name an account: `{"job":"usage-view","acct":"team2"}`.
+
 ## Turn on real runs
 1. Run: `C:\zz\zr.exe setup`
 2. Log in by hand in the window if it asks.
