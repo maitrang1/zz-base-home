@@ -10,7 +10,7 @@ Every command shows a preview by default. Add `--live` to do it for real. See ev
 3. `fb doctor`: checks the buttons fb needs. If a line says MISSING, see "Fix a button name" below.
 
 ## Start from zero (only a login and a password)
-1. Create the secrets file `acct.json` in `~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs/` (Windows: your user folder). Only the fields you need, for example `{"login":"you@mail.com","pass":"your password"}`. Other fields: `newp` (new password), `firs` and `last` (name), `mail`, `birt` (birthday, YYYY-MM-DD).
+1. Create the secrets file `user-acct.json` in `~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs/` (Windows: your user folder). Only the fields you need, for example `{"login":"you@mail.com","pass":"your password"}`. Other fields: `newp` (new password), `firs` and `last` (name), `mail`, `birt` (birthday, YYYY-MM-DD).
 2. `fb secret` shows which fields are filled (never the values).
 3. `fb setup --yes` once (risk note), then `fb start --live`: it logs in, checks the buttons and maps the site's pages. If Facebook asks for a code or approval, you do that in the browser window; fb waits and continues.
 4. `fb gaps`: shows buttons that changed and new buttons no job knows. `fb gaps matrix` lists every job by area.

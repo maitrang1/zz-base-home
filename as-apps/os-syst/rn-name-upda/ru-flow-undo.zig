@@ -31,10 +31,16 @@ const ren = pend orelse return path;
 if (!osys.insid(ctxz.osy, path, ren.a)) return path;
 return std.fmt.allocPrint(ctxz.allo, "{s}{s}", .{ ren.b, path[ren.a.len..] });
 }
-fn pathNow(ctxz: *const cx.Ctxz, ent: jour.Jent, pend: ?jour.Jent) ![]const u8 {
-const ren = pend orelse return ent.a;
-if (!osys.insid(ctxz.osy, ent.a, ren.a)) return ent.a;
-return std.fmt.allocPrint(ctxz.allo, "{s}{s}", .{ ren.b, ent.a[ren.a.len..] });
+const Verd = enum { done, same, conf };
+fn verdOf(cur: []const u8, ent: jour.Jent, force: bool) Verd {
+const hcur = take.hashHex(cur);
+if (std.mem.eql(u8, &hcur, ent.h0)) return .done;
+if (!std.mem.eql(u8, &hcur, ent.h1) and !force) return .conf;
+return .same;
+}
+fn tally(verd: Verd, rsl: *Rslt) bool {
+switch (verd) { .done => rsl.skip += 1, .conf => rsl.conf += 1, .same => return true }
+return false;
 }
 fn undoPatch(ctxz: *const cx.Ctxz, pth: stor.Pths, ent: jour.Jent, where: []const u8, live: bool, force: bool, rsl: *Rslt) !void {
 var scra = std.heap.ArenaAllocator.init(ctxz.gpaz);
@@ -43,9 +49,7 @@ const sara = scra.allocator();
 const nat = try ctxz.nati(where);
 const maxz = ctxz.conf.scan_maxz * CF.mbyt + 1;
 const cur = std.Io.Dir.cwd().readFileAlloc(ctxz.iozz, nat, sara, .limited(maxz)) catch { rsl.conf += 1; return; };
-const hcur = take.hashHex(cur);
-if (std.mem.eql(u8, &hcur, ent.h0)) { rsl.skip += 1; return; }
-if (!std.mem.eql(u8, &hcur, ent.h1) and !force) { rsl.conf += 1; return; }
+if (!tally(verdOf(cur, ent, force), rsl)) return;
 const orig = rest.getz(sara, ctxz.iozz, pth.snap, ent.b, ent.h0, maxz) catch { rsl.conf += 1; return; };
 if (live) try patc.writeRetry(ctxz, nat, orig);
 rsl.restd += 1;
@@ -54,9 +58,7 @@ fn undoLoca(ctxz: *const cx.Ctxz, pth: stor.Pths, ent: jour.Jent, id: []const u8
 const kind = loca.kindOf(ent.a) orelse { rsl.conf += 1; return; };
 const name = if (kind == .link) try mapPath(ctxz, ent.b, pend) else ent.b;
 const cur = loca.current(ctxz, kind, name) catch { rsl.conf += 1; return; };
-const hcur = take.hashHex(cur);
-if (std.mem.eql(u8, &hcur, ent.h0)) { rsl.skip += 1; return; }
-if (!std.mem.eql(u8, &hcur, ent.h1) and !force) { rsl.conf += 1; return; }
+if (!tally(verdOf(cur, ent, force), rsl)) return;
 const orig = rest.getz(ctxz.allo, ctxz.iozz, pth.snap, ent.note, ent.h0, ctxz.conf.scan_maxz * CF.mbyt) catch { rsl.conf += 1; return; };
 if (live) try loca.setz(ctxz, kind, name, orig, id);
 rsl.restd += 1;
@@ -80,7 +82,7 @@ else rsl.conf += 1;
 continue;
 }
 if (std.mem.eql(u8, ent.op, "loca")) { try undoLoca(ctxz, pth, ent, id, pend, live, force, &rsl); continue; }
-if (std.mem.eql(u8, ent.op, "patch")) try undoPatch(ctxz, pth, ent, try pathNow(ctxz, ent, pend), live, force, &rsl);
+if (std.mem.eql(u8, ent.op, "patch")) try undoPatch(ctxz, pth, ent, try mapPath(ctxz, ent.a, pend), live, force, &rsl);
 }
 if (rsl.conf > 0) rsl.code = .bloc;
 return rsl;

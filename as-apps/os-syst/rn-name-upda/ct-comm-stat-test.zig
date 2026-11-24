@@ -55,6 +55,25 @@ try std.testing.expect(std.mem.indexOf(u8, aw.written(), "\"gitz_hist\":true") !
 try std.testing.expect(std.mem.indexOf(u8, aw.written(), "\"enco_vari\":false") != null);
 try std.testing.expect(std.mem.indexOf(u8, aw.written(), "\"vers\":\"0.1.0\"") != null);
 }
+test "stat shows the last run, and an open run exits 3 with the recovery command" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const root = try fake.rootOf(allo, &tmp);
+try fake.putz(&tmp, "zz-tena/as-apps/os-syst/rn-name-upda/jour/20231114-221320.jsonl", "{\"op\":\"open\"}\n{\"op\":\"patch\",\"a\":\"/f\"}\n");
+var aw: std.Io.Writer.Allocating = .init(allo);
+const ctxz = try make.make(allo, &aw.writer, root, .{}, false);
+try std.testing.expectEqual(exit.Code.find, try stat.comm(&ctxz, &.{}));
+try std.testing.expect(std.mem.indexOf(u8, aw.written(), "last run 20231114-221320: open") != null);
+try std.testing.expect(std.mem.indexOf(u8, aw.written(), "open run: rn undo 20231114-221320 --live --force") != null);
+try fake.putz(&tmp, "zz-tena/as-apps/os-syst/rn-name-upda/jour/20231114-221320.jsonl", "{\"op\":\"open\"}\n{\"op\":\"done\"}\n");
+aw.clearRetainingCapacity();
+try std.testing.expectEqual(exit.Code.okay, try stat.comm(&ctxz, &.{}));
+try std.testing.expect(std.mem.indexOf(u8, aw.written(), "last run 20231114-221320: done") != null);
+try std.testing.expect(std.mem.indexOf(u8, aw.written(), "open run") == null);
+}
 test "stat takes no args" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();

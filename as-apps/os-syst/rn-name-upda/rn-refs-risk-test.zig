@@ -145,6 +145,46 @@ try std.testing.expectEqual(@as(usize, 1), gitz);
 try std.testing.expectEqual(@as(usize, 1), sign);
 try std.testing.expectEqual(@as(usize, 1), okay);
 }
+test "the walker finds binary and UTF-16 hits and flags the binary one by default" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const root = try fake.rootOf(allo, &tmp);
+try fake.putz(&tmp, "b.dat2", try std.fmt.allocPrint(allo, "MZ\x00{s}/p/old\x00", .{root}));
+try fake.putz(&tmp, "u.txt", try ldz.encode(allo, .u16le, try std.fmt.allocPrint(allo, "x {s}/p/old y", .{root})));
+var aw: std.Io.Writer.Allocating = .init(allo);
+const ctxz = try make.make(allo, &aw.writer, root, .{}, false);
+const scn = try scan.collect(&ctxz, try std.fmt.allocPrint(allo, "{s}/p/old", .{root}), try std.fmt.allocPrint(allo, "{s}/p/new", .{root}));
+try std.testing.expectEqual(@as(usize, 2), scn.items.len);
+var binz: usize = 0;
+var utf16: usize = 0;
+for (scn.items) |item| {
+if (std.mem.endsWith(u8, item.path, "b.dat2")) { binz += 1; try std.testing.expect(item.skip); try std.testing.expectEqual(plan.Clas.bina, item.clas); }
+if (std.mem.endsWith(u8, item.path, "u.txt")) { utf16 += 1; try std.testing.expect(!item.skip); }
+}
+try std.testing.expectEqual(@as(usize, 1), binz);
+try std.testing.expectEqual(@as(usize, 1), utf16);
+try std.testing.expectEqual(@as(usize, 1), scn.wst.bina);
+try std.testing.expectEqual(@as(usize, 1), scn.wst.scan);
+}
+test "a binary over scan_binz_maxz is counted and never scanned; maxz 0 means never" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const root = try fake.rootOf(allo, &tmp);
+try fake.putz(&tmp, "b.dat2", try std.fmt.allocPrint(allo, "MZ\x00{s}/p/old\x00", .{root}));
+var conf: cfgz.Conf = .{};
+conf.scan_binz_maxz = 0;
+var aw: std.Io.Writer.Allocating = .init(allo);
+const ctxz = try make.make(allo, &aw.writer, root, conf, false);
+const scn = try scan.collect(&ctxz, try std.fmt.allocPrint(allo, "{s}/p/old", .{root}), try std.fmt.allocPrint(allo, "{s}/p/new", .{root}));
+try std.testing.expectEqual(@as(usize, 0), scn.items.len);
+try std.testing.expectEqual(@as(usize, 1), scn.wst.bina);
+}
 test "a symlink into the old path becomes a link ref with the new target" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();

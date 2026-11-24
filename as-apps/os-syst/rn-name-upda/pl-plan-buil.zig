@@ -4,7 +4,6 @@
 // Flo: kind + file risks > class bits > skip flag from config > count the plan
 // I/O: Hit kind, path mask, file kind + Conf > Item {clas, mask, skip}; Item list > Summ counts
 // ===================================================================
-const std = @import("std");
 const cfgz = @import("cf-conf-load.zig");
 const vari = @import("ut-path-vari.zig");
 pub const Clas = enum(u4) { safe, comp, enco, bina, arch, sign, othe, syst, runn, sync, pack, urls, gitz };

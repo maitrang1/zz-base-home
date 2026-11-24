@@ -11,7 +11,6 @@ const plan = @import("pl-plan-buil.zig");
 const wind = @import("sy-loca-wind.zig");
 const cron = @import("sy-loca-cron.zig");
 const link = @import("sy-link-kind.zig");
-const runm = @import("ru-cmdz-runn.zig");
 const unit_exts = [_][]const u8{ ".service", ".timer", ".socket", ".mount", ".path" };
 pub fn collect(ctxz: *const cx.Ctxz, targ: walk.Targ, outc: *walk.Outc) !void {
 if (!ctxz.conf.loca_on) return;

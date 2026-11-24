@@ -38,7 +38,7 @@ Missing keys use the defaults below.
 | capz_mone_dayz | Money: payment methods, Meta Verified, ads (0 = off) | 0 | 0 and up |
 | capz_help_dayz | Reads, support messages, map pages | 40 | 0 and up |
 | mone_spen_capz | Biggest budget a spend job may use (0 = none) | 0 | 0 and up |
-| secr_loca_main | Folder with your secrets file `acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs | folder |
+| secr_loca_main | Folder with your secrets file `user-acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs | folder |
 | base_deve_main | Developer console address | https://developers.facebook.com | http(s) address |
 | map_page_maxx | Pages `fb map` visits per run | 25 | 1 to 200 |
 | map_deep_maxx | How many link steps from a start page | 2 | 0 to 3 |

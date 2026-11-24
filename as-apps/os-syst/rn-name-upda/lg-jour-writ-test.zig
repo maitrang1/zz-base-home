@@ -53,7 +53,21 @@ defer tmp.cleanup();
 const pth = try paths(allo, &tmp);
 try std.testing.expectError(error.FileNotFound, jour.readAll(allo, std.testing.io, pth[1]));
 }
-test "blank lines are skipped, a broken line is an error" {
+test "a torn last line (crash mid-append) is dropped, the lines before it are kept" {
+var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arna.deinit();
+const allo = arna.allocator();
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+const pth = try paths(allo, &tmp);
+try fake.putz(&tmp, "jour/r1.jsonl", "{\"op\":\"open\"}\n{\"op\":\"patch\",\"a\":\"/f\"}\n{\"op\":\"pat");
+const ents = try jour.readAll(allo, std.testing.io, pth[1]);
+try std.testing.expectEqual(@as(usize, 2), ents.len);
+try std.testing.expectEqualStrings("patch", ents[1].op);
+try fake.putz(&tmp, "jour/r1.jsonl", "{\"op\":\"open\"}\n{\"op\":\"pat\n{\"op\":\"done\"}\n");
+try std.testing.expect(std.meta.isError(jour.readAll(allo, std.testing.io, pth[1])));
+}
+test "blank lines are skipped, a broken only-line is dropped as torn" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
 defer arna.deinit();
 const allo = arna.allocator();
@@ -65,7 +79,7 @@ const ents = try jour.readAll(allo, std.testing.io, pth[1]);
 try std.testing.expectEqual(@as(usize, 2), ents.len);
 try fake.putz(&tmp, "jour/r2.jsonl", "{not json}\n");
 const bad = try std.fmt.allocPrint(allo, "{s}/jour/r2.jsonl", .{try fake.rootOf(allo, &tmp)});
-try std.testing.expect(std.meta.isError(jour.readAll(allo, std.testing.io, bad)));
+try std.testing.expectEqual(@as(usize, 0), (try jour.readAll(allo, std.testing.io, bad)).len);
 }
 test "state: none, open, done, rolled (rolled after fail still rolled)" {
 const none = [_]jour.Jent{};

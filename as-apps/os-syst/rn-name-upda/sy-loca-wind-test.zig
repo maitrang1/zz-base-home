@@ -11,7 +11,6 @@ const walk = @import("se-scan-walk.zig");
 const plan = @import("pl-plan-buil.zig");
 const scan = @import("ru-flow-scan.zig");
 const mock = @import("te-mock-runn.zig");
-const osys = @import("ut-osys-adap.zig");
 const fake = @import("te-mach-fake.zig");
 const make = @import("te-ctxz-make.zig");
 const cfgz = @import("cf-conf-load.zig");

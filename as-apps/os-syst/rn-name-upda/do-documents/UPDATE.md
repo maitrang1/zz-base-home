@@ -15,4 +15,7 @@ Changed
 - Paths written with `\\` or as `file:///` are changed by default.
 
 Fixed
-- Nothing yet. First release.
+- `rn` now finds `aa-conf-main.json` no matter which folder you run it from. Before, it only looked in the current folder.
+- Paths with `\` in `skip_path_list` and `scan_skip_list` now work on Windows.
+- A run cut short by a crash or power loss can be undone: the run log and the saved copies are written to disk before any file changes, and a half-written last log line is ignored.
+- Saved copies and the run log are private to you on Linux and macOS.

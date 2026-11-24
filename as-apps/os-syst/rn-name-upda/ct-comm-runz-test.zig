@@ -12,7 +12,6 @@ const exit = @import("ct-exit-code.zig");
 const fake = @import("te-mach-fake.zig");
 const make = @import("te-ctxz-make.zig");
 const seed = @import("te-flow-seed.zig");
-const ladz = @import("ct-safe-ladd.zig");
 fn pair(allo: std.mem.Allocator, fxt: seed.Fxt) ![]const []const u8 { return allo.dupe([]const u8, &.{ fxt.old, fxt.new }); }
 test "dry-run is the default: plan printed, disk untouched" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);

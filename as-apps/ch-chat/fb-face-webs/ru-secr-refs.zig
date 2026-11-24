@@ -1,11 +1,11 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Account secrets as refs: read login data from acct.json in the secrets folder (never from the command line, never stored by fb)
-// Flo: expand the secrets folder > read acct.json (missing or broken = empty) > fields login, pass, newp, firs, last, mail, birt > `fb secret` lists which fields are set, never the values
+// Des: Account secrets as refs: read login data from user-acct.json in the secrets folder (never from the command line, never stored by fb)
+// Flo: expand the secrets folder > read user-acct.json (missing or broken = empty) > fields login, pass, newp, firs, last, mail, birt > `fb secret` lists which fields are set, never the values
 // I/O: folder path (caller) > task.Secr (arena owned); status text lists field names only
 // ===================================================================
 const std = @import("std"); const task = @import("ru-task-runn.zig"); const cfgz = @import("cf-conf-load.zig");
-const CF = .{ .file = "acct.json", .maxz = 8192 };
+const CF = .{ .file = "user-acct.json", .maxz = 8192 };
 const FIELDS = [_][]const u8{ "login", "pass", "newp", "firs", "last", "mail", "birt" };
 pub fn dirOf(allo: std.mem.Allocator, home: []const u8, conf: cfgz.Conf) ![]u8 { return cfgz.pathExpa(allo, home, conf.secr_loca_main); }
 pub fn load(aren: std.mem.Allocator, iozz: std.Io, dir: []const u8) task.Secr { if (dir.len == 0) return .{}; const path = std.fs.path.join(aren, &.{ dir, CF.file }) catch return .{}; const byte = std.Io.Dir.cwd().readFileAlloc(iozz, path, aren, .limited(CF.maxz)) catch return .{}; return std.json.parseFromSliceLeaky(task.Secr, aren, byte, .{ .ignore_unknown_fields = true, .allocate = .alloc_always }) catch .{}; }

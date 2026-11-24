@@ -12,7 +12,9 @@
 
 ## Settings
 
-Settings live in `aa-conf-main.json`, next to the program. A key you leave out uses the default below.
+Settings live in `aa-conf-main.json` in the `rn-name-upda` folder (two folders above the program). `rn` also accepts a copy placed right next to the program. A key you leave out uses the default below. To use another file, add `--conf FILE`.
+
+Paths in lists may use `\` or `/`.
 
 | Name | Does | Default | Allowed |
 |---|---|---|---|

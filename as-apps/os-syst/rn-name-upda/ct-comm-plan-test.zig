@@ -6,7 +6,6 @@
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig
 // ===================================================================
 const std = @import("std");
-const cx = @import("ct-ctrl-ctxz.zig");
 const plan = @import("ct-comm-plan.zig");
 const exit = @import("ct-exit-code.zig");
 const cfgz = @import("cf-conf-load.zig");

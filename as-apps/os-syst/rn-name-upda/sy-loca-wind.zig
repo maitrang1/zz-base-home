@@ -10,7 +10,6 @@ const walk = @import("se-scan-walk.zig");
 const stex = @import("se-scan-text.zig");
 const plan = @import("pl-plan-buil.zig");
 const runm = @import("ru-cmdz-runn.zig");
-const risk = @import("ut-risk-clas.zig");
 const CF = .{ .sepz = "\x1f", .hkey = "HKEY_", .typz = "    REG_", .gap = "    " };
 pub const Erro = error{RegFail};
 pub const Regv = struct { key: []const u8, name: []const u8, typz: []const u8, data: []const u8 };
