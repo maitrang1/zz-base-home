@@ -1,0 +1,27 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Many accounts, one at a time: data folders per account, first-run move, daily rotation, random gap, rest handling, caps scale
+// Flo: ids > rotate by day > per account: skip when resting > run (callback) > unsafe stop = rest it > two accounts resting = rest all the rest > random gap before the next ; results list with exit codes
+// I/O: account ids + callback (caller) > Res per account; moves old prof/stat into acct/main (never deletes); state in each account's own db
+// ===================================================================
+const std = @import("std"); const cfgz = @import("cf-conf-load.zig"); const pace = @import("ru-huma-pace.zig"); const stat = @import("st-stat-main.zig"); const erro = @import("er-erro-type.zig");
+const CF = .{ .sub = "acct", .stat = "stat", .prof = "prof", .dbfi = "fb-state.db", .unsf = "unsafe_until", .dayz = 86400000, .corr = 2 };
+pub const Res = struct { id: []const u8, state: []const u8, code: u8 };
+pub const Env = struct { aren: std.mem.Allocator, iozz: std.Io, conf: cfgz.Conf, root: []const u8, ids: []const []const u8, now: i64, rng: *pace.Rng, ctx: ?*anyopaque, run: *const fn (ctx: ?*anyopaque, id: []const u8) anyerror!void, say: *const fn (ctx: ?*anyopaque, msg: []const u8) void, browser: bool = true };
+pub fn applyScal(conf: cfgz.Conf, scal: u32) cfgz.Conf { var out = conf; if (scal >= 100) return out; const info = @typeInfo(cfgz.Conf).@"struct"; inline for (info.field_names, info.field_types) |fnm, fty| { if (fty == u32 and std.mem.startsWith(u8, fnm, "capz_")) { const base = @field(conf, fnm); @field(out, fnm) = if (base == 0) 0 else @max(1, @as(u32, @intCast(@as(u64, base) * scal / 100))); } } return out; }
+pub fn order(aren: std.mem.Allocator, ids: []const []const u8, now: i64) ![]const []const u8 { const out = try aren.alloc([]const u8, ids.len); if (ids.len == 0) return out; const off: usize = @intCast(@mod(@divFloor(now, CF.dayz), @as(i64, @intCast(ids.len)))); for (ids, 0..) |_, ix| out[ix] = ids[(ix + off) % ids.len]; return out; }
+pub fn gapMs(rng: *pace.Rng, conf: cfgz.Conf) u64 { return pace.logn(rng, @as(u64, conf.acct_gap_secs[0]) * 1000, @as(u64, conf.acct_gap_secs[1]) * 1000); }
+fn dbOpen(env: *Env, id: []const u8) !stat.Stat { const dir = try std.fs.path.join(env.aren, &.{ env.root, CF.sub, id, CF.stat }); try std.Io.Dir.cwd().createDirPath(env.iozz, dir); const path = try std.fs.path.joinZ(env.aren, &.{ dir, CF.dbfi }); return stat.Stat.open(env.aren, path); }
+pub fn restUntil(env: *Env, id: []const u8) i64 { var st = dbOpen(env, id) catch return 0; defer st.close(); return st.metaGet(CF.unsf) catch 0; }
+pub fn restSet(env: *Env, id: []const u8) void { var st = dbOpen(env, id) catch return; defer st.close(); st.metaSet(CF.unsf, env.now + @as(i64, env.conf.cool_hour_coun) * 3600000) catch {}; }
+pub fn migrate(aren: std.mem.Allocator, iozz: std.Io, root: []const u8) !bool { const dst = try std.fs.path.join(aren, &.{ root, CF.sub, "main" }); const cwd = std.Io.Dir.cwd(); if (cwd.access(iozz, dst, .{})) |_| { return false; } else |_| {} const old_stat = try std.fs.path.join(aren, &.{ root, CF.stat }); const old_prof = try std.fs.path.join(aren, &.{ root, CF.prof }); var moved = false; try cwd.createDirPath(iozz, dst); if (cwd.access(iozz, old_stat, .{})) |_| { try cwd.rename(old_stat, cwd, try std.fs.path.join(aren, &.{ dst, CF.stat }), iozz); moved = true; } else |_| {} if (cwd.access(iozz, old_prof, .{})) |_| { try cwd.rename(old_prof, cwd, try std.fs.path.join(aren, &.{ dst, CF.prof }), iozz); moved = true; } else |_| {} return moved; }
+fn note(env: *Env, comptime fmtz: []const u8, args: anytype) void { const line = std.fmt.allocPrint(env.aren, fmtz, args) catch return; env.say(env.ctx, line); }
+fn isUnsafe(err: anyerror) bool { return err == error.Unsafe; }
+pub fn runAll(env: *Env) ![]const Res { var out: std.ArrayList(Res) = .empty; const seq = try order(env.aren, env.ids, env.now); var resting: u32 = 0; if (env.browser) { for (seq) |id| { if (restUntil(env, id) > env.now) resting += 1; } }
+var stop_all = env.browser and resting >= CF.corr; if (stop_all) note(env, "{d} accounts are already resting: all accounts rest, nothing runs", .{resting}); var ran: u32 = 0;
+for (seq) |id| { if (env.browser) { if (stop_all or restUntil(env, id) > env.now) { if (stop_all) restSet(env, id); try out.append(env.aren, .{ .id = id, .state = "rest", .code = 4 }); note(env, "account {s}: resting, skipped", .{id}); continue; } if (ran > 0) { const gap = gapMs(env.rng, env.conf); note(env, "waiting {d} s before the next account", .{gap / 1000}); pace.nap(env.iozz, gap, env.conf.time_scal_perc); } }
+ran += 1; note(env, "== account {s} ==", .{id}); env.run(env.ctx, id) catch |err| { try out.append(env.aren, .{ .id = id, .state = @errorName(err), .code = erro.exitCode(err) }); if (env.browser and isUnsafe(err)) { restSet(env, id); resting += 1; if (resting >= CF.corr and !stop_all) { stop_all = true; note(env, "two accounts hit a safety stop: the remaining accounts rest too", .{}); } } continue; }; try out.append(env.aren, .{ .id = id, .state = "ok", .code = 0 }); }
+return out.items; }
+pub fn worst(res: []const Res) u8 { var code: u8 = 0; for (res) |rs| { if (rs.code > code) code = rs.code; } return code; }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
