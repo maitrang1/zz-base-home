@@ -1,6 +1,18 @@
 {
-    "grup_rule_mapz": {},
-    "site_rule_list": [],
+    "grup_rule_mapz": {
+        "cars_easy": { "geoz_code_dflt": "vn", "rate_host_seco": 2, "tier_maxz": 1 },
+        "cars_midd": { "geoz_code_dflt": "vn", "rate_host_seco": 3, "tier_maxz": 3 },
+        "cars_hard": { "geoz_code_dflt": "vn", "rate_host_seco": 5, "tier_maxz": 4 }
+    },
+    "site_rule_list": [
+        { "name": "otof", "host": ["otofun.net.vn", "*.otofun.net.vn"], "grup": "cars_easy", "note": "forum, Apache, plain GET works" },
+        { "name": "carp", "host": ["carpla.vn", "*.carpla.vn"], "grup": "cars_easy", "note": "plain GET works, big pages" },
+        { "name": "carm", "host": ["carmudi.vn", "*.carmudi.vn"], "grup": "cars_easy", "note": "Next.js, data in __NEXT_DATA__, behind Cloudflare" },
+        { "name": "otov", "host": ["oto.com.vn", "*.oto.com.vn"], "grup": "cars_midd", "note": "plain GET works but slow (3s)" },
+        { "name": "chot", "host": ["xe.chotot.com", "*.chotot.com"], "grup": "cars_midd", "note": "Cloudflare, huge pages, probe the public API" },
+        { "name": "tinb", "host": ["tinbanxe.vn", "*.tinbanxe.vn"], "grup": "cars_hard", "note": "Cloudflare" },
+        { "name": "bonb", "host": ["bonbanh.com", "*.bonbanh.com"], "grup": "cars_hard", "judg_bloc_list": ["quá tải"], "note": "serves a 200 overload page instead of a block" }
+    ],
     "capz_usdz_mont": 0,
     "vend_free_cred": { "deco": 4000, "zenr": 5000, "brig": 0 },
     "vend_orde": ["deco", "zenr", "brig"],
