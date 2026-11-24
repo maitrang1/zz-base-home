@@ -1,5 +1,9 @@
 # Updates
 
+## 2026-11-24 (manual login)
+Changed: login and sign-up are done by hand in zr's own window (Cloudflare check, email code). The saved-login jobs (`login`, `signup`, `verify-email`) are optional. `zr login` is the main way; the login stays in zr's browser profile.
+Fixed: the folder lock-down could lock you out on a PC where your user name equals the PC name (AccessDenied). It now grants by account id and only then removes inherited access. Help now says `--head` hides the window.
+
 ## 2026-11-24 (accounts)
 Added: several accounts in one `user-acct.json`, picked with `--acct <id>` or run all with `--acct all` (one at a time, rotating order, random wait between accounts). Each account has its own browser profile, database and limits under `acct/<id>/`. Two accounts resting = all rest. `zr secret --acct <id>` saves one login, `zr secret list` shows them. New settings `acct_maxx_coun` (3), `acct_gap_secs`. Routine items can name an account.
 Changed: your existing profile and data move into `acct/main/` the first time you run this version (moved, nothing deleted). The login file is now `user-acct.json`; the old `zr-login.json` is still read.

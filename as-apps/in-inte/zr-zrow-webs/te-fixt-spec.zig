@@ -26,7 +26,7 @@ pub const SPECS = [_]Spec{
 .{ .path = "/settings/notifications", .title = "Notifications", .togs = &.{"Usage alerts"}, .boxes = &.{.{ .lab = "Extra recipients" }}, .btns = &.{"Save=>Notifications saved"} },
 .{ .path = "/settings/preferences", .title = "Preferences" },
 .{ .path = "/integrations", .title = "Integrations", .btns = &.{"Connect"} },
-.{ .path = "/builder", .title = "Playground", .boxes = &.{ .{ .lab = "URL" }, .{ .lab = "Parameters" } }, .combos = &.{.{ .lab = "Language", .opts = &.{ "python", "node", "go", "curl" } }}, .btns = &.{ "Run=>Response 200 OK", "Show code=>import requests curl" } },
+.{ .path = "/fetch", .title = "Fetch", .boxes = &.{ .{ .lab = "URL" }, .{ .lab = "Parameters" } }, .combos = &.{.{ .lab = "Language", .opts = &.{ "python", "node", "go", "curl" } }}, .btns = &.{ "Run=>Response 200 OK", "Show code=>import requests curl" } },
 .{ .path = "/extract", .title = "Extract", .boxes = &.{ .{ .lab = "URL" }, .{ .lab = "Extraction rules" } }, .btns = &.{"Run=>Result 200 OK"} },
 .{ .path = "/crawl", .title = "Crawls", .boxes = &.{.{ .lab = "Start URL" }}, .btns = &.{ "New crawl", "Start=>Crawl started, running", "Crawl actions", "Stop crawl=>Crawl stopped" } },
 .{ .path = "/batch", .title = "Batch", .boxes = &.{.{ .lab = "URLs" }}, .btns = &.{"Submit=>Batch submitted"}, .file = true },
