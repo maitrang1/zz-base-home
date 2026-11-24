@@ -2,7 +2,7 @@
     "grup_rule_mapz": {},
     "site_rule_list": [],
     "capz_usdz_mont": 0,
-    "vend_free_cred": { "deco": 0, "zenr": 0, "brig": 0 },
+    "vend_free_cred": { "deco": 0, "zenr": 5000, "brig": 0 },
     "vend_orde": ["deco", "zenr", "brig"],
     "uagt_cont_mail": "",
     "rate_host_seco": 1,
