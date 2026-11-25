@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Run the owner's social engines (fb, za) as child steps
+// Des: Run owner's social engines (fb, za) as child steps
 // Flo: split each soci_engi_list entry "name|exe|arg|arg" > run it with a deadline and no retry > exit 0 or 3 (nothing to do, the fb and za code) is okay, anything else is a failure; the engines write their own JSONL, scra never logs in
 // I/O: list + deadline (caller) > Sres counts; a missing exe, timeout or bad entry counts as a failure
 // ===================================================================

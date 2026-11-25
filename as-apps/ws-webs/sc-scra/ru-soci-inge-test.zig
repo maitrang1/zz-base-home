@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests social ingest, the cars pull on it, and contact privacy
+// Des: Tests social ingest, cars pull, contact privacy
 // Flo: write JSONL in a temp folder > dry-run counts > live saves pages > file moves to done > pull builds rows > contacts hide names when private is off
 // I/O: temp dir > pass or fail
 // Run: zig build test

@@ -14,7 +14,8 @@ File: aa-conf-main.json, next to aa-auto-task.json. Every key is optional. A mis
 | Name | Does | Default | Allowed |
 |---|---|---|---|
 | port | the port the page is served on (127.0.0.1 only). A port typed on the command line wins | 4000 | 1 to 65535. If it is taken, the program says so and stops |
-| jobs_same_time | jobs that may run at the same time | 4 | 1 to 4 |
+| jobs_same_time | jobs that may run at the same time (this repo sets 8) | 4 | 1 to 8 |
+| lock_list | lock name to the job or step ids that share it: an id or a prefix (`scra-` covers scra-raws, scra-data). Same lock = one at a time | none (all `main`) | `{ "scra": ["scra-"], "cicd": ["cicd-", "home-doct"] }` · up to 32 ids in all · id ≤ 64 · name ≤ 32 · name `none` = run beside anything |
 | cmds_hist_maxz | commands kept in history | 64 | 1 to 10000 |
 | time_limi_seco | default time limit of a job, in seconds | 86400 | 1 to 86400 |
 | apps_data_loca_wind | data folder on Windows | E:\.zz-base-home-tena\ac-auto-task | absolute path, `~/name`, or a name under your user folder (max 260, no ..) |
@@ -65,7 +66,6 @@ Optional per job:
 | try | run again this many times after a failure | 0 | whole number |
 | tmo | stop the job after this many seconds | time_limi_seco | up to 86400 (24 h) |
 | dela | minutes to wait before a boot job, or before a chai's first job | 0 | whole number |
-| lock | jobs with the same lock never run together | main | a name of 1-32 characters · none = run beside anything |
 | catc | if the PC was off when a cron, once or chai job was due, run the missed slots when it is back, up to this many (once and chai: at most 1) | 0 (none) | 0-9 · the old `"catchup":"once"` still loads as `1` |
 | ids | chai only: the ids to run in order. An id with no job line runs the auto-run script. A failed step does not stop the chain | — | 1-32 distinct ids |
 | plus | chai only: the wait between jobs, six positions [years, months, days, hours, mins, secs]. A list picks one at random, one letter = default 0 | — | whole numbers, up to 64 per list |

@@ -86,10 +86,10 @@ A release says **Verified** only after two separate builders (GitHub and GitLab)
 
 1. From the release page download `sha256.txt`, `sha256.txt.sig` and the archive for your system.
 2. Unpack the archive and compare the file's hash with its line in `sha256.txt`:
-   `sha256sum wo` (macOS: `shasum -a 256 wo`). The line for your system is `./linux-x86_64/wo`, `./macos-aarch64/wo`, and so on.
+`sha256sum wo` (macOS: `shasum -a 256 wo`). The line for your system is `./linux-x86_64/wo`, `./macos-aarch64/wo`, and so on.
 3. Check the owner's signature on the hash list, using the public key file `mo-modu/mo-core/bs-boot-modu/si-rele-keyz.txt` from this repo:
-   `ssh-keygen -Y verify -f si-rele-keyz.txt -I zz-base-home-release -n zz-base-home-release -s sha256.txt.sig < sha256.txt`
-   You should see `Good "zz-base-home-release" signature`.
+`ssh-keygen -Y verify -f si-rele-keyz.txt -I zz-base-home-release -n zz-base-home-release -s sha256.txt.sig < sha256.txt`
+You should see `Good "zz-base-home-release" signature`.
 4. Optional: rebuild it yourself with `zig build dist` (see the build notes) and compare again. The build is reproducible.
 
 For the owner: after a release is marked Verified, run `wo rels sign vX.Y.Z --live` from the repo folder on a trusted device, in cmd or PowerShell (not Git Bash, whose ssh-keygen cannot reach the Windows agent). The key must be loaded in ssh-agent. It signs `sha256.txt` with the key in ssh-agent and uploads the `.sig`.

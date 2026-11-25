@@ -10,15 +10,15 @@ A browser, and Zig 0.17.0 to build it. No runtime, no setup.
 
 ## Quick start
 1. Build once:
-   cd /d E:\zz-base-home\ac-auto-task
-   zig build
+cd /d E:\zz-base-home\ac-auto-task
+zig build
 2. Start it:
-   E:\zz-base-home\ac-auto-task\zig-out\bin\auto-task.exe
-   You see:
-     auto-task listening http://127.0.0.1:4000
-     ui <folder> · <os>
+E:\zz-base-home\ac-auto-task\zig-out\bin\auto-task.exe
+You see:
+auto-task listening http://127.0.0.1:4000
+ui <folder> · <os>
 3. Open this in your browser:
-   http://127.0.0.1:4000
+http://127.0.0.1:4000
 Another port: add it after the file name, for example `E:\zz-base-home\ac-auto-task\zig-out\bin\auto-task.exe 8080`.
 
 ## Key behavior

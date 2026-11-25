@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests social post records turned into car and demand rows
+// Des: Tests social post records into car and demand rows
 // Flo: record JSON in > assert fields, masked phone, buyer row, bad input
 // I/O: strings > pass or fail
 // Run: zig build test

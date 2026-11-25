@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Car page parser: HTML page (or social record) to one Car row
+// Des: Parse HTML page or social record into Car row
 // Flo: split html to lines > label lines give fields (first hit wins, stop at similar-cars) > price from JSON-LD, price-only line or title > make/model from URL slug, labels or title > normalize > class, powertrain, seller kind
 // I/O: url + html + arena (caller) > Car; unknown stays empty (text), 0 (numbers) or -1 (km); individual seller names are dropped, only dealer names and the phone digits are kept
 // ===================================================================
