@@ -16,7 +16,7 @@ try std.testing.expectEqualStrings("ci-flow-sync", cfgv.hook_path_main);
 try std.testing.expectEqual(@as(i64, 1800), cfgv.wipz_ager_maxz);
 try std.testing.expectEqual(@as(i64, 3024000), cfgv.dril_ager_maxz);
 try std.testing.expectEqual(@as(i64, 900), cfgv.dril_rtoz_maxz);
-try std.testing.expectEqual(@as(usize, 13), cfgv.chek_t0_list.len);
+try std.testing.expectEqual(@as(usize, 10), cfgv.chek_t0_list.len);
 try std.testing.expectEqual(@as(usize, 3), cfgv.chek_ci_list.len);
 try std.testing.expectEqual(@as(usize, 0), cfgv.wipz_remo_list.len);
 try std.testing.expectEqual(@as(usize, 2), cfgv.kill_step_list.len);
