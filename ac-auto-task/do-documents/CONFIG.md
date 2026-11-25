@@ -55,9 +55,9 @@ Jobs live in aa-auto-task.json in the project folder (next to the zig-out folder
 | tcpr | a port opens | 3000 |
 | webs | a web address starts answering | localhost:8080 |
 | sola | sunrise or sunset | sunset+30 |
-| chai | its start time, then runs its ids one after another | boot · 0 2 * * * · 6h · sunset |
 | mail | not available, listed but never runs | — |
-Random hour: put hours in [ ] in a cron or chai time to pick one at random each day, for example `08 [09,10,11],[15,16],[22] * * *`. Ranges work: [09..11]. The pick stays the same all day, even after a restart.
+A job with ids is a chain. Its type is the trigger that starts it: boot (no sche), cron, puls or sola, with the same sche form. The type must match the sche, and the old type chai is rejected.
+Random hour: put hours in [ ] in a cron chain or cron job time to pick one at random each day, for example `08 [09,10,11],[15,16],[22] * * *`. Ranges work: [09..11]. The pick stays the same all day, even after a restart.
 Linux and macOS: disk takes a path like /home<10GB; idle needs xprintidle on Linux; powe and proc work everywhere.
 Optional per job:
 | Field | Does | Default | Allowed |
@@ -65,10 +65,10 @@ Optional per job:
 | on | false switches the job off | true | true · false |
 | try | run again this many times after a failure | 0 | whole number |
 | tmo | stop the job after this many seconds | time_limi_seco | up to 86400 (24 h) |
-| dela | minutes to wait before a boot job, or before a chai's first job | 0 | whole number |
-| catc | if the PC was off when a cron, once or chai job was due, run the missed slots when it is back, up to this many (once and chai: at most 1) | 0 (none) | 0-9 · the old `"catchup":"once"` still loads as `1` |
-| ids | chai only: the ids to run in order. An id with no job line runs the auto-run script. A failed step does not stop the chain | — | 1-32 distinct ids |
-| plus | chai only: the wait between jobs, six positions [years, months, days, hours, mins, secs]. A list picks one at random, one letter = default 0 | — | whole numbers, up to 64 per list |
+| dela | minutes to wait before a boot job, or before a chain's first job | 0 | whole number |
+| catc | if the PC was off when a cron, once or chain job was due, run the missed slots when it is back, up to this many (once and chain: at most 1) | 0 (none) | 0-9 · the old `"catchup":"once"` still loads as `1` |
+| ids | makes the job a chain (type cron, puls, sola or boot, matching its sche): the ids to run in order. An id with no job line runs the auto-run script. A failed step does not stop the chain | — | 1-32 distinct ids |
+| plus | chain only: the wait between jobs, six positions [years, months, days, hours, mins, secs]. A list picks one at random, one letter = default 0 | — | whole numbers, up to 64 per list |
 | cwd | folder to run in | the program folder | a folder path |
 | shell | which shell | auto | see Shells |
 | noLog | no log for this job | false | true · false |
