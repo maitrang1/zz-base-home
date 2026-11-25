@@ -10,6 +10,7 @@ I/O: toolbar markup (html) > toolbar and search look
 .repl-row { display: none; align-items: center; gap: var(--sp-6); padding: var(--sp-4) 0; }
 .repl-row.visible { display: flex; }
 .repl-step { font-family: var(--mono); font-size: var(--font-10); color: var(--dim); white-space: nowrap; flex-shrink: 0; }
+.repl-step:empty { display: none; }
 .block.is-waiting .repl-step { color: var(--warn); }
 .block.is-waiting .block-cmd-label::before { content: "●"; color: var(--warn); margin-right: var(--sp-4); animation: pulse var(--time-1s) infinite; }
 .tab-dot.is-waiting { animation: pulse var(--time-1s) infinite; }
