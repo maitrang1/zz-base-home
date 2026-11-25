@@ -157,7 +157,7 @@ var isgone = false;
 for (gone.items) |old| { if (std.mem.eql(u8, old, item)) isgone = true; }
 if (!isgone) try live.append(ctxz.allo, item);
 }
-if (live.items.len > 0 and !try okay(ctxz, &facts, "add", try cat(ctxz.allo, &.{ "git", "add", "-A", "--" }, live.items))) return ctxz.emit(facts.items);
+if (live.items.len > 0 and !try okay(ctxz, &facts, "add", try cat(ctxz.allo, &.{ "git", "add", "-A", "-f", "--" }, live.items))) return ctxz.emit(facts.items);
 if (gone.items.len > 0 and !try okay(ctxz, &facts, "drop", try cat(ctxz.allo, &.{ "git", "rm", "--cached", "--ignore-unmatch", "-q", "--" }, gone.items))) return ctxz.emit(facts.items);
 const when = if (edit > 0 and edit <= ctxz.nowz() + merg.CF.futz) edit else ctxz.nowz();
 const envc = try ctxz.allo.alloc(runm.Envp, 1);

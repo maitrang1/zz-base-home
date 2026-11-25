@@ -2,8 +2,10 @@
 
 {"type":"chai","sche":"10m","plus":["y","m","d","h","m",[8]],"id":"home-sync","on":true,"tmo":900,"kind":"shell","ids":["home-docs","home-code","cicd-stat","cicd-rele","home-beat"]},
 
-{"type":"chai","sche":"04 08,14 * * *","plus":["y","m","d","h","m",[8]],"id":"cicd-dail","on":true,"tmo":3600,"kind":"shell","lock":"cicd","catc":1,"ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
+{"type":"chai","sche":"[00..59] [08..11] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"once-aday","on":true,"tmo":3600,"kind":"shell","lock":"scra","catc":1,"ids":["scra-raws","scra-data","scra-cont","scra-sync"]},
 
-{"type":"chai","sche":"[00..59] [08..11] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"1-times-a-day-am-oo","on":true,"tmo":3600,"kind":"shell","lock":"scra","catc":1,"ids":["scra-raws","scra-data","scra-cont","scra-sync"]}
+{"type":"chai","sche":"[00..59] [08..11],[14..17] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"twic-aday","on":true,"tmo":3600,"kind":"shell","lock":"cicd","catc":1,"ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
+
+{"type":"chai","sche":"[00..59] [08..11],[14..17],[20..23] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"thri-aday","on":false,"tmo":3600,"kind":"shell","lock":"scra","catc":1,"ids":[""]}
 
 ]

@@ -135,7 +135,7 @@ const env = try envMake(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
 try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{}, .{}, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(hasCall(&mck, "git add -A -- a/one.txt b/two.txt"));
+try std.testing.expect(hasCall(&mck, "git add -A -f -- a/one.txt b/two.txt"));
 try std.testing.expect(hasCall(&mck, "commit -q -m auto(devb): 2 file(s) · a, b -- a/one.txt b/two.txt"));
 try std.testing.expect(hasCall(&mck, "git fetch origin main") and hasCall(&mck, "git fetch mirr main"));
 try std.testing.expect(hasCall(&mck, "git push origin main") and hasCall(&mck, "git push mirr main"));
@@ -155,7 +155,7 @@ const env = try envMake(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
 try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{ .stat = "R  a/one.txt\x00old/gone.txt\x00D  old/two.txt\x00" }, .{}, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(hasCall(&mck, "git add -A -- a/one.txt") and !hasCall(&mck, "add -A -- a/one.txt old"));
+try std.testing.expect(hasCall(&mck, "git add -A -f -- a/one.txt") and !hasCall(&mck, "add -A -f -- a/one.txt old"));
 try std.testing.expect(hasCall(&mck, "git rm --cached --ignore-unmatch -q -- old/gone.txt old/two.txt"));
 try std.testing.expect(hasCall(&mck, "-- a/one.txt old/gone.txt old/two.txt"));
 }
@@ -184,7 +184,7 @@ cfgv.sync_deny_list = &.{"b/"};
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
 try std.testing.expectEqual(exit.Code.okay, try run(allo, env, .{}, cfgv, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(hasCall(&mck, "git add -A -- a/one.txt") and !hasCall(&mck, "b/two.txt"));
+try std.testing.expect(hasCall(&mck, "git add -A -f -- a/one.txt") and !hasCall(&mck, "b/two.txt"));
 }
 test "a file over the size limit is kept out and reported; too many files blocks, nothing staged" {
 var arna = std.heap.ArenaAllocator.init(std.testing.allocator);
@@ -198,7 +198,7 @@ var buff: std.Io.Writer.Allocating = .init(allo);
 var big: cfgz.Conf = .{};
 big.sync_file_maxz = 1;
 try std.testing.expectEqual(exit.Code.drif, try run(allo, env, .{}, big, true, env.mtim + 1000, &buff, &mck));
-try std.testing.expect(std.mem.indexOf(u8, buff.written(), "over 1 bytes kept out, never published: b/two.txt") != null and hasCall(&mck, "git add -A -- a/one.txt") and !hasCall(&mck, "b/two.txt"));
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "over 1 bytes kept out, never published: b/two.txt") != null and hasCall(&mck, "git add -A -f -- a/one.txt") and !hasCall(&mck, "b/two.txt"));
 var many: cfgz.Conf = .{};
 many.sync_file_cntz = 1;
 try std.testing.expectEqual(exit.Code.bloc, try run(allo, env, .{}, many, true, env.mtim + 1000, &buff, &mck));
