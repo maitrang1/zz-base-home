@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: CLI glue for the local browser: session, actions, login command
+// Des: CLI glue for the local browser: session, actions, login
 // Flo: expand profile dir (+ account name) > Rndr or none > read steps file under the step cap > login = headed Chrome until the owner closes it
 // I/O: Ctx (caller) > Rndr / Acts; login prints one status line; owner types credentials by hand, scra never sees them
 // ===================================================================

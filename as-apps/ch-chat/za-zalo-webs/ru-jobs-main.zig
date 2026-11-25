@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Job table: run one job by name and words, shared by run and flow commands
+// Des: Job table: run one job by name and words
 // Flo: job name > words > matching job function > Report
 // I/O: Sess + job + words (caller) > Report (counts, lines)
 // ===================================================================

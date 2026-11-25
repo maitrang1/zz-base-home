@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Store raw pages as hashed gzip files, once per content
+// Des: Store raw pages as hashed gzip, once per content
 // Flo: hash body > skip if file exists > gzip > write p.part > rename over final > load: read gz > inflate with size cap
 // I/O: body bytes + root dir (caller) > hash hex, fresh flag, or bytes back (caller frees)
 // ===================================================================

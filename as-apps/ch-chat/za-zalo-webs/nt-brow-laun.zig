@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Find, launch and stop a local Chrome or Edge for CDP
+// Des: Find, launch, stop local Chrome or Edge for CDP
 // Flo: find exe > dedicated profile dir > spawn with port 0 > read DevToolsActivePort > list targets over /json > kill by child handle
 // I/O: config paths (caller) > Brow (child, port, profile); page websocket path; stop frees everything
 // ===================================================================

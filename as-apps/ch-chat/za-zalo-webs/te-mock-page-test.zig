@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: M1 gate: launch Chrome on a scratch profile, connect, navigate, snapshot the fake chat page
+// Des: M1 gate: launch Chrome, connect, navigate, snapshot fake page
 // Flo: launch > navigate data url > read text > AX snapshot > find nodes > stop
 // I/O: fake html > pass or fail (skips when no browser)
 // Run: zig build test

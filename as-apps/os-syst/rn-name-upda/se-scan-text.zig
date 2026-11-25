@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Find every reference to the old path inside one text
+// Des: Find every old-path reference inside one text
 // Flo: search each old form > keep whole-path matches > drop overlaps (longest wins) > number lines
 // I/O: text + old forms + new forms (same order) > sorted Hit list
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Open a chat by name or phone: visible list, scroll the list, then search; ambiguity and strangers are explicit
+// Des: Open a chat by name or phone: scroll, search
 // Flo: parse target (#group, #person) > candidates (DOM rows or AX nodes) > exact name match > scroll > search > pick or Ambiguous/NoElem > click
 // I/O: Sess + name text (caller) > Opened (canonical name, stranger flag); chat open on the page
 // ===================================================================

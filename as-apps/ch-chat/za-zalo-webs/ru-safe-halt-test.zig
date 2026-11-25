@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-safe-halt: fold, classes (login, needs-you, unsafe), stored halt, live sim pages
+// Des: Tests halt guard: classes, stored halt, sim pages
 // Flo: texts > verdict; sim overlays > guard result; nothing sent
 // I/O: text and html > pass or fail
 // Run: zig build test

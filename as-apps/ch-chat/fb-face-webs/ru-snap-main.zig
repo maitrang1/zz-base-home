@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Read-only page capture for fixtures: accessibility tree + text, redacted
+// Des: Read-only page capture for fixtures: accessibility tree, redacted
 // Flo: open the page (halt checks apply) > read url, language, text, accessibility names > redact private bits > write JSON in stat/snaps
 // I/O: path or url + name (caller) > <stat>/snaps/<name>.json (redacted, outside the repo); never clicks, never types
 // ===================================================================

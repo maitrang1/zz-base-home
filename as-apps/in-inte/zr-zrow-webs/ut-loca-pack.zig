@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Label registry (key to visible names) and page paths, owner overrides win
+// Des: Label registry and page paths, owner overrides win
 // Flo: key > labl_over from config > built-in PACK > empty; path key > path_over > built-in PATHS
 // I/O: Conf + key (caller) > label list or path (all UNVERIFIED until zr map runs on the real site)
 // ===================================================================

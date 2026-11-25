@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tell the owner something needs them (plain line, never private text)
+// Des: Tell the owner they're needed, in one plain line
 // Flo: for each channel in noti_chai_orde > file = append to alerts.txt > toas = OS popup (PowerShell, notify-send, osascript) > true if any channel worked
 // I/O: message line (caller, no private text) > alerts.txt in the state folder and/or an OS popup
 // ===================================================================

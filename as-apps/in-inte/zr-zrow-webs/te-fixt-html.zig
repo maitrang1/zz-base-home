@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Fixed mock pages for halt tests: captcha, block, ban, rate limit, cookie banner
+// Des: Mock pages for halt tests: captcha, block, ban, limit
 // Flo: constant HTML strings > served by te-mock-page on fixed paths
 // I/O: none (constants) > HTML bytes
 // ===================================================================

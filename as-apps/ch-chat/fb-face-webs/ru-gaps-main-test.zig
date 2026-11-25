@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the gap report: drift against the newest map, controls no label knows, no-map case, coverage matrix
+// Des: Tests for the gap report: drift, unknown controls, coverage
 // Flo: map fake pages > compute > assert counts and rows; rename a label to simulate Facebook drift > report it with exit class Drift
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-gaps-main-test.zig

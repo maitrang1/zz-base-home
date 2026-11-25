@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Core jobs the first catalog missed: friend lists, page likes, groups and pages (create, edit, delete), post extras, comment edit and delete, saved, search, story, reel, event edit, Messenger extras, boost
+// Des: Core jobs as data: friends, pages, groups, posts, boost
 // Flo: rows only; same safety ladder as every job; `url` rows act on the page the owner names
 // I/O: none (constants) > ROWS joined into the catalog by ru-jobs-tabl
 // ===================================================================

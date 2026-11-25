@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: DOM extractor: structured messages and chat rows from registry selectors, with rects for clicks
+// Des: DOM extractor: messages and chat rows with click rects
 // Flo: registry selectors > build one JS text > Runtime.evaluate > parse json > Msg and Cand lists
 // I/O: Conn + Ext (caller) > Msg list, Cand list (name, unread, stranger, group, click point), rect centers
 // ===================================================================

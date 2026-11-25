@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Probe free JSON or iframe URLs behind a thin shell page
+// Des: Probe free JSON or iframe URLs behind thin shells
 // Flo: find candidates > cached winner kind first > robots check (deny on error) > own GET each, capped > validate + word overlap > remember winner per host
 // I/O: shell page URL + HTML + Conf + Db (caller) > Got built from the winning response, or null
 // ===================================================================

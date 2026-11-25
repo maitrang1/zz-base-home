@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Action map: every action a real user can do on Zalo Web, with status built, gap, hand or out and the job that does it
+// Des: Action map: each Zalo Web action, status and job
 // Flo: static tables by category > joined list > print rows and counts (text or JSON)
 // I/O: Ctx (caller) > stdout table or JSON; jobs starting with @ are guards or commands, not jobs
 // ===================================================================

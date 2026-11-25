@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Run one command: status, log, ledger, jobs, plan, approve, flow, run, ask, doctor, snap, report, backup, export, purge, login, setup
+// Des: Dispatch each CLI command to its code
 // Flo: command word > state-only commands first > browser commands (login, setup, run, ask, flow run, doctor, snap, read) > print result
 // I/O: Ctx + Args (caller) > text or JSON lines on stdout (sink in tests), exit code 0 on success
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Atomic file write and bounded read for small state files
+// Des: Atomic write and bounded read for small state files
 // Flo: write p.part > rename over p; read with size cap
 // I/O: path + bytes (caller) > file on disk, or bytes read
 // ===================================================================

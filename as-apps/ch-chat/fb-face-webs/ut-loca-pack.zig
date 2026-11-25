@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Label packs: button and box names in English + Vietnamese, owner can override
+// Des: Label packs: button and box names, English and Vietnamese
 // Flo: key > owner override in config (labl_over) > older config lists (labl_*) > built-in pack (English and Vietnamese together)
 // I/O: key text (caller) > list of accepted names; any language matches
 // ===================================================================

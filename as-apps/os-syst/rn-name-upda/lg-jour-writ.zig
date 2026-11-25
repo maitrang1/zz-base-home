@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Append-only journal of one run (one JSON line per step)
+// Des: Append-only run journal, one JSON line per step
 // Flo: build line > append at end + sync > read all lines back (a torn last line is dropped: its write never ran) > derive run state
 // I/O: Jent > <data>/jour/<id>.jsonl; file > Jent list + State
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo ci: every sub-command green, red and tool-absent
+// Des: Tests wo ci: every sub-command green, red, tool-absent
 // Flo: mock gh/curl/git/zig/gitleaks + fixed clock > run ci > check argv, facts, exit codes
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

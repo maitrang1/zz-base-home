@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Patch the refs inside one file (text, UTF-16 text, or same-length binary), safely
+// Des: Patch refs inside one file (text, UTF-16, binary) safely
 // Flo: read > load as text or binary > re-scan now > snapshot + journal first > write in place > read back and compare hash
 // I/O: file path + Targ + run paths > file rewritten, snapshot + journal line; count of refs patched
 // ===================================================================

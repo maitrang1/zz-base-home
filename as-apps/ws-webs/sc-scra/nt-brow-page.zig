@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Drive one Chrome tab: navigate, settle, read the final DOM
+// Des: Drive one Chrome tab: navigate, settle, read final DOM
 // Flo: enable domains > Page.navigate > wait load event > poll text length until stable > optional wait + selector > flatten open shadow roots to HTML > snapshot text when closed roots exist
 // I/O: Conn (caller) + URL + Opt > HTML text of the rendered page, JS error count; eval helpers for other modules
 // ===================================================================

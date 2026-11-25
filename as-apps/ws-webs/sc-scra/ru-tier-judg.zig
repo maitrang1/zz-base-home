@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Judge one reply: good, gone, block or thin shell, with per-site rules
+// Des: Judge a reply: good, gone, block or thin shell
 // Flo: status > PDF good > convert to UTF-8 > validate > extra block phrases, min text, must-have phrases, required JSON fields > shell check > verdict
 // I/O: Got + previous row + merged Conf (caller) > Judg
 // ===================================================================

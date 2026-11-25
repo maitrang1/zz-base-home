@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Probe: dump the page's AX tree with personal text hashed, replay dumps as fixtures
+// Des: Probe: dump page AX tree, hash personal text
 // Flo: node + registry > keep exact labels, hash everything else > json dump > fixture parse back to nodes
 // I/O: nodes + page text + Reg (caller) > redacted json text; fixture json > nodes
 // ===================================================================

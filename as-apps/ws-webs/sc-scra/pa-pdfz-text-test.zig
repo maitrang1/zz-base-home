@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for pa-pdfz-*: M10 gate, PDF fixtures to exact text
+// Des: Tests M10 gate: PDF fixtures give exact text
 // Flo: build PDFs in code > pdfText > assert text, flags, typed errors, caps, fuzz
 // I/O: generated PDFs > pass or fail (no leaks)
 // Run: zig build test

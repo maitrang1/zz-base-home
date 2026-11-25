@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Access and team jobs as data: page roles, business people, ad account roles, partners, group admins, developer console (read, webhook), connected accounts
+// Des: Access and team jobs as data rows
 // Flo: rows only; every change is guarded (needs approval) and uses the admin cap; app secrets and tokens are never read or stored
 // I/O: none (constants) > ROWS joined into the catalog by ru-jobs-tabl
 // ===================================================================

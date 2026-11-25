@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Send job: preview or send one text once, read the composer back, detect failed sends, log it
+// Des: Send job: send one text once, verify, log failures
 // Flo: mode check > halt+pace gate > open chat > failed-chat refusal > begin send row > type + read back > popup check > click send > verify not failed > mark sent
 // I/O: Sess + chat name + text (caller) > Out (sent, dup, dry); rows in sends, acts, logz, chatf
 // ===================================================================

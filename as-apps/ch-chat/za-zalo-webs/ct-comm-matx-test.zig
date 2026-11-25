@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ct-comm-matx: every job is in the matrix, every matrix job exists, ids are J01-J39 once
+// Des: Tests the job matrix is complete, J01-J39 once each
 // Flo: scan tables > assert coverage both ways
 // I/O: tables > pass or fail
 // Run: zig build test

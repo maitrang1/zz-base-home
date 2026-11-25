@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Shared test rig: mock site, mock vendor, ladder and local browser
+// Des: Shared test rig: mock site, mock vendor, ladder, browser
 // Flo: temp dir + absolute profile dir > start mock > open index > Rndr > ladder with session
 // I/O: Conf (test) > Rig with go(path) and reco(path); skipNo() skips when no Chrome
 // ===================================================================

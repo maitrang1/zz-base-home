@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Turn plain words into a job and its arguments (non-tech mode)
+// Des: Turn plain words into a job and its arguments
 // Flo: lowercase the words > match a phrase prefix > put the rest in the right slot > preset params for "get <url> as text|html|json|markdown"
 // I/O: words (caller) > job name + Args, or null when not understood
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Undo one run from its journal (also the rollback of a failed run)
+// Des: Undo one run from its journal, also failed-run rollback
 // Flo: dry pass finds conflicts > stop if any > live pass walks the journal backwards: rename back, restore snapshots by hash > mark rolled
 // I/O: run id + live/force flags > state restored byte-identical; counts
 // ===================================================================

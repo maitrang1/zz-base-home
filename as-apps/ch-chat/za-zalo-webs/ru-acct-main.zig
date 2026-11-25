@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Many accounts, one at a time: data folders per account, first-run move, daily rotation, random gap, safety-stop handling, caps percent
+// Des: Run many accounts one at a time, rotating daily
 // Flo: ids > rotate by day > per account: skip when halted > run (callback) > a Halted stop counts as a safety stop > two safety stops = the remaining accounts do not run > random gap before the next ; results with exit codes
 // I/O: account ids + callback (caller) > Res per account; moves old prof/stat into acct/main (never deletes); the halt state lives in each account's own db
 // ===================================================================

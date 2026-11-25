@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Flow queue in SQLite: flows, items with states and approvals, failed-chat marks
+// Des: Flow queue in SQLite: flows, items, approvals, failed marks
 // Flo: new flow > add items with risk > approve > next pending item > set state > resume after restart
 // I/O: Stor + ids and text (caller) > rows; item states todo doing wait done skip unsure fail
 // ===================================================================

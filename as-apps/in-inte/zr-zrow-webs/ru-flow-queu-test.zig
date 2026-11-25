@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for routines: plan, approve, wait for the owner, park, unsafe stop
+// Des: Tests for routines: plan, approve, wait, park, unsafe stop
 // Flo: build a routine > run it in the rig > check item states, alerts, records
 // I/O: none (mock site on loopback, scratch profile) > pass or fail (skips without Chrome)
 // Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ru-flow-queu-test.zig

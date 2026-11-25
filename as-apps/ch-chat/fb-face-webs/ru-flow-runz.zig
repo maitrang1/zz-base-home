@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Run a list of page steps at human pace with halt checks and popup handling
+// Des: Run page steps at human pace with halt checks
 // Flo: pause flag > pace delay > find by role + label (retry) > scroll > click, type, select, toggle, hover > halt check (dialog-scoped) > popups dismissed after each page load
 // I/O: Steps + Run (page, rng, conf, state) > page effects; errors Halted Unsafe NeedLogin NoElement Drift Paused
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Commands pause, stop, resume, log: owner control over the halt flag and the activity log
+// Des: Commands pause, stop, resume, log: owner halt control
 // Flo: open store > set or clear halt flag (running jobs stop at the next action) > or print log tail
 // I/O: Ctx (caller) > halt flag in state db, stdout text or JSON; exit 0
 // ===================================================================

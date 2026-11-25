@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Mock tool runner for tests (never runs a real tool)
+// Des: Mock tool runner for tests, runs nothing real
 // Flo: match argv prefix against rules (a rule can expire after N uses) > return the canned output > record every call
 // I/O: rules + argv > Outp; call log
 // ===================================================================

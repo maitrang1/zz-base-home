@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Attended flow: a saved queue of jobs that runs by itself and pauses only when it truly needs the owner
+// Des: Attended flow: saved queue pausing only when owner needed
 // Flo: create queue (risk class from code sets the approval) > run items in order > needs-you = wait + resume the same item > unsafe = stop the flow > one item failing parks only that item > summary
 // I/O: Ctx + routine name or flow id (caller) > item states in the state db; Result counts; restart resumes at the pending item
 // ===================================================================

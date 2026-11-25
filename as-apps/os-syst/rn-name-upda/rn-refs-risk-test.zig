@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for risky files: UTF-16, binary, signed files, git dirs, links, through walk + patch
+// Des: Tests for risky files: UTF-16, binary, signed, git, links
 // Flo: UTF-16 BOM patched and kept > binary same-length only when its key is off > signed/git skipped by default > symlink retarget plan
 // I/O: tmp dir fake machine > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

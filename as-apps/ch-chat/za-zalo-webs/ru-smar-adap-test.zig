@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-smar-adap: argv, validation, chain fallback with a mock echo tool
+// Des: Tests for AI adapter: argv, validation, chain fallback
 // Flo: pure helpers > run echo as the AI > first tool missing, second answers > none answers
 // I/O: strings > pass or fail
 // Run: zig build test

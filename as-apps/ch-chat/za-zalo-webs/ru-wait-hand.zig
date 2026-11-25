@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Wait for the human: needs-you pages (QR, captcha), notify once, poll, deadline, settle, cool pace
+// Des: Wait for the human: needs-you pages, notify once, poll
 // Flo: 2nd challenge in 24 h is unsafe > notify > poll page every 3 s without touching it > cleared: settle, re-verify, cool pace > or deadline > or unsafe
 // I/O: Sess + stat dir + why (caller) > Wait (cleared, deadline, unsafe); meta cool_until, interventions, wait time
 // ===================================================================

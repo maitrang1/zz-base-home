@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the read-only site map: seeds, link following, caps, halts, redacted files
+// Des: Tests the site map: seeds, links, caps, halts, redaction
 // Flo: fake pages > map > files in <stat>/map/<date>/ > assert pages, controls, caps, deny list, halts; nothing is clicked
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-map-crwl-test.zig

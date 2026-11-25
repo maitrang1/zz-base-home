@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ct-comm-expo: export lines, report has no chat text, backup is a readable copy, undo last on the sim
+// Des: Tests for export, report, backup and undo commands
 // Flo: memory/tmp stores > build outputs > assert content
 // I/O: rows and files > pass or fail
 // Run: zig build test

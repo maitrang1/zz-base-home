@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-huma-sess: deterministic day schedule, property over many days, reading time, check jitter
+// Des: Tests for presence: day schedule, reading time, check jitter
 // Flo: seeded schedules > scan a whole day > assert bounds and share of active time
 // I/O: numbers > pass or fail
 // Run: zig build test

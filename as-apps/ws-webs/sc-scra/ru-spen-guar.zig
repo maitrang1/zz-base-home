@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Spend guard: free credits first, paid only under cap + go
+// Des: Spend guard: free credits first, paid only under cap
 // Flo: kill switch off? > month credits used > free left covers cost? > else paid part x price must fit capz_usdz_mont and needs go > record real spend
 // I/O: Db + Conf + vendor + credit cost + time (ladder) > Deci (allow, paid, micro-USD, reason); ledger rows in vled
 // ===================================================================

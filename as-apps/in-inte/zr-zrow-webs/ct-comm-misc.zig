@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Support tools: report folder, db backup, JSONL export, purge old rows
+// Des: Support tools: report, db backup, export, purge old rows
 // Flo: report: info + safe conf + recent log + alerts > backup: checkpoint + copy db > export: log rows to JSONL > purge: delete rows past the keep window
 // I/O: Ctx (caller) > files under <data>/stat/{report,backup,export}; no cookies, passwords or private text
 // ===================================================================

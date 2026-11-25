@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: The one door to OS tools (reg, crontab, systemctl); tests swap it for a mock
+// Des: One door to OS tools; tests use a mock
 // Flo: argv > run child with the parent environment > capture exit code, stdout, stderr
 // I/O: argv + extra env > Outp; a missing tool is error.ToolAbsent
 // ===================================================================

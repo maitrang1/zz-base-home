@@ -128,6 +128,12 @@ Facebook shows different words in different languages. `fb doctor` lists what is
 `"labl_over": { "noti_mark": ["Mark all as read"] }`
 Then run `fb doctor` again.
 
+## Feed for scra (read-only)
+`fb read feed` opens each page in `feed_path_list` (a group you joined, a Marketplace search), reads the posts at human pace and never clicks or types. Without `--live` it only counts. With `--live` it writes one `fb-<time>.jsonl` file into scra's `social-in` folder; `scra cars --live` loads it (same cloud copy, purge and privacy as every other source).
+1. Put the paths in `feed_path_list`, for example `"/groups/123456789/"`.
+2. `fb read feed` shows how many posts it found. Add `--live` to write the file.
+3. Selectors are checked on the fake site only. Run it once by hand on a spare account and look at the count.
+
 ## Your data
 - `fb report`: makes a support folder with no cookies and no private text.
 - `fb backup`: copies your data. `fb export`: your ledger and log as files. `fb purge`: deletes logs older than 30 days.

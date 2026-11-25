@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-appr-list: item parse, risk class, approval once, ids, packing
+// Des: Tests approval list: parse, risk class, once-only approval
 // Flo: texts > parsed items > saved flow > approve > list text
 // I/O: texts and memory store > pass or fail
 // Run: zig build test

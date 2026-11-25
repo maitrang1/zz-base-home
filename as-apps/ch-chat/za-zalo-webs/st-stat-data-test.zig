@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for st-stat-data: windows, no double send, resume, queue, halt
+// Des: Tests state data: windows, no double send, resume, halt
 // Flo: memory db > act on fake clock > assert counts and states
 // I/O: rows > pass or fail
 // Run: zig build test

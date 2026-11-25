@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Test helper: run a table of job cases on the fake site and check what the fake page recorded
+// Des: Test helper: run job cases, check the fake page
 // Flo: set caps + paths > per case: irreversible rows must refuse without --force > run > count > records > typed values
 // I/O: Rig + Case rows (tests only) > pass or a named failure on stderr; never writes to stdout
 // ===================================================================

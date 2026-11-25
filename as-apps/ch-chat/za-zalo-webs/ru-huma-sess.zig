@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Presence model: work sessions with breaks (seeded per day), reading time by message length, check interval with jitter
+// Des: Presence model: work sessions, breaks, reading time, jitter
 // Flo: day seed > alternating active and break segments (log-normal lengths) > state at a time > reading and think delay > next inbox check
 // I/O: now ms + seed + ranges (caller) > Seg (active, ms left); delay msec
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Spot ZenRows challenges, bans and logouts so the agent stops or waits
+// Des: Spot ZenRows challenges, bans, logouts and stop the agent
 // Flo: lowercase url, page text, dialog text > match url parts > strong phrases on page text > weak phrases only inside dialogs > Halt kind > class (needs you or unsafe)
 // I/O: url + page text + dialog/alert text (caller) > optional Halt kind, its Class (never bypassed, never retried blindly)
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the whole flow: happy run, rollback at every step, flagged refs
+// Des: Tests the whole flow: happy run, rollback, flagged refs
 // Flo: run on a fake machine > check files, names, journal > inject a fault at each step > tree must be byte-identical
 // I/O: tmp dir > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

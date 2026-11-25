@@ -28,6 +28,10 @@ Missing keys use the defaults below. Times are in milliseconds (msec) or seconds
 | warm_dayz_coun | Days to grow caps from 20% to 100% | 7 | 0 or more |
 | retr_coun_maxz | Tries to find a button | 3 | 1-9 |
 | read_msgz_maxz | Messages read per chat | 20 | 1 or more |
+| feed_chat_list | Chats whose stored messages `za feed` hands to scra. Only these; empty = nothing leaves | none | list of chat names |
+| feed_dirz_wind · feed_dirz_unix | Folder where `za feed --live` writes its `.jsonl` files (scra's `social-in` folder) | scra data folder | a path (`~` works) |
+| feed_item_maxz | Most messages per chat in one file | 500 | 1 to 5000 |
+| feed_text_maxz | Longest message text kept, in bytes | 4000 | 200 or more |
 | brow_time_secs | Browser wait | 60 | 1 or more |
 | logi_wait_secs | How long login waits for the QR | 300 | 1 or more |
 | smar_mode_enab | AI replies | false | true, false |

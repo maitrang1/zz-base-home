@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Drive one tab: open pages, find items by meaning, get click points
+// Des: Drive one tab: open pages, find items, click points
 // Flo: enable CDP domains > navigate and settle > read accessibility tree > match role + label (exact name first, then part of a name, any language case) > scroll into view > box centre
 // I/O: Conn (caller) + URL, role, label list > page text, backend node id, x/y point
 // ===================================================================

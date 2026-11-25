@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Settings and data jobs as data: privacy, search, notifications, blocking, apps, activity log, download your information, albums, saved
+// Des: Settings jobs as data: privacy, notifications, blocking, activity log
 // Flo: rows only; reads use the help cap, writes the acct or data cap; irreversible rows need approval
 // I/O: none (constants) > ROWS joined into the catalog by ru-jobs-tabl
 // ===================================================================

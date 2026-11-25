@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the attended flow: plan, approve once, run, wait for the owner, resume, unsafe stop
+// Des: Tests for attended flow: plan, approve, run, resume, stop
 // Flo: risky items skipped until approved > double approve = once > needs-you wait then auto-resume > deadline parks and a rerun resumes > unsafe stops and cools down > 2nd challenge = unsafe > dry-run previews
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-flow-queu-test.zig

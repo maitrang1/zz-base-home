@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Benchmark: run a URL list through the ladder, report cost per good page
+// Des: Benchmark: run URLs through ladder, report cost per page
 // Flo: read list (L<level> <url>) > dry-run prints plan and worst case > live fetches each URL > tally per tier and vendor > text table > append dated section to a file
 // I/O: --list file (caller) > table on stdout, optional section in --out file; dry-run unless --live
 // ===================================================================

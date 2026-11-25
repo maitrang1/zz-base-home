@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-jobs-main: every job name maps to its job with the right words, arity is checked, ask jobs are known
+// Des: Tests that every job name maps to its job
 // Flo: dispatch by name on the sim > read page state
 // I/O: job words > pass or fail
 // Run: zig build test

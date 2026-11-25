@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: One lock for every entry point so two fb runs never share a profile
+// Des: One lock stops two fb runs sharing a profile
 // Flo: create fb.lock exclusively with our pid > if it exists check the old pid is alive > stale lock replaced > release deletes it
 // I/O: state folder (caller) > Lock handle; error Locked when another live run holds it
 // ===================================================================

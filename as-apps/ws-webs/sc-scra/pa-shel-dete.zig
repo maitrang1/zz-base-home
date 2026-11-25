@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Detect a thin JavaScript shell page with no real content
+// Des: Detect thin JavaScript shell pages with no content
 // Flo: visible text > too short? > embedded data block big? > shell marker or noscript hint
 // I/O: HTML text + min text length (caller) > bool (true = shell, content needs JS)
 // ===================================================================

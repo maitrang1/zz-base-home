@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-revi-sche: x2 / div 2 with cap and floor, due list, requeue
+// Des: Tests for revisit schedule: double, halve, cap, floor, requeue
 // Flo: interval math > real pipeline on the mock doubles the interval > due pages go back in the frontier
 // I/O: numbers, mock pages > pass or fail
 // Run: zig build test

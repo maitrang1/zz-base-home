@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Read job: list chats, open a chat, save only new messages
+// Des: Read job: list chats, open one, save new messages
 // Flo: snapshot chat list > match unread by registry > open chat with human click > read message nodes > diff with saved tail > save
 // I/O: Sess (caller) > Chat list, new message count, rows in msgs table
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-chat-read: name parse, overlap diff, live read of unread chats on the mock page
+// Des: Tests for chat read: name parse, overlap diff, unread
 // Flo: pure helpers > mock page read twice > only new messages saved
 // I/O: strings and html > pass or fail
 // Run: zig build test

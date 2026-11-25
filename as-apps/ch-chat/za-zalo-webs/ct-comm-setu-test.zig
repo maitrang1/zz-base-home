@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ct-comm-setu and the consent gate: texts, consent flag in the store
+// Des: Tests for setup texts and the consent gate
 // Flo: memory store > consent unset, set > assert; risk texts present
 // I/O: store > pass or fail
 // Run: zig build test

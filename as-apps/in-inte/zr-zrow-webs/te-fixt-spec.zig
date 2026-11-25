@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Data-driven mock ZenRows pages for tests: spec rows become accessible HTML
+// Des: Data-driven mock ZenRows pages: spec rows become HTML
 // Flo: Spec (path, buttons, boxes, combos, toggles) > render HTML with role + aria-label > clicks record to /_rec and show a result line (label=>result)
 // I/O: path string (caller) > Spec pointer or null; render(spec) > HTML bytes (caller frees)
 // ===================================================================

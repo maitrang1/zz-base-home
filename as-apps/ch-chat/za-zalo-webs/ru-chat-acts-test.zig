@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-chat-acts on the sim: react, quote-reply, recall, delete, pin message, download, archive, hide, unread, alias, block, sticker
+// Des: Tests for message and chat actions on the sim
 // Flo: sim chat > run each action > read page state; failure cases: missing message, no force, dry
 // I/O: sim page > pass or fail
 // Run: zig build test

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Halt guard: login page, needs-you pages (captcha) and unsafe pages (lock, warning) stop all work
+// Des: Halt guard: login, captcha, unsafe pages stop work
 // Flo: stored halt flag > page text lowercased > match QR names, needs words, unsafe words > store flag + class > typed error
 // I/O: page text + Conf + Reg (caller) > Verd; error Halted or NeedLogin, halt flag + class in state db
 // ===================================================================

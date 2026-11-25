@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo sync (alias push): keep every device and remote on ONE version of the code, nothing lost
+// Des: wo sync: keep devices and remotes on one version
 // Flo: gates > commit idle files (hooks scan) > fetch > merge each remote tip (ff, else merge, clash: newer edit wins, loser saved) > push > verify HEAD == every remote
 // I/O: Ctxz (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 3 clash resolved / 4 blocked
 // ===================================================================

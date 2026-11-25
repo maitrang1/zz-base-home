@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Fake Facebook pages for tests (labels match the built-in label packs)
+// Des: Fake Facebook pages for tests, labels match built-in packs
 // Flo: page strings with ARIA roles and small scripts > each action posts /_rec so tests can assert
 // I/O: none (constants) > HTML text served by te-mock-page
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Command login: open Zalo Web in a visible window, wait while the owner scans the QR
+// Des: Command login: open Zalo Web, owner scans QR
 // Flo: launch Chrome on own profile > poll page text > QR page: tell owner once > chat page: done > halt words: alert > timeout: NeedLogin
 // I/O: Ctx (caller) > session saved in the profile dir; stdout text; exit 0 or 4
 // ===================================================================

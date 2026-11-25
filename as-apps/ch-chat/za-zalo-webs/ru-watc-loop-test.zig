@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-watc-loop: cadence with jitter, waits out breaks and quiet hours, stops on limit, deadline or a halt
+// Des: Tests for watch loop: jitter, breaks, quiet hours, stops
 // Flo: sim page and fake clock > run the loop > assert checks, clock, why
 // I/O: sim page > pass or fail
 // Run: zig build test

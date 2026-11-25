@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Many accounts, one at a time (zr): data folders per account, first-run move, daily rotation, random gap, rest handling, caps scale
+// Des: Run many accounts one at a time, rotating daily
 // Flo: ids > rotate by day > per account: skip when resting > run (callback) > unsafe stop = rest it > two accounts resting = rest all the rest > random gap before the next ; results list with exit codes
 // I/O: account ids + callback (caller) > Res per account; moves old prof/stat into acct/main (never deletes); state in each account's own db
 // ===================================================================

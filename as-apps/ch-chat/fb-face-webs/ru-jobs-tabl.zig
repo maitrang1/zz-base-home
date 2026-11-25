@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Job catalog as data: base rows here, area tables (account, settings, money, access, core, help) joined at compile time
+// Des: Job catalog as data: base rows plus area tables
 // Flo: one row per job > steps name a label key (ut-loca-pack) and an argument slot > the runner turns rows into flow steps
 // I/O: none (constants) > Job rows (find by name, list for `fb jobs`, class A/G/H, area)
 // ===================================================================

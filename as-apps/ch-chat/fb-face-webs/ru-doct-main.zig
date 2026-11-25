@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Doctor: read-only check that the buttons and boxes each job needs are on the live pages
+// Des: Doctor: read-only check each job's controls exist live
 // Flo: Chrome version check > for each job open its page (read-only) > look for the first label the job needs > print found or MISSING > exit 3 when anything is missing
 // I/O: Ctx + optional job name + optional url (caller) > printed table; error Drift when a label is missing
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-page-walk: M2 gate end to end on the mock
+// Des: Tests M2 gate end to end on the mock
 // Flo: mock + temp db > seed/sitemap > run > assert counts, rows, logs
 // I/O: mock responses > pass or fail (no leaks)
 // Run: zig build test
@@ -22,5 +22,6 @@ test "Retry-After holds the host before the retry" { var rig3: Rigg = undefined;
 test "walker with the ladder: blocked page is rescued by the vendor inside free credits" { var rig3: Rigg = undefined; try rig3.upzz(); defer rig3.down(); var vmkz = vmoc.Mock.init(allo); defer vmkz.deinit(); vmkz.rul2 = &.{.{ .hasz = "blockp", .minm = .rend }}; rig3.wlk2.conf.vend_free_cred = .{ .deco = 50, .zenr = 50, .brig = 50 }; rig3.wlk2.back = vmkz.bac2(); _ = try rig3.wlk2.walkSeed(&.{ rig3.url("/blockp"), rig3.url("/p1") }); const sum5 = try rig3.wlk2.walkRunz(null); try std.testing.expectEqual(@as(u32, 2), sum5.done); try std.testing.expectEqual(@as(usize, 2), vmkz.cal3.items.len); try std.testing.expect(!sum5.halt); }
 test "walker with the ladder: no free credits and no go stops the run instead of burning retries" { var rig3: Rigg = undefined; try rig3.upzz(); defer rig3.down(); var vmkz = vmoc.Mock.init(allo); defer vmkz.deinit(); rig3.wlk2.back = vmkz.bac2(); _ = try rig3.wlk2.walkSeed(&.{ rig3.url("/blockp"), rig3.url("/blockp?n=2"), rig3.url("/blockp?n=3") }); const sum5 = try rig3.wlk2.walkRunz(null); try std.testing.expect(sum5.halt); try std.testing.expectEqual(@as(usize, 0), vmkz.cal3.items.len); try std.testing.expectEqual(@as(u32, 1), sum5.seen); }
 test "walkRevi puts due pages back in the queue" { var rig3: Rigg = undefined; try rig3.upzz(); defer rig3.down(); _ = try rig3.wlk2.walkSeed(&.{rig3.url("/p1")}); _ = try rig3.wlk2.walkRunz(null); try std.testing.expectEqual(@as(u32, 0), try rig3.wlk2.walkRevi(10)); try rig3.dbzz.exec("UPDATE page SET next=0;"); try std.testing.expectEqual(@as(u32, 1), try rig3.wlk2.walkRevi(10)); const sum5 = try rig3.wlk2.walkRunz(null); try std.testing.expectEqual(@as(u32, 1), sum5.done); }
+test "sameSite: www and sub-domains of one site match, other sites and look-alikes do not" { try std.testing.expect(walk.Walk.sameSite("carpla.vn", "www.carpla.vn")); try std.testing.expect(walk.Walk.sameSite("xe.chotot.com", "chotot.com")); try std.testing.expect(walk.Walk.sameSite("oto.com.vn", "OTO.com.vn")); try std.testing.expect(!walk.Walk.sameSite("carpla.vn", "muaban.net")); try std.testing.expect(!walk.Walk.sameSite("carpla.vn", "notcarpla.vn")); try std.testing.expect(!walk.Walk.sameSite("oto.com.vn", "com.vn.evil.net")); try std.testing.expect(!walk.Walk.sameSite("a.vn", "")); }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

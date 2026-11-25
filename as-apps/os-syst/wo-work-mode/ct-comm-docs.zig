@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo docs: sync the git-ignored docs through a private docs repo
+// Des: wo docs: sync git-ignored docs via a private repo
 // Flo: init: hidden git dir > exclude all > remotes from the main repo > restore | sync: stage docs > scan changed files > commit (author date = edit time) > fetch + merge (newer edit wins a clash, loser saved aside) > push, retry > stamp
 // I/O: Ctxz + init|sync (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================

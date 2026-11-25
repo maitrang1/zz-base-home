@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for rn runz and rn undo commands end to end
+// Des: End-to-end tests for rn runz and undo
 // Flo: dry-run writes nothing > live run line > json > undo last > bad input
 // I/O: tmp dir fake machine > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: One place that maps a job name to its code, risk and description
+// Des: Map a job name to its code, risk, description
 // Flo: legacy jobs (post, reply, dm, ...) and catalog jobs (ru-jobs-tabl) and read lists > exec by name > risk class from code (never the AI)
 // I/O: job name + Args (caller) > runs the job; risky(): true when it needs the owner's approval; names() for `fb jobs`
 // ===================================================================

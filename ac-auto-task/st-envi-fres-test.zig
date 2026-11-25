@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Unit tests for the fresh environment merge (PATH merge, %VAR% expand, registry merge, diff, registry read)
+// Des: Unit tests for the fresh environment merge
 // Flo: feed fixed pairs and maps > assert exact PATH text, values, diff names > read a real test key if present
 // I/O: Pair lists + env maps > pass or fail
 // ===================================================================

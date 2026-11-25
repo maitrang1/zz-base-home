@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the flow with non-file locations (registry on Windows, crontab elsewhere)
+// Des: Tests the flow with non-file locations: registry, crontab
 // Flo: run with a mock tool > value written > undo writes the old value back > fault at every step restores the location too
 // I/O: tmp dir + mock tool > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

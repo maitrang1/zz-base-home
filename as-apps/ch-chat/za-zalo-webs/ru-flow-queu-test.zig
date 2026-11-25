@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the attended flow: ru-flow-queu and ru-wait-hand on the sim
+// Des: Tests for the attended flow and wait-for-owner on sim
 // Flo: plan a flow > run live on the sim > inject captcha, lock, failures > assert states, notifications, cool pace
 // I/O: sim page + memory store > pass or fail
 // Run: zig build test

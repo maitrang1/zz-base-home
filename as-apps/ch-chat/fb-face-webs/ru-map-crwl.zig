@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Read-only site map: visit seed pages at human pace, record every control (role + name), follow same-site links on allowed paths
+// Des: Read-only site map: record every control at human pace
 // Flo: seeds > per page: quiet hours + help cap + halt checks (task.visit) > read title, controls, links > write one JSON per page + index in <stat>/map/<date>/ > queue allowed links (depth and page caps) ; never clicks, never types
 // I/O: config map_* keys (caller) > files in <stat>/map/<date>/ (redacted); returns the page count; errors Halted NeedLogin Unsafe CapHit QuietHour
 // ===================================================================

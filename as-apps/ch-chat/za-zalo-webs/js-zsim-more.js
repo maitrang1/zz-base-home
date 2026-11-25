@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Zalo-like simulator actions: bar buttons, dialogs, panels, upload, stickers, mentions
+// Des: Zalo-like simulator actions: buttons, dialogs, panels, upload
 // Flo: buildUI from label table > button/dialog helpers > panels > language and drift switch
 // I/O: none > global Z.set(k,v) rebuilds the page labels
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-chat-remi: reminder dialog filled once, dry run empty, bad input
+// Des: Tests reminders: fill once, dry run, bad input
 // Flo: mock chat page > remind in each mode > read the page reminder list
 // I/O: html > pass or fail
 // Run: zig build test

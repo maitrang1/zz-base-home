@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Turn raw hits into plan items: apply or skip by risk class
+// Des: Turn raw hits into plan items by risk class
 // Flo: kind + file risks > class bits > skip flag from config > count the plan
 // I/O: Hit kind, path mask, file kind + Conf > Item {clas, mask, skip}; Item list > Summ counts
 // ===================================================================

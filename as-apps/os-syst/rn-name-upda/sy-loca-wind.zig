@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Windows registry values that hold the old path (env, Run, services)
+// Des: Windows registry values that hold the old path
 // Flo: reg query each key tree > parse values > scan string values > Lref with new value > reg add to apply or restore
 // I/O: Ctxz + Targ + key list > Lref list; reg add calls (only through the runner)
 // ===================================================================

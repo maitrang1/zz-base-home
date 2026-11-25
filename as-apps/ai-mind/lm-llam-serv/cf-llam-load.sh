@@ -1,6 +1,6 @@
 # ===================================================================
 # Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-# Des: Load and check the AI server settings (text and vision)
+# Des: Load and check AI server settings, text and vision
 # Flo: defaults > aa-conf-main.env > env overrides > expand ~ > pick role > check numbers > find llama-server
 # I/O: [role: main or visi] (env AISV_CONF = other file) > globals AISV_*, or exit 1 with a clear message
 # Run: bash ~/zz-base-home/as-apps/ai-mind/lm-llam-serv/cf-llam-load.sh --check [visi]

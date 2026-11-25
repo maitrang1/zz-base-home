@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-page-dial and the M12 send hardening: popups, composer read-back, failed sends, streak halt, cool pace
+// Des: Tests for popups, composer read-back, failed sends, halt
 // Flo: sim page with injected modals, dropped keys, failed sends > send > assert page and store
 // I/O: sim page > pass or fail
 // Run: zig build test

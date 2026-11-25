@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: `za secret`: list the accounts of user-acct.json (id, label, masked phone, language, caps percent); za keeps no passwords
+// Des: za secret: list accounts from user-acct.json, no passwords
 // Flo: the book loaded by the context > one line per account > count and limit
 // I/O: Ctx (caller) > text or JSON on stdout; exit 0
 // ===================================================================

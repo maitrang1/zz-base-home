@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for M15: HAR and curl specs, templates, replay, stale signature, TLS-bypass refusal
+// Des: Tests M15: HAR and curl specs, replay, TLS refusal
 // Flo: parse specs > replay against the mock API > assert stored record, typed errors, no network on refusal
 // I/O: mock server > pass or fail (no leaks)
 // Run: zig build test

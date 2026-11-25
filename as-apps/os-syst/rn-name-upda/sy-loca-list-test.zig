@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the location door: kind names and the reload hint
+// Des: Tests for the location door: kind names, reload hint
 // Flo: kind from text > no hint for plain files > systemd reload through the mock > plist hint > windows says nothing
 // I/O: tmp dir + mock > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

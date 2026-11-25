@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the doctor (does each job's first control exist on its page)
+// Des: Tests the doctor: each job's first control exists
 // Flo: run the doctor in the rig > check OK and MISSING lines, errors
 // I/O: none (mock site on loopback, scratch profile) > pass or fail (skips without Chrome)
 // Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ru-doct-main-test.zig

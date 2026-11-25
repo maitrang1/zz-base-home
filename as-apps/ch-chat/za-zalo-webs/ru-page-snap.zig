@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Page snapshot by accessibility tree, find by role and name
+// Des: Page snapshot by accessibility tree, find by name
 // Flo: enable AX > getFullAXTree > parse nodes > find by role + name > scroll + box center
 // I/O: CDP Conn (caller) > Node list, Pt click point, evaluated page text
 // ===================================================================

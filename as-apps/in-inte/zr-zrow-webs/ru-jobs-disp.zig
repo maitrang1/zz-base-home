@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: One place that maps a job name to its row, risk and description
+// Des: Map a job name to its row, risk, description
 // Flo: catalog jobs (ru-jobs-tabl) > exec by name > risk class from code (never the AI)
 // I/O: job name + Args (caller) > runs the job; risky(): true when it needs the owner's approval; rows for `zr jobs`
 // ===================================================================

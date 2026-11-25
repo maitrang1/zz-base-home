@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for M12: scroll, load more, consent wall, scripted form steps
+// Des: Tests M12: scroll, load more, consent wall, forms
 // Flo: mock pages > ladder with actions through local Chrome > assert rows, text, caps, refusals
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test

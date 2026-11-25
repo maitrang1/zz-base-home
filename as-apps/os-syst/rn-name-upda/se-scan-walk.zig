@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Walk the roots and collect plan items from files and links
+// Des: Walk roots, collect plan items from files and links
 // Flo: stack of dirs > skip listed dirs > per dir build relative forms > per file load, scan, classify > links read and scanned > items
 // I/O: roots + Conf + Targ > Outc {items, lrefs, counts} (never follows links, never writes)
 // ===================================================================

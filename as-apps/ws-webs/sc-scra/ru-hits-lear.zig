@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Learn which vendor wins per host and mode, order by value
+// Des: Learn the best vendor per host and mode
 // Flo: record each vendor result > drop rows older than 30 days > score = smoothed success rate, then cost per good page, then config order > ordered vendor names
 // I/O: Db + host + mode + outcome (caller) > vendor name order (arena)
 // ===================================================================

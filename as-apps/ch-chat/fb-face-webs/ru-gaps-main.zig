@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Gap report: compare the newest site map with the job catalog and the label packs; also prints the coverage matrix
+// Des: Gap report: compare newest site map with job catalog
 // Flo: newest <stat>/map/<date>/ > per job: first button or box name on its page (missing = UI drift) > controls no label knows (new things to automate) > counts, lists, exit 3 on drift ; matrix = every job with area, class, cap, page
 // I/O: map files + catalog + config (caller) > text or JSON lines; error Drift when a job's first name is not on its mapped page; BadUsage when no map exists yet
 // ===================================================================

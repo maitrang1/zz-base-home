@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Minimal WebSocket client and CDP call layer for local Chrome
+// Des: Minimal WebSocket client and CDP calls for local Chrome
 // Flo: connect loopback > HTTP upgrade + accept check > masked text frames > read fragments, ping/pong, size cap > watchdog deadline > call by id, keep events
 // I/O: port + ws path (caller) > JSON replies and event log; errors Timeout Closed TooBig BadFrame BadHandshake CdpError
 // ===================================================================

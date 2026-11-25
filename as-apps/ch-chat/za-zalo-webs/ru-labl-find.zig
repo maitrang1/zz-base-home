@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Find page nodes by registry key: any Vietnamese or English name, exact before substring
+// Des: Find page nodes by registry key, Vietnamese or English
 // Flo: key > role + names > pass 1 exact name > pass 2 substring > node; helpers for marks and prefixes
 // I/O: Reg + AX nodes (caller) > Node or null; text helpers
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Command matrix: job catalog J01-J39 with job names and quality level
+// Des: Command matrix: job catalog J01-J39 with quality levels
 // Flo: static table > check every job name is in the job table > print id, level, jobs
 // I/O: Ctx (caller) > stdout table or JSON; levels L0 spec, L1 simulator green, L2+ need the live campaign
 // ===================================================================

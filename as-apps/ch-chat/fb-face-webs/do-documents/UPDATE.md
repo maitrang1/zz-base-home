@@ -1,5 +1,8 @@
 # Updates
 
+## 2026-11-25 (feed for scra)
+Added: `fb read feed` reads the pages in `feed_path_list` (groups, Marketplace searches) and, with `--live`, writes the posts as JSONL for scra (`scra cars` loads them). Read-only. New settings feed_*.
+
 ## 2026-11-24 (accounts)
 Added: several accounts in one `user-acct.json`, picked with `--acct <id>` or run all with `--acct all` (one at a time, rotating order, random wait between accounts). Each account has its own browser profile, database, limits, warm-up and safety rest under `acct/<id>/`. Two accounts resting = all rest. New settings `acct_maxx_coun`, `acct_gap_secs`. Routine items can name an account.
 Changed: your existing profile and data move into `acct/main/` the first time you run this version (moved, nothing deleted). `fb secret` lists every account. `fb status` shows the account. The file is now named `user-acct.json`.

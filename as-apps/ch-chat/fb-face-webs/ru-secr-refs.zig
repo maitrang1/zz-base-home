@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Account secrets as refs: read the account book from user-acct.json in the secrets folder (never from the command line, never stored by fb)
+// Des: Read account secrets as refs from the secrets folder
 // Flo: expand the secrets folder > read user-acct.json {"v":1,"main":id,"accs":[{id,login,pass,...}]} or the old flat file (= one account "main") > check ids, count, limit > pick one account > `fb secret` lists ids and which fields are set, never the values
 // I/O: folder path + limit (caller) > Book (arena owned); errors BadConfig (broken file, bad or duplicate id, too many accounts)
 // ===================================================================

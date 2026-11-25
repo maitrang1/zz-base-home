@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for M9: geo and wait options per vendor adapter and ladder
+// Des: Tests M9: geo and wait options per vendor
 // Flo: build requests with geo > assert vendor params, prices, ladder skip of own GET
 // I/O: mock vendor + mock site > pass or fail (no leaks)
 // Run: zig build test

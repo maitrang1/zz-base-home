@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Account jobs as data: login, logout, sign-up, password, 2FA, sessions, contact info, language, profile parts, deactivate and delete
+// Des: Account jobs as data: login, password, sessions, profile, delete
 // Flo: rows only; secrets come from refs (never args); class H rows stop on a `hand` step for what only the owner can do (codes, final delete click)
 // I/O: none (constants) > ROWS joined into the catalog by ru-jobs-tabl
 // ===================================================================

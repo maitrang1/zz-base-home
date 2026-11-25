@@ -1,6 +1,6 @@
 ﻿# ===================================================================
 # Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-# Des: Save work, close apps gracefully, fix Chrome flags, shut down Windows
+# Des: Save work, close apps, fix Chrome flags, shut down
 # Flo: admin > cancel countdown > save work (wo wipz) > Explorer > VSCode > other apps > Chrome flags > countdown > shut down
 # I/O: [-Auto] + aa-conf-main.env (any scalar `$CF` key) > apps closed, PC off (any key in a countdown cancels; -Auto = no UAC, no countdowns, for tr jobs)
 # Run: E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-shut-wind.bat [-Auto]

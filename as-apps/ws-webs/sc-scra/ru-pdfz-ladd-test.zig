@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for M10 end to end: PDF over HTTP into the index
+// Des: Tests M10 end to end: PDF into the index
 // Flo: mock server PDFs > ladder fetch > assert record kind, text, flags, refusal when off
 // I/O: mock responses > pass or fail (no leaks)
 // Run: zig build test

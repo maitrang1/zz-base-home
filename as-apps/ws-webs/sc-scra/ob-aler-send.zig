@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Alerts on a different channel: Healthchecks fail ping + Resend email
+// Des: Alerts on a separate channel: Healthchecks ping, Resend email
 // Flo: load channel secrets from key files > POST fail ping with text > POST email > count channels that answered > none = error
 // I/O: subject + text (breaker, purge, caps) > delivered count; key files healthchecks.url and resend.key
 // ===================================================================

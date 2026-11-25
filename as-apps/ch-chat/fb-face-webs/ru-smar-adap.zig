@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Optional AI text drafts: Claude Code CLI first, local llama.cpp as backup
+// Des: Optional AI text drafts: Claude Code CLI, then llama.cpp
 // Flo: only when smar_mode_enab > try each tool in smar_chai_orde > clau = run `claude -p` with a timeout > llam = POST to a loopback llama.cpp server > first good text wins
 // I/O: prompt text (caller) > drafted text (arena owned); error AiFail when every tool fails; never leaves the machine except via the owner's own Claude CLI
 // ===================================================================

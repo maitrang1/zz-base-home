@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-apiz-prob: M8 gate, shells stored via free API
+// Des: Tests M8 gate: shells stored via free API
 // Flo: mock site + mock vendor > ladder fetch of shell pages > assert $0, kinds, caps, robots, climb
 // I/O: mock responses > pass or fail (no leaks)
 // Run: zig build test

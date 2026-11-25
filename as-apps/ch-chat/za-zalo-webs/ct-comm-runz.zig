@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Command run: pick a job, run it through the session, print the report, map to exit code
+// Des: Command run: run a job, print report, exit code
 // Flo: open store + browser > build Sess with the ladder mode > dispatch job > print text or JSON > exit code 0-4
 // I/O: Ctx + job words (caller) > Report on stdout; alert on halt; exit code
 // ===================================================================

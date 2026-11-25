@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-safe-priv and purge: owner-only folder (never locks the owner out), body redaction, retention
+// Des: Tests for privacy: owner-only folder, redaction, retention
 // Flo: tmp dir > lock > read ACL and write a file after > purge old rows > redact text
 // I/O: folders and rows > pass or fail
 // Run: zig build test

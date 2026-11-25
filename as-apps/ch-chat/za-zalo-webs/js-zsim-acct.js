@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Zalo-like simulator account pages: logout, devices, settings, storage, help, feedback, password, unfriend
+// Des: Zalo-like simulator account pages for tests
 // Flo: label table additions > state additions > Z.xtra builds the buttons and panels on every page rebuild
 // I/O: none > Z.st.out devout sets fb unfr; Z.devs; Z.xtra(S) called by buildUI
 // ===================================================================

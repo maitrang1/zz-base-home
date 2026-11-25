@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for M16: vendor learning, honeypot links, truncation, poison, OCR adapter
+// Des: Tests for M16: vendor learning, honeypots, truncation, poison, OCR
 // Flo: replayed outcomes > order shifts; hub page > only real link followed; helpers on samples
 // I/O: mock server + db > pass or fail (no leaks)
 // Run: zig build test

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Plain-language recipes to steps: send, remind, answer price, summarize unread
+// Des: Plain-language recipes to steps: send, remind, price, summarize
 // Flo: parse phrase (EN or VI) > pick recipe > bulk guard > run jobs through the session > report lines
 // I/O: phrase text + Sess (caller) > Report counts and preview lines; AI only if enabled
 // ===================================================================

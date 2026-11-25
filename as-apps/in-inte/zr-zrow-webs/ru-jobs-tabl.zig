@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Job catalog as data: each job = name, cap kind, risk, page, steps with label keys
+// Des: Job catalog as data: name, cap, risk, page, steps
 // Flo: one row per ZenRows action > steps name a label key (ut-loca-pack) and an argument slot > the runner turns rows into flow steps
 // I/O: none (constants) > Job rows (find by name, list for `zr jobs`)
 // ===================================================================

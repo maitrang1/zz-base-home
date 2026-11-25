@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Test rig: fake ZenRows site + real headless Chrome + one tab
+// Des: Test rig: fake ZenRows site, headless Chrome, one tab
 // Flo: find Chrome (skip when absent) > start mock site > launch Chrome on a scratch profile > connect first tab > enable CDP domains
 // I/O: none > Rig with mock, page, env helpers (tests only; never touches a real profile or real ZenRows)
 // ===================================================================

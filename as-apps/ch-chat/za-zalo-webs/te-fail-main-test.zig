@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Failure tests: the browser link dies mid-send, mid-upload, mid-flow; the next run resumes with no duplicate and no lost item
+// Des: Failure tests: browser link dies, next run resumes safely
 // Flo: kill the socket at a stage > run again on a second connection > count what reached the page
 // I/O: sim page > pass or fail
 // Run: zig build test

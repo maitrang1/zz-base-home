@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for st-lock-main: second run is Busy, stale lock is replaced, release frees it
+// Des: Tests for the run lock: busy, stale replaced, release
 // Flo: tmp dir > acquire with fake pids > assert
 // I/O: lock file > pass or fail
 // Run: zig build test

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Commands status and caps: halt flag, quiet hours, caps used and left
+// Des: Commands status, caps: halt flag, quiet hours, caps left
 // Flo: open store > read stat windows + halt > compute effective caps > print text or JSON
 // I/O: Ctx (caller) > stdout text or JSON; exit 0 ready, 4 halted
 // ===================================================================

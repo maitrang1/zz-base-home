@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Expand leading ~ in a path using the home dir
+// Des: Expand a leading ~ in paths via home dir
 // Flo: check prefix ~ > join home + rest > else copy as is
 // I/O: path text + home dir text (caller) > owned path text
 // ===================================================================

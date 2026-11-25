@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: The one approval list: show the plan, approve or deny items once, up front
+// Des: One approval list: approve or deny planned items once
 // Flo: items saved with approval 0 (needs OK) or 1 (auto) > show numbered list > approve all or some by number (duplicate approve = once) > deny some
 // I/O: Ctx + flow id (caller) > printed plan lines; approval flags saved in the state db
 // ===================================================================

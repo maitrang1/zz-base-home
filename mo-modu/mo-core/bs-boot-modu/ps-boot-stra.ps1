@@ -1,6 +1,6 @@
 # ===================================================================
 # Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-# Des: Bootstrap a fresh Windows device: toolchain + wo + drift check
+# Des: Bootstrap a fresh Windows device: toolchain, wo, drift check
 # Flo: repo root > git config > mise (sha256 checked) > mise install --locked > build wo > wo doct
 # I/O: none > exit 0 ok / 1 failed / 3 drift / 4 blocked; prints the next manual step
 # Run: powershell -NoProfile -ExecutionPolicy Bypass -File E:\zz-base-home\mo-core\bs-boot-modu\ps-boot-stra.ps1

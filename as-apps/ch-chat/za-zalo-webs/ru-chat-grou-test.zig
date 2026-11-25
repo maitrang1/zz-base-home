@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-chat-grou: pin and mute live, group needs force, dry run changes nothing
+// Des: Tests pin and mute: group needs force, dry run
 // Flo: mock chat page > run each action > read page state
 // I/O: html > pass or fail
 // Run: zig build test

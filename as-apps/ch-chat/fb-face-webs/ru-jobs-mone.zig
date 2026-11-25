@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Money jobs as data: billing, invoices, payment methods, Meta Verified, ads (read, pause, resume, budget, create, boost), plans
+// Des: Money jobs as data: billing, payments, ads, plans
 // Flo: rows only; cap `mone` is 0 until the owner sets it; every spend row checks mone_spen_capz; card entry, payment and final publish are owner steps (class H)
 // I/O: none (constants) > ROWS joined into the catalog by ru-jobs-tabl
 // ===================================================================

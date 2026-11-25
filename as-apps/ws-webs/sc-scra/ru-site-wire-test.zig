@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for site rules wired into the ladder, judge, walk and records
+// Des: Tests site rules wired into ladder, judge, walk
 // Flo: mock site on 127.0.0.1 with one site rule > fetch or walk > assert the rule changed behavior
 // I/O: mock server + mock vendor > pass or fail (no leaks)
 // Run: zig build test

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Privacy: owner-only data folder, purge old logs, redact private text
+// Des: Privacy: owner-only data folder, purge logs, redact text
 // Flo: lock folder to the owner (chmod 700 or icacls) > purge log rows older than msgs_keep_days > redact emails, phones, long numbers, names after by/from
 // I/O: folder path + user name (caller) > best-effort permission change; redacted text (arena owned)
 // ===================================================================

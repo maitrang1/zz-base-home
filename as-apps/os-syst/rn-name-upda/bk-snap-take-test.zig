@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for snapshot hashing and writing, and for reading it back
+// Des: Tests for snapshot hashing, writing and reading back
 // Flo: known SHA-256 vectors > write/read roundtrip > overwrite > hash check on restore
 // I/O: tmp dir > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

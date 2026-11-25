@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Fake Facebook pages for the Phase 3 jobs (settings, account, billing, roles, help, create pages): generated from the job tables
+// Des: Fake Facebook pages for Phase 3, built from tables
 // Flo: Spec rows by path > te-fixt-spec renders them > findAny looks in both tables
 // I/O: path (caller) > Spec pointer or null
 // ===================================================================

@@ -44,6 +44,10 @@ Missing keys use the defaults below.
 | base_deve_main | Developer console address | https://developers.facebook.com | http(s) address |
 | map_page_maxx | Pages `fb map` visits per run | 25 | 1 to 200 |
 | map_deep_maxx | How many link steps from a start page | 2 | 0 to 3 |
+| feed_path_list | Pages `fb read feed` reads for scra: group feeds, Marketplace searches (paths that start with `/`) | none | list of paths |
+| feed_dirz_wind · feed_dirz_unix | Folder where `fb read feed --live` writes its `.jsonl` files (scra's `social-in` folder) | scra data folder | a path (`~` works) |
+| feed_item_maxz | Most posts taken from one page per run | 50 | 1 to 500 |
+| feed_text_maxz | Longest post text kept, in bytes | 4000 | 200 or more |
 | map_seed_list | Pages `fb map` starts from | settings, Accounts Center, activity log, ... | list of paths |
 | map_allo_list | Only paths starting like this are visited | settings, accountscenter, privacy, ... | list of paths |
 | path_*, pbiz_*, pdev_* | Page paths jobs use (account, settings, billing on the business site, developer console, help, ...). Change one if Facebook moves a page | Facebook defaults | paths |

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Notify the owner: OS toast, hub alert line, alerts file; one plain line, never chat text
+// Des: Notify the owner by toast, hub alert, alerts file
 // Flo: sanitize line > for each channel in config order: toast, hubz (stderr), file (append) > count delivered
 // I/O: Conf channel list + stat dir + line (caller) > Done flags; alerts.txt appended
 // ===================================================================

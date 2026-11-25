@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the ZenRows login book: user-acct.json (one or many accounts), old zr-login.json, limits, id rules, save
+// Des: Tests for ZenRows login book: accounts, old file, limits
 // Flo: scratch folder > write or save > load the book > pick accounts > errors for bad books
 // I/O: scratch dir (no real secrets) > pass or fail (no leaks)
 // Run: zig build test -Dfile=ut-secr-refz-test.zig

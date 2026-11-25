@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Plan and approval list: phrases to flow items, risk class from code, approve all or some once
+// Des: Plan and approval list: phrases to risk-rated items
 // Flo: item text > job + words > risk (ask for group, forward) > saved as flow items > one printed list > approve ids or all
 // I/O: item texts + Stor (caller) > flow id, list text, approvals saved
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Canary: check that every job's labels exist on the live page, read only
+// Des: Canary: check every job's labels exist on live page
 // Flo: collect jobs from registry > check page-level keys > open one chat (read) > check chat-level keys > one line per job
 // I/O: Sess + optional job name (caller) > Report: ok jobs in prev, drifted jobs in skip, lines
 // ===================================================================

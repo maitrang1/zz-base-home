@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the walker on a fake machine in a tmp dir
+// Des: Tests the walker on a fake machine
 // Flo: build fake tree > walk > check hits, skips, counters, limits
 // I/O: tmp dir > pass or fail (never the live machine)
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Re-point a symbolic link at a new target without a gap
+// Des: Re-point a symlink to a new target, no gap
 // Flo: make a temp link with the new target > rename it over the old link > read a link back
 // I/O: link path + target text + tag > link retargeted on disk
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Command setup: check browser and folders, explain the risk, record consent once, print the next steps
+// Des: Command setup: check browser, explain risk, record consent
 // Flo: find browser > open store (folders + owner-only) > text in Vietnamese or English > --yes records the date > next steps
 // I/O: Ctx (caller) > consent date in the store; stdout text; safe to run again
 // ===================================================================

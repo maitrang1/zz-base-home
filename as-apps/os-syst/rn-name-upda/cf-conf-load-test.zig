@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for config defaults, the JSON file and the skip keys
+// Des: Tests for config defaults, JSON file and skip keys
 // Flo: defaults = file > partial override > unknown keys > bad path > all skip keys default true
 // I/O: none > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

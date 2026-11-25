@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-chat-send: dry run sends 0, live sends once, crash resume, caps, halt
+// Des: Tests send: dry run, live once, resume, caps, halt
 // Flo: mock chat page > send in each mode > assert page state and store rows
 // I/O: html > pass or fail
 // Run: zig build test

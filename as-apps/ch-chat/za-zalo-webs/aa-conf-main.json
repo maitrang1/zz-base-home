@@ -1,6 +1,11 @@
 {
     "data_loca_wind": "E:\\.zz-base-home-tena\\as-apps\\ch-chat\\za-zalo-webs",
     "data_loca_unix": "~/.zz-base-home-tena/as-apps/ch-chat/za-zalo-webs",
+    "feed_chat_list": [],
+    "feed_dirz_wind": "E:\\.zz-base-home-tena\\as-apps\\ws-webs\\sc-scra\\social-in",
+    "feed_dirz_unix": "~/.zz-base-home-tena/as-apps/ws-webs/sc-scra/social-in",
+    "feed_item_maxz": 500,
+    "feed_text_maxz": 4000,
     "brow_exec_path": "",
     "brow_head_mode": false,
     "pipe_mode_enab": false,

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for every catalog job on the fake site (mock-tested, not live-verified)
+// Des: Tests every catalog job on the fake site (mock-tested)
 // Flo: run each job live > assert what the site recorded > irreversible jobs refuse without --force > list jobs loop item by item
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-jobs-main-test.zig

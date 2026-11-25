@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Crawl the live site read-only, find real routes, store every named control, report gaps
+// Des: Crawl live site read-only, store named controls, report gaps
 // Flo: open the dashboard home > collect same-site links > visit each (GET only) > read the accessibility tree > write map-report.txt > then per job: are its labels on its page? > OK or GAP > summary
 // I/O: Ctx (caller) > rows in the state db (mapz), <stat>/map-report.txt, lines on stdout; counts of pages, controls, ok, gaps
 // ===================================================================

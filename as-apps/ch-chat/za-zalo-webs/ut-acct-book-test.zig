@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the account book: missing file, many accounts, limits, id rules, masked phone
+// Des: Tests account book: missing file, limits, id rules
 // Flo: scratch folder > write user-acct.json > load > pick > errors for bad books
 // I/O: scratch dir (no real data) > pass or fail (no leaks)
 // Run: zig build test -Dfile=ut-acct-book-test.zig

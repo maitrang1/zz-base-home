@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the command dispatcher against the mock ZenRows site
+// Des: Tests the command dispatcher against the mock ZenRows site
 // Flo: parse argv > dispatch in the rig > check output lines, records, exit codes, typed errors
 // I/O: none (mock site on loopback, scratch profile) > pass or fail (skips without Chrome)
 // Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ct-ctrl-runz-test.zig

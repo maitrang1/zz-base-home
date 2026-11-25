@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Doctor: check that each job's first button or box exists on its page (read-only)
+// Des: Doctor: read-only check each job's first control exists
 // Flo: browser version check > for each job (or one) visit its page > find the first labeled step by role + label > OK or MISSING > count
 // I/O: Ctx + optional job name + optional --url path (caller) > lines on stdout, count of OK; error Drift when anything is missing
 // ===================================================================

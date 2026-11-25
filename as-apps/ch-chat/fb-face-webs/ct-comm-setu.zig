@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: First-run wizard and login: browser, folder, login, doctor, dry demo, risk consent
+// Des: First-run wizard: browser, folder, login, doctor, demo, risk consent
 // Flo: login waits for the owner (attended) > setup: lock folder > login > doctor > dry-run demo > record consent only with --yes
 // I/O: Ctx (caller) + yes flag + user name > printed steps; consent date saved in the state db; live runs refused without it
 // ===================================================================

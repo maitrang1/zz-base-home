@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for M14: SSE, long-poll and WebSocket frames with caps
+// Des: Tests for M14: SSE, long-poll, WebSocket frames with caps
 // Flo: mock feeds > sseRead / wsRead > assert exact frame count, deadline, frame cap, JSONL record
 // I/O: mock server + local Chrome for WebSocket (skipped when absent) > pass or fail (no leaks)
 // Run: zig build test

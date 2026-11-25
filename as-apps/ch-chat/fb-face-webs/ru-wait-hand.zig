@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Wait for the owner when a job truly needs them, then continue by itself
+// Des: Wait for the owner when needed, then resume alone
 // Flo: needs-you halt > 2nd challenge in 24 h = unsafe > notify (plain line) > touch nothing, poll the page > cleared: settle, re-check, cool pace, resume the same step > deadline: park
 // I/O: Ctx + flow id + item id + halt kind (caller) > Outcome (resumed, timeout, unsafe); states and wait time saved in the state db
 // ===================================================================

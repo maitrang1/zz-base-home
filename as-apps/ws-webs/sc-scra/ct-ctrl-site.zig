@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: CLI: show the effective settings for a host, or check every site rule
+// Des: CLI: show a host's effective settings, check site rules
 // Flo: site --check > validate groups, sites, paths > site <host or url> > merge layers > one line per changed key with its source
 // I/O: Ctx (caller) > text or JSON lines; exit 0 ok, 2 bad usage, config error otherwise
 // ===================================================================

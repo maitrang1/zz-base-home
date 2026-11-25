@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Build every text form a path can take inside files
+// Des: Build every text form a path can take
 // Flo: normalized abs path > url, double-slash, native, forward forms > or relative forms from a file dir
 // I/O: normalized path (+ file dir) > list of Vari {kind, text}; same shape for old and new
 // ===================================================================

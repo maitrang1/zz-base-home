@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Attended flow engine: run the saved queue item by item, pause only for needs-you, stop on unsafe
+// Des: Attended flow engine: run queue, pause only when needed
 // Flo: next pending item > approval gate > run job > done | park item (unsure, fail, skip) | needs-you: wait, resume same item | unsafe: stop flow, cooldown
 // I/O: Sess + flow id + Env (caller) > Result (kind, counts, one-line fixes); item states saved before and after each act
 // ===================================================================

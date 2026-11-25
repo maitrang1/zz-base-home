@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Extra mock routes for browser tests: DOM, scroll, forms, login, streams
+// Des: Mock routes for browser tests: DOM, forms, login, streams
 // Flo: path match > canned page, cookie check, SSE feed or WebSocket push > true when handled
 // I/O: mock server self + writer + path (te-mock-serv) > bytes on the wire (tests only)
 // ===================================================================

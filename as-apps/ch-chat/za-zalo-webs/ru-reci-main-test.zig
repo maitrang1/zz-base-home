@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-reci-main: phrase parse, dry run sends 0, price recipe, bulk guard
+// Des: Tests recipes: phrase parse, dry run, price, bulk guard
 // Flo: parse phrases > run recipes on the mock chat page > assert counts and page state
 // I/O: phrases and html > pass or fail
 // Run: zig build test

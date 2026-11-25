@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Owner tools: report for support, backup, export own data, purge old logs
+// Des: Owner tools: support report, backup, export, purge old logs
 // Flo: report = redacted folder (version, safe config, last log, alerts) > backup = copy the state db > export = ledger + log as JSONL > purge = drop rows older than msgs_keep_days
 // I/O: Ctx (state + folder) > files in <stat>/report, backup, export; printed paths and counts; never includes cookies, profile data or private text
 // ===================================================================

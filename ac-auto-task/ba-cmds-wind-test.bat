@@ -20,6 +20,16 @@ set "LOGZ=%T%\calls.log" & set "WOX=%T%\as-apps\os-syst\wo-work-mode\zig-out\bin
 set "FAKE_RC=0"
 echo -- cmds-wind
 for %%P in ("home-wipz|wipz --live" "home-docs|docs sync --live" "home-beat|beat --live" "home-bkup-stat|bkup stat --live" "home-bkup-nigh|bkup nigh --live" "home-doct|doct" "home-dril|dril --live" "home-code|sync --live" "cicd-stat|ci stat" "cicd-rele|ci rele" "cicd-test|ci test" "cicd-leak|ci leak" "cicd-lock|ci lock" "cicd-repr|ci repr" "cicd-deps|ci deps") do for /f "tokens=1,2 delims=|" %%A in ("%%~P") do call :runid "%%A" "%%B"
+set "SCX=%T%\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe"
+type nul > "%LOGZ%"
+set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
+call "%DISP%" scra-raws
+> "%T%\exp.txt" echo mise exec -- "%SCX%" run --seed-file "%T%\..\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt" --follow 800 --live
+findstr /b /c:"mise exec -- \"%SCX%\" run" "%LOGZ%" > "%T%\got.txt"
+fc "%T%\exp.txt" "%T%\got.txt" >nul && call :ok "scra-raws runs scra run with the tena seeds" || call :bad "scra-raws runs scra run with the tena seeds"
+call :runsc scra-data "cars --live"
+call :runsc scra-cont "cont --live"
+call :runsc scra-sync "sync --live"
 set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
 call "%DISP%" home-wipz
 findstr /b /c:"cwd=%T%" "%LOGZ%" >nul && call :ok "task runs from the repo root" || call :bad "task runs from the repo root"
@@ -50,6 +60,12 @@ type nul > "%LOGZ%"
 set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
 call "%DISP%" %~1
 findstr /x /c:"mise exec -- \"%WOX%\" %~2" "%LOGZ%" >nul && call :ok "%~1 runs wo %~2" || call :bad "%~1 runs wo %~2"
+exit /b 0
+:runsc
+type nul > "%LOGZ%"
+set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
+call "%DISP%" %~1
+findstr /x /c:"mise exec -- \"%SCX%\" %~2" "%LOGZ%" >nul && call :ok "%~1 runs scra %~2" || call :bad "%~1 runs scra %~2"
 exit /b 0
 :ok
 echo PASS  %~1

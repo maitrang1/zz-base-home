@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: The one thin OS file: path style, case rules, normalizing
+// Des: The one thin OS file: path style, case rules
 // Flo: pick host rules > compare text by case rule > normalize abs path to forward slashes > back to native form
 // I/O: path text + Osys rules > normalized path (E:/a/b or /a/b), native text, case-aware compare
 // ===================================================================

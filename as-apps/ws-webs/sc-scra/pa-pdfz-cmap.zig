@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Read a PDF ToUnicode CMap and map font codes to text
+// Des: Read PDF ToUnicode CMap, map font codes to text
 // Flo: find codespace width > parse bfchar and bfrange blocks > code to UTF-8 map > decode byte strings
 // I/O: CMap stream bytes (caller) > Cmap (code width, map); decode(bytes) appends UTF-8
 // ===================================================================

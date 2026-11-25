@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-boar-acts on the sim, in Vietnamese and English: poll, note, label, quick message, friends, message requests, group admin, profile
+// Des: Tests board, social and group admin actions on sim
 // Flo: sim page > run each op > read page state; no force, dry, bad input, caps
 // I/O: sim page > pass or fail
 // Run: zig build test

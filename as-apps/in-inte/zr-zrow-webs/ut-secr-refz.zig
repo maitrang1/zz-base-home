@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Read and save the ZenRows logins (email + password) in user-acct.json: one account or many
+// Des: Read and save ZenRows logins in user-acct.json
 // Flo: join secret dir + user-acct.json (old zr-login.json is read when the new file is missing) > parse {"v":1,"main":id,"accs":[{id,user,pass,lang,scal}]} or the flat file (= account main) > check ids and limit > pick one account ; save = replace or add one account
 // I/O: secret dir path + limit (caller) > Book / Cred (arena owned); values are never printed or logged; errors BadConfig, NoSecret
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Commands plan, approve, go, flow: attended flows from the command line
+// Des: Commands plan, approve, go, flow: attended flows from CLI
 // Flo: plan items > one approval list > approve > go runs by itself, waits only for the owner > summary + exit code
 // I/O: Ctx + words (caller) > saved flow, list text, run summary; exit 0 ok, 3 items need you, 4 parked/blocked/unsafe
 // ===================================================================

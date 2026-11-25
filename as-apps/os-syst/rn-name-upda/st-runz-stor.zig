@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Run ids and the data-dir layout (one owner of run state paths)
+// Des: Run ids and data-dir layout: one owner of paths
 // Flo: data dir > jour/snap paths per id > new unique id > latest id
 // I/O: Ctxz + id > native paths; dir listing > id text
 // ===================================================================

@@ -10,6 +10,8 @@ rem exit code: "call exit /b %%errorlevel%%" - a plain "exit /b" after a command
 setlocal
 for %%I in ("%~dp0..") do set "R=%%~fI"
 set "WOZ=%R%\as-apps\os-syst\wo-work-mode\zig-out\bin\wo.exe"
+set "SCRA=%R%\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe"
+set "SEED=%R%\..\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt"
 call :conf
 if not defined CMDS_MISE set "CMDS_MISE=mise"
 cd /d "%R%"
@@ -28,6 +30,10 @@ if "%~1"=="cicd-leak" call "%CMDS_MISE%" exec -- "%WOZ%" ci leak & call exit /b 
 if "%~1"=="cicd-lock" call "%CMDS_MISE%" exec -- "%WOZ%" ci lock & call exit /b %%errorlevel%%
 if "%~1"=="cicd-repr" call "%CMDS_MISE%" exec -- "%WOZ%" ci repr & call exit /b %%errorlevel%%
 if "%~1"=="cicd-deps" call "%CMDS_MISE%" exec -- "%WOZ%" ci deps & call exit /b %%errorlevel%%
+if "%~1"=="scra-raws" call "%CMDS_MISE%" exec -- "%SCRA%" run --seed-file "%SEED%" --follow 800 --live & call exit /b %%errorlevel%%
+if "%~1"=="scra-data" call "%CMDS_MISE%" exec -- "%SCRA%" cars --live & call exit /b %%errorlevel%%
+if "%~1"=="scra-cont" call "%CMDS_MISE%" exec -- "%SCRA%" cont --live & call exit /b %%errorlevel%%
+if "%~1"=="scra-sync" call "%CMDS_MISE%" exec -- "%SCRA%" sync --live & call exit /b %%errorlevel%%
 echo ba-cmds-wind.bat: unknown task id: %~1 1>&2
 exit /b 2
 :conf

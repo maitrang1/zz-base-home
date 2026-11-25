@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Decide if a text match is a whole path or a piece of a word
+// Des: Tell a whole-path match from a word piece
 // Flo: look at the byte before > look at the byte after > allow or reject (utf16 looks at the low byte of each unit)
 // I/O: text + match offset/length + kind > bool
 // ===================================================================

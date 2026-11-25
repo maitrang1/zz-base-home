@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Commit guard: big files, CRLF, Windows path traps, case clashes
+// Des: Commit guard: big files, CRLF, path traps, case clashes
 // Flo: read NUL path list > check name + length > stat size > scan text for CR > report > exit 4 on any hit
 // I/O: stdin NUL-separated repo paths (git ls-files -z) > stderr lines "kind<TAB>path", exit 0 ok / 4 blocked
 // Run: git ls-files -z | zig run E:\zz-base-home\ci-flow-sync\ci-comm-guar.zig

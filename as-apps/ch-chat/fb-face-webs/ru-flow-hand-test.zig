@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the step ops added in Phase 3: hand (wait for the owner), stopif, soft goto, error-page retry
+// Des: Tests for hand, stopif, soft goto and error-page retry
 // Flo: owner simulated by a page timer > hand waits and alerts once > deadline parks > unsafe page stops > stopif ends early > soft goto skips the login halt > error page = Drift
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-flow-hand-test.zig

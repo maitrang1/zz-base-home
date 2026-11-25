@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the safety ladder, caps, quiet hours and once-only keys
+// Des: Tests the safety ladder, caps, quiet hours, once-only keys
 // Flo: read and dry change nothing > live posts once > repeat is skipped > caps and quiet hours block > unsure key refuses > failure before submit stays retryable
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-task-runn-test.zig

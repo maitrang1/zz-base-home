@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Test helper: headless Chrome on a scratch profile loading a fake page
+// Des: Test helper: headless Chrome loading a fake page
 // Flo: find browser > launch scratch profile > connect > navigate data url > eval/stop
 // I/O: html text + scratch dir (test) > Mock with live CDP connection
 // ===================================================================

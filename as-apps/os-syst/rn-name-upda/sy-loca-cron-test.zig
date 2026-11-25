@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the crontab location through a mock crontab tool
+// Des: Tests the crontab location via a mock crontab tool
 // Flo: collect refs > no crontab > absent tool > set writes a file and calls crontab
 // I/O: tmp dir + mock > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

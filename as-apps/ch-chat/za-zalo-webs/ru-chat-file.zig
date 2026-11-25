@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Send a file or image: only from the outbox folder, size and type checked, file chooser intercepted, upload verified once
+// Des: Send a file only from outbox, checked, upload verified
 // Flo: check path (inside outbox, size, type, hash) > halt+pace gate > open chat > send row key = file hash > attach click > chooser event > set files > wait until uploaded
 // I/O: Sess + chat + file path (caller) > Out (sent, dup, dry); message with the file name in the chat
 // ===================================================================

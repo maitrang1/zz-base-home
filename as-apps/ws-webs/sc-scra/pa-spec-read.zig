@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Read an owner-captured HAR or curl command into a request spec
+// Des: Read an owner-captured HAR or curl into a spec
 // Flo: detect HAR (starts with brace) or curl > pull method, URL, headers, body > refuse TLS-bypass flags > fill {param} templates > hide secret query values for storage
 // I/O: spec text + params k=v&k2=v2 (caller) > Spec; errors BadSpec PinBypass
 // ===================================================================

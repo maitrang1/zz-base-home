@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Board, social and group admin: polls, notes, labels, quick messages, friends, message requests, group admin, profile read
+// Des: Board, social, group admin: polls, notes, labels, friends
 // Flo: mode gate > halt+pace gate (new contact budget for friends) > open chat > open dialog by registry key > fill fields > confirm > log
 // I/O: Sess + chat + words (caller) > page state change; preview in dry mode; ask-first actions need force
 // ===================================================================

@@ -1,7 +1,7 @@
 #!/bin/sh
 # ===================================================================
 # Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-# Des: Bootstrap a fresh Linux/macOS/Termux device: toolchain + wo + drift check
+# Des: Bootstrap a fresh Linux/macOS/Termux device: toolchain, wo, drift check
 # Flo: repo root > git config > mise (sha256 checked) > mise install --locked > build wo > wo doct
 # I/O: none > exit 0 ok / 1 failed / 3 drift / 4 unsupported or blocked; prints the next manual step
 # Run: sh /path/to/zz-base-home/mo-core/bs-boot-modu/sh-boot-stra.sh

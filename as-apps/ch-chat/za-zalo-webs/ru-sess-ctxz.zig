@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Job session: pace gate, halt check, find with retry, human click and type
+// Des: Job session: pace gate, halt check, find, human click
 // Flo: init rng + clock > pre (halt guard, pace gate, wait) > find (re-snapshot, retry) > click/type > log
 // I/O: Conf + store + CDP Conn (caller) > page actions, log rows, typed errors
 // ===================================================================

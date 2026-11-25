@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: List likely JSON or page URLs behind a JavaScript shell
+// Des: List likely JSON or page URLs behind JS shells
 // Flo: link tags > wp-json > Next buildId > Nuxt payload > SvelteKit data > /api/ strings > openapi > iframes > .json twin > same-host dedupe
 // I/O: page URL + HTML text (caller) > Cand list (absolute same-host URLs, kind label, page flag)
 // ===================================================================

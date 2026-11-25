@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Read live feeds: SSE and long-poll by own GET, WebSocket by Chrome
+// Des: Read live feeds: SSE, long-poll, WebSocket via Chrome
 // Flo: worker thread reads lines > SSE events or NDJSON lines become frames > main waits for frame cap or deadline > stop flag > JSONL out; WebSocket: Network events from the page's own socket
 // I/O: URL + caps (caller) > frames (copies) and a JSONL text; errors BadStatus NoBrowser BrowFail
 // ===================================================================

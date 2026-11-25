@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Optional AI adapter: Claude Code CLI then llama.cpp, one chain from config
+// Des: Optional AI adapter: Claude Code CLI then llama.cpp
 // Flo: build prompt from chat tail > run first tool in chain > validate text > next tool on failure > draft or AiFail
 // I/O: Conf chain + prompt (caller) > cleaned draft text; never holds secrets, never sends
 // ===================================================================

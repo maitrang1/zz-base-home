@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Standard fake machine for flow tests: 3 files with refs, 1 without
+// Des: Standard fake machine for flow tests, 4 files
 // Flo: root > write files with abs + relative refs > give back paths and the file list
 // I/O: TmpDir > Fxt {root, old, new, rels}
 // ===================================================================

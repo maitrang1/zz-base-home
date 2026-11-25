@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Test rig: simulator page in headless Chrome, memory store, fast session with sim selectors
+// Des: Test rig: simulator in headless Chrome, memory store
 // Flo: up (tmp profile, sim html, store) > ses (fast, fake noon) > js (page eval) > down (stop all)
 // I/O: scratch dir (test) > Rig with live CDP link and Sess factory
 // ===================================================================

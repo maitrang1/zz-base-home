@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: The account book: user-acct.json in the secrets folder lists the Zalo accounts you own (id, label, phone, lang, caps percent); za never types a password or a code
+// Des: Account book: user-acct.json lists owned Zalo accounts, no passwords
 // Flo: read user-acct.json {"v":1,"main":id,"accs":[{id,label,phone,lang,scal}]} (missing file = one account "main") > check ids, count, limit > pick one account ; phone is shown masked
 // I/O: folder path + limit (caller) > Book (arena owned); error BadConfig (broken file, bad or repeated id, too many, unknown main, caps percent out of range)
 // ===================================================================

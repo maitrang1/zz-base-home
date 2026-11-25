@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Post text on the timeline, a group or a page
+// Des: Post text to the timeline, a group or page
 // Flo: plan steps (open composer, type, submit, check text shows) > run through the safety ladder > once-only key from the text
 // I/O: Args text + optional url (caller) > Out; one post per run; same text on the same place is never posted twice
 // ===================================================================

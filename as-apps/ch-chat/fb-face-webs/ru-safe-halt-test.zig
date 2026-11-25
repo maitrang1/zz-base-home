@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for challenge and logout detection, classes, dialog-scoped weak phrases
+// Des: Tests for challenge and logout detection and classes
 // Flo: each halt kind by url and by text (EN + VI) > weak phrases only in dialogs > classes > normal pages stay clear
 // I/O: url + text + dialog samples > expected Halt, Class or null
 // Run: zig build test -Dfile=ru-safe-halt-test.zig

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for secret refs: account book (one or many accounts), old flat file, limits, id rules, no values in the status text
+// Des: Tests for secret refs: account book, limits, id rules
 // Flo: scratch folder > write user-acct.json > load the book > pick accounts > status lists names only
 // I/O: scratch dir (no real secrets) > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-secr-refs-test.zig

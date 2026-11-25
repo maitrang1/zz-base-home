@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo ci: local mirrors of the CI jobs plus cloud watchers (read-only)
+// Des: wo ci: local CI job mirrors plus cloud watchers
 // Flo: pick sub-command > run outside tools through the runner > facts (red = fail, tool absent = blocked)
 // I/O: Ctxz + stat|test|leak|lock|rele|repr|deps > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================

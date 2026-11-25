@@ -1,0 +1,17 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Car row retention: trim old phones, text, history, rows
+// Flo: every rule works on gone rows only (active rows are never touched) > phone digits cleared (hash stays) > text and extras blanked > history keeps first and last price > rows dropped only after a roll-up ran since they were last seen
+// I/O: open Db + Conf + clock (caller) > Cres counts; dryz only counts; runs on every cars run, age decides, not disk pressure
+// ===================================================================
+const std = @import("std"); const cfgz = @import("cf-conf-load.zig"); const sqli = @import("st-stor-sqli.zig"); const fail = @import("ru-fail-over.zig");
+const CF = .{ .dayz = 86400000 };
+pub const Cres = struct { pers: u32 = 0, text: u32 = 0, hist: u32 = 0, rows: u32 = 0 };
+fn runzOnez(dbzz: *sqli.Dbzz, sqlz: [:0]const u8, cutz: i64, extr: i64) !u32 { var stmt = try dbzz.prep(sqlz); defer stmt.fini(); try stmt.bindIntz(1, cutz); try stmt.bindIntz(2, extr); _ = try stmt.step(); return @intCast(dbzz.cha2()); }
+fn contOnez(dbzz: *sqli.Dbzz, sqlz: [:0]const u8, cutz: i64, extr: i64) !u32 { var stmt = try dbzz.prep(sqlz); defer stmt.fini(); try stmt.bindIntz(1, cutz); try stmt.bindIntz(2, extr); _ = try stmt.step(); return @intCast(stmt.colzIntz(0)); }
+pub fn purgRunz(dbzz: *sqli.Dbzz, conf: cfgz.Conf, nowz: i64, dryz: bool) !Cres { var rslt: Cres = .{}; const persCutz = nowz - @as(i64, conf.carz_pers_days) * CF.dayz; const textCutz = nowz - @as(i64, conf.carz_text_days) * CF.dayz; const histCutz = nowz - @as(i64, conf.carz_hist_days) * CF.dayz; const goneCutz = nowz - @as(i64, conf.carz_gone_days) * CF.dayz; const roll = try fail.flagGetz(dbzz, "carz_roll");
+    if (dryz) { rslt.pers = try contOnez(dbzz, "SELECT count(*) FROM carz WHERE stat=1 AND phon<>'' AND gone<?1 AND ?2=?2;", persCutz, 0); rslt.text = try contOnez(dbzz, "SELECT count(*) FROM carz WHERE stat=1 AND (text<>'' OR xtra<>'{}') AND gone<?1 AND ?2=?2;", textCutz, 0); rslt.hist = try contOnez(dbzz, "SELECT count(*) FROM carp p WHERE p.urlz IN (SELECT urlz FROM carz WHERE stat=1 AND gone<?1) AND p.timz>(SELECT min(timz) FROM carp q WHERE q.urlz=p.urlz) AND p.timz<(SELECT max(timz) FROM carp r WHERE r.urlz=p.urlz) AND ?2=?2;", histCutz, 0); rslt.rows = if (roll > 0) try contOnez(dbzz, "SELECT count(*) FROM carz WHERE stat=1 AND gone<?1 AND lasz<=?2;", goneCutz, roll) else 0; return rslt; }
+    rslt.pers = try runzOnez(dbzz, "UPDATE carz SET phon='' WHERE stat=1 AND phon<>'' AND gone<?1 AND ?2=?2;", persCutz, 0); rslt.text = try runzOnez(dbzz, "UPDATE carz SET text='',xtra='{}' WHERE stat=1 AND (text<>'' OR xtra<>'{}') AND gone<?1 AND ?2=?2;", textCutz, 0); rslt.hist = try runzOnez(dbzz, "DELETE FROM carp WHERE urlz IN (SELECT urlz FROM carz WHERE stat=1 AND gone<?1) AND timz>(SELECT min(timz) FROM carp q WHERE q.urlz=carp.urlz) AND timz<(SELECT max(timz) FROM carp r WHERE r.urlz=carp.urlz) AND ?2=?2;", histCutz, 0);
+    if (roll > 0) { _ = try runzOnez(dbzz, "DELETE FROM carp WHERE urlz IN (SELECT urlz FROM carz WHERE stat=1 AND gone<?1 AND lasz<=?2);", goneCutz, roll); rslt.rows = try runzOnez(dbzz, "DELETE FROM carz WHERE stat=1 AND gone<?1 AND lasz<=?2;", goneCutz, roll); } return rslt; }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

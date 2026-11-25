@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Label pack part 3: Phase 3 button, box and marker names (English first, then Vietnamese)
+// Des: Label pack 3: Phase 3 button and box names
 // Flo: key > list of names the page may use > ut-loca-pack searches every part (owner labl_over wins)
 // I/O: none (constants) > E entries (key + names)
 // ===================================================================

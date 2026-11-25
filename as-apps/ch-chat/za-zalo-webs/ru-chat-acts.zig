@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Message and chat actions: react, quote-reply, recall, delete, pin message, download, archive, hide, unread, alias, block, sticker
+// Des: Message and chat actions: react, recall, pin, archive, block
 // Flo: mode gate > halt+pace gate > open chat > hover message or click chat button > click registry key > verify > log
 // I/O: Sess + chat + needle text (caller) > page state change; preview in dry mode; ask-first actions need force
 // ===================================================================

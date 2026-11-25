@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: rn stat: version, OS, data dir, which skip keys are on
+// Des: rn stat: version, OS, data dir, active skip keys
 // Flo: read config > print one line + the skip list > exit 0
 // I/O: config > text or JSON on stdout; read-only
 // Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe stat

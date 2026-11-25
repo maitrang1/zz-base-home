@@ -5,7 +5,7 @@
 # I/O: task id (argv 1, from the scheduler) + optional aa-conf-main.env (CMDS_MISE, WO_DEVI_NAME) > command exit code, or stderr + exit 2
 # Run: bash "~/zz-base-home/ac-auto-task/sh-cmds-linu.sh" <task-id>
 # ===================================================================
-dirz=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd); R=$(cd "$dirz/.." && pwd); WOZ=$R/as-apps/os-syst/wo-work-mode/zig-out/bin/wo; SSS=$R/as-apps/os-syst/ss-star-shut
+dirz=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd); R=$(cd "$dirz/.." && pwd); WOZ=$R/as-apps/os-syst/wo-work-mode/zig-out/bin/wo; SCRA=$R/as-apps/ws-webs/sc-scra/zig-out/bin/scra; SEED=$HOME/.zz-base-home-tena/as-apps/ws-webs/sc-scra/seeds.txt;SSS=$R/as-apps/os-syst/ss-star-shut
 if [[ -r $dirz/aa-conf-main.env ]]; then while IFS='=' read -r key val; do case $key in CMDS_MISE) [[ -n ${CMDS_MISE-} ]] || CMDS_MISE=$val ;; WO_DEVI_NAME) [[ -n ${WO_DEVI_NAME-} ]] || WO_DEVI_NAME=$val ;; esac; done < "$dirz/aa-conf-main.env"; fi
 [[ -n ${CMDS_MISE-} ]] || { command -v mise >/dev/null 2>&1 && CMDS_MISE=mise || CMDS_MISE=$HOME/.local/bin/mise; }
 [[ -z ${WO_DEVI_NAME-} ]] || export WO_DEVI_NAME
@@ -26,6 +26,10 @@ cicd-leak) exec "$CMDS_MISE" exec -- "$WOZ" ci leak ;;
 cicd-lock) exec "$CMDS_MISE" exec -- "$WOZ" ci lock ;;
 cicd-repr) exec "$CMDS_MISE" exec -- "$WOZ" ci repr ;;
 cicd-deps) exec "$CMDS_MISE" exec -- "$WOZ" ci deps ;;
+scra-raws) exec "$CMDS_MISE" exec -- "$SCRA" run --seed-file "$SEED" --follow 800 --live ;;
+scra-data) exec "$CMDS_MISE" exec -- "$SCRA" cars --live ;;
+scra-cont) exec "$CMDS_MISE" exec -- "$SCRA" cont --live ;;
+scra-sync) exec "$CMDS_MISE" exec -- "$SCRA" sync --live ;;
 linu-shut-nigh) exec bash "$SSS/ru-shut-guar.sh" tick ;;
 *) echo "sh-cmds-linu.sh: unknown task id: $1" >&2; exit 2 ;;
 esac

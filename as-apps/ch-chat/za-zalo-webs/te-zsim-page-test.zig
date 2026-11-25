@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for te-zsim-page: the simulator loads, is bilingual, virtualizes lists, switches drift
+// Des: Tests that the simulator loads, is bilingual, switches drift
 // Flo: load sim in headless Chrome > read AX tree > flip Z.set > read again
 // I/O: sim page > pass or fail
 // Run: zig build test

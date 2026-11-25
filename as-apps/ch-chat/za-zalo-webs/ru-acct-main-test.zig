@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for many accounts: rotation, caps percent, first-run move, sequential run, skips for halted accounts, the two-safety-stops rule
+// Des: Tests for many accounts: rotation, caps, skips, safety stops
 // Flo: fake runner per account (no browser) > assert order, results, halt marks in each account's own db, nothing shared
 // I/O: scratch dir + sqlite (no Chrome) > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-acct-main-test.zig

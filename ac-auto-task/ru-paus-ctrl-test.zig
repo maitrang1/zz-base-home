@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Unit tests for pause and resume of a process tree
+// Des: Unit tests for pausing and resuming a process tree
 // Flo: parse stat lines > collect tree > real freeze and thaw of a live child
 // I/O: stat text, proc lists, a spawned sleeper > pass or fail
 // ===================================================================

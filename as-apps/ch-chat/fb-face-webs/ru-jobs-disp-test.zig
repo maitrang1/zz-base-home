@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the dispatcher: job classes, areas, session-expiry re-login, dry run of an assist job
+// Des: Tests the dispatcher: job classes, areas, re-login, dry run
 // Flo: rowAt classes > expired page with no secrets = NeedLogin > with secrets = one automatic login then the job runs > dry run of a class H job does not wait
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-jobs-disp-test.zig

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for st-flow-data: queue order, approvals once, resume at the pending row, failed-chat marks
+// Des: Tests for flow data: queue order, approvals, resume, marks
 // Flo: memory store > flows and items > assert states
 // I/O: rows > pass or fail
 // Run: zig build test

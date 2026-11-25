@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tell text from binary and read UTF-16 files as UTF-8 text
+// Des: Tell text from binary, read UTF-16 files as UTF-8
 // Flo: look at the first bytes > BOM means UTF-16 > NUL means binary > else UTF-8 > encode back the same way
 // I/O: raw bytes > Load {enc, text}; text + enc > raw bytes (BOM kept)
 // ===================================================================

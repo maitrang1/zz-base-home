@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Popups: dismiss known harmless dialogs, stop on unknown ones, deny browser permission prompts
+// Des: Popups: dismiss harmless dialogs, stop on unknown ones
 // Flo: AX snapshot > any dialog? > known by registry: click its close button, verify gone > unknown: UnknownModal
 // I/O: session-like value (caller, duck typed) > Res clear or dismissed; permissions denied in the browser
 // ===================================================================

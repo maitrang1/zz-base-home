@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the command dispatcher end to end on the fake site
+// Des: End-to-end tests of the command dispatcher on fake site
 // Flo: status JSON > pause blocks run > ask in plain words > ledger + log output > unlock > login ok and login timeout > unknown job
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ct-ctrl-runz-test.zig

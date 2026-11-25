@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: One run lock for every entry point: pid file, stale lock cleared by pid check
+// Des: One run lock for every entry point, stale-safe
 // Flo: exclusive create > on conflict read pid > live other pid: Busy; dead pid: replace > release removes
 // I/O: lock path + pid (caller) > lock file; error Busy when another run is alive
 // ===================================================================

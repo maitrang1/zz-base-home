@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for every core catalog row on the fake site (mock-tested, not live-verified): generated from the job table
+// Des: Tests every core catalog row on the fake site
 // Flo: run each row live (irreversible rows must refuse without --force first) > assert what the fake page recorded > class H rows wait for the page marker
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // ===================================================================

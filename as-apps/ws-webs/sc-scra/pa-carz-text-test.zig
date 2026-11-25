@@ -1,0 +1,16 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests car text: labels, dropped scripts, entities, JSON-LD
+// Flo: small HTML shaped like the real car pages > assert the lines
+// I/O: html strings > pass or fail
+// Run: zig build test
+// ===================================================================
+const std = @import("std"); const text = @import("pa-carz-text.zig");
+fn arenNewz() std.heap.ArenaAllocator { return std.heap.ArenaAllocator.init(std.testing.allocator); }
+test "label and value spans become separate lines" { var aren = arenNewz(); defer aren.deinit(); const page = try text.pageSpli(aren.allocator(), "<html><head><title>Bán xe Toyota &amp; co | 6986108</title><style>.a{x:1}</style></head><body><div class=\"row\"><label>Hộp số:</label><span class=\"v\">Số tự động</span></div><div><label>Năm sản xuất:</label><span>2026</span></div><script>var x = '<div>no</div>';</script></body></html>"); try std.testing.expectEqualStrings("Bán xe Toyota & co | 6986108", page.titl); try std.testing.expectEqual(@as(usize, 4), page.lins.len); try std.testing.expectEqualStrings("Hộp số:", page.lins[0]); try std.testing.expectEqualStrings("Số tự động", page.lins[1]); try std.testing.expectEqualStrings("Năm sản xuất:", page.lins[2]); try std.testing.expectEqualStrings("2026", page.lins[3]); }
+test "numeric and named entities decode to UTF-8, unknown ones stay" { var aren = arenNewz(); defer aren.deinit(); const deco = try text.decoEnti(aren.allocator(), "M&#225;y x&#259;ng &aacute; &#x1EA1; &nbsp;x &bogus; &#; 5 &amp 3"); try std.testing.expectEqualStrings("Máy xăng á ạ  x &bogus; &#; 5 &amp 3", deco); }
+test "br breaks, inline tags join, comments and noscript vanish" { var aren = arenNewz(); defer aren.deinit(); const page = try text.pageSpli(aren.allocator(), "<p>one<br>two <b>bold</b> end</p><!-- <div>hidden</div> --><noscript><div>nojs</div></noscript><p>3 < 5 tỷ</p>"); try std.testing.expectEqual(@as(usize, 3), page.lins.len); try std.testing.expectEqualStrings("one", page.lins[0]); try std.testing.expectEqualStrings("two bold end", page.lins[1]); try std.testing.expectEqualStrings("3 < 5 tỷ", page.lins[2]); }
+test "JSON-LD blocks are collected, other scripts are not" { var aren = arenNewz(); defer aren.deinit(); const page = try text.pageSpli(aren.allocator(), "<script type=\"application/ld+json\">{\"@type\":\"Car\",\"name\":\"X\"}</script><script>var a=1;</script><script type=\"application/ld+json\">{\"@type\":\"BreadcrumbList\"}</script>"); try std.testing.expectEqual(@as(usize, 2), page.ldjs.len); try std.testing.expectEqualStrings("{\"@type\":\"Car\",\"name\":\"X\"}", page.ldjs[0]); try std.testing.expectEqual(@as(usize, 0), page.lins.len); }
+test "broken html never crashes: open tag, open script, empty, binary" { var aren = arenNewz(); defer aren.deinit(); const bads = [_][]const u8{ "", "<div", "<div class=\"x", "<script>never closed", "<title>no end", "</", "<<<>>>", "\x00\xff\xfe<p>x</p>" }; for (bads) |badz| _ = try text.pageSpli(aren.allocator(), badz); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

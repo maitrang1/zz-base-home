@@ -1,0 +1,13 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests monthly call counters and their cap
+// Flo: temp Db > add calls > assert counts and the reset
+// I/O: counters > pass or fail
+// Run: zig build test
+// ===================================================================
+const std = @import("std"); const inde = @import("st-page-inde.zig"); const quot = @import("sy-mirr-quot.zig");
+const NOWZ: i64 = 1795600000000; const DAYZ: i64 = 86400000;
+test "counts add up per vendor, the cap is exact, the 80 percent mark is flagged" { var tmpz = std.testing.tmpDir(.{}); defer tmpz.cleanup(); const dirz = try std.fmt.allocPrint(std.testing.allocator, ".zig-cache/tmp/{s}", .{tmpz.sub_path}); defer std.testing.allocator.free(dirz); var dbzz = try inde.pageOpen(std.testing.allocator, std.testing.io, dirz); defer dbzz.close(); try std.testing.expectEqual(@as(i64, 0), try quot.opsaGetz(&dbzz, "tigr", NOWZ)); try quot.opsaAddz(&dbzz, "tigr", NOWZ, 7); try quot.opsaAddz(&dbzz, "tigr", NOWZ + 5, 3); try quot.opsaAddz(&dbzz, "b2zz", NOWZ, 1); try std.testing.expectEqual(@as(i64, 10), try quot.opsaGetz(&dbzz, "tigr", NOWZ)); try std.testing.expectEqual(@as(i64, 1), try quot.opsaGetz(&dbzz, "b2zz", NOWZ)); try std.testing.expect(try quot.opsaOkay(&dbzz, "tigr", NOWZ, 10, 0)); try std.testing.expect(!try quot.opsaOkay(&dbzz, "tigr", NOWZ, 10, 1)); try std.testing.expect(try quot.opsaHigh(&dbzz, "tigr", NOWZ, 12)); try std.testing.expect(!try quot.opsaHigh(&dbzz, "tigr", NOWZ, 13)); }
+test "a new month starts at zero and the old month's counter is removed" { var tmpz = std.testing.tmpDir(.{}); defer tmpz.cleanup(); const dirz = try std.fmt.allocPrint(std.testing.allocator, ".zig-cache/tmp/{s}", .{tmpz.sub_path}); defer std.testing.allocator.free(dirz); var dbzz = try inde.pageOpen(std.testing.allocator, std.testing.io, dirz); defer dbzz.close(); try quot.opsaAddz(&dbzz, "tigr", NOWZ, 9); const nex2 = NOWZ + 40 * DAYZ; try std.testing.expectEqual(@as(i64, 0), try quot.opsaGetz(&dbzz, "tigr", nex2)); try quot.opsaAddz(&dbzz, "tigr", nex2, 2); try std.testing.expectEqual(@as(i64, 2), try quot.opsaGetz(&dbzz, "tigr", nex2)); try std.testing.expectEqual(@as(i64, 0), try quot.opsaGetz(&dbzz, "tigr", NOWZ)); var stmt = try dbzz.prep("SELECT count(*) FROM flag WHERE name LIKE 'opsa_tigr_%';"); defer stmt.fini(); _ = try stmt.step(); try std.testing.expectEqual(@as(i64, 1), stmt.colzIntz(0)); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Fresh environment for spawned commands (Windows registry merge, PATH merge, diff)
+// Des: Fresh environment for spawned commands: registry and PATH merge
 // Flo: read machine + user + volatile Environment from the registry > expand %VAR% (REG_EXPAND_SZ only) > user over machine > volatile over both, only for names they set (USERNAME) > PATH = machine;user + old session-only entries > put into the env map
 // I/O: env map (copy of the app's start env) > same map with changes made after the app started; two maps > names that differ
 // ===================================================================

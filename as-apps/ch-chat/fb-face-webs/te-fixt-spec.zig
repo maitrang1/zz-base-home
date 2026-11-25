@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Data-driven fake Facebook pages (buttons, boxes, menus, lists) for job tests
+// Des: Data-driven fake Facebook pages for job tests
 // Flo: Spec table by path > render HTML with ARIA roles > every action posts /_rec so tests can assert
 // I/O: path (caller) > HTML text (arena owned); records "kind|text" in the mock server
 // ===================================================================

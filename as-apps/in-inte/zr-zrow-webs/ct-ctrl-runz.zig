@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Dispatch a command to its code: status, jobs, run, ask, flows, map, doctor, snap, support tools
+// Des: Dispatch each CLI command to its code
 // Flo: command word > browser needed? > run the matching module > print result lines (or JSON)
 // I/O: Ctx + Args (caller) > exit code 0; typed errors for the caller to print
 // ===================================================================

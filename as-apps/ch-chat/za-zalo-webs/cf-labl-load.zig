@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Load the Zalo label registry: key to role + Vietnamese + English names
+// Des: Load Zalo label registry: key to role and names
 // Flo: embedded default or file override > parse json > key lookup, job key lists, name lists
 // I/O: json text or path (caller) > Reg (arena owned)
 // ===================================================================

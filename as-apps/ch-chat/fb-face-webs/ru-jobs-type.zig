@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Types and row helpers shared by every job table (catalog as data)
+// Des: Types and row helpers shared by every job table
 // Flo: Job = name + cap kind + risk + page source + steps; helper fns build one step each; class A/G/H comes from the rows
 // I/O: none (types + comptime helpers) > used by ru-jobs-tabl and the area tables
 // ===================================================================

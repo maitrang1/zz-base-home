@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-chat-file: outbox rules, size and type caps, real file chooser upload on the sim, duplicate and resume
+// Des: Tests for file send: outbox rules, caps, upload, resume
 // Flo: tmp outbox with files > check / send on the sim > read page upload list
 // I/O: files and sim page > pass or fail
 // Run: zig build test

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Freeze and thaw a whole process tree (pause / resume)
+// Des: Freeze and thaw a whole process tree
 // Flo: Windows: freeze the Job Object | POSIX: stop the group, then walk /proc for children that left it, repeat until stable
 // I/O: job handle or leader pid + on/off > true when the tree was frozen or thawed
 // ===================================================================

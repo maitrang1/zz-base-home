@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-acct-acts on the sim, Vietnamese and English: logout, devices, settings, storage, help, feedback, password hand-off, edge pages
+// Des: Tests account pages on sim in Vietnamese and English
 // Flo: sim page > run each op > read page state; no force, dry, read mode, bad input, halt pages
 // I/O: sim page > pass or fail
 // Run: zig build test

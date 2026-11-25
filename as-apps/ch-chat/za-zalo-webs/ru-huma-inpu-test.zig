@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-huma-inpu: curve shape, typing plan, live trusted events on the mock page
+// Des: Tests for human input: curves, typing plan, live events
 // Flo: pure geometry and plan asserts > live click, type, scroll against headless Chrome
 // I/O: points and text > pass or fail
 // Run: zig build test

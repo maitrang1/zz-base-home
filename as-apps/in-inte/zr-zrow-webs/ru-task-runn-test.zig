@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the safety ladder: read, dry, live, force, caps, quiet hours, once-only keys
+// Des: Tests the safety ladder, caps, quiet hours, once-only keys
 // Flo: run catalog jobs in the rig > check records, counters, typed errors
 // I/O: none (mock site on loopback, scratch profile) > pass or fail (skips without Chrome)
 // Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ru-task-runn-test.zig

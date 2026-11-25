@@ -1,5 +1,8 @@
 # Updates
 
+## 2026-11-25 (feed for scra)
+Added: `za feed` hands the stored messages of the chats in `feed_chat_list` to scra as JSONL (`--live` writes the file, incremental per chat). Opt-in, no browser. New settings feed_*.
+
 ## 2026-11-24 (accounts)
 Added: several accounts in one `user-acct.json` (names only, no passwords), picked with `--acct <id>` or run all with `--acct all` (one at a time, rotating order, random wait between accounts). Each account has its own browser profile, database, limits and stop state under `acct/<id>/`. Two accounts stopped for safety = nothing runs. `za secret` lists the accounts. New settings `acct_maxx_coun`, `acct_gap_secs`, `secr_loca_main`. A routine can name an account.
 Changed: your existing profile and data move into `acct/main/` the first time you run this version (moved, nothing deleted).

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Chaos helpers: cut the CDP socket at a named stage, reconnect a second client to the same page
+// Des: Chaos helpers: cut CDP socket, reconnect a second client
 // Flo: stage name > hook kills the socket when that stage fires > second connection > new session on it
 // I/O: Rig + stage (test) > a session whose link dies at the stage; a fresh session on the same page
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the job catalog and runner against the mock ZenRows site
+// Des: Tests job catalog and runner on mock ZenRows
 // Flo: catalog checks > dry-run every job > live runs per job group > risky jobs need force > secrets, once-only keys
 // I/O: none (mock site on loopback, scratch profile) > pass or fail (browser tests skip without Chrome)
 // Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ru-jobs-main-test.zig

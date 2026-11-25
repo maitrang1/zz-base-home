@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: The whole auto flow: scan, snapshot, apply, verify, report, rollback
+// Des: The whole flow: scan, snapshot, apply, verify, report, rollback
 // Flo: scan > journal open > patch each file > fix links and locations > rename > re-scan > done | any fail > undo everything
 // I/O: normalized old/new + Ctxz + Opts > Rslt {code, id, counts}; disk changed or fully restored
 // ===================================================================

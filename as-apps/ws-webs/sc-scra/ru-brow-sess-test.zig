@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for M13: owner sessions, profile reuse, caps, login wall
+// Des: Tests M13: owner sessions, profile reuse, caps, login wall
 // Flo: mock cookie site > account fetches through a persistent profile > assert reuse, stop on wall, day cap, no vendor, no path in logs
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test

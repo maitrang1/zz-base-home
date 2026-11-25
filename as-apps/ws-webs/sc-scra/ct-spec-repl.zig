@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Replay an owner-captured request (HAR or curl) and store the reply
+// Des: Replay an owner-captured request (HAR or curl), store reply
 // Flo: read spec file > fill {params} > send with deadline through the host guard > 401/403 = stale signature > save by hidden-secret URL > print outcome
 // I/O: --spec file + --param k=v (caller) > page record; errors BadSpec PinBypass StaleSpec; never logs headers or cookies
 // ===================================================================

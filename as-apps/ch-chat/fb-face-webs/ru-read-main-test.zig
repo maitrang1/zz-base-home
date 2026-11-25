@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for read lists, Messenger replies, buyer inquiries, listing extras, sale detection
+// Des: Tests for read lists, replies, inquiries, extras, sale detection
 // Flo: lists print numbered lines > unread threads answered for known contacts only > market actions (available, relist, delete, share) > sale scan proposes sold
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-read-main-test.zig

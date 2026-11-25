@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Safety ladder, caps gate, consent and once-only keys around every write
+// Des: Safety ladder, caps, consent, once-only keys around writes
 // Flo: mode check (read, dry, live, force) > approval for risky acts > consent > quiet hours + warm-up + cool-pace cap > take key > run steps > mark done or leave unsure
 // I/O: Ctx (page, state, config) + kind, key, steps > Out (done, dry, read, dupe); errors QuietHour CapHit NeedApprove NoConsent Dupe Halted Unsafe
 // ===================================================================

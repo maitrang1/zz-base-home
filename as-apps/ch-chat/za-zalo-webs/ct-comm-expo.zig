@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Commands export, report, backup, retry, undo: owner data out, support bundle, safety copy, second chance, take back
+// Des: Commands export, report, backup, retry, undo for owner data
 // Flo: read store > write atomic files under the data root > print where > retry resets an item > undo recalls the last own message
 // I/O: Ctx (caller) > files in stat/export, stat/report, stat/backup; stdout text; exit 0, 3 when nothing to do
 // ===================================================================

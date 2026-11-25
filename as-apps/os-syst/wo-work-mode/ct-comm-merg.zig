@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Shared merge helpers for wo docs and wo sync: one version per file, the loser saved aside
+// Des: Merge helpers for wo docs and sync: one winner
 // Flo: unmerged files > newer edit wins (author date) > loser restored under zz-dele-auto > checkout winner > commit
 // I/O: Ctxz + git env > facts, true when every clash was resolved and committed
 // ===================================================================

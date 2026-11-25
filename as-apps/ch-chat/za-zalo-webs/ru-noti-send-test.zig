@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-noti-send: plain line, sanitizing, channel order, alerts file append and trim
+// Des: Tests for notify: plain line, channel order, alerts file
 // Flo: strings > clean; tmp stat dir > send with file channel > read back
 // I/O: text > pass or fail (no real toast in tests)
 // Run: zig build test

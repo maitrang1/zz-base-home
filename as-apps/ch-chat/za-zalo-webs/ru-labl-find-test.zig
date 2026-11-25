@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for cf-labl-load and ru-labl-find: registry parse, bilingual match, exact first, marks
+// Des: Tests for label registry parse and bilingual matching
 // Flo: embedded registry + hand nodes > assert finds
 // I/O: nodes > pass or fail
 // Run: zig build test

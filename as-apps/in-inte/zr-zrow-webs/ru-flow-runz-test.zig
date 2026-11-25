@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the step runner against the mock ZenRows site (real headless Chrome)
+// Des: Tests the step runner on the mock ZenRows site
 // Flo: build steps > run in the rig > check page effects, records, typed errors
 // I/O: none (mock site on loopback, scratch profile) > pass or fail (skips without Chrome)
 // Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ru-flow-runz-test.zig

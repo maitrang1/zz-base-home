@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Help and support jobs as data: help search, help center, support inbox, report a problem, send feedback, contact support
+// Des: Help and support jobs as data rows
 // Flo: rows only; sending text to Meta is guarded (needs approval) and uses the help cap
 // I/O: none (constants) > ROWS joined into the catalog by ru-jobs-tabl
 // ===================================================================

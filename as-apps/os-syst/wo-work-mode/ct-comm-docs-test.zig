@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo docs: url derive, init, sync, leak stop, one-winner conflict policy
+// Des: Tests wo docs: url, init, sync, leak stop, conflicts
 // Flo: mock git + gitleaks > run init / sync > check argv, env, saved losers, stamp, exit codes
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

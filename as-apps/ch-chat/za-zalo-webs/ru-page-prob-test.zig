@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-page-prob and ru-labl-cana: redaction, fixture replay, live canary on the sim in vi, en, drift B, drift C
+// Des: Tests for page probe: redaction, fixture replay, live canary
 // Flo: redact names > dump sim page > replay offline > run canary live > assert missing keys
 // I/O: names, json, sim pages > pass or fail
 // Run: zig build test

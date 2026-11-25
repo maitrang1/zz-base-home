@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for human-like input: find by role + label, click, type, keys, mouse path, scroll
+// Des: Tests for human-like input: find, click, type, keys, scroll
 // Flo: load a mock page > find controls through the accessibility tree > act > read records
 // I/O: none (mock site on loopback, scratch profile) > pass or fail (skips without Chrome)
 // Run: cd E:\zz-base-home\as-apps\in-inte\zr-zrow-webs && zig build test -Dfile=ru-huma-inpu-test.zig

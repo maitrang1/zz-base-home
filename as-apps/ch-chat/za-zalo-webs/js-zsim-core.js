@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Zalo-like simulator core: labels vi/en/drift, state, virtual chat list, thread, composer
+// Des: Zalo-like simulator core: labels, state, chat list, composer
 // Flo: label table > state + chats > render list/thread > send/fail > overlays and modals
 // I/O: none > global Z used by tests through Runtime.evaluate
 // ===================================================================

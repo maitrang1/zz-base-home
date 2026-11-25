@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo sync: parse, message, every gate, merge, clash, held file, retries, verify
+// Des: Tests wo sync: parse, gates, merge, clash, retries, verify
 // Flo: mock git + tmp repo files + fake clock > run sync > check argv, facts, exit codes
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

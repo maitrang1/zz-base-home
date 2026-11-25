@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the AI adapter chain and its daily cap
+// Des: Tests the AI adapter chain and its daily cap
 // Flo: off = refuses > Claude CLI missing falls back to the llama.cpp mock > cap stops extra calls > non-loopback url refused > JSON content parsed
 // I/O: mock llama server on loopback + missing exe name (no real AI, no network) > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-smar-adap-test.zig

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Run any catalog job: turn a job row into flow steps and send it through the safety ladder
+// Des: Run any catalog job through the safety ladder
 // Flo: check needed args > resolve host + page path > map label keys to names (packs, owner overrides) > fill secrets > once-only key (once jobs only) > execWrite
 // I/O: Job row + Args (caller) > count of items done; errors BadUsage NoElement CapHit NeedApprove NoSecret ...
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Watch loop: check the inbox at a human cadence inside work sessions, rest on breaks and quiet hours
+// Des: Watch loop: check inbox at human pace, with rests
 // Flo: segment now > break: wait it out > read unread > optional price reply > wait next check (log-normal gap) > repeat to limit or deadline
 // I/O: Sess + limits (caller) > Res (checks, new messages, why it ended); chats read into the store
 // ===================================================================

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ct-comm-flws: the action map is complete and honest
+// Des: Tests that the action map is complete and honest
 // Flo: scan tables > assert job coverage both ways, reasons for non-built rows, counts add up
 // I/O: tables > pass or fail
 // Run: zig build test

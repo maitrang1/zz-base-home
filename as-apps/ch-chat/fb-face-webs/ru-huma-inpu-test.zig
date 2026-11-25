@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for page reading and human input on the fake site
+// Des: Tests page reading and human input on fake site
 // Flo: find by role + label > scroll > click through real mouse events > type incl. Vietnamese > assert the site saw it
 // I/O: real local Chrome (skipped when absent) + mock site > pass or fail (no leaks)
 // Run: zig build test -Dfile=ru-huma-inpu-test.zig

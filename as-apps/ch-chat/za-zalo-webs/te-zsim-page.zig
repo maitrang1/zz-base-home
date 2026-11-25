@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Zalo-like simulator page for tests: embeds markup + three scripts
+// Des: Zalo-like simulator page for tests: markup plus scripts
 // Flo: embed html, core js, account js, more js > join into one page text
 // I/O: allocator (caller) > html text for te-mock-page.start
 // ===================================================================

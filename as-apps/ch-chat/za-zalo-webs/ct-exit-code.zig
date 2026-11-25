@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Map job results to exit codes 0 ok, 1 fail, 3 finding, 4 blocked
+// Des: Map results to exit codes: ok, fail, finding, blocked
 // Flo: job counts + halt flag > one exit code
 // I/O: done, fail, skip, blocked counts (caller) > u8 exit code
 // ===================================================================

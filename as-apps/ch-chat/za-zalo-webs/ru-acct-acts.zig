@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Account pages: logout, devices (list, remote logout), settings (notify, language), storage, help, feedback, password hand-off
+// Des: Account pages: logout, devices, settings, storage, help, feedback
 // Flo: mode gate > halt+pace gate > open panel by registry key > click or read > read back the page state > log
 // I/O: Sess + words (caller) > Out (done flag + text); ask-first actions need force; password is a hand-task, never typed
 // ===================================================================

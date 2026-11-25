@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Human wheel scrolling: load older messages, move the chat list, with step caps
+// Des: Human wheel scrolling: older messages, chat list, step caps
 // Flo: find container center by registry selector > move mouse there > wheel ticks with pauses > stop on goal, no growth or cap
 // I/O: Sess (caller) > message count reached; list scrolled
 // ===================================================================

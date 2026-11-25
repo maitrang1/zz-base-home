@@ -50,6 +50,9 @@ Put your reply in `aa-conf-main.json` as `reci_pric_text` (`{name}` becomes the 
 4. A routine from `flow_list`: `za flow run morning --live`. A parked item: `za retry 3` then `za go --live`.
 5. Check inbox now and then: `za watch --live`.
 
+## Feed for scra
+`za feed` takes the messages `za` already stored (it opens no browser and reads nothing from Zalo) for the chats you list in `feed_chat_list`, and with `--live` writes them as one `za-<time>.jsonl` file in scra's `social-in` folder. `scra cars --live` loads it (same cloud copy, purge and privacy as every other source). Without `--live` it only counts. It remembers the last message per chat, so the next file holds only new ones. Chats you do not list never leave `za`.
+
 ## Look after it
 `za status` · `za caps` · `za log` · `za matrix` (every job and its quality level) · `za flows` (every Zalo Web action: built, gap, hand = yours, out) · `za run devices --read` · `za run notify on --live` · `za run lang en --live` · `za run logout --live --force` · `za export` · `za backup` · `za purge` · `za report` (a safe bundle for support, no chat text) · `za stop` (stops at the next action) · `za resume`.
 

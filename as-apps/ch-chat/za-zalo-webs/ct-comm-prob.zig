@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Command probe: save a redacted dump of the current Zalo page for label discovery
+// Des: Command probe: save redacted Zalo page dump for labels
 // Flo: open browser > AX snapshot + page text > redact by registry > write <stat>/probe/<name>.json > print counts
 // I/O: Ctx + name (caller) > redacted json file, stdout line; exit 0
 // ===================================================================

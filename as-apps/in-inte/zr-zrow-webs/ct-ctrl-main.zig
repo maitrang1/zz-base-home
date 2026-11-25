@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Start the app: read args and config, lock, open state, open the browser only if needed
+// Des: Start the app: read args, config, lock, open state
 // Flo: args > aa-conf-main.json > data folder (stat + prof) > lock (one run at a time) > state db > secrets > (browser commands) launch own-profile Chrome + tab > dispatch > print errors
 // I/O: process Init (caller) > exit code 0-4; browser profile in <data>/prof, state in <data>/stat (data = data_loca_wind / data_loca_unix)
 // ===================================================================

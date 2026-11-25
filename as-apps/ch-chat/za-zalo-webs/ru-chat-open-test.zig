@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for ru-chat-open, ru-page-scrl, ru-page-extr: open far chat by scrolling, search, ambiguity, stranger, history load
+// Des: Tests opening far chats: scroll, search, ambiguity, strangers
 // Flo: sim with 306 virtual chats and a 500-message chat > open/locate/scroll > assert page state
 // I/O: sim page > pass or fail
 // Run: zig build test

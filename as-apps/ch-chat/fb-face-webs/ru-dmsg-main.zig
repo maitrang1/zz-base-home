@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Send one direct message; friend requests; group join; page post
+// Des: Send messages, friend requests, group joins, page posts
 // Flo: plan steps > known contact sends freely, new contact or friend request needs --force approval > safety ladder
 // I/O: Args to, text, url (caller) > Out; same message to the same person is never sent twice
 // ===================================================================

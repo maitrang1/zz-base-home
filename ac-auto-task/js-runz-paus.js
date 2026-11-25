@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Pause / resume buttons for a running block and a chain row
+// Des: Pause and resume buttons for running blocks and chains
 // Flo: click > POST /pause or /resume > trust the server answer > flip label, block mark, tab dot
 // I/O: job or chain id + server answers > button elements (DOM)
 // ===================================================================

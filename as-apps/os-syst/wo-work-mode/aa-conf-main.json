@@ -40,7 +40,7 @@
     "sync_remo_list": ["origin", "mirr"],
     "sync_deny_list": [],
     "sync_quie_secz": 120,
-    "sync_file_cntz": 200,
+    "sync_file_cntz": 500,
     "sync_file_maxz": 10485760,
     "sync_tryz_maxz": 3,
     "ci_bran_main": "main",

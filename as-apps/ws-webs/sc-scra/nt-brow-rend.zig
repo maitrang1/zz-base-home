@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Local browser session: launch once, render pages, kill on error
+// Des: Local browser session: launch once, render, kill on error
 // Flo: find exe > launch with own profile on first use > connect tab > navigate + actions > flatten DOM > on any error kill the browser so none is orphaned
 // I/O: Conf + profile dir (caller) > Rndr; render(url, wait, selector, actions) > HTML + error count; avail() says if a browser exists
 // ===================================================================

@@ -1,6 +1,6 @@
 ' ===================================================================
 ' Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-' Des: At login: WiFi, Sticky Notes, folders, Chrome profiles, VSCode, tr, old hub (3030); arg tr or hub = that one only
+' Des: Starts login apps and the hub; arg picks one
 ' Flo: WiFi > Sticky Notes > folders > Chrome profiles > VSCode > tr (hidden, only if down; mini window only if none open) > old hub (hidden, only if down) > extra scripts (admin)
 ' I/O: config lines below + aa-conf-main.env (WIFI_NAME, PROF_LIST, VSCO_BINA, HUBZ_BINA, HUBZ_PORT) > apps opened; a missing item shows a warning and the run goes on
 ' Run: wscript.exe "E:\zz-base-home\as-apps\os-syst\ss-star-shut\ru-star-wind.vbs" [tr|hub]
