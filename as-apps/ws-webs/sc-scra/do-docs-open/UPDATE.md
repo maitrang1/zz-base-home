@@ -1,5 +1,9 @@
 # Updates
 
+## 0.11.0 — 2026-11-26
+- `scra cars` now builds rows for 7 more sites (muaban, oto360, vucar, vuabantai, fordassured, xetaitoanquoc, xedaukeocu); stored pages are parsed again.
+- Fixed: phone numbers read as prices, category text read as the make, "Truck" or "SUV" read as the model, trailers classed as cars.
+
 ## 0.10.0 — 2026-11-26
 - The visible browser window (`scra login`, or rendering with `brow_head_mode` true) now opens small at the left edge. Hidden rendering is unchanged. New settings brow_wind_widt, brow_wind_high, brow_wind_scal, brow_wind_left.
 - The shipped values (500, 1008, 1.0, -7) give a 400 by 800 window on a Windows screen set to 125%. Other screens need their own numbers; 0 turns a setting off. The page is about 500 wide in this window. Not tried on a real logged-in account.
