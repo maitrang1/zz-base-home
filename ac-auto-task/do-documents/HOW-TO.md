@@ -25,6 +25,9 @@ To answer ahead of time, click answers, type one line per question, then run the
 ## Links in the output
 Any http(s):// or www. address in the output is a link. Click it to open it in a new tab. A small copy icon sits right before every link: click it to copy the link (it shows a check for a moment). You can also right-click the link, or select it as plain text and copy it. Trailing dots, commas and closing brackets are left out of the link. Other kinds of links (file:, javascript:, ftp:) stay plain text. While a search is active the links are plain text again.
 
+## Run one step of a chain by hand
+Each step of a chain logs in its own row (in the chain's tab). Click the play button on that row to run only that step again. It does not touch the chain or its schedule, it uses the same lock and worker limit as the chain, and its output shows up as a new row in the same tab. If the step's lock is busy it waits its turn and the row says so. Stop and pause work on the new row like on any running block. You cannot run a step while its chain is running (abort the chain first), and a step that is already running or queued is refused.
+
 ## Pause and resume a command or chain
 Click stop on a running block to freeze the command and every program it started. The block shows a pause mark and the button turns into play. Click play and it goes on where it stopped. A chain has a pause icon on its row in the schedule list: the running step freezes and the next step does not start until you resume. Stop (abort) still works while paused.
 Good to know: the command's own time limit does not count the paused time. A paused command still holds its memory. Things that depend on a clock outside this PC (a login, a download, a server connection) can time out while it is frozen. On Linux the whole tree is frozen. On macOS only the command's process group is. Scheduled jobs that are not part of a chain have no pause button.
