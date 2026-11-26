@@ -1,6 +1,9 @@
 # Updates
 What changed, newest first.
 
+## 2026-11-26
+Changed: the job `home-sync` is now `puls-15mi` (every 15 minutes; it was 10). It also runs `fb-watc` and `za-watc` (`fb alive` and `za alive`): they read each account's saved login state, and when the last look is older than `aliv_look_hour` (8) they make one read-only look at ONE account per run. A dead login gives one alert per 6 hours with the exact login command. Task ids added to `ba-cmds-wind.bat` and `sh-cmds-linu.sh`.
+
 ## 2026-11-25
 Changed: the job type chai is gone (19 types left). A job with ids is a chain; its type is the trigger that starts it: boot (no sche), cron, puls or sola, and it must match the sche. Edit old jobs: chai with no sche becomes boot, a cron line becomes cron, 6h becomes puls, sunset becomes sola. A job that still says chai is rejected with a message.
 

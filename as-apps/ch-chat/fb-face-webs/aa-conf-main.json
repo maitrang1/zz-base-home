@@ -41,6 +41,7 @@
 "mone_spen_capz": 0,
 "acct_maxx_coun": 5,
 "acct_gap_secs": [240, 960],
+"aliv_look_hour": 8,
 "secr_loca_main": "~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs",
 "base_deve_main": "https://developers.facebook.com",
 "map_page_maxx": 25,

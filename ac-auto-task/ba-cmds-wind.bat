@@ -11,6 +11,8 @@ setlocal
 for %%I in ("%~dp0..") do set "R=%%~fI"
 set "WOZ=%R%\as-apps\os-syst\wo-work-mode\zig-out\bin\wo.exe"
 set "SCRA=%R%\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe"
+set "FBZ=%R%\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe"
+set "ZAZ=%R%\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe"
 set "SEED=%R%\..\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt"
 call :conf
 if not defined CMDS_MISE set "CMDS_MISE=mise"
@@ -34,6 +36,8 @@ if "%~1"=="scra-raws" call "%CMDS_MISE%" exec -- "%SCRA%" run --seed-file "%SEED
 if "%~1"=="scra-data" call "%CMDS_MISE%" exec -- "%SCRA%" cars --live & call exit /b %%errorlevel%%
 if "%~1"=="scra-cont" call "%CMDS_MISE%" exec -- "%SCRA%" cont --live & call exit /b %%errorlevel%%
 if "%~1"=="scra-sync" call "%CMDS_MISE%" exec -- "%SCRA%" sync --live & call exit /b %%errorlevel%%
+if "%~1"=="fb-watc" call "%CMDS_MISE%" exec -- "%FBZ%" alive --acct all & call exit /b %%errorlevel%%
+if "%~1"=="za-watc" call "%CMDS_MISE%" exec -- "%ZAZ%" alive --acct all & call exit /b %%errorlevel%%
 echo ba-cmds-wind.bat: unknown task id: %~1 1>&2
 exit /b 2
 :conf

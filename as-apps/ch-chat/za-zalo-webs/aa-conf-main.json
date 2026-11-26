@@ -20,6 +20,7 @@
 "capz_send_hour": 20,
 "acct_maxx_coun": 5,
 "acct_gap_secs": [240, 960],
+"aliv_look_hour": 8,
 "capz_send_dayz": 120,
 "capz_newc_dayz": 5,
 "capz_send_minu": 6,

@@ -30,6 +30,9 @@ fc "%T%\exp.txt" "%T%\got.txt" >nul && call :ok "scra-raws runs scra run with th
 call :runsc scra-data "cars --live"
 call :runsc scra-cont "cont --live"
 call :runsc scra-sync "sync --live"
+set "FBX=%T%\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe" & set "ZAX=%T%\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe"
+call :runapp fb-watc "%FBX%" "alive --acct all"
+call :runapp za-watc "%ZAX%" "alive --acct all"
 set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
 call "%DISP%" home-wipz
 findstr /b /c:"cwd=%T%" "%LOGZ%" >nul && call :ok "task runs from the repo root" || call :bad "task runs from the repo root"
@@ -66,6 +69,12 @@ type nul > "%LOGZ%"
 set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
 call "%DISP%" %~1
 findstr /x /c:"mise exec -- \"%SCX%\" %~2" "%LOGZ%" >nul && call :ok "%~1 runs scra %~2" || call :bad "%~1 runs scra %~2"
+exit /b 0
+:runapp
+type nul > "%LOGZ%"
+set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
+call "%DISP%" %~1
+findstr /x /c:"mise exec -- \"%~2\" %~3" "%LOGZ%" >nul && call :ok "%~1 runs %~3" || call :bad "%~1 runs %~3"
 exit /b 0
 :ok
 echo PASS  %~1

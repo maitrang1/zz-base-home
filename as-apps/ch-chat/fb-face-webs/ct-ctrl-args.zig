@@ -6,7 +6,7 @@
 // ===================================================================
 const std = @import("std"); const task = @import("ru-task-runn.zig");
 const VALS = [_][]const u8{ "--text", "--to", "--url", "--title", "--price", "--desc", "--group", "--photo", "--opt", "--date", "--time", "--catg", "--cond", "--loca" };
-pub const CMDS = [_][]const u8{ "help", "version", "status", "caps", "ledger", "log", "jobs", "pause", "resume", "unlock", "plan", "approve", "deny", "flow", "login", "setup", "doctor", "snap", "read", "map", "gaps", "secret", "start", "report", "backup", "export", "purge", "run", "ask" };
+pub const CMDS = [_][]const u8{ "help", "version", "status", "caps", "ledger", "log", "jobs", "pause", "resume", "unlock", "plan", "approve", "deny", "flow", "login", "setup", "doctor", "snap", "read", "map", "gaps", "secret", "start", "report", "backup", "export", "purge", "run", "ask", "alive" };
 pub const Args = struct { cmdz: []const u8 = "", subz: []const u8 = "", extr: []const u8 = "", json: bool = false, dryz: bool = false, live: bool = false, forc: bool = false, read: bool = false, head: bool = false, helz: bool = false, yesz: bool = false, conf: []const u8 = "", acct: []const u8 = "", tsk: task.Args = .{}, sink: ?*std.ArrayList(u8) = null,
 pub fn known(self: Args) bool { for (CMDS) |nam| { if (std.mem.eql(u8, nam, self.cmdz)) return true; } return false; }
 pub fn writes(self: Args) bool { if (std.mem.eql(u8, self.cmdz, "flow")) return std.mem.eql(u8, self.subz, "run"); for ([_][]const u8{ "run", "ask", "start", "setup" }) |nam| { if (std.mem.eql(u8, nam, self.cmdz)) return true; } return false; }

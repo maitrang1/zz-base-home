@@ -43,6 +43,7 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | capz_help_dayz | Reads, support messages, map pages | 40 | 0 and up |
 | acct_maxx_coun | Most accounts in `user-acct.json` | 5 | 1 to 20 |
 | acct_gap_secs | Wait between accounts when running `--acct all` (min, max seconds) | [240, 960] | numbers |
+| aliv_look_hour | Hours between the automatic read-only login looks of `fb alive` (one account per run; 0 is refused) | 8 | 1 to 72 |
 | mone_spen_capz | Biggest budget a spend job may use (0 = none) | 0 | 0 and up |
 | secr_loca_main | Folder with your secrets file `user-acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs | folder |
 | base_deve_main | Developer console address | https://developers.facebook.com | http(s) address |

@@ -22,6 +22,9 @@ scr="$tmpz/as-apps/ws-webs/sc-scra/zig-out/bin/scra"; run scra-raws; chk "scra-r
 run scra-data; chk "scra-data runs scra cars" grep -q -x "mise exec -- $scr cars --live" "$logz"
 run scra-cont; chk "scra-cont runs scra cont" grep -q -x "mise exec -- $scr cont --live" "$logz"
 run scra-sync; chk "scra-sync runs scra sync" grep -q -x "mise exec -- $scr sync --live" "$logz"
+fbx="$tmpz/as-apps/ch-chat/fb-face-webs/zig-out/bin/fb"; zax="$tmpz/as-apps/ch-chat/za-zalo-webs/zig-out/bin/za"
+run fb-watc; chk "fb-watc runs fb alive" grep -q -x "mise exec -- $fbx alive --acct all" "$logz"
+run za-watc; chk "za-watc runs za alive" grep -q -x "mise exec -- $zax alive --acct all" "$logz"
 run linu-shut-nigh; chk "linu-shut-nigh runs the guard tick" grep -q -x "guar tick" "$logz"
 run home-wipz; chk "task runs from the repo root" grep -q -x "cwd=$tmpz" "$logz"
 run nope-nope 2>"$tmpz/err.txt"; rc=$?; chk "unknown id exits 2" test $rc -eq 2
