@@ -87,6 +87,15 @@
 "halt_need": {"vi": ["captcha", "xác minh", "đăng nhập ở nơi khác", "trình duyệt không được hỗ trợ", "bắt buộc cập nhật"], "en": ["captcha", "verify", "logged in elsewhere", "browser not supported", "update required"]},
 "halt_unsf": {"vi": ["bị khóa", "bị khoá", "tạm khóa", "tạm khoá", "hạn chế", "bất thường", "cảnh báo", "thao tác quá nhanh", "quá nhiều yêu cầu"], "en": ["locked", "suspended", "restricted", "unusual activity", "warning", "too many requests", "action blocked"]}
 },
+"ext": {
+"msg_sel": "#messageViewScroll div.text-message__container, #messageViewScroll div.link-message",
+"id_atr": "data-id",
+"dir_atr": ".chat-item.me",
+"list_sel": "#conversationList",
+"scrl_sel": "#messageViewScroll",
+"chat_sel": "#conversationList div.msg-item",
+"chat_nam_atr": ".conv-item-title__name"
+},
 "jobs": {
 "read": {"rest": ["chat_item", "sear_boxz"], "chat": ["mesg_item"]},
 "send": {"rest": ["chat_item"], "chat": ["mesg_boxz", "send_butt"]},
