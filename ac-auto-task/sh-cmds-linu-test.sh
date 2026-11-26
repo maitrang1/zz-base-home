@@ -25,6 +25,9 @@ run scra-sync; chk "scra-sync runs scra sync" grep -q -x "mise exec -- $scr sync
 fbx="$tmpz/as-apps/ch-chat/fb-face-webs/zig-out/bin/fb"; zax="$tmpz/as-apps/ch-chat/za-zalo-webs/zig-out/bin/za"
 run fb-watc; chk "fb-watc runs fb alive" grep -q -x "mise exec -- $fbx alive --acct all" "$logz"
 run za-watc; chk "za-watc runs za alive" grep -q -x "mise exec -- $zax alive --acct all" "$logz"
+run face-scra; chk "face-scra runs fb read feed" grep -q -x "mise exec -- $fbx read feed --live --acct all" "$logz"
+run zalo-scra; chk "zalo-scra reads first" grep -q -x "mise exec -- $zax run read --live --acct all" "$logz"; chk "zalo-scra then feeds" grep -q -x "mise exec -- $zax feed --live --acct all" "$logz"
+FAKE_RC=5 run zalo-scra; chk "zalo-scra exits with the read failure" test $? -eq 5
 run linu-shut-nigh; chk "linu-shut-nigh runs the guard tick" grep -q -x "guar tick" "$logz"
 run home-wipz; chk "task runs from the repo root" grep -q -x "cwd=$tmpz" "$logz"
 run nope-nope 2>"$tmpz/err.txt"; rc=$?; chk "unknown id exits 2" test $rc -eq 2

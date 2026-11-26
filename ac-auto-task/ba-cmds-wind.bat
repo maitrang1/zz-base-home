@@ -38,8 +38,18 @@ if "%~1"=="scra-cont" call "%CMDS_MISE%" exec -- "%SCRA%" cont --live & call exi
 if "%~1"=="scra-sync" call "%CMDS_MISE%" exec -- "%SCRA%" sync --live & call exit /b %%errorlevel%%
 if "%~1"=="fb-watc" call "%CMDS_MISE%" exec -- "%FBZ%" alive --acct all & call exit /b %%errorlevel%%
 if "%~1"=="za-watc" call "%CMDS_MISE%" exec -- "%ZAZ%" alive --acct all & call exit /b %%errorlevel%%
+if "%~1"=="face-scra" call "%CMDS_MISE%" exec -- "%FBZ%" read feed --live --acct all & call exit /b %%errorlevel%%
+if "%~1"=="zalo-scra" goto :zalo_scra
 echo ba-cmds-wind.bat: unknown task id: %~1 1>&2
 exit /b 2
+:zalo_scra
+rem the feed step runs even when one account failed to read; the exit code is the first failure
+call "%CMDS_MISE%" exec -- "%ZAZ%" run read --live --acct all
+set "RC1=%errorlevel%"
+call "%CMDS_MISE%" exec -- "%ZAZ%" feed --live --acct all
+set "RC2=%errorlevel%"
+if not "%RC1%"=="0" exit /b %RC1%
+exit /b %RC2%
 :conf
 if not exist "%~dp0aa-conf-main.env" exit /b 0
 for /f "usebackq eol=# tokens=1,* delims==" %%a in ("%~dp0aa-conf-main.env") do (

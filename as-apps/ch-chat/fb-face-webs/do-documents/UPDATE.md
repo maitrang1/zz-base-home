@@ -1,6 +1,7 @@
 # Updates
 
 ## 2026-11-26 (login watch)
+Changed: a successful `fb read` also saves the login state as ok, so the login watch rarely needs its own page load.
 Added: `fb alive`: tells you if each account is still logged in. It reads the saved state (no network). When the last look is older than `aliv_look_hour` (8 hours) it also makes one read-only look at ONE account per run, so a 15-minute schedule never opens two accounts together. `--live` looks now. A dead login exits 3 and shows one alert per 6 hours with the exact `fb login --acct <id>` to run. Quiet hours skip the look. `fb login` saves ok; a run that hits a login wall saves needs-login.
 Changed: the gap between accounts with `--acct all` is now 4 to 16 minutes (`acct_gap_secs` [240, 960]).
 

@@ -6,6 +6,6 @@
 
 {"type":"cron","sche":"[00..59] [08..11],[14..17] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"twic-aday","on":true,"tmo":3600,"kind":"shell","catc":1,"ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
 
-{"type":"cron","sche":"[00..59] [08..11],[14..17],[20..23] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"thri-aday","on":false,"tmo":3600,"kind":"shell","catc":1,"ids":[""]}
+{"type":"cron","sche":"[00..59] [08..11],[14..17],[20..23] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"thri-aday","on":true,"tmo":5400,"kind":"shell","catc":0,"ids":["face-scra","zalo-scra"]}
 
 ]
