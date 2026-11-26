@@ -13,6 +13,10 @@ Missing keys use the defaults below.
 | data_loca_unix | Same on Linux and macOS | ~/.zz-base-home-tena/as-apps/ch-chat/fb-face-webs | folder |
 | brow_exec_path | Chrome or Edge file ("" = find it) | "" | file |
 | brow_head_mode | Hide the browser window | false | true/false |
+| brow_wind_widt | Visible window width, in Chrome units (0 = Chrome's own; set with the height) | 0 | 0 to 10000 |
+| brow_wind_high | Visible window height, in Chrome units | 0 | 0 to 10000 |
+| brow_wind_scal | Display scale of the window and page (0 = system). 1.0 on a 125% screen looks like 80% zoom | 0 | 0, or 0.25 to 4 |
+| brow_wind_left | Left position of a visible window; negative hides the Windows border gap | 0 | -100 to 10000 |
 | brow_time_seco | Seconds to wait for one step | 60 | 1 and up |
 | brow_vers_minz | Oldest Chrome version fb accepts | 120 | number |
 | lang_main_code | Language of messages | vi | vi, en |

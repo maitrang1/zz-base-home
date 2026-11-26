@@ -1,5 +1,9 @@
 # Updates
 
+## 0.10.0 — 2026-11-26
+- The visible browser window (`scra login`, or rendering with `brow_head_mode` true) now opens small at the left edge. Hidden rendering is unchanged. New settings brow_wind_widt, brow_wind_high, brow_wind_scal, brow_wind_left.
+- The shipped values (500, 1008, 1.0, -7) give a 400 by 800 window on a Windows screen set to 125%. Other screens need their own numbers; 0 turns a setting off. The page is about 500 wide in this window. Not tried on a real logged-in account.
+
 ## 0.9.0 — 2026-11-25
 - New mirror mode (`clou_mirr_enab`): each sync writes to all 3 object stores and all 3 databases in parallel instead of one vendor per run. The main vendor decides success; a down mirror is queued (stores) or spooled (databases) and catches up on its own.
 - New weekly audit of every store: missing or wrong-size objects are queued again, a few are compared byte for byte.

@@ -1,5 +1,9 @@
 # Updates
 
+## 2026-11-26 (small browser window)
+Changed: the visible browser window now opens small at the left edge, zoomed out. Hidden runs are unchanged. New settings brow_wind_widt, brow_wind_high, brow_wind_scal, brow_wind_left.
+The shipped values (500, 1008, 1.0, -7) give a 400 by 800 window on a Windows screen set to 125%. Other screens need their own numbers; 0 turns a setting off. The page is about 500 wide in this window. Not tried on a real logged-in account.
+
 ## 2026-11-25 (feed for scra)
 Added: `za feed` hands the stored messages of the chats in `feed_chat_list` to scra as JSONL (`--live` writes the file, incremental per chat). Opt-in, no browser. New settings feed_*.
 

@@ -10,6 +10,10 @@ Missing keys use the defaults below. Times are in milliseconds (msec) or seconds
 | data_loca_unix | Data root on Linux and macOS | ~/.zz-base-home-tena/as-apps/ch-chat/za-zalo-webs | folder |
 | brow_exec_path | Chrome or Edge file ("" = find it) | "" | file |
 | brow_head_mode | true = hidden browser window | false | true, false |
+| brow_wind_widt | Visible window width, in Chrome units (0 = Chrome's own; set with the height) | 0 | 0 to 10000 |
+| brow_wind_high | Visible window height, in Chrome units | 0 | 0 to 10000 |
+| brow_wind_scal | Display scale of the window and page (0 = system). 1.0 on a 125% screen looks like 80% zoom | 0 | 0, or 0.25 to 4 |
+| brow_wind_left | Left position of a visible window; negative hides the Windows border gap | 0 | -100 to 10000 |
 | pipe_mode_enab | Reserved, no effect | false | true, false |
 | zalo_page_urlz | Zalo Web address | https://chat.zalo.me/ | http(s) address |
 | type_dely_msec | Pause between keys | [90, 260] | two numbers, low ≤ high |

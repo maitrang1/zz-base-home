@@ -32,6 +32,10 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | brow_scrl_maxz | Most scroll steps or load-more clicks per page | 30 | 1 or more |
 | brow_step_maxz | Most steps in a steps file | 50 | 1 or more |
 | brow_head_mode | Show the browser window while rendering | false | true or false |
+| brow_wind_widt | Visible window width, in Chrome units (0 = Chrome's own; set with the height) | 0 | 0 to 10000 |
+| brow_wind_high | Visible window height, in Chrome units | 0 | 0 to 10000 |
+| brow_wind_scal | Display scale of the window and page (0 = system). 1.0 on a 125% screen looks like 80% zoom | 0 | 0, or 0.25 to 4 |
+| brow_wind_left | Left position of a visible window; negative hides the Windows border gap | 0 | -100 to 10000 |
 | cons_sele_list | Buttons clicked to dismiss cookie or consent walls | known list | CSS selectors |
 | strm_time_seco | Seconds to listen to a live feed | 30 | 1 or more |
 | strm_frme_maxz | Most frames kept per feed | 1000 | 1 or more |

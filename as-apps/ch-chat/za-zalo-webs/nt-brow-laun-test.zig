@@ -1,0 +1,14 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests window flags for visible and hidden Chrome
+// Flo: build flags > compare text; parse config > check keys
+// I/O: Wind values and JSON text > pass or fail
+// Run: zig build test
+// ===================================================================
+const std = @import("std"); const brow = @import("nt-brow-laun.zig"); const cfgz = @import("cf-conf-load.zig");
+test "a hidden browser gets no window flags" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const list = try brow.windArgz(aren.allocator(), true, .{ .widt = 500, .high = 1008, .scal = 0.8, .left = -7 }); try std.testing.expectEqual(@as(usize, 0), list.len); }
+test "a visible browser sits at the left edge with the set size and zoom" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const list = try brow.windArgz(aren.allocator(), false, .{ .widt = 500, .high = 1008, .scal = 0.8, .left = -7 }); try std.testing.expectEqual(@as(usize, 3), list.len); try std.testing.expectEqualStrings("--window-position=-7,0", list[0]); try std.testing.expectEqualStrings("--window-size=500,1008", list[1]); try std.testing.expectEqualStrings("--force-device-scale-factor=0.8", list[2]); }
+test "zero keeps Chrome's own size and zoom but still goes left" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const list = try brow.windArgz(aren.allocator(), false, .{}); try std.testing.expectEqual(@as(usize, 1), list.len); try std.testing.expectEqualStrings("--window-position=0,0", list[0]); }
+test "config reads the window keys and refuses half a size, odd zoom or far-off left" { var aren = std.heap.ArenaAllocator.init(std.testing.allocator); defer aren.deinit(); const allo = aren.allocator(); const conf = try cfgz.confParse(allo, "{\"brow_wind_widt\":500,\"brow_wind_high\":1008,\"brow_wind_scal\":1.0,\"brow_wind_left\":-7}"); try std.testing.expectEqual(@as(u32, 500), conf.brow_wind_widt); try std.testing.expectEqual(@as(u32, 1008), conf.brow_wind_high); try std.testing.expectEqual(@as(i32, -7), conf.brow_wind_left); try std.testing.expectEqual(@as(f64, 1.0), conf.brow_wind_scal); try std.testing.expectError(error.BadConfig, cfgz.confParse(allo, "{\"brow_wind_scal\":9}")); try std.testing.expectError(error.BadConfig, cfgz.confParse(allo, "{\"brow_wind_left\":-500}")); try std.testing.expectError(error.BadConfig, cfgz.confParse(allo, "{\"brow_wind_widt\":500}")); try std.testing.expectError(error.BadConfig, cfgz.confParse(allo, "{\"brow_wind_widt\":20000,\"brow_wind_high\":800}")); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
