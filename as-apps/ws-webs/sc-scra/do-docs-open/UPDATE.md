@@ -1,5 +1,13 @@
 # Updates
 
+## 0.12.0 — 2026-11-26
+- Command-line contract: a wrong flag, unknown command or bad value now names itself on stderr and exits 2. `--help` prints to stdout (exit 0); no command prints usage to stderr (exit 2).
+- Changed: a bad config now exits 2 (was 1). An unknown name in `aa-conf-main.json` now stops scra instead of being ignored: a typo can no longer silently turn a setting off.
+- New: `--dry-run` (the default for writes); with `--live` it exits 2.
+- New: `--json` always prints exactly one document, failures too, with `ok`, `cmd`, `exit`, `dry_run`, `code`, `msg`. Old fields are unchanged. `export --json` needs `--out`.
+- New: one run at a time per data folder (`scra.lock`); a second live run exits 4. `kill` still works during a run.
+- New: setting `runz_time_seco` (3300): a live `run` stops cleanly at this limit (exit 3, INCOMPLETE) so it ends before the hub step timeout (3600 s).
+
 ## 0.11.0 — 2026-11-26
 - `scra cars` now builds rows for 7 more sites (muaban, oto360, vucar, vuabantai, fordassured, xetaitoanquoc, xedaukeocu); stored pages are parsed again.
 - Fixed: phone numbers read as prices, category text read as the make, "Truck" or "SUV" read as the model, trailers classed as cars.

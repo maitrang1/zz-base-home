@@ -1,5 +1,11 @@
 # Updates
 
+## 2026-11-26 (command-line contract)
+Changed: a bad config now exits 2 (was 1). An unknown name in `aa-conf-main.json` now stops the program instead of being ignored, so a typo can no longer silently turn a setting off. Bad flags and unknown commands name themselves on stderr.
+Changed: running `za` with no command now prints usage on stderr and exits 2 (was exit 0); `za --help` prints usage on stdout, exit 0.
+Added: `--dry-run` (the default); with `--live` or `--force` it exits 2. `--json` is now always one document with `ok`, `cmd`, `exit`, `dry_run`, `code`, `msg`; old fields are unchanged.
+Changed: `za status` and `za caps` no longer create folders or write to the database.
+
 ## 2026-11-26 (small browser window)
 Changed: the visible browser window now opens small at the left edge, zoomed out. Hidden runs are unchanged. New settings brow_wind_widt, brow_wind_high, brow_wind_scal, brow_wind_left.
 The shipped values (500, 1008, 1.0, -7) give a 400 by 800 window on a Windows screen set to 125%. Other screens need their own numbers; 0 turns a setting off. The page is about 500 wide in this window. Not tried on a real logged-in account.

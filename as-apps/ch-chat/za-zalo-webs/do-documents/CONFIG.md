@@ -1,7 +1,7 @@
 # za settings
 
 Program: `za` · settings file: `aa-conf-main.json` (next to the exe, or `--conf <file>`) · built with Zig.
-Missing keys use the defaults below. Times are in milliseconds (msec) or seconds (secs).
+Missing keys use the defaults below. A name this program does not know (a typo) or a bad value stops it with "bad config" (exit 2) and the unknown name is printed. Times are in milliseconds (msec) or seconds (secs).
 
 ## Settings
 | Name | Does | Default | Allowed |
@@ -73,7 +73,9 @@ Missing keys use the defaults below. Times are in milliseconds (msec) or seconds
 Commands and words you type. A settings file.
 
 ## Output
-Text or `--json` on screen. Exit code: 0 ok · 1 failed · 2 wrong use · 3 finding (something to check) · 4 blocked.
+Text or `--json` on screen. Exit code: 0 ok · 1 failed · 2 wrong use (bad flag, unknown command, no command, bad or unknown config key, `--dry-run` with `--live`) · 3 finding (something to check) · 4 blocked.
+
+`--json` prints exactly one JSON document on stdout, failures too. Core fields: `ok` · `cmd` · `exit` · `dry_run` (commands that can act) · `code` and `msg` (failures). Text lines of a command arrive in `lines`, a list in `data`. Errors and progress stay on stderr. `status` reads only: it creates no folder and no file.
 
 ## Files
 | File | What |

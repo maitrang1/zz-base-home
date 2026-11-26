@@ -1,5 +1,5 @@
 # scra settings
-File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missing file = defaults. A wrong value stops scra with "bad config".
+File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missing file = defaults. A wrong value, or a name scra does not know (a typo), stops scra with "bad config" (exit 2); the unknown name is printed.
 
 ## Settings
 | Name | Does | Default | Allowed |
@@ -15,6 +15,7 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | vend_keyz_dirz | Folder with key files | ~/.zz-base-home-secr/as-apps/ws-webs/sc-scra | path |
 | vend_zone_brig | Bright Data zone name | empty | text |
 | fetc_time_seco | Seconds before a download is given up | 30 | 1 or more |
+| runz_time_seco | Seconds a live `scra run` may work; then it stops cleanly, exit 3 (keep it under the hub step time) | 3300 | 60-86400 |
 | fetc_body_maxz | Largest page in bytes (after unzip) | 5242880 | 1 or more |
 | fetc_redi_maxz | Most redirects followed | 5 | 0-16 |
 | rate_host_seco | Seconds between requests to one site | 1 | 0 or more |
@@ -179,4 +180,10 @@ The engines write into the input folder: `fb read feed --live` (feed_path_list i
 | ~/.zz-base-home-secr/as-apps/ws-webs/sc-scra/<name>.key | vendor and cloud keys, line 1 |
 
 ## Exit codes
-0 ok · 1 failed · 2 wrong use · 3 layout changed or run incomplete · 4 blocked
+0 ok · 1 failed · 2 wrong use (bad flag, unknown command, bad or unknown config key, `--dry-run` with `--live`) · 3 layout changed or run incomplete (incl. the run time limit) · 4 blocked (guard, kill switch, another run holds the lock)
+
+## Machine output
+`--json` prints exactly one JSON document on stdout, failures too. Core fields: `ok` · `cmd` · `exit` · `dry_run` (commands that write) · `code` and `msg` (failures). Text lines of a command arrive in `lines`, a list in `data`. `export` with `--json` needs `--out <file>`. Errors and progress stay on stderr.
+
+## One run at a time
+Commands that write (`--live`, `login`) take `scra.lock` in the data folder. A second one stops with exit 4; a lock left by a dead run is replaced. `status`, dry runs and `kill` never take it.
