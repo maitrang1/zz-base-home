@@ -56,7 +56,7 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | map_seed_list | Pages `fb map` starts from | settings, Accounts Center, activity log, ... | list of paths |
 | map_allo_list | Only paths starting like this are visited | settings, accountscenter, privacy, ... | list of paths |
 | path_*, pbiz_*, pdev_* | Page paths jobs use (account, settings, billing on the business site, developer console, help, ...). Change one if Facebook moves a page | Facebook defaults | paths |
-| quie_hour_rang | Quiet hours (from, to) | [23, 6] | hours 0 to 23 |
+| quie_hour_rang | Quiet hours (from, to) | [2, 4] | hours 0 to 23 |
 | quie_zone_minu | Minutes from UTC to your time | 420 | -840 to 840 |
 | warm_dayz_coun | Days to reach full limits | 14 | 0 and up |
 | retr_coun_maxz | Tries to find a button | 3 | 1 to 10 |

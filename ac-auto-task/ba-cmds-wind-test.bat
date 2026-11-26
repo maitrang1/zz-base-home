@@ -28,6 +28,7 @@ call "%DISP%" scra-raws
 findstr /b /c:"mise exec -- \"%SCX%\" run" "%LOGZ%" > "%T%\got.txt"
 fc "%T%\exp.txt" "%T%\got.txt" >nul && call :ok "scra-raws runs scra run with the tena seeds" || call :bad "scra-raws runs scra run with the tena seeds"
 call :runsc scra-data "cars --live"
+call :runsc scra-inge "ingest --live"
 call :runsc scra-cont "cont --live"
 call :runsc scra-sync "sync --live"
 set "FBX=%T%\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe" & set "ZAX=%T%\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe"

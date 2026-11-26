@@ -28,7 +28,7 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | capz_newc_dayz | New-contact actions per day | 5 | 0 or more |
 | capz_send_minu | Sends per minute | 6 | 1 or more |
 | gapz_send_msec | Least gap between sends | 3000 | 1000 or more |
-| quie_hour_rang | No activity from hour to hour | [23, 6] | hours 0-23 (equal = none) |
+| quie_hour_rang | No activity from hour to hour | [2, 4] | hours 0-23 (equal = none) |
 | loca_utcz_mins | Your time zone, minutes from UTC | 420 | -720 to 840 |
 | warm_dayz_coun | Days to grow caps from 20% to 100% | 7 | 0 or more |
 | retr_coun_maxz | Tries to find a button | 3 | 1-9 |

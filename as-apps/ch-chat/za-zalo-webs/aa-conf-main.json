@@ -25,7 +25,7 @@
 "capz_newc_dayz": 5,
 "capz_send_minu": 6,
 "gapz_send_msec": 3000,
-"quie_hour_rang": [23, 6],
+"quie_hour_rang": [2, 4],
 "loca_utcz_mins": 420,
 "warm_dayz_coun": 7,
 "retr_coun_maxz": 3,

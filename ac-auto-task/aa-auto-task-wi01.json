@@ -2,10 +2,10 @@
 
 {"type":"puls","sche":"15m","plus":["y","m","d","h","m",[8]],"id":"puls-15mi","on":true,"tmo":900,"kind":"shell","ids":["fb-watc","za-watc","home-docs","home-code","cicd-stat","cicd-rele"]},
 
-{"type":"cron","sche":"[00..59] [08..11] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"once-aday","on":true,"tmo":3600,"kind":"shell","catc":1,"ids":["scra-raws","scra-data","scra-cont","scra-sync"]},
+{"type":"cron","sche":"[00..59] [07..11] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"once-aday","on":true,"tmo":3600,"kind":"shell","catc":1,"ids":["scra-raws","scra-data","scra-cont","scra-sync"]},
 
-{"type":"cron","sche":"[00..59] [08..11],[14..17] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"twic-aday","on":true,"tmo":3600,"kind":"shell","catc":1,"ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
+{"type":"cron","sche":"[00..59] [07..11],[13..17] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"twic-aday","on":true,"tmo":3600,"kind":"shell","catc":1,"ids":["cicd-test","cicd-leak","cicd-lock","home-doct"]},
 
-{"type":"cron","sche":"[00..59] [08..11],[14..17],[20..23] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"thri-aday","on":true,"tmo":5400,"kind":"shell","catc":0,"ids":["face-scra","zalo-scra"]}
+{"type":"cron","sche":"[00..59] [07..11],[13..17],[19..23] * * *","plus":["y","m","d","h","1..2","0..59"],"id":"thri-aday","on":true,"tmo":5400,"kind":"shell","catc":1,"ids":["face-scra","zalo-scra","scra-inge"]}
 
 ]

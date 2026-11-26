@@ -46,7 +46,7 @@
 "base_deve_main": "https://developers.facebook.com",
 "map_page_maxx": 25,
 "map_deep_maxx": 2,
-"quie_hour_rang": [23, 6],
+"quie_hour_rang": [2, 4],
 "quie_zone_minu": 420,
 "warm_dayz_coun": 14,
 "retr_coun_maxz": 3,

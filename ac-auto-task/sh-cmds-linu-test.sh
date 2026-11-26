@@ -20,6 +20,7 @@ echo "-- cmds-linu"
 for pair in "home-wipz|wipz --live" "home-docs|docs sync --live" "home-beat|beat --live" "home-bkup-stat|bkup stat --live" "home-bkup-nigh|bkup nigh --live" "home-doct|doct" "home-dril|dril --live" "home-code|sync --live" "cicd-stat|ci stat" "cicd-rele|ci rele" "cicd-test|ci test" "cicd-leak|ci leak" "cicd-lock|ci lock" "cicd-repr|ci repr" "cicd-deps|ci deps"; do id=${pair%%|*}; args=${pair#*|}; run "$id"; chk "$id runs wo $args" grep -q -x "mise exec -- $wo $args" "$logz"; done
 scr="$tmpz/as-apps/ws-webs/sc-scra/zig-out/bin/scra"; run scra-raws; chk "scra-raws runs scra run" grep -q -x "mise exec -- $scr run --seed-file $HOME/.zz-base-home-tena/as-apps/ws-webs/sc-scra/seeds.txt --follow 800 --live" "$logz"
 run scra-data; chk "scra-data runs scra cars" grep -q -x "mise exec -- $scr cars --live" "$logz"
+run scra-inge; chk "scra-inge runs scra ingest" grep -q -x "mise exec -- $scr ingest --live" "$logz"
 run scra-cont; chk "scra-cont runs scra cont" grep -q -x "mise exec -- $scr cont --live" "$logz"
 run scra-sync; chk "scra-sync runs scra sync" grep -q -x "mise exec -- $scr sync --live" "$logz"
 fbx="$tmpz/as-apps/ch-chat/fb-face-webs/zig-out/bin/fb"; zax="$tmpz/as-apps/ch-chat/za-zalo-webs/zig-out/bin/za"

@@ -34,6 +34,7 @@ if "%~1"=="cicd-repr" call "%CMDS_MISE%" exec -- "%WOZ%" ci repr & call exit /b 
 if "%~1"=="cicd-deps" call "%CMDS_MISE%" exec -- "%WOZ%" ci deps & call exit /b %%errorlevel%%
 if "%~1"=="scra-raws" call "%CMDS_MISE%" exec -- "%SCRA%" run --seed-file "%SEED%" --follow 800 --live & call exit /b %%errorlevel%%
 if "%~1"=="scra-data" call "%CMDS_MISE%" exec -- "%SCRA%" cars --live & call exit /b %%errorlevel%%
+if "%~1"=="scra-inge" call "%CMDS_MISE%" exec -- "%SCRA%" ingest --live & call exit /b %%errorlevel%%
 if "%~1"=="scra-cont" call "%CMDS_MISE%" exec -- "%SCRA%" cont --live & call exit /b %%errorlevel%%
 if "%~1"=="scra-sync" call "%CMDS_MISE%" exec -- "%SCRA%" sync --live & call exit /b %%errorlevel%%
 if "%~1"=="fb-watc" call "%CMDS_MISE%" exec -- "%FBZ%" alive --acct all & call exit /b %%errorlevel%%
