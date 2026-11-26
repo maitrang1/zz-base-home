@@ -1,5 +1,11 @@
 # Updates
 
+## 2026-11-26 (human pace)
+Changed: waits now follow a human-like spread: mostly short, about one in five long, always inside your min and max. Each account gets its own speed that drifts slowly, and a long run gets a little slower. The mouse moves on a curved, eased path and lands a few pixels off center after a short hover. Typing has a pause between key down and up, a few overlapping keys and faster common letter pairs; long texts are pasted. Scrolling comes in flicks and sometimes goes back a little.
+Changed: the daily work and break blocks now differ per account; the quiet-hours window starts a little earlier or later each day.
+Changed (bad config, exit 2): a fixed random seed is refused, and settings that would make waits fixed or instant are refused: typing delay under 30 ms or with too little spread, action gap under 2 s, read delay under 200 ms.
+Not included on purpose: fake typos, deliberate overshoot, detour clicks or anything meant to fool a bot detector.
+
 ## 2026-11-26 (command-line contract)
 Changed: a bad config now exits 2 (was 1). An unknown name in `aa-conf-main.json` now stops the program instead of being ignored, so a typo can no longer silently turn a setting off. Bad flags and unknown commands name themselves on stderr.
 Changed: running `za` with no command now prints usage on stderr and exits 2 (was exit 0); `za --help` prints usage on stdout, exit 0.

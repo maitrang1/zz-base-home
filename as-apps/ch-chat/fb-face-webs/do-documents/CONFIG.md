@@ -20,11 +20,11 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | brow_time_seco | Seconds to wait for one step | 60 | 1 and up |
 | brow_vers_minz | Oldest Chrome version fb accepts | 120 | number |
 | lang_main_code | Language of messages | vi | vi, en |
-| type_dely_msec | Time between keys (min, max) | [90, 260] | numbers |
-| acti_dely_secs | Pause between actions (min, max) | [8, 40] | numbers |
-| mous_step_coun | Steps of one mouse move | 18 | 1 to 200 |
-| time_scal_perc | Speed of waits (100 = normal, 0 = none, tests only) | 100 | 0 to 1000 |
-| rand_seed_numb | Fixed randomness (0 = random) | 0 | number |
+| type_dely_msec | Time between keys (min, max); waits are mostly short, one in five long, always inside this range | [90, 260] | min 30, max at least 1.5 x min |
+| acti_dely_secs | Pause between actions (min, max) | [8, 40] | min 2, max above min |
+| mous_step_coun | Base steps of one mouse move (long moves use up to 3 times this) | 18 | 8 to 200 |
+| time_scal_perc | Speed of waits (100 = normal) | 100 | 50 to 1000 |
+| rand_seed_numb | Must stay 0: a fixed seed is refused (real entropy every run, the seed is logged as `pace`) | 0 | 0 |
 | capz_post_dayz | Posts per 24 hours | 3 | 0 and up |
 | capz_comm_dayz | Comments and replies | 30 | 0 and up |
 | capz_mark_dayz | Marketplace actions | 2 | 0 and up |

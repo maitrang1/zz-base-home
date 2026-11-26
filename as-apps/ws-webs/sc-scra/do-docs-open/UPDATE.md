@@ -1,5 +1,9 @@
 # Updates
 
+## 0.13.0 — 2026-11-26
+- The pause between two requests to one site now varies like a person would: mostly close to `rate_host_seco`, about one in five up to half as long again. It was a flat random 0-25% before. The random seed now comes from the system and is printed on stderr as `pace seed` at the start of a live run.
+- Changed (bad config, exit 2): `rate_host_seco` 0 is refused; at least 1 second between requests to one site.
+
 ## 0.12.0 — 2026-11-26
 - Command-line contract: a wrong flag, unknown command or bad value now names itself on stderr and exits 2. `--help` prints to stdout (exit 0); no command prints usage to stderr (exit 2).
 - Changed: a bad config now exits 2 (was 1). An unknown name in `aa-conf-main.json` now stops scra instead of being ignored: a typo can no longer silently turn a setting off.

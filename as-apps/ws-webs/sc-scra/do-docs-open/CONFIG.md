@@ -18,7 +18,7 @@ File: `aa-conf-main.json` beside the project folder (or `--conf <file>`). Missin
 | runz_time_seco | Seconds a live `scra run` may work; then it stops cleanly, exit 3 (keep it under the hub step time) | 3300 | 60-86400 |
 | fetc_body_maxz | Largest page in bytes (after unzip) | 5242880 | 1 or more |
 | fetc_redi_maxz | Most redirects followed | 5 | 0-16 |
-| rate_host_seco | Seconds between requests to one site | 1 | 0 or more |
+| rate_host_seco | Seconds between requests to one site (the real wait varies from this to 1.5 times this) | 1 | 1 or more |
 | retr_cont_maxz | Tries before a page goes to the dead-letter list | 3 | 1 or more |
 | shel_text_minz | A page with less visible text than this and a JavaScript-shell marker is a thin shell | 500 | 0 or more |
 | apiz_prob_enab | Look for a free JSON or iframe URL behind a thin shell before paying a vendor | true | true or false |

@@ -16,9 +16,9 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | brow_wind_left | Left position of a visible window; negative hides the Windows border gap | 0 | -100 to 10000 |
 | pipe_mode_enab | Reserved, no effect | false | true, false |
 | zalo_page_urlz | Zalo Web address | https://chat.zalo.me/ | http(s) address |
-| type_dely_msec | Pause between keys | [90, 260] | two numbers, low ≤ high |
-| acti_dely_secs | Pause between actions | [6, 25] | two numbers, low ≥ 1 |
-| read_dely_msec | Pause after opening a chat | [800, 3500] | two numbers |
+| type_dely_msec | Pause between keys; waits are mostly short, one in five long, always inside this range | [90, 260] | min 30, max at least 1.5 x min |
+| acti_dely_secs | Pause between actions | [6, 25] | min 2, max above min |
+| read_dely_msec | Pause after opening a chat | [800, 3500] | min 200, max at least 1.5 x min |
 | acct_maxx_coun | Most accounts in `user-acct.json` | 5 | 1 to 20 |
 | acct_gap_secs | Wait between accounts with `--acct all` (min, max seconds) | [300, 1200] | numbers |
 | secr_loca_main | Folder with `user-acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/za-zalo-webs | folder |
@@ -43,7 +43,7 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | smar_clau_exec · smar_clau_argz | Claude Code command and arguments (`{p}` = prompt) | claude · ["-p","{p}"] | command |
 | smar_llam_exec · smar_llam_argz | llama.cpp command and arguments | llama-cli · ["-p","{p}",...] | command |
 | smar_time_secs | AI wait | 60 | 1 or more |
-| rand_seed_fixd | Fixed random seed (0 = random) | 0 | number |
+| rand_seed_fixd | Must stay 0: a fixed seed is refused (real entropy every run; the seed is logged as `pace seed`) | 0 | 0 |
 | labl_file_path | Your own label file instead of the built-in `so-labl-zalo.json` ("" = built-in) | "" | file |
 | halt_word_list | Extra words that stop za (the built-in Vietnamese and English lists always apply) | [] | list of text |
 | lang_main_code | Language of messages | vi | vi, en |
