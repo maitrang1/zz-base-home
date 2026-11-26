@@ -95,6 +95,7 @@
 "list_sel": "#conversationList",
 "scrl_sel": "#messageViewScroll",
 "chat_sel": "#conversationList div.msg-item",
+"sear_sel": "#contact-search-input",
 "chat_nam_atr": ".conv-item-title__name"
 },
 "jobs": {
