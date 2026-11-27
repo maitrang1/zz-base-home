@@ -21,7 +21,7 @@ for fldr in "$CF_SRCZ"/*/; do fldr=${fldr%/}; name=$(basename "$fldr"); link=$CF
 for link in "$CF_LINK"/*; do [[ -L $link ]] || continue; targ=$(readlink "$link"); [[ $targ == "$CF_SRCZ"/* && ! -e $targ ]] || continue; [[ $dryz -eq 0 ]] || { echo "would unlink $(basename "$link")"; continue; }; unlink "$link"; echo "unlinked $(basename "$link")"; cntz_dead=$((cntz_dead+1)); done
 file=$CF_STAT/so-help-hash.txt
 [[ ! -f $file ]] || while IFS='=' read -r keyz valu; do [[ -z $keyz ]] || oldz[$keyz]=$valu; done < "$file"
-for tool in "${tool_list[@]}"; do dstz=$CF_BINZ/$tool; [[ -x $dstz ]] || continue; argz=--help; [[ $tool != za ]] || argz=help; hash=$(help_hash "$dstz" "$argz") || continue; newz[$tool]=$hash; if [[ -n ${oldz[$tool]-} && ${oldz[$tool]} != "$hash" && $ackz -eq 0 ]]; then echo "drift ${skil[$tool]}"; cntz_drif=$((cntz_drif+1)); newz[$tool]=${oldz[$tool]}; fi; done
+for tool in "${tool_list[@]}"; do dstz=$CF_BINZ/$tool; [[ -x $dstz ]] || continue; argz=--help; [[ $tool != za-zalo-webs ]] || argz=help; hash=$(help_hash "$dstz" "$argz") || continue; newz[$tool]=$hash; if [[ -n ${oldz[$tool]-} && ${oldz[$tool]} != "$hash" && $ackz -eq 0 ]]; then echo "drift ${skil[$tool]}"; cntz_drif=$((cntz_drif+1)); newz[$tool]=${oldz[$tool]}; fi; done
 for keyz in "${!oldz[@]}"; do [[ -n ${newz[$keyz]-} ]] || newz[$keyz]=${oldz[$keyz]}; done
 if [[ $dryz -eq 0 ]]; then mkdir -p "$CF_STAT"; for keyz in "${!newz[@]}"; do echo "$keyz=${newz[$keyz]}"; done | sort > "$file.tmp" && mv -f "$file.tmp" "$file"; fi
 echo "done copied=$cntz_copy linked=$cntz_link unlinked=$cntz_dead busy=$cntz_busy miss=$cntz_miss drift=$cntz_drif"

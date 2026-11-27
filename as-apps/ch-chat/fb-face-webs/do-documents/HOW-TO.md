@@ -1,6 +1,6 @@
 # How to use fb
 
-Replace `fb` below with the full path: `E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe`
+Replace `fb` below with the full path: `E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe`
 
 Every command shows a preview by default. Add `--live` to do it for real. See every job with `fb jobs`.
 

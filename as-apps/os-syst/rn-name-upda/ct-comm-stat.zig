@@ -3,7 +3,7 @@
 // Des: rn stat: version, OS, data dir, active skip keys
 // Flo: read config > print one line + the skip list > exit 0
 // I/O: config > text or JSON on stdout; read-only
-// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe stat
+// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe stat
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

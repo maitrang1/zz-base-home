@@ -3,7 +3,7 @@
 // Des: rn runz OLD NEW: rename, fix refs, dry-run default
 // Flo: check pair > dry-run prints the plan > live runs the flow > one-line result
 // I/O: OLD NEW + --live/--force > text or JSON; exit 0 ok · 1 failed (rolled back) · 3 flagged or left · 4 blocked
-// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe runz E:\proj\old E:\proj\new --live
+// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe runz E:\proj\old E:\proj\new --live
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

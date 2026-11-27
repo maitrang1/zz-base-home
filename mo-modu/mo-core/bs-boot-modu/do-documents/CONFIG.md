@@ -20,4 +20,4 @@ Installed tools, a built `wo`, and the result of `wo doct`.
 
 ## Files
 - `mise.toml` and `mise.lock` in the repo root (tool versions and checksums)
-- `as-apps/os-syst/wo-work-mode/zig-out/bin/wo` (built by the script)
+- `as-apps/os-syst/wo-work-mode/zig-out/bin/wo-work-mode` (built by the script)

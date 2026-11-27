@@ -3,7 +3,7 @@
 // Des: rn undo ID|last: restore a past run (dry-run default)
 // Flo: pick id > run undo > print counts
 // I/O: id + --live/--force > text or JSON; exit 0 ok · 1 no such run · 4 conflict (file changed since)
-// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe undo last --live
+// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe undo last --live
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

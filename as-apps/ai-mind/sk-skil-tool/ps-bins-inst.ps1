@@ -8,7 +8,7 @@
 param([switch]$Dry,[switch]$Ack)
 $ErrorActionPreference='Stop'
 function envzRead($keyz,$defa){ $valu=[Environment]::GetEnvironmentVariable($keyz); if($valu){ $valu }else{ $defa } }
-$CF=@{timeMsec=10000;helpArgz=@{za='help'}}
+$CF=@{timeMsec=10000;helpArgz=@{'za-zalo-webs'='help'}}
 $CF.repo=envzRead 'SKIL_REPO' (Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent); $CF.srcz=Join-Path $CF.repo 'as-apps\ai-mind\sk-skil-tool'; $CF.dist=envzRead 'SKIL_DIST' 'windows-x86_64'
 $CF.binz=envzRead 'SKIL_BINZ' "$HOME\.zz-base-home-bin"; $CF.link=envzRead 'SKIL_LINK' "$HOME\.claude\skills"; $CF.stat=envzRead 'SKIL_STAT' (Join-Path (Split-Path $CF.repo -Parent) '.zz-base-home-tena\as-apps\ai-mind\sk-skil-tool')
 $CF.mapz=Join-Path $CF.srcz 'so-skil-tool.json'
@@ -17,7 +17,7 @@ function helpExec($exez,$argz){ $proc=New-Object Diagnostics.Process; $info=$pro
 function helpHash($exez,$argz){ try{ helpExec $exez $argz }catch{ $null } }
 $cnts=@{copy=0;link=0;dead=0;busy=0;miss=0;drif=0}
 $mapz=[ordered]@{}
-foreach($line in Get-Content $CF.mapz){ if($line -match '^"([a-z]+)":"([a-z\-]+)\|([^"]+)"'){ $mapz[$Matches[1]]=@($Matches[2],$Matches[3]) } }
+foreach($line in Get-Content $CF.mapz){ if($line -match '^"([a-z-]+)":"([a-z\-]+)\|([^"]+)"'){ $mapz[$Matches[1]]=@($Matches[2],$Matches[3]) } }
 if(-not $Dry){ New-Item -ItemType Directory -Force -Path $CF.binz,$CF.link | Out-Null }
 foreach($tool in $mapz.Keys){ $srcz=Join-Path $CF.repo (Join-Path $mapz[$tool][1] "zig-out\dist\$($CF.dist)\$tool.exe"); $dstz=Join-Path $CF.binz "$tool.exe"; if(-not (Test-Path $srcz)){ "miss $tool"; $cnts.miss++; continue }; if((Test-Path $dstz) -and (((Get-Item $srcz).LastWriteTimeUtc -le (Get-Item $dstz).LastWriteTimeUtc) -or ((fileHash $srcz) -eq (fileHash $dstz)))){ continue }; if($Dry){ "would copy $tool.exe"; continue }; try{ Copy-Item $srcz "$dstz.new" -Force; Move-Item "$dstz.new" $dstz -Force; "copied $tool.exe"; $cnts.copy++ }catch{ Remove-Item "$dstz.new" -Force -ErrorAction SilentlyContinue; "busy $tool.exe"; $cnts.busy++ } }
 if(-not $env:SKIL_BINZ -and -not $Dry){ $path=[Environment]::GetEnvironmentVariable('Path','User'); if(($path -split ';') -notcontains $CF.binz){ [Environment]::SetEnvironmentVariable('Path',($path.TrimEnd(';')+';'+$CF.binz),'User'); 'pathed (restart terminals)' } }

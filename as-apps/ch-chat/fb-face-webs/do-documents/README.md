@@ -22,19 +22,19 @@ fb is a helper that uses Facebook the way you do. It posts, comments, reacts, se
 1. Open a terminal.
 2. Run the first-time setup. It opens the browser, you log in by hand:
 ```
-E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe setup
+E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe setup
 ```
 3. Read the note it prints. If you accept the risk, run:
 ```
-E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe setup --yes
+E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe setup --yes
 ```
 4. Preview a post (nothing is posted):
 ```
-E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe ask "post: Hello everyone"
+E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe ask "post: Hello everyone"
 ```
 5. Do it for real:
 ```
-E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe ask "post: Hello everyone" --live
+E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe ask "post: Hello everyone" --live
 ```
 
 ## Good to know

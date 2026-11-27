@@ -1,7 +1,7 @@
 # Config
 
 ## Program
-- File: `E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe`
+- File: `E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe`
 - Setting file: `E:\zz-base-home\as-apps\os-syst\id-edit-iden\aa-conf-main.json` (a missing key uses the default; use `--conf FILE` for another file)
 - Built with: Zig 0.17.0
 

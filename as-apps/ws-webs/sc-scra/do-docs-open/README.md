@@ -12,11 +12,11 @@ Windows or Linux, 64-bit. Zig 0.17.0 to build it. Vendor accounts and keys only 
    cd /d E:\zz-base-home\as-apps\ws-webs\sc-scra
    zig build
 2. Check it runs:
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe status
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe status
    You see:
      scra 0.1.0 | read-only | kill false | spend 0/0 micro-USD | pages 0 | queue 0 pending 0 dead | disk cap 5 GB
 3. Fetch one page (nothing happens until you add --live):
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe fetch https://example.com/ --live
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe fetch https://example.com/ --live
    You see:
      new | 200 | T1  | https://example.com/ | 25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484
    Run it again and you see `notm | 304 ...`: the page did not change, so nothing was stored twice.

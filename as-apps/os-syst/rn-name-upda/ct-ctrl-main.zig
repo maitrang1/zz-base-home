@@ -3,7 +3,7 @@
 // Des: rn entry: parse flags, load config, run command
 // Flo: args > ladder flags > config > context > dispatch plan/stat > flush > exit
 // I/O: argv + aa-conf-main.json > text or JSON on stdout, errors on stderr, exit 0-4
-// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe plan E:\proj\old E:\proj\new
+// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe plan E:\proj\old E:\proj\new
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

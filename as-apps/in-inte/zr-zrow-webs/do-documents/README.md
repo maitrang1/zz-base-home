@@ -16,13 +16,13 @@
 
 ## Quick start
 1. Log in by hand, once. A Chrome window opens on ZenRows. Tick the Cloudflare box, then sign up or log in there (you read the 6-digit email code yourself):
-`C:\zz\zr.exe login`
+`C:\zz\zr-zrow-webs.exe login`
 2. Turn on real runs once, after you read the risk note:
-`C:\zz\zr.exe setup --yes`
+`C:\zz\zr-zrow-webs.exe setup --yes`
 3. See what a job would do (nothing is sent yet):
-`C:\zz\zr.exe run usage-view`
+`C:\zz\zr-zrow-webs.exe run usage-view`
 4. Do it for real:
-`C:\zz\zr.exe run usage-view --live`
+`C:\zz\zr-zrow-webs.exe run usage-view --live`
 The login stays in zr's own browser profile, so later runs need no login until the session expires.
 
 ## Key behavior

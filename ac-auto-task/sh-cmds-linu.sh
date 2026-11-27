@@ -5,7 +5,7 @@
 # I/O: task id (argv 1, from the scheduler) + optional aa-conf-main.env (CMDS_MISE, WO_DEVI_NAME) > command exit code, or stderr + exit 2
 # Run: bash "~/zz-base-home/ac-auto-task/sh-cmds-linu.sh" <task-id>
 # ===================================================================
-dirz=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd); R=$(cd "$dirz/.." && pwd); WOZ=$R/as-apps/os-syst/wo-work-mode/zig-out/bin/wo; SCRA=$R/as-apps/ws-webs/sc-scra/zig-out/bin/scra; FBZ=$R/as-apps/ch-chat/fb-face-webs/zig-out/bin/fb; ZAZ=$R/as-apps/ch-chat/za-zalo-webs/zig-out/bin/za; SEED=$HOME/.zz-base-home-tena/as-apps/ws-webs/sc-scra/seeds.txt;SSS=$R/as-apps/os-syst/ss-star-shut
+dirz=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd); R=$(cd "$dirz/.." && pwd); WOZ=$R/as-apps/os-syst/wo-work-mode/zig-out/bin/wo-work-mode; SCRA=$R/as-apps/ws-webs/sc-scra/zig-out/bin/sc-scra; FBZ=$R/as-apps/ch-chat/fb-face-webs/zig-out/bin/fb-face-webs; ZAZ=$R/as-apps/ch-chat/za-zalo-webs/zig-out/bin/za-zalo-webs; SEED=$HOME/.zz-base-home-tena/as-apps/ws-webs/sc-scra/seeds.txt;SSS=$R/as-apps/os-syst/ss-star-shut
 if [[ -r $dirz/aa-conf-main.env ]]; then while IFS='=' read -r key val; do case $key in CMDS_MISE) [[ -n ${CMDS_MISE-} ]] || CMDS_MISE=$val ;; WO_DEVI_NAME) [[ -n ${WO_DEVI_NAME-} ]] || WO_DEVI_NAME=$val ;; esac; done < "$dirz/aa-conf-main.env"; fi
 [[ -n ${CMDS_MISE-} ]] || { command -v mise >/dev/null 2>&1 && CMDS_MISE=mise || CMDS_MISE=$HOME/.local/bin/mise; }
 [[ -z ${WO_DEVI_NAME-} ]] || export WO_DEVI_NAME

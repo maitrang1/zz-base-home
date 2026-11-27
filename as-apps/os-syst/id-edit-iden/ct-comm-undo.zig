@@ -3,7 +3,7 @@
 // Des: ie undo: put a past run back (dry-run by default)
 // Flo: pick run id or "last" > undo from the journal > print counts > exit okay or blocked
 // I/O: args > text or JSON on stdout; files restored on --live
-// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe undo last --live
+// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe undo last --live
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

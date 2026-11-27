@@ -3,7 +3,7 @@
 // Des: ie stat: version, repo, hub, job files, last run (read-only)
 // Flo: read config + hub config + job files > ask the hub > last run state > print
 // I/O: none > text or JSON on stdout; nothing written
-// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe stat
+// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe stat
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

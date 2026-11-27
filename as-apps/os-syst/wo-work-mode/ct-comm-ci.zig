@@ -8,7 +8,7 @@ const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");
 const fcts = @import("ob-fact-rept.zig");
 const exit = @import("ct-exit-code.zig");
-const CF = .{ .mark = "Verified: GitHub and GitLab built identical bytes", .miss = "MISMATCH", .mirr = "cimi", .bina = [_][]const u8{ "windows-x86_64/wo.exe", "linux-x86_64/wo", "linux-aarch64/wo", "macos-aarch64/wo" }, .shaz = 32 };
+const CF = .{ .mark = "Verified: GitHub and GitLab built identical bytes", .miss = "MISMATCH", .mirr = "cimi", .bina = [_][]const u8{ "windows-x86_64/wo-work-mode.exe", "linux-x86_64/wo-work-mode", "linux-aarch64/wo-work-mode", "macos-aarch64/wo-work-mode" }, .shaz = 32 };
 fn shaOf(ctxz: *const cx.Ctxz, base: []const u8, sub: []const u8) ?[CF.shaz]u8 {
 const path = std.fs.path.join(ctxz.allo, &.{ base, "dist", sub }) catch return null;
 const data = std.Io.Dir.cwd().readFileAlloc(ctxz.iozz, path, ctxz.allo, .limited(256 * 1024 * 1024)) catch return null;

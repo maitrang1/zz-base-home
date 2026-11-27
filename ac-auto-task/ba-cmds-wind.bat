@@ -9,10 +9,10 @@
 rem exit code: "call exit /b %%errorlevel%%" - a plain "exit /b" after a command returns 0 and hides failures
 setlocal
 for %%I in ("%~dp0..") do set "R=%%~fI"
-set "WOZ=%R%\as-apps\os-syst\wo-work-mode\zig-out\bin\wo.exe"
-set "SCRA=%R%\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe"
-set "FBZ=%R%\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe"
-set "ZAZ=%R%\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe"
+set "WOZ=%R%\as-apps\os-syst\wo-work-mode\zig-out\bin\wo-work-mode.exe"
+set "SCRA=%R%\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe"
+set "FBZ=%R%\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe"
+set "ZAZ=%R%\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe"
 set "SEED=%R%\..\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt"
 call :conf
 if not defined CMDS_MISE set "CMDS_MISE=mise"

@@ -3,7 +3,7 @@
 // Des: ie entry: parse flags, load config, find the repo, run a command
 // Flo: args > ladder flags > config > repo root > context > dispatch stat/plan/run/undo > flush > exit
 // I/O: argv + aa-conf-main.json > text or JSON on stdout, errors on stderr, exit 0-4
-// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe stat
+// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe stat
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

@@ -1,7 +1,7 @@
 # wo settings
 
 ## Program
-- File: `wo.exe` (Linux/macOS: `wo`)
+- File: `wo-work-mode.exe` (Linux/macOS: `wo`)
 - Run: `wo <command>`
 - Output: lines on screen (or JSON with `--json`)
 - Built with: Zig 0.17.0

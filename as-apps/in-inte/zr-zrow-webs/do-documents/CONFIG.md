@@ -3,7 +3,7 @@
 ## Program
 | Item | Value |
 |---|---|
-| File | `zr.exe` (`zr` on Linux and macOS) |
+| File | `zr-zrow-webs.exe` (`zr` on Linux and macOS) |
 | Settings | `aa-conf-main.json` next to the program, or `--conf <file>` |
 | Output | lines on screen; state in the data folder |
 | Built with | Zig, Chrome DevTools, SQLite |

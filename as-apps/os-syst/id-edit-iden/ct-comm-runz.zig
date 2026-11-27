@@ -3,7 +3,7 @@
 // Des: ie run: dry-run by default, --live applies, --live --force passes soft guards
 // Flo: parse map > build plan > verdict > dry: print and stop > live: apply, print result > exit code
 // I/O: args > text or JSON on stdout; files edited and state moved on --live
-// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe run cicd-stat=cics-stat --live
+// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe run cicd-stat=cics-stat --live
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

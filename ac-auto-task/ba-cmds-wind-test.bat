@@ -11,7 +11,7 @@ set "T=%TEMP%\ba-cmds-test-%RANDOM%%RANDOM%"
 set "PASSZ=0" & set "FAILZ=0"
 mkdir "%T%\ac-auto-task" "%T%\as-apps\os-syst\wo-work-mode\zig-out\bin" >nul
 copy "%~dp0ba-cmds-wind.bat" "%T%\ac-auto-task\" >nul
-set "LOGZ=%T%\calls.log" & set "WOX=%T%\as-apps\os-syst\wo-work-mode\zig-out\bin\wo.exe" & set "DISP=%T%\ac-auto-task\ba-cmds-wind.bat"
+set "LOGZ=%T%\calls.log" & set "WOX=%T%\as-apps\os-syst\wo-work-mode\zig-out\bin\wo-work-mode.exe" & set "DISP=%T%\ac-auto-task\ba-cmds-wind.bat"
 > "%T%\fake-mise.bat" echo @echo off
 >> "%T%\fake-mise.bat" echo ^>^>"%LOGZ%" echo mise %%*
 >> "%T%\fake-mise.bat" echo ^>^>"%LOGZ%" echo dev=%%WO_DEVI_NAME%%
@@ -20,7 +20,7 @@ set "LOGZ=%T%\calls.log" & set "WOX=%T%\as-apps\os-syst\wo-work-mode\zig-out\bin
 set "FAKE_RC=0"
 echo -- cmds-wind
 for %%P in ("home-wipz|wipz --live" "home-docs|docs sync --live" "home-beat|beat --live" "home-bkup-stat|bkup stat --live" "home-bkup-nigh|bkup nigh --live" "home-doct|doct" "home-dril|dril --live" "home-code|sync --live" "cicd-stat|ci stat" "cicd-rele|ci rele" "cicd-test|ci test" "cicd-leak|ci leak" "cicd-lock|ci lock" "cicd-repr|ci repr" "cicd-deps|ci deps") do for /f "tokens=1,2 delims=|" %%A in ("%%~P") do call :runid "%%A" "%%B"
-set "SCX=%T%\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe"
+set "SCX=%T%\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe"
 type nul > "%LOGZ%"
 set "WO_DEVI_NAME=" & set "CMDS_MISE=%T%\fake-mise.bat"
 call "%DISP%" scra-raws
@@ -31,7 +31,7 @@ call :runsc scra-data "cars --live"
 call :runsc scra-inge "ingest --live"
 call :runsc scra-cont "cont --live"
 call :runsc scra-sync "sync --live"
-set "FBX=%T%\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb.exe" & set "ZAX=%T%\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe"
+set "FBX=%T%\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe" & set "ZAX=%T%\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe"
 call :runapp fb-watc "%FBX%" "alive --acct all"
 call :runapp za-watc "%ZAX%" "alive --acct all"
 call :runapp face-scra "%FBX%" "read feed --live --acct all"

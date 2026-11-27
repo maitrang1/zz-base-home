@@ -8,18 +8,18 @@
 set -u
 here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd); inst=$here/sh-bins-inst.sh; root=$(mktemp -d); repo=$root/repo; srcz=$repo/as-apps/ai-mind/sk-skil-tool; dist=$repo/as-apps/xx/fb-app/zig-out/dist/testdist; binz=$root/bin; link=$root/link; stat=$root/stat; fail=0
 mkdir -p "$srcz/face-book" "$srcz/auto-task" "$dist" "$link"
-printf '{\n"fb":"face-book|as-apps/xx/fb-app",\n"zz":"nope-tool|as-apps/xx/none"\n}\n' > "$srcz/so-skil-tool.json"
-mkexe() { printf '#!/bin/sh\necho %s\n' "$1" > "$dist/fb"; chmod +x "$dist/fb"; touch -d "$2" "$dist/fb"; }
+printf '{\n"fb-face":"face-book|as-apps/xx/fb-app",\n"zz-none":"nope-tool|as-apps/xx/none"\n}\n' > "$srcz/so-skil-tool.json"
+mkexe() { printf '#!/bin/sh\necho %s\n' "$1" > "$dist/fb-face"; chmod +x "$dist/fb-face"; touch -d "$2" "$dist/fb-face"; }
 mkexe help-v1 '2020-01-01 00:00:00'
 export SKIL_REPO=$repo SKIL_DIST=testdist SKIL_BINZ=$binz SKIL_LINK=$link SKIL_STAT=$stat
 runz() { outz=$(bash "$inst" "$@" 2>&1); code=$?; }
 hasz() { grep -qxF "$1" <<< "$outz"; }
 chek() { if eval "$2"; then echo "ok $1"; else echo "FAIL $1 code=$code out=$(tr '\n' '|' <<< "$outz")"; fail=$((fail+1)); fi; }
 runz --dry; chek 'dry changes nothing' '[[ ! -e $binz && ! -e $link/face-book && $code -eq 0 ]]'
-runz; chek 'first run copies exe' 'hasz "copied fb" && [[ -x $binz/fb && $code -eq 0 ]]'
+runz; chek 'first run copies exe' 'hasz "copied fb-face" && [[ -x $binz/fb-face && $code -eq 0 ]]'
 chek 'first run links skills' 'hasz "linked face-book" && hasz "linked auto-task" && [[ -L $link/face-book && -L $link/auto-task ]]'
-chek 'missing src is reported' 'hasz "miss zz"'
-chek 'baseline hash saved' 'grep -Eq "^fb=[0-9a-f]{64}$" "$stat/so-help-hash.txt"'
+chek 'missing src is reported' 'hasz "miss zz-none"'
+chek 'baseline hash saved' 'grep -Eq "^fb-face=[0-9a-f]{64}$" "$stat/so-help-hash.txt"'
 chek 'path step skipped for a custom bin dir' '! grep -q "^pathed" <<< "$outz"'
 runz; chek 'second run is a no-op' '[[ $(wc -l <<< "$outz") -eq 2 ]] && hasz "done copied=0 linked=0 unlinked=0 busy=0 miss=1 drift=0" && [[ $code -eq 0 ]]'
 mkdir -p "$srcz/file-rena"; runz; chek 'new skill folder is linked' 'hasz "linked file-rena" && [[ -L $link/file-rena ]]'
@@ -28,9 +28,9 @@ mkdir -p "$root/elsewhere" "$srcz/jct-clash"; ln -s "$root/elsewhere" "$link/jct
 mkdir -p "$srcz/dead-clash"; ln -s "$root/gone2" "$link/dead-clash"; runz; chek 'dead foreign link on a skill name is a clash, not a crash' 'hasz "clash dead-clash" && [[ $code -eq 0 ]]'; mv "$srcz/dead-clash" "$root/moved-dead-clash"
 mv "$srcz/real-dir" "$root/moved-real-dir"; mv "$srcz/file-rena" "$root/moved-file-rena"; runz; chek 'dead link is removed' 'hasz "unlinked file-rena" && [[ ! -e $link/file-rena && ! -L $link/file-rena && -d $link/real-dir ]]'
 ln -s "$root/gone-dir" "$link/foreign"; runz; chek 'foreign dead link is kept' '[[ -L $link/foreign ]] && ! hasz "unlinked foreign"'
-unlink "$link/foreign"; printf '#!/bin/sh\necho local\n' > "$binz/fb"; touch -d '2025-01-01 00:00:00' "$binz/fb"; runz; chek 'older src never overwrites newer exe' '! hasz "copied fb" && grep -q local "$binz/fb"'
-mkexe help-v2 '2030-01-01 00:00:00'; runz --dry; chek 'dry run keeps newer exe uncopied' 'hasz "would copy fb" && ! grep -q help-v2 "$binz/fb"'
-runz; chek 'newer exe is copied' 'hasz "copied fb"'
+unlink "$link/foreign"; printf '#!/bin/sh\necho local\n' > "$binz/fb-face"; touch -d '2025-01-01 00:00:00' "$binz/fb-face"; runz; chek 'older src never overwrites newer exe' '! hasz "copied fb-face" && grep -q local "$binz/fb-face"'
+mkexe help-v2 '2030-01-01 00:00:00'; runz --dry; chek 'dry run keeps newer exe uncopied' 'hasz "would copy fb-face" && ! grep -q help-v2 "$binz/fb-face"'
+runz; chek 'newer exe is copied' 'hasz "copied fb-face"'
 chek 'help change flags drift' 'hasz "drift face-book" && [[ $code -eq 3 ]]'
 runz; chek 'drift stays flagged' 'hasz "drift face-book" && [[ $code -eq 3 ]]'
 runz --ack; chek 'ack accepts new help' '! hasz "drift face-book" && [[ $code -eq 0 ]]'

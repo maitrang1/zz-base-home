@@ -3,7 +3,7 @@
 // Des: rn plan OLD NEW: list refs the rename patches
 // Flo: resolve paths > check sibling rename > scan files, links, locations > classify > print summary + items
 // I/O: OLD NEW + config > text or JSON on stdout, exit 0 (clean) or 3 (flagged skips); writes nothing
-// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe plan E:\proj\old E:\proj\new
+// Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe plan E:\proj\old E:\proj\new
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

@@ -138,7 +138,7 @@ defer tmp.cleanup();
 const home = try make.homeOf(allo, &tmp);
 var mck: mock.Mock = undefined;
 var buff: std.Io.Writer.Allocating = .init(allo);
-const subs = [_][]const u8{ "windows-x86_64/wo.exe", "linux-x86_64/wo", "linux-aarch64/wo", "macos-aarch64/wo" };
+const subs = [_][]const u8{ "windows-x86_64/wo-work-mode.exe", "linux-x86_64/wo-work-mode", "linux-aarch64/wo-work-mode", "macos-aarch64/wo-work-mode" };
 for (subs) |sub| { try binPut(allo, home, "run0", sub, sub); try binPut(allo, home, "run1", sub, sub); }
 try std.testing.expectEqual(exit.Code.okay, try runCi(allo, &.{.{ .pref = &.{"zig"} }}, home, "repr", &buff, &mck));
 try std.testing.expect(hasCall(&mck, "zig build dist --build-file as-apps/os-syst/wo-work-mode/build.zig --prefix"));

@@ -1,6 +1,6 @@
 # How to use za
 
-Short form: `E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe` = `za` below. Flags: no flag = preview only · `--read` = look only · `--live` = do it · `--live --force` = also risky actions · `--json` = machine output. Put names with spaces in quotes. `Anna#group` or `Anna#person` picks between two chats with the same name.
+Short form: `E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe` = `za` below. Flags: no flag = preview only · `--read` = look only · `--live` = do it · `--live --force` = also risky actions · `--json` = machine output. Put names with spaces in quotes. `Anna#group` or `Anna#person` picks between two chats with the same name.
 
 ## Set up once
 1. `za setup --yes` checks Chrome, makes the folders, records that you accept the Zalo risk.

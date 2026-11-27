@@ -1,16 +1,16 @@
 # How to use ie
 
-Program: `E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe`
+Program: `E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe`
 
 ## Check the setup
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe stat
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe stat
 ```
 It shows the repo, whether the hub is up, how many job ids and chain steps exist, and your last run. Exit 0 means all is fine.
 
 ## Preview one rename
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe plan cicd-stat=cics-stat
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe plan cicd-stat=cics-stat
 ```
 You see every file and line that holds the id, the state files that would move, and any guard. Nothing is written.
 
@@ -18,7 +18,7 @@ You see every file and line that holds the id, the state files that would move, 
 1. Run the preview above and read the guards.
 2. Apply:
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe run cicd-stat=cics-stat --live
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe run cicd-stat=cics-stat --live
 ```
 3. Read the last lines: files edited, state files moved, leftovers, and the hub answer.
 
@@ -30,13 +30,13 @@ scra-raws -> scra-rawz
 ```
 Then:
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe run --map C:\work\map.txt --live
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe run --map C:\work\map.txt --live
 ```
 
 ## Pass a soft guard
 A soft guard means "check this first". If you are sure:
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe run cicd-stat=cics-stat --live --force
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe run cicd-stat=cics-stat --live --force
 ```
 Hard guards never pass.
 
@@ -46,14 +46,14 @@ Add `--no-docs`. Only code, scripts and job files change.
 ## Fix the second computer
 After the first computer renamed and the repo synced, the second computer still has old state file names. Run the same pairs with:
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe run cicd-stat=cics-stat --live --scope state
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe run cicd-stat=cics-stat --live --scope state
 ```
 
 ## Undo a run
 Preview, then apply:
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe undo last
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe undo last --live
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe undo last
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe undo last --live
 ```
 Use a run id from `stat` instead of `last` for an older run.
 

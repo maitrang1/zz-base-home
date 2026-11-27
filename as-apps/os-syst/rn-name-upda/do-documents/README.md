@@ -18,7 +18,7 @@ Nothing is deleted. Before it touches a file, it saves a copy.
 1. Preview the change. This writes nothing:
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe plan R:\work\old-app R:\work\new-app
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe plan R:\work\old-app R:\work\new-app
 ```
 
 ```
@@ -35,7 +35,7 @@ do   safe R:/notes/todo.txt:2 rela
 2. Do it for real:
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe runz R:\work\old-app R:\work\new-app --live
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe runz R:\work\old-app R:\work\new-app --live
 ```
 
 ```
@@ -46,7 +46,7 @@ undo: rn undo 20261123-140621 --live
 3. Changed your mind? Undo it:
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe undo last --live
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe undo last --live
 ```
 
 ```

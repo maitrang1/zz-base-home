@@ -5,7 +5,7 @@ Lookup only. For steps, see HOW-TO.md.
 | | |
 |---|---|
 | File | zig-out\bin\auto-task.exe |
-| Run | auto-task.exe [port] |
+| Run | ac-auto-task.exe [port] |
 | Output | a web page at http://127.0.0.1:<port>, plus the files under Your data |
 | Built with | Zig 0.17.0, one file, no other program needed |
 

@@ -1,6 +1,6 @@
 # How to use wo
 
-Replace `wo` below with `E:\zz-base-home\wo-work-mode\zig-out\bin\wo.exe`.
+Replace `wo` below with `E:\zz-base-home\wo-work-mode\zig-out\bin\wo-work-mode.exe`.
 
 ## Check that this device is healthy
 1. Run: `wo doct`

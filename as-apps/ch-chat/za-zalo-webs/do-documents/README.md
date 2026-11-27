@@ -22,19 +22,19 @@ za is a helper that uses Zalo Web the way you do. It reads your new chats, repli
 ## Quick start
 1. Check everything and accept the risk once:
 ```
-E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe setup --yes
+E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe setup --yes
 ```
 2. Open the browser and log in once. Scan the QR code with the Zalo app on your phone:
 ```
-E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe login
+E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe login
 ```
 3. See what it would do (nothing is changed):
 ```
-E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe run send Mom "See you at 7"
+E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe run send Mom "See you at 7"
 ```
 4. Do it for real:
 ```
-E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za.exe run send Mom "See you at 7" --live
+E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe run send Mom "See you at 7" --live
 ```
 
 ## Good to know

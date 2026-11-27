@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Entry point: port arg, scheduler, HTTP server
 // Flo: main > port from argv (default 4000, clear of cli-run 3010 and old hub 3000) > ui root and project root next to exe > POSIX orphan sweep after kill -9 (Windows: KILL_ON_JOB_CLOSE) > scheduler star BEFORE servStar (accept loop never returns) > POSIX signal stop (handler may not alloc, lock or do io: kills loop children via file-scope pointer) > servStar
-// I/O: argv[1] optional port (u16) > listening HTTP server, never returns until killed; usage auto-task.exe [port] [jobs-file.json]
+// I/O: argv[1] optional port (u16) > listening HTTP server, never returns until killed; usage ac-auto-task.exe [port] [jobs-file.json]
 // ===================================================================
 const std = @import("std"); const builtin = @import("builtin"); const serv = @import("server"); const tick = @import("ticker"); const spaw = @import("spawn"); const stor = @import("store"); const tkst = @import("taskstore");
 const CF = .{ .sepa = std.fs.path.sep_str };

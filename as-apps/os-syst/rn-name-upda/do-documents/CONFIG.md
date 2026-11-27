@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| File | `E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe` |
+| File | `E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe` |
 | Run | `rn plan OLD NEW` · `rn runz OLD NEW [--live] [--force]` · `rn undo ID or last [--live] [--force]` · `rn stat` |
 | Flags | `--conf FILE` settings file · `--json` JSON output · `--live` really change things · `--force` go past a blocked or changed item |
 | Output | one result line, or JSON with `--json` |

@@ -1,13 +1,13 @@
 # How to use rn
 
-In every command below, `rn` means `E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe`.
+In every command below, `rn` means `E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe`.
 
 ## Preview a rename
 
 1. Run:
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe plan R:\work\old-app R:\work\new-app
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe plan R:\work\old-app R:\work\new-app
 ```
 
 2. Read the second line. `apply 6` means 6 places will change. `skip 3` means 3 places are listed but left alone.
@@ -21,7 +21,7 @@ The exit code is 0 when nothing is skipped and 3 when something is skipped.
 2. Run:
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe runz R:\work\old-app R:\work\new-app --live
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe runz R:\work\old-app R:\work\new-app --live
 ```
 
 3. Read the answer:
@@ -47,7 +47,7 @@ failed 20261123-140621: Blocked · rolled back, nothing changed
 1. Undo the latest run:
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe undo last --live
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe undo last --live
 ```
 
 2. Or undo a named run: replace `last` with the run id.
@@ -70,7 +70,7 @@ Add `--force` only if you are sure you want your later edit replaced by the save
 ## Check the last run
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe stat
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe stat
 ```
 
 ```
@@ -86,7 +86,7 @@ If the last line says `open run`, a run was cut short. Run `rn undo <id> --live 
 Add `--conf` and the file path to any command:
 
 ```
-E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn.exe --conf R:\conf.json plan R:\work\old-app R:\work\new-app
+E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe --conf R:\conf.json plan R:\work\old-app R:\work\new-app
 ```
 
 ## Machine-readable output

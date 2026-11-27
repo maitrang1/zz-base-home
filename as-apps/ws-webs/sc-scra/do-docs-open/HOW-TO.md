@@ -2,22 +2,22 @@
 Every example uses the full path. Replace nothing. Add `--json` to any command for machine output.
 
 ## See what is going on
-E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe status
+E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe status
 Shows kill switch, month spend against your cap, pages stored and queue size.
 
 ## Fetch one page
 1. Preview (no network):
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe fetch https://example.com/
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe fetch https://example.com/
 2. Run it:
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe fetch https://example.com/ --live
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe fetch https://example.com/ --live
 Words in the answer: `new` stored, `same` same content as before, `notm` not modified, `http` the site answered with an error (not stored), `bloc` block page (not stored), `empt` empty page, `jbad` broken JSON.
 
 ## Crawl a list of pages
 1. Put one address per line in a file, for example `E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt`. Lines starting with # are ignored.
 2. Preview:
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe run --seed-file E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe run --seed-file E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt
 3. Run:
-   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe run --seed-file E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt --live
+   E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe run --seed-file E:\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt --live
 Add `--sitemap https://example.com/` to read the site's sitemap first. Add `--decl 120` if the site says it has 120 items: a shorter result is flagged (exit code 3).
 scra reads robots.txt, waits between requests to the same site, retries failures, and stops the run if too many pages fail.
 
@@ -29,11 +29,11 @@ scra reads robots.txt, waits between requests to the same site, retries failures
 5. To allow paid use: set `capz_usdz_mont` (dollars per month) and add `--force` after `--live`.
 
 ## Stop all spending
-E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe kill --on
+E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe kill --on
 Undo with `--off`.
 
 ## Export what you collected
-E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\scra.exe export --format csv --out C:\Users\<you>\scra.csv
+E:\zz-base-home\as-apps\ws-webs\sc-scra\zig-out\bin\sc-scra.exe export --format csv --out C:\Users\<you>\scra.csv
 Formats: `jsonl` (default) or `csv`.
 
 ## Watch for layout changes

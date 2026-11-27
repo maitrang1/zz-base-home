@@ -33,7 +33,7 @@ if ($LASTEXITCODE -ne 0) { exit 1 }
 & $mise exec -- zig build --build-file as-apps/os-syst/wo-work-mode/build.zig
 if ($LASTEXITCODE -ne 0) { exit 1 }
 $prof = if ($env:CI -eq 'true') { 'ci' } else { 't0' }
-& $mise exec -- as-apps\os-syst\wo-work-mode\zig-out\bin\wo.exe --prof $prof doct
+& $mise exec -- as-apps\os-syst\wo-work-mode\zig-out\bin\wo-work-mode.exe --prof $prof doct
 $code = $LASTEXITCODE
 if ($code -eq 0) { Write-Output 'bs: ok. Next: enroll this device in the tailnet, or lend a secret (wo secr lend).' }
 exit $code

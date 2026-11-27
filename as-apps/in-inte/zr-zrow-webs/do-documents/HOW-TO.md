@@ -1,9 +1,9 @@
 # How to use zr
 
-Commands below use `C:\zz\zr.exe`. Use your own path.
+Commands below use `C:\zz\zr-zrow-webs.exe`. Use your own path.
 
 ## Log in or sign up (by hand, once)
-1. Run: `C:\zz\zr.exe login`
+1. Run: `C:\zz\zr-zrow-webs.exe login`
 2. A Chrome window opens on ZenRows. Tick the Cloudflare box.
 3. Sign up or log in there. Type the 6-digit email code yourself.
 4. The terminal prints `logged in` and ends. The login stays in zr's own profile.
@@ -11,7 +11,7 @@ Commands below use `C:\zz\zr.exe`. Use your own path.
 If Cloudflare keeps looping in the window, stop and tell the developer.
 
 ## Optional: let zr fill the login form
-Only if Cloudflare lets it through. Save the login first (`printf 'you@example.com\nyour-password\n' | C:\zz\zr.exe secret`), then `C:\zz\zr.exe run login --live`. Sign-up: `run signup --live`, then `run verify-email --text 123456 --live`. Prefer the by-hand way above.
+Only if Cloudflare lets it through. Save the login first (`printf 'you@example.com\nyour-password\n' | C:\zz\zr-zrow-webs.exe secret`), then `C:\zz\zr-zrow-webs.exe run login --live`. Sign-up: `run signup --live`, then `run verify-email --text 123456 --live`. Prefer the by-hand way above.
 
 ## Several accounts
 Save each login under its own name (email on line 1, password on line 2), for example `printf 'a@x.com\nPASS\n' | zr secret --acct team1`, then `zr secret list` shows the ids. The old one-login file still works.
@@ -23,17 +23,17 @@ Save each login under its own name (email on line 1, password on line 2), for ex
 - In a routine, an item can name an account: `{"job":"usage-view","acct":"team2"}`.
 
 ## Turn on real runs
-1. Run: `C:\zz\zr.exe setup`
+1. Run: `C:\zz\zr-zrow-webs.exe setup`
 2. Log in by hand in the window (Cloudflare tick, password, email code).
-3. Read the risk note. Then run: `C:\zz\zr.exe setup --yes`
+3. Read the risk note. Then run: `C:\zz\zr-zrow-webs.exe setup --yes`
 
 ## Make an API key
-1. Run: `C:\zz\zr.exe run key-create --title my-key --live`
-2. Limit its credits: `C:\zz\zr.exe run key-cap --price 500 --live`
+1. Run: `C:\zz\zr-zrow-webs.exe run key-create --title my-key --live`
+2. Limit its credits: `C:\zz\zr-zrow-webs.exe run key-cap --price 500 --live`
 
 ## Get a web page
-1. Plain words: `C:\zz\zr.exe ask "get https://example.com as text" --live`
-2. Devs: `C:\zz\zr.exe run fetch-run --url https://example.com --opt "js_render=true&premium_proxy=true" --text python --live`
+1. Plain words: `C:\zz\zr-zrow-webs.exe ask "get https://example.com as text" --live`
+2. Devs: `C:\zz\zr-zrow-webs.exe run fetch-run --url https://example.com --opt "js_render=true&premium_proxy=true" --text python --live`
 
 ## Look at your account
 | Want | Command |
@@ -45,18 +45,18 @@ Save each login under its own name (email on line 1, password on line 2), for ex
 
 ## Do a risky act
 Pay, cancel, delete, remove: add `--force`.
-1. Preview: `C:\zz\zr.exe run plan-change --opt Business`
-2. Do it: `C:\zz\zr.exe run plan-change --opt Business --live --force`
+1. Preview: `C:\zz\zr-zrow-webs.exe run plan-change --opt Business`
+2. Do it: `C:\zz\zr-zrow-webs.exe run plan-change --opt Business --live --force`
 
 ## Run a routine
-1. List: `C:\zz\zr.exe jobs`
-2. Plan: `C:\zz\zr.exe plan zero-start`
-3. Approve: `C:\zz\zr.exe approve all`
-4. Run: `C:\zz\zr.exe flow run zero-start --live`
+1. List: `C:\zz\zr-zrow-webs.exe jobs`
+2. Plan: `C:\zz\zr-zrow-webs.exe plan zero-start`
+3. Approve: `C:\zz\zr-zrow-webs.exe approve all`
+4. Run: `C:\zz\zr-zrow-webs.exe flow run zero-start --live`
 It pauses when it needs you and goes on by itself.
 
 ## Check the site still matches
-1. Run: `C:\zz\zr.exe map`
+1. Run: `C:\zz\zr-zrow-webs.exe map`
 2. Lines starting with `GAP` are buttons it could not find. Fix them in `aa-conf-main.json` under `labl_over` or `path_over`.
 
 ## Other tools

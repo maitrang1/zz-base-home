@@ -19,19 +19,19 @@ Nothing is deleted. Before it touches a file, it saves a copy.
 1. Check the setup:
 
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe stat
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe stat
 ```
 
 2. Preview a rename. This writes nothing:
 
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe plan fb-watc=fb-aliv
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe plan fb-watc=fb-aliv
 ```
 
 3. Apply it:
 
 ```
-E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe run fb-watc=fb-aliv --live
+E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe run fb-watc=fb-aliv --live
 ```
 
 ## Key behavior

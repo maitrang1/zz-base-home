@@ -3,7 +3,7 @@
 // Des: ie plan: show what a rename would touch (read-only); also the printer run reuses
 // Flo: parse map > build plan > print pairs, files, moves, guards > exit okay or blocked
 // I/O: args > text or JSON on stdout; nothing written
-// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\ie.exe plan cicd-stat=cics-stat
+// Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe plan cicd-stat=cics-stat
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

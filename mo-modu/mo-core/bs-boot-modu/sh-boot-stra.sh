@@ -36,7 +36,7 @@ mise install --locked
 mise exec -- zig build --build-file as-apps/os-syst/wo-work-mode/build.zig
 prof=t0
 if [ "${CI:-}" = "true" ]; then prof=ci; fi
-mise exec -- as-apps/os-syst/wo-work-mode/zig-out/bin/wo --prof "$prof" doct
+mise exec -- as-apps/os-syst/wo-work-mode/zig-out/bin/wo-work-mode --prof "$prof" doct
 echo "bs: ok. Next: enroll this device in the tailnet, or lend a secret (wo secr lend)."
 # =======================___THIS_IS_THE_END___=======================
 # ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

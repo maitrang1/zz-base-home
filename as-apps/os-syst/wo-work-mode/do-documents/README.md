@@ -13,7 +13,7 @@ One small command that keeps your work safe: it checks your device is healthy, s
 ## Quick start
 1. Open a terminal.
 2. Run:
-`E:\zz-base-home\wo-work-mode\zig-out\bin\wo.exe stat`
+`E:\zz-base-home\wo-work-mode\zig-out\bin\wo-work-mode.exe stat`
 3. You see the version and when each job last ran:
 ```
 okay	vers	wo 0.1.0
@@ -23,7 +23,7 @@ skip	bknt	none yet
 skip	dril	none yet
 ```
 4. Check this device:
-`E:\zz-base-home\wo-work-mode\zig-out\bin\wo.exe doct`
+`E:\zz-base-home\wo-work-mode\zig-out\bin\wo-work-mode.exe doct`
 
 ## Key behavior
 - Exit code 0 = fine · 3 = something drifted · 4 = a check could not run · 1 = failed · 2 = wrong command.

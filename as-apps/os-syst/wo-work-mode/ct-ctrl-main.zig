@@ -3,7 +3,7 @@
 // Des: wo entry: parse flags, load config, run command
 // Flo: args > ladder flags > config > context > dispatch stat/conf/doct/wipz/bkup/dril/kill/secr > flush > exit
 // I/O: argv + aa-conf-main.json > text or JSON on stdout, errors on stderr, exit 0-4
-// Run: E:\zz-base-home\wo-work-mode\zig-out\bin\wo.exe doct --prof ci
+// Run: E:\zz-base-home\wo-work-mode\zig-out\bin\wo-work-mode.exe doct --prof ci
 // ===================================================================
 const std = @import("std");
 const cx = @import("ct-ctrl-ctxz.zig");

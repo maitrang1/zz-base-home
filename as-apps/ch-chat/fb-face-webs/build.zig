@@ -2,11 +2,11 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Build script: exe, dist targets, auto-found tests
 // Flo: CF consts > exe module > run step > dist-dev 2 targets > scan root for *-test.zig > one test run each
-// I/O: sibling *.zig (project root) + -Doptimize (CLI) > zig-out/bin/fb(.exe), zig-out/dist/<os>-<arch>/, test run
+// I/O: sibling *.zig (project root) + -Doptimize (CLI) > zig-out/bin/fb-face-webs(.exe), zig-out/dist/<os>-<arch>/, test run
 // Run: zig build | zig build test | zig build dist-dev
 // ===================================================================
 const std = @import("std"); const Targ = std.Build.ResolvedTarget; const Opti = std.builtin.Optimize;
-const CF = .{ .exez = "fb", .root = "ru-main-root.zig", .tail = "-test.zig", .sqld = "../../../vd-vend-deps/sqlite-3540100/sqlite-amalgamation-3540100", .sqlf = @as([]const []const u8, &.{ "-DSQLITE_THREADSAFE=1", "-DSQLITE_OMIT_LOAD_EXTENSION", "-DSQLITE_DQS=0" }), .sqpf = [_][]const u8{ "st-", "ru-", "ct-" }, .dist = [_]struct { dirz: []const u8, quer: std.Target.Query }{ .{ .dirz = "dist/windows-x86_64", .quer = .{ .cpu_arch = .x86_64, .os_tag = .windows } }, .{ .dirz = "dist/linux-x86_64", .quer = .{ .cpu_arch = .x86_64, .os_tag = .linux, .abi = .musl } } } };
+const CF = .{ .exez = "fb-face-webs", .root = "ru-main-root.zig", .tail = "-test.zig", .sqld = "../../../vd-vend-deps/sqlite-3540100/sqlite-amalgamation-3540100", .sqlf = @as([]const []const u8, &.{ "-DSQLITE_THREADSAFE=1", "-DSQLITE_OMIT_LOAD_EXTENSION", "-DSQLITE_DQS=0" }), .sqpf = [_][]const u8{ "st-", "ru-", "ct-" }, .dist = [_]struct { dirz: []const u8, quer: std.Target.Query }{ .{ .dirz = "dist/windows-x86_64", .quer = .{ .cpu_arch = .x86_64, .os_tag = .windows } }, .{ .dirz = "dist/linux-x86_64", .quer = .{ .cpu_arch = .x86_64, .os_tag = .linux, .abi = .musl } } } };
 fn modMake(buil: *std.Build, targ: Targ, opti: Opti, path: []const u8) *std.Build.Module { const modu = buil.createModule(.{ .root_source_file = buil.path(path), .target = targ, .optimize = opti, .link_libc = true }); if (needSql(path)) { modu.addCSourceFile(.{ .file = buil.path(CF.sqld ++ "/sqlite3.c"), .flags = CF.sqlf }); } return modu; }
 fn needSql(path: []const u8) bool { for (CF.sqpf) |pref| if (std.mem.startsWith(u8, path, pref)) return true; return false; }
 pub fn build(buil: *std.Build) void {
