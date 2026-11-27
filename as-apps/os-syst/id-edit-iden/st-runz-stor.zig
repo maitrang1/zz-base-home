@@ -67,8 +67,12 @@ return Erro.Busy;
 pub fn lockFree(ctxz: *const cx.Ctxz, id: []const u8) void {
 const pth = pthsOf(ctxz, id) catch return;
 std.Io.Dir.cwd().createDirPath(ctxz.iozz, pth.lold) catch return;
-const aside = std.fs.path.join(ctxz.allo, &.{ pth.lold, std.fmt.allocPrint(ctxz.allo, "{s}-done.lock", .{id}) catch return }) catch return;
-std.Io.Dir.renamePreserve(std.Io.Dir.cwd(), pth.lock, std.Io.Dir.cwd(), aside, ctxz.iozz) catch {};
+var tryz: usize = 0;
+while (tryz < CF.tryz) : (tryz += 1) {
+const aside = std.fs.path.join(ctxz.allo, &.{ pth.lold, std.fmt.allocPrint(ctxz.allo, "{s}-done{d}.lock", .{ id, tryz }) catch return }) catch return;
+std.Io.Dir.renamePreserve(std.Io.Dir.cwd(), pth.lock, std.Io.Dir.cwd(), aside, ctxz.iozz) catch continue;
+return;
+}
 }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

@@ -7,7 +7,7 @@
 const std = @import("std");
 const tk = @import("ut-iden-toke.zig");
 pub const Issue = struct { why: []const u8, iden: []const u8 };
-pub const Erro = error{ BadLine, NoPairs };
+pub const Erro = error{BadLine};
 fn splitPair(line: []const u8) ?tk.Pair {
 if (std.mem.indexOf(u8, line, "->")) |pos| return .{ .old = std.mem.trim(u8, line[0..pos], " \t"), .new = std.mem.trim(u8, line[pos + 2 ..], " \t") };
 if (std.mem.indexOfScalar(u8, line, '=')) |pos| return .{ .old = std.mem.trim(u8, line[0..pos], " \t"), .new = std.mem.trim(u8, line[pos + 1 ..], " \t") };

@@ -40,7 +40,6 @@ if (row.ids) |idsz| for (idsz) |step| if (std.mem.eql(u8, step, iden)) return tr
 };
 return false;
 }
-pub fn isJobId(jobs: []const Jobz, iden: []const u8) bool { for (jobs) |job| for (job.rows) |row| if (std.mem.eql(u8, row.id, iden)) return true; return false; }
 pub fn calls(allo: std.mem.Allocator, jobs: []const Jobz) ![][]const u8 {
 var list: std.ArrayList([]const u8) = .empty;
 for (jobs) |job| for (job.rows) |row| {

@@ -45,7 +45,12 @@ stor.lockFree(&ctxz, "r1");
 try stor.lockTake(&ctxz, "r3");
 const pth = try stor.pthsOf(&ctxz, "r3");
 try std.testing.expectEqualStrings("r3", try fk.get(allo, std.testing.io, pth.data, "run.lock"));
-try std.testing.expect(fk.has(allo, std.testing.io, pth.lold, "r1-done.lock"));
+try std.testing.expect(fk.has(allo, std.testing.io, pth.lold, "r1-done0.lock"));
+stor.lockFree(&ctxz, "r3");
+try stor.lockTake(&ctxz, "r1");
+stor.lockFree(&ctxz, "r1");
+try std.testing.expect(fk.has(allo, std.testing.io, pth.lold, "r1-done1.lock"));
+try stor.lockTake(&ctxz, "r4");
 }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

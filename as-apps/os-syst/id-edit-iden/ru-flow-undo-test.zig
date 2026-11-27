@@ -14,6 +14,7 @@ const tk = @import("ut-iden-toke.zig");
 const pl = @import("pl-plan-buil.zig");
 const fl = @import("ru-flow-main.zig");
 const un = @import("ru-flow-undo.zig");
+const stor = @import("st-runz-stor.zig");
 const PAIRS = [_]tk.Pair{.{ .old = "cicd-stat", .new = "cics-stat" }};
 const Env = struct { arena: std.heap.ArenaAllocator, fake: fk.Fake, ctxz: cx.Ctxz, wrtr: std.Io.Writer.Allocating, mck: mock.Mock };
 fn setup(env: *Env, tmp: *std.testing.TmpDir) !void {
@@ -80,6 +81,15 @@ const blk = try un.undoRun(&env.ctxz, resu.id, true, false);
 try std.testing.expectEqual(@as(usize, 1), blk.bloc);
 try std.testing.expect(!blk.done);
 try std.testing.expectEqualStrings("new run wrote this\n", try fk.get(allo, std.testing.io, env.fake.hubd, "task-log/cicd-stat.log"));
+const jfil = (try stor.pthsOf(&env.ctxz, resu.id)).jfil;
+const jtxt = try std.Io.Dir.cwd().readFileAlloc(std.testing.io, jfil, allo, .limited(1 << 20));
+const cut = std.mem.indexOf(u8, jtxt, "{\"op\":\"done\"").?;
+try std.Io.Dir.cwd().writeFile(std.testing.io, .{ .sub_path = jfil, .data = jtxt[0..cut] });
+try std.testing.expect(fl.openRun(&env.ctxz) != null);
+const frc = try un.undoRun(&env.ctxz, resu.id, true, true);
+try std.testing.expectEqual(@as(usize, 1), frc.bloc);
+try std.testing.expect(frc.done);
+try std.testing.expect(fl.openRun(&env.ctxz) == null);
 }
 test "unknown run id" {
 var tmp = std.testing.tmpDir(.{});

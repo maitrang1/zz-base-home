@@ -24,7 +24,8 @@ pub fn atom(allo: std.mem.Allocator, iozz: std.Io, path: []const u8, bytes: []co
 const temp = try std.fmt.allocPrint(allo, "{s}.ie-tmp", .{path});
 defer allo.free(temp);
 {
-var file = try std.Io.Dir.cwd().createFile(iozz, temp, .{ .truncate = true });
+const perm: std.Io.File.Permissions = if (std.Io.Dir.cwd().statFile(iozz, path, .{})) |stz| stz.permissions else |_| .default_file;
+var file = try std.Io.Dir.cwd().createFile(iozz, temp, .{ .truncate = true, .permissions = perm });
 defer file.close(iozz);
 try file.writePositionalAll(iozz, bytes, 0);
 try file.sync(iozz);

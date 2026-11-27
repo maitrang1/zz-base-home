@@ -16,7 +16,7 @@ pub const Scope = enum { all, repo, state };
 pub const Opts = struct { scope: Scope = .all, docs: bool = true };
 pub const Guard = struct { kind: []const u8, hard: bool, iden: []const u8, note: []const u8 };
 pub const Move = struct { from: []const u8, to: []const u8 };
-pub const Plan = struct { pairs: []const tk.Pair, opts: Opts, files: []const wk.Fhit, moves: []const Move, guards: []const Guard, hits: usize, wst: wk.Wstat, hubz: hub.Hubz, unre: []const []const u8 };
+pub const Plan = struct { pairs: []const tk.Pair, opts: Opts, files: []const wk.Fhit, moves: []const Move, guards: []const Guard, hits: usize, hubz: hub.Hubz, unre: []const []const u8 };
 const Slot = struct { dirz: []const u8, suff: []const u8 };
 const SLOTS = [_]Slot{ .{ .dirz = "task-state", .suff = ".last" }, .{ .dirz = "task-state", .suff = ".chain" }, .{ .dirz = "task-state", .suff = ".done" }, .{ .dirz = "task-log", .suff = ".log" } };
 pub fn existz(ctxz: *const cx.Ctxz, path: []const u8) bool { return if (std.Io.Dir.cwd().statFile(ctxz.iozz, path, .{})) |_| true else |_| false; }
@@ -55,7 +55,7 @@ for (outc.clash.items) |item| try guardAdd(ctxz, &guards, "clash", false, item.i
 var hits: usize = 0;
 for (outc.files.items) |item| hits += item.hits;
 const unre = try jz.unresolved(allo, ctxz.iozz, ctxz.repo, conf, try jz.calls(allo, jobs));
-return .{ .pairs = pairs, .opts = opts, .files = outc.files.items, .moves = moves.items, .guards = guards.items, .hits = hits, .wst = outc.wst, .hubz = hubz, .unre = unre };
+return .{ .pairs = pairs, .opts = opts, .files = outc.files.items, .moves = moves.items, .guards = guards.items, .hits = hits, .hubz = hubz, .unre = unre };
 }
 pub fn verdict(plan: Plan, forc: bool) exit.Code {
 for (plan.guards) |guar| if (guar.hard or !forc) return .bloc;

@@ -32,8 +32,6 @@ try std.testing.expect(std.mem.endsWith(u8, jobs[0].file, "aa-auto-task-li01.jso
 try std.testing.expect(jz.hasIden(jobs, "cicd-stat"));
 try std.testing.expect(jz.hasIden(jobs, "puls-15mi"));
 try std.testing.expect(!jz.hasIden(jobs, "cicd-stat2"));
-try std.testing.expect(jz.isJobId(jobs, "once-aday"));
-try std.testing.expect(!jz.isJobId(jobs, "cicd-stat"));
 const cal = try jz.calls(allo, jobs);
 try std.testing.expectEqual(@as(usize, 6), cal.len);
 }

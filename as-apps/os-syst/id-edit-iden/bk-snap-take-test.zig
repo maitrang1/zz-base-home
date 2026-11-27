@@ -7,6 +7,7 @@
 // ===================================================================
 const std = @import("std");
 const snap = @import("bk-snap-take.zig");
+const osys = @import("ut-osys-adap.zig");
 const fk = @import("te-fake-repo.zig");
 test "hashHex of abc matches the SHA-256 vector" {
 const hex = snap.hashHex("abc");
@@ -25,6 +26,20 @@ try fk.put(allo, std.testing.io, base, "f.txt", "before");
 try snap.atom(allo, std.testing.io, try std.fs.path.join(allo, &.{ base, "f.txt" }), "after");
 try std.testing.expectEqualStrings("after", try fk.get(allo, std.testing.io, base, "f.txt"));
 try std.testing.expect(!fk.has(allo, std.testing.io, base, "f.txt.ie-tmp"));
+}
+test "atom keeps the file mode (an executable script stays executable)" {
+if (osys.wind) return error.SkipZigTest;
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+defer arena.deinit();
+const allo = arena.allocator();
+const path = try std.fs.path.join(allo, &.{ try fk.tmpPath(allo, &tmp.sub_path), "run.sh" });
+var file = try std.Io.Dir.cwd().createFile(std.testing.io, path, .{ .permissions = @fromBackingInt(0o755) });
+file.close(std.testing.io);
+try snap.atom(allo, std.testing.io, path, "echo hi\n");
+const stz = try std.Io.Dir.cwd().statFile(std.testing.io, path, .{});
+try std.testing.expectEqual(@as(u32, 0o755), @as(u32, @intCast(stz.permissions.toBackingInt() & 0o777)));
 }
 test "atom into a missing folder fails and writes nothing" {
 var tmp = std.testing.tmpDir(.{});

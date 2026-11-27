@@ -15,6 +15,7 @@ const ladz = @import("ct-safe-ladd.zig");
 const plan = @import("ct-comm-plan.zig");
 const runz = @import("ct-comm-runz.zig");
 const undo = @import("ct-comm-undo.zig");
+const stor = @import("st-runz-stor.zig");
 const stat = @import("ct-comm-stat.zig");
 const Env = struct { arena: std.heap.ArenaAllocator, fake: fk.Fake, ctxz: cx.Ctxz, wrtr: std.Io.Writer.Allocating, mck: mock.Mock };
 fn setup(env: *Env, tmp: *std.testing.TmpDir, ladd: ladz.Ladd) !void {
@@ -120,6 +121,18 @@ defer env.arena.deinit();
 try std.testing.expectEqual(exit.Code.bloc, try undo.comm(&env.ctxz, &.{"last"}));
 try std.testing.expectEqual(exit.Code.usag, try undo.comm(&env.ctxz, &.{"19990101-000000"}));
 try std.testing.expectError(exit.Erro.Usag, undo.comm(&env.ctxz, &.{}));
+}
+test "a live undo waits on a busy lock and frees the lock when done" {
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+var env: Env = undefined;
+try setup(&env, &tmp, .{ .live = true });
+defer env.arena.deinit();
+try stor.lockTake(&env.ctxz, "other");
+try std.testing.expectEqual(exit.Code.bloc, try undo.comm(&env.ctxz, &.{"19990101-000000"}));
+stor.lockFree(&env.ctxz, "other");
+try std.testing.expectEqual(exit.Code.usag, try undo.comm(&env.ctxz, &.{"19990101-000000"}));
+try stor.lockTake(&env.ctxz, "after");
 }
 test "usage errors: bad pair, same ids, unknown flag, bad scope, missing map" {
 var tmp = std.testing.tmpDir(.{});

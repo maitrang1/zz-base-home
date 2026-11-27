@@ -1,8 +1,9 @@
-# ===== repo-specific (keep) =====
+# ===== repo-specific (keep) ===== 
 AGENTS.md
 CLAUDE.md
 aa-todo-*/
 ag-agen-*/
+sk-skil-*/
 do-*/
 !do-documents/
 .claude/settings.local.json
