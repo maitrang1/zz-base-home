@@ -9,7 +9,7 @@ Option Explicit
 Const CODE_OPEN = True : Const TR_PORT = 4000 : Const TR_JOBS = "aa-auto-task-wi01.json" : Const WAIT_SECO = 3 : Const PAUS_FOLD = 1000 : Const STIC_APPID = "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App"
 Dim sh, fso, waitms, root : Set sh = CreateObject("WScript.Shell") : Set fso = CreateObject("Scripting.FileSystemObject") : waitms = WAIT_SECO * 1000
 root = fso.GetParentFolderName(fso.GetParentFolderName(fso.GetParentFolderName(fso.GetParentFolderName(WScript.ScriptFullName))))
-Dim WIFI_NAME, VSCO_BINA, HUBZ_BINA, HUBZ_PORT, TR_EXEC, FOLD_LIST, PROF_LIST, EXTR_LIST : WIFI_NAME = "" : VSCO_BINA = "" : HUBZ_BINA = "" : HUBZ_PORT = 3030 : TR_EXEC = root & "\ac-auto-task\zig-out\bin\auto-task.exe" : FOLD_LIST = Array(root, "%USERPROFILE%\Downloads") : PROF_LIST = Array("Default") : EXTR_LIST = Array()
+Dim WIFI_NAME, VSCO_BINA, HUBZ_BINA, HUBZ_PORT, TR_EXEC, FOLD_LIST, PROF_LIST, EXTR_LIST : WIFI_NAME = "" : VSCO_BINA = "" : HUBZ_BINA = "" : HUBZ_PORT = 3030 : TR_EXEC = root & "\ac-auto-task\zig-out\bin\ac-auto-task.exe" : FOLD_LIST = Array(root, "%USERPROFILE%\Downloads") : PROF_LIST = Array("Default") : EXTR_LIST = Array()
 Sub Warn(msg, ttl) : MsgBox msg, vbExclamation, ttl : End Sub
 Function EnvPath(nam) : EnvPath = sh.ExpandEnvironmentStrings(nam) : End Function
 Function FindExe(paths) : Dim i : FindExe = "" : For i = 0 To UBound(paths) : If FindExe = "" Then If fso.FileExists(paths(i)) Then FindExe = paths(i)

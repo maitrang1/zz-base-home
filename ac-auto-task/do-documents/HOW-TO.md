@@ -74,7 +74,7 @@ Commands run with the environment as it is now, not as it was when auto-task sta
 | A command works in a new window but not here, or just installed, not found | Open `/env`. The name you need should be listed. If not, restart auto-task. |
 | `AccessDenied` when rebuilding | Stop the program first, then build again. |
 | A job's log ends with TIMEOUT | It ran past its time limit (1 hour if none is set). Raise out. |
-| `error: port 4000 is already in use.` | Another program has the port. Close it, or start with the port it suggests: `E:\zz-base-home\ac-auto-task\zig-out\bin\auto-task.exe 4001`. |
+| `error: port 4000 is already in use.` | Another program has the port. Close it, or start with the port it suggests: `E:\zz-base-home\ac-auto-task\zig-out\bin\ac-auto-task.exe 4001`. |
 
 ## Open the mini window (optional)
 - Web is the main version: open the page in a browser. The mini window is the same page in a small always-on-top window.
