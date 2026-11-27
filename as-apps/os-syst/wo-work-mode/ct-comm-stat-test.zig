@@ -22,7 +22,7 @@ var mck: mock.Mock = .{ .rule = &.{} };
 var buff: std.Io.Writer.Allocating = .init(allo);
 const ctxz = make.make(allo, &buff.writer, &mck, .{}, home, false, false);
 try std.testing.expectEqual(exit.Code.okay, try comm.comm(&ctxz, &.{}));
-try std.testing.expectEqualStrings("okay\tvers\two 0.1.0\nskip\twipz\tnone yet\nskip\tbkup\tnone yet\nskip\tbknt\tnone yet\nskip\tdocs\tnone yet\nskip\tsync\tnone yet\nskip\trels\tnone yet\nskip\tdril\tnone yet\n", buff.written());
+try std.testing.expectEqualStrings("okay\tvers\two-work-mode 0.1.0\nskip\twipz\tnone yet\nskip\tbkup\tnone yet\nskip\tbknt\tnone yet\nskip\tdocs\tnone yet\nskip\tsync\tnone yet\nskip\trels\tnone yet\nskip\tdril\tnone yet\n", buff.written());
 try std.testing.expectEqual(@as(usize, 0), mck.call.items.len);
 }
 test "ages come from the stamp; a failed last run is shown but never fails stat" {
