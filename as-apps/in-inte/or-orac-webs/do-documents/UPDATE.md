@@ -9,4 +9,6 @@ Added: Windows, Linux and macOS builds.
 Changed: nothing yet.
 Fixed: you no longer have to log in again for every command: Oracle login cookies are kept for 7 days (`sess_keep_dayz`).
 Added: window size settings `brow_wind_*` (default 400x900).
-Fixed: nothing else yet. Not yet checked on the live Oracle console.
+Added: the page reader now looks inside iframes and waits for "Loading..." (the Oracle console needs it). `snap` also saves frame info.
+Fixed: `doctor` no longer stops on one unreachable page.
+Checked live (read-only): 8 jobs match the real console; many labels and paths still need fixing.
