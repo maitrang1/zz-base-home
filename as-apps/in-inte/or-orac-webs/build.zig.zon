@@ -1,0 +1,8 @@
+.{
+.name = .orac,
+.version = "0.1.0",
+.fingerprint = 0xbd29ee73e42d2a4f,
+.minimum_zig_version = "0.17.0",
+.dependencies = .{},
+.paths = .{""},
+}
