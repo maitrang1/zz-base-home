@@ -1,7 +1,7 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Crawl live site read-only, store named controls, report gaps
-// Flo: open the dashboard home > collect same-site links > visit each (GET only) > read the accessibility tree > write map-report.txt > then per job: are its labels on its page? > OK or GAP > summary
+// Flo: open the console home > collect same-site links > visit each (GET only) > read the accessibility tree > write map-report.txt > then per job: are its labels on its page? > OK or GAP > summary
 // I/O: Ctx (caller) > rows in the state db (mapz), <stat>/map-report.txt, lines on stdout; counts of pages, controls, ok, gaps
 // ===================================================================
 const std = @import("std"); const task = @import("ru-task-runn.zig"); const jobs = @import("ru-jobs-tabl.zig"); const jrun = @import("ru-jobs-main.zig"); const pack = @import("ut-loca-pack.zig"); const priv = @import("ru-safe-priv.zig"); const fld = @import("ut-text-fold.zig");

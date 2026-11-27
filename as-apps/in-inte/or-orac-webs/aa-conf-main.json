@@ -1,5 +1,6 @@
 {
-"base_urlz_main": "https://www.oracle.com",
+"base_urlz_main": "https://signup.cloud.oracle.com",
+"tena_name_main": "",
 "base_appz_main": "https://cloud.oracle.com",
 "base_docz_main": "https://docs.oracle.com",
 "data_loca_wind": "E:\\.zz-base-home-tena\\as-apps\\in-inte\\or-orac-webs",
@@ -22,7 +23,7 @@
 "capz_acce_dayz": 30,
 "capz_sett_dayz": 30,
 "capz_help_dayz": 30,
-"acct_maxx_coun": 3,
+"acct_maxx_coun": 1,
 "acct_gap_secs": [300, 1200],
 "quie_hour_rang": [0, 0],
 "quie_zone_minu": 0,
@@ -38,7 +39,7 @@
 "labl_over": {},
 "path_over": {},
 "flow_list": [
-{ "name": "zero-start", "jobs": [ { "job": "signup" }, { "job": "verify-email" }, { "job": "key-create", "title": "default" } ] },
-{ "name": "daily-check", "jobs": [ { "job": "login" }, { "job": "usage-view" }, { "job": "plan-view" } ] }
+{ "name": "daily-check", "jobs": [ { "job": "login" }, { "job": "limits-view" }, { "job": "usage-view" }, { "job": "plan-view" } ] },
+{ "name": "free-guard", "jobs": [ { "job": "login" }, { "job": "budget-list" }, { "job": "inst-list" }, { "job": "secl-view", "title": "default" } ] }
 ]
 }
