@@ -40,6 +40,7 @@ if "%~1"=="scra-sync" call "%CMDS_MISE%" exec -- "%SCRA%" sync --live & call exi
 if "%~1"=="fb-watc" call "%CMDS_MISE%" exec -- "%FBZ%" alive --acct all & call exit /b %%errorlevel%%
 if "%~1"=="za-watc" call "%CMDS_MISE%" exec -- "%ZAZ%" alive --acct all & call exit /b %%errorlevel%%
 if "%~1"=="face-scra" call "%CMDS_MISE%" exec -- "%FBZ%" read feed --live --acct all & call exit /b %%errorlevel%%
+if "%~1"=="skil-sync" powershell -NoProfile -ExecutionPolicy Bypass -File "%R%\as-apps\ai-mind\sk-skil-tool\ps-bins-inst.ps1" & call exit /b %%errorlevel%%
 if "%~1"=="zalo-scra" goto :zalo_scra
 echo ba-cmds-wind.bat: unknown task id: %~1 1>&2
 exit /b 2

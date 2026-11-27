@@ -30,6 +30,7 @@ run face-scra; chk "face-scra runs fb read feed" grep -q -x "mise exec -- $fbx r
 run zalo-scra; chk "zalo-scra reads first" grep -q -x "mise exec -- $zax run read --live --acct all" "$logz"; chk "zalo-scra then feeds" grep -q -x "mise exec -- $zax feed --live --acct all" "$logz"
 FAKE_RC=5 run zalo-scra; chk "zalo-scra exits with the read failure" test $? -eq 5
 run linu-shut-nigh; chk "linu-shut-nigh runs the guard tick" grep -q -x "guar tick" "$logz"
+mkdir -p "$tmpz/as-apps/ai-mind/sk-skil-tool"; printf 'echo skil >> "%s"\nexit 3\n' "$logz" > "$tmpz/as-apps/ai-mind/sk-skil-tool/sh-bins-inst.sh"; run skil-sync; rc=$?; chk "skil-sync runs the skill installer" grep -q -x "skil" "$logz"; chk "skil-sync exit code passes through" test $rc -eq 3
 run home-wipz; chk "task runs from the repo root" grep -q -x "cwd=$tmpz" "$logz"
 run nope-nope 2>"$tmpz/err.txt"; rc=$?; chk "unknown id exits 2" test $rc -eq 2
 chk "unknown id says so" grep -q "unknown task id: nope-nope" "$tmpz/err.txt"

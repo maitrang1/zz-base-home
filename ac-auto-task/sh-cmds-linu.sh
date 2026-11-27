@@ -35,6 +35,7 @@ fb-watc) exec "$CMDS_MISE" exec -- "$FBZ" alive --acct all ;;
 za-watc) exec "$CMDS_MISE" exec -- "$ZAZ" alive --acct all ;;
 face-scra) exec "$CMDS_MISE" exec -- "$FBZ" read feed --live --acct all ;;
 zalo-scra) "$CMDS_MISE" exec -- "$ZAZ" run read --live --acct all; rc1=$?; "$CMDS_MISE" exec -- "$ZAZ" feed --live --acct all; rc2=$?; exit $(( rc1 != 0 ? rc1 : rc2 )) ;;
+skil-sync) exec bash "$R/as-apps/ai-mind/sk-skil-tool/sh-bins-inst.sh" ;;
 linu-shut-nigh) exec bash "$SSS/ru-shut-guar.sh" tick ;;
 *) echo "sh-cmds-linu.sh: unknown task id: $1" >&2; exit 2 ;;
 esac

@@ -59,6 +59,12 @@ set "CMDS_MISE=" & set "WO_DEVI_NAME=envwins"
 type nul > "%LOGZ%"
 call "%DISP%" home-wipz
 findstr /x /c:"dev=envwins" "%LOGZ%" >nul && call :ok "env var beats the file" || call :bad "env var beats the file"
+mkdir "%T%\as-apps\ai-mind\sk-skil-tool" >nul
+> "%T%\as-apps\ai-mind\sk-skil-tool\ps-bins-inst.ps1" echo Set-Content "%T%\skil.log" 'ran'; exit 3
+call "%DISP%" skil-sync
+set "RCS=%errorlevel%"
+if "%RCS%"=="3" (call :ok "skil-sync exit code passes through") else (call :bad "skil-sync exit code passes through")
+findstr /c:"ran" "%T%\skil.log" >nul && call :ok "skil-sync runs the skill installer" || call :bad "skil-sync runs the skill installer"
 echo.
 echo %PASSZ% passed, %FAILZ% failed
 endlocal & exit /b %FAILZ%
