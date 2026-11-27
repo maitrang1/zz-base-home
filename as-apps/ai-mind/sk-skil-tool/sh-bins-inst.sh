@@ -1,29 +1,30 @@
 # ===================================================================
 # Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 # Des: Sync tool exes, skill links, and flag help drift.
-# Flo: read map > copy newer exes > link new skills > unlink dead links > hash help > flag drift
-# I/O: so-skil-tool.json + repo dist exes (disk) > bin dir, ~/.claude/skills links, help hashes (disk); exit 0 ok, 3 drift, 2 usage
+# Flo: read map > copy newer exes > add PATH > link new skills > unlink dead links > hash help > flag drift
+# I/O: so-skil-tool.json + repo dist exes (disk) > bin dir, ~/.profile, ~/.claude/skills links, help hashes (disk); exit 0 ok, 3 drift, 2 usage
 # Run: bash ~/zz-base-home/as-apps/ai-mind/sk-skil-tool/sh-bins-inst.sh [--dry] [--ack]
 # ===================================================================
 set -u
-CF_HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd); CF_REPO=${ZZ_REPO:-$(cd "$CF_HERE/../../.." && pwd)}; CF_SRC=$CF_REPO/as-apps/ai-mind/sk-skil-tool; CF_DIST=${ZZ_DIST:-linux-x86_64}; CF_BIN=${ZZ_BIN:-$HOME/.zz-base-home-bin}; CF_SKL=${ZZ_SKL:-$HOME/.claude/skills}; CF_STATE=${ZZ_STATE:-$HOME/.zz-base-home-tena/as-apps/ai-mind/sk-skil-tool}; CF_MAP=$CF_SRC/so-skil-tool.json; CF_TMO=10
-dry=0; ack=0
-for a in "$@"; do case $a in --dry) dry=1 ;; --ack) ack=1 ;; *) echo "sh-bins-inst.sh: bad flag: $a" >&2; exit 2 ;; esac; done
-hsh() { sha256sum "$1" | cut -d' ' -f1; }
-helphash() { local out; out=$(timeout "$CF_TMO" "$1" "$2" 2>&1 </dev/null); [[ $? -ne 124 ]] || return 1; printf %s "$out" | tr -d '\r' | sha256sum | cut -d' ' -f1; }
-c_copied=0; c_linked=0; c_unlinked=0; c_busy=0; c_miss=0; c_drift=0
-declare -A skl dir old new
-while IFS='"' read -r _ t _ v _; do [[ -n ${v-} ]] && { skl[$t]=${v%%|*}; dir[$t]=${v#*|}; }; done < "$CF_MAP"
-[[ $dry -eq 1 ]] || mkdir -p "$CF_BIN" "$CF_SKL"
-for t in "${!skl[@]}"; do s=$CF_REPO/${dir[$t]}/zig-out/dist/$CF_DIST/$t; d=$CF_BIN/$t; [[ -f $s ]] || { echo "miss $t"; c_miss=$((c_miss+1)); continue; }; if [[ -f $d ]] && { [[ ! $s -nt $d ]] || [[ $(hsh "$s") == $(hsh "$d") ]]; }; then continue; fi; [[ $dry -eq 0 ]] || { echo "would copy $t"; continue; }; if cp -p "$s" "$d.new" && mv -f "$d.new" "$d"; then echo "copied $t"; c_copied=$((c_copied+1)); else rm -f "$d.new"; echo "busy $t"; c_busy=$((c_busy+1)); fi; done
-for f in "$CF_SRC"/*/; do f=${f%/}; n=$(basename "$f"); l=$CF_SKL/$n; if [[ -L $l ]]; then [[ $(readlink "$l") == "$f" ]] || echo "clash $n"; continue; fi; [[ ! -e $l ]] || { echo "clash $n"; continue; }; [[ $dry -eq 0 ]] || { echo "would link $n"; continue; }; ln -s "$f" "$l"; echo "linked $n"; c_linked=$((c_linked+1)); done
-for l in "$CF_SKL"/*; do [[ -L $l ]] || continue; g=$(readlink "$l"); [[ $g == "$CF_SRC"/* && ! -e $g ]] || continue; [[ $dry -eq 0 ]] || { echo "would unlink $(basename "$l")"; continue; }; unlink "$l"; echo "unlinked $(basename "$l")"; c_unlinked=$((c_unlinked+1)); done
-sf=$CF_STATE/so-help-hash.txt
-[[ ! -f $sf ]] || while IFS='=' read -r k v; do [[ -z $k ]] || old[$k]=$v; done < "$sf"
-for t in "${!skl[@]}"; do d=$CF_BIN/$t; [[ -x $d ]] || continue; a=--help; [[ $t != za ]] || a=help; h=$(helphash "$d" "$a") || continue; new[$t]=$h; if [[ -n ${old[$t]-} && ${old[$t]} != "$h" && $ack -eq 0 ]]; then echo "drift ${skl[$t]}"; c_drift=$((c_drift+1)); new[$t]=${old[$t]}; fi; done
-for k in "${!old[@]}"; do [[ -n ${new[$k]-} ]] || new[$k]=${old[$k]}; done
-if [[ $dry -eq 0 ]]; then mkdir -p "$CF_STATE"; for k in "${!new[@]}"; do echo "$k=${new[$k]}"; done | sort > "$sf.tmp" && mv -f "$sf.tmp" "$sf"; fi
-echo "done copied=$c_copied linked=$c_linked unlinked=$c_unlinked busy=$c_busy miss=$c_miss drift=$c_drift"
-[[ $c_drift -eq 0 ]] || exit 3
+CF_HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd); CF_REPO=${SKIL_REPO:-$(cd "$CF_HERE/../../.." && pwd)}; CF_SRCZ=$CF_REPO/as-apps/ai-mind/sk-skil-tool; CF_DIST=${SKIL_DIST:-linux-x86_64}; CF_BINZ=${SKIL_BINZ:-$HOME/.zz-base-home-bin}; CF_LINK=${SKIL_LINK:-$HOME/.claude/skills}; CF_STAT=${SKIL_STAT:-$HOME/.zz-base-home-tena/as-apps/ai-mind/sk-skil-tool}; CF_MAPZ=$CF_SRCZ/so-skil-tool.json; CF_TIME=10
+dryz=0; ackz=0
+for argz in "$@"; do case $argz in --dry) dryz=1 ;; --ack) ackz=1 ;; *) echo "sh-bins-inst.sh: bad flag: $argz" >&2; exit 2 ;; esac; done
+hash_file() { sha256sum "$1" | cut -d' ' -f1; }
+help_hash() { local outz; outz=$(timeout "$CF_TIME" "$1" "$2" 2>&1 </dev/null); [[ $? -ne 124 ]] || return 1; printf %s "$outz" | tr -d '\r' | sha256sum | cut -d' ' -f1; }
+cntz_copy=0; cntz_link=0; cntz_dead=0; cntz_busy=0; cntz_miss=0; cntz_drif=0
+declare -A skil fold oldz newz; tool_list=()
+while IFS='"' read -r _ tool _ valu _; do [[ -n ${valu-} ]] && { tool_list+=("$tool"); skil[$tool]=${valu%%|*}; fold[$tool]=${valu#*|}; }; done < "$CF_MAPZ"
+[[ $dryz -eq 1 ]] || mkdir -p "$CF_BINZ" "$CF_LINK"
+for tool in "${tool_list[@]}"; do srcz=$CF_REPO/${fold[$tool]}/zig-out/dist/$CF_DIST/$tool; dstz=$CF_BINZ/$tool; [[ -f $srcz ]] || { echo "miss $tool"; cntz_miss=$((cntz_miss+1)); continue; }; if [[ -f $dstz ]] && { [[ ! $srcz -nt $dstz ]] || [[ $(hash_file "$srcz") == $(hash_file "$dstz") ]]; }; then continue; fi; [[ $dryz -eq 0 ]] || { echo "would copy $tool"; continue; }; if cp -p "$srcz" "$dstz.new" && mv -f "$dstz.new" "$dstz"; then echo "copied $tool"; cntz_copy=$((cntz_copy+1)); else rm -f "$dstz.new"; echo "busy $tool"; cntz_busy=$((cntz_busy+1)); fi; done
+[[ -n ${SKIL_BINZ-} || $dryz -eq 1 ]] || grep -qsF "$CF_BINZ" "$HOME/.profile" || { echo "export PATH=\"\$PATH:$CF_BINZ\"" >> "$HOME/.profile"; echo "pathed (re-login)"; }
+for fldr in "$CF_SRCZ"/*/; do fldr=${fldr%/}; name=$(basename "$fldr"); link=$CF_LINK/$name; if [[ -L $link ]]; then [[ $(readlink "$link") == "$fldr" ]] || echo "clash $name"; continue; fi; [[ ! -e $link ]] || { echo "clash $name"; continue; }; [[ $dryz -eq 0 ]] || { echo "would link $name"; continue; }; ln -s "$fldr" "$link"; echo "linked $name"; cntz_link=$((cntz_link+1)); done
+for link in "$CF_LINK"/*; do [[ -L $link ]] || continue; targ=$(readlink "$link"); [[ $targ == "$CF_SRCZ"/* && ! -e $targ ]] || continue; [[ $dryz -eq 0 ]] || { echo "would unlink $(basename "$link")"; continue; }; unlink "$link"; echo "unlinked $(basename "$link")"; cntz_dead=$((cntz_dead+1)); done
+file=$CF_STAT/so-help-hash.txt
+[[ ! -f $file ]] || while IFS='=' read -r keyz valu; do [[ -z $keyz ]] || oldz[$keyz]=$valu; done < "$file"
+for tool in "${tool_list[@]}"; do dstz=$CF_BINZ/$tool; [[ -x $dstz ]] || continue; argz=--help; [[ $tool != za ]] || argz=help; hash=$(help_hash "$dstz" "$argz") || continue; newz[$tool]=$hash; if [[ -n ${oldz[$tool]-} && ${oldz[$tool]} != "$hash" && $ackz -eq 0 ]]; then echo "drift ${skil[$tool]}"; cntz_drif=$((cntz_drif+1)); newz[$tool]=${oldz[$tool]}; fi; done
+for keyz in "${!oldz[@]}"; do [[ -n ${newz[$keyz]-} ]] || newz[$keyz]=${oldz[$keyz]}; done
+if [[ $dryz -eq 0 ]]; then mkdir -p "$CF_STAT"; for keyz in "${!newz[@]}"; do echo "$keyz=${newz[$keyz]}"; done | sort > "$file.tmp" && mv -f "$file.tmp" "$file"; fi
+echo "done copied=$cntz_copy linked=$cntz_link unlinked=$cntz_dead busy=$cntz_busy miss=$cntz_miss drift=$cntz_drif"
+[[ $cntz_drif -eq 0 ]] || exit 3
 # =======================___THIS_IS_THE_END___=======================
 # ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
