@@ -3,7 +3,7 @@ What changed, newest first.
 
 ## 2026-11-26
 Added: the play button on a chain-step row now runs that one step alone (`POST /step/run`). Before it sent the step id to the shell ("is not recognized"). The step goes through the normal queue, so `lock_list` and the worker cap apply, there is no retry, and the new row appears in the same tab. It is refused while its chain runs. Stop and pause work on it. See HOW-TO "Run one step of a chain by hand".
-Added: id `scra-inge` (`scra ingest --live`, social only). It is the last id of `thri-aday`, so fb and za data is ingested right after each scrape. `scra-data` (`scra cars --live`) stays in `once-aday`.
+Added: id `scra-inge` (`scra ingest --live`, social only). It is the last id of `thri-aday`, so fb and za data is ingested right after each scrape. `scra-cars` (`scra cars --live`, renamed from `scra-data`) stays in `once-aday`.
 Added: `thri-aday` is on (3 windows a day, `tmo` 5400, `catc` 0 so a missed slot is not made up) and runs `face-scra` (`fb read feed --live --acct all`) then `zalo-scra` (`za run read --live --acct all`, then `za feed --live --acct all`; the feed step runs even if one account failed to read, and the exit code is the first failure). New files land in the scra `social-in` folder and `once-aday` ingests them.
 Changed: the job `home-sync` is now `puls-15mi` (every 15 minutes; it was 10). It also runs `fb-watc` and `za-watc` (`fb alive` and `za alive`): they read each account's saved login state, and when the last look is older than `aliv_look_hour` (8) they make one read-only look at ONE account per run. A dead login gives one alert per 6 hours with the exact login command. Task ids added to `ba-cmds-wind.bat` and `sh-cmds-linu.sh`.
 

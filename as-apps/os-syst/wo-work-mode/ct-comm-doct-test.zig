@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo doct: every check state
+// Des: Tests for wo-work-mode doct: every check state
 // Flo: ISO time parser > each check with a mock runner and scratch state files > output shape
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: ie run: dry-run by default, --live applies, --live --force passes soft guards
+// Des: id-edit-iden run: dry-run by default, --live applies, --live --force passes soft guards
 // Flo: parse map > build plan > verdict > dry: print and stop > live: apply, print result > exit code
 // I/O: args > text or JSON on stdout; files edited and state moved on --live
 // Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe run cicd-stat=cics-stat --live
@@ -27,8 +27,8 @@ if (live) try ctxz.outw.print("run: blocked, nothing changed → exit 4\n", .{})
 return code;
 }
 const resu = fl.applyPlan(ctxz, plan) catch |err| {
-if (err == fl.Erro.OpenRun) { const opnz = fl.openRun(ctxz) orelse "?"; std.debug.print("ie: run {s} never finished\nfix: ie undo {s} --live --force\n", .{ opnz, opnz }); return .bloc; }
-if (err == stor.Erro.Busy) { std.debug.print("ie: another run holds the lock in the data folder\nfix: wait for it, or after {d}s the lock counts as stale\n", .{ctxz.conf.lock_stal_seco}); return .bloc; }
+if (err == fl.Erro.OpenRun) { const opnz = fl.openRun(ctxz) orelse "?"; std.debug.print("id-edit-iden: run {s} never finished\nfix: id-edit-iden undo {s} --live --force\n", .{ opnz, opnz }); return .bloc; }
+if (err == stor.Erro.Busy) { std.debug.print("id-edit-iden: another run holds the lock in the data folder\nfix: wait for it, or after {d}s the lock counts as stale\n", .{ctxz.conf.lock_stal_seco}); return .bloc; }
 return err;
 };
 if (jsn) {
@@ -42,9 +42,9 @@ outj.msg = resu.note;
 try ctxz.outw.print("{s}\n", .{try std.json.Stringify.valueAlloc(ctxz.allo, outj, .{})});
 return resu.code;
 }
-if (resu.code == .fail) { std.debug.print("ie: run {s} failed: {s}\n", .{ resu.id, resu.note }); try ctxz.outw.print("run {s}: failed, tree restored → exit 1\n", .{resu.id}); return .fail; }
+if (resu.code == .fail) { std.debug.print("id-edit-iden: run {s} failed: {s}\n", .{ resu.id, resu.note }); try ctxz.outw.print("run {s}: failed, tree restored → exit 1\n", .{resu.id}); return .fail; }
 try ctxz.outw.print("run {s}: {d} files edited · {d} state files moved · {d} leftover · hub: {s}\n", .{ resu.id, resu.edit, resu.mved, resu.left, if (resu.hubz.len == 0) "not checked" else resu.hubz });
-if (resu.code == .find) try ctxz.outw.print("finding: check the leftovers or the hub, or undo: ie undo {s} --live\n", .{resu.id});
+if (resu.code == .find) try ctxz.outw.print("finding: check the leftovers or the hub, or undo: id-edit-iden undo {s} --live\n", .{resu.id});
 try ctxz.outw.print("run: done → exit {d}\n", .{@intFromEnum(resu.code)});
 return resu.code;
 }

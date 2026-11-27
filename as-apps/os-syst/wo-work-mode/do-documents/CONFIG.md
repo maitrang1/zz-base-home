@@ -2,7 +2,7 @@
 
 ## Program
 - File: `wo-work-mode.exe` (Linux/macOS: `wo`)
-- Run: `wo <command>`
+- Run: `wo-work-mode <command>`
 - Output: lines on screen (or JSON with `--json`)
 - Built with: Zig 0.17.0
 
@@ -16,7 +16,7 @@
 | hook_path_main | Hooks folder the repo must use | ci-flow-sync | any path |
 | zigz_vers_pinz | Zig version the device must have | 0.17.0 | any version text |
 | wipz_ager_maxz | Longest allowed gap since the last saved work (seconds) | 1800 | whole number |
-| sync_ager_maxz | Longest allowed gap since the last good `wo sync` (seconds) | 1800 | whole number |
+| sync_ager_maxz | Longest allowed gap since the last good `wo-work-mode sync` (seconds) | 1800 | whole number |
 | bkup_ager_maxz | Longest allowed gap since the last backup (seconds) | 1800 | whole number |
 | dril_ager_maxz | Longest allowed gap since the last restore test (seconds) | 3024000 | whole number |
 | dril_rtoz_maxz | Longest allowed restore time (seconds) | 900 | whole number |
@@ -45,9 +45,9 @@
 | beat_urlz_file | File (under your home) whose first line is the https ping address of an outside dead-man monitor such as Healthchecks.io. `wo beat --live` pings it, or pings `/fail` when a check below is stale. If the hub dies the pings stop and the monitor alerts you. Keep the file outside the repo | empty (off) | file path |
 | beat_chek_list | Stamps that must be fresh for a healthy ping (`docs`, `sync`, `bkup`, `bknt`). Empty = ping only proves the hub runs | docs | text list |
 | beat_ager_maxz | Seconds a stamp may be old before the ping says fail | 3600 | seconds |
-| sync_bran_main | Branch `wo sync` works on; anything else is blocked | main | branch name |
-| sync_remo_list | Remotes `wo sync` merges from and pushes to, in order | origin, mirr | text list |
-| sync_deny_list | Path prefixes `wo sync` never commits | empty | text list |
+| sync_bran_main | Branch `wo-work-mode sync` works on; anything else is blocked | main | branch name |
+| sync_remo_list | Remotes `wo-work-mode sync` merges from and pushes to, in order | origin, mirr | text list |
+| sync_deny_list | Path prefixes `wo-work-mode sync` never commits | empty | text list |
 | sync_quie_secz | A changed file is committed only after it has been idle this long | 120 | seconds |
 | sync_file_cntz | More files than this to commit stops the run | 200 | whole number |
 | sync_file_maxz | A file bigger than this is kept out of the commit and reported (the run goes on) | 10485760 | bytes |

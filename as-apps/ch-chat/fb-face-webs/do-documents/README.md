@@ -10,7 +10,7 @@ fb is a helper that uses Facebook the way you do. It posts, comments, reacts, se
 - Runs a whole routine by itself (for example "morning") and stops only when it truly needs you, for example a Facebook security check. When you finish the check, it continues on its own.
 - Does account jobs too: log in from a secrets file, password, two-factor, sessions, profile parts, settings, activity log, download your data, billing, ads, page and group roles, help and support. Money, security and delete jobs are guarded: you approve them, and you press the last button yourself.
 - Runs several accounts you own from one `user-acct.json`, one at a time, each in its own browser profile (`--acct shop1` or `--acct all`).
-- Maps the site (`fb map`) and reports changed buttons (`fb gaps`).
+- Maps the site (`fb-face-webs map`) and reports changed buttons (`fb-face-webs gaps`).
 - Stops and rests when Facebook warns or limits your account.
 - Shows a preview first. Nothing happens until you add `--live`.
 
@@ -41,7 +41,7 @@ E:\zz-base-home\as-apps\ch-chat\fb-face-webs\zig-out\bin\fb-face-webs.exe ask "p
 - fb has its own browser profile. Your daily Chrome is not touched.
 - It is slow on purpose. Daily limits, quiet hours and a slow start protect your account.
 - Facebook does not allow automation. Your account can still be restricted. You accept this risk.
-- This version is tested on a practice copy of Facebook, not on the real site yet. Facebook's button names may differ for you: run `fb doctor` and fix names in your settings.
+- This version is tested on a practice copy of Facebook, not on the real site yet. Facebook's button names may differ for you: run `fb-face-webs doctor` and fix names in your settings.
 - Messages are in Vietnamese by default. Set `lang_main_code` to `en` for English.
 - Your data lives in one folder: `E:\.zz-base-home-tena\as-apps\ch-chat\fb-face-webs` (Windows).
 

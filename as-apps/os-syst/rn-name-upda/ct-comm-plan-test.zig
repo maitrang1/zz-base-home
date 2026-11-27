@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests rn plan: checks, output, exit codes, no writes
+// Des: Tests rn-name-upda plan: checks, output, exit codes, no writes
 // Flo: pair checks > text run > json run > flagged skips > files untouched
 // I/O: tmp dir fake machine > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig

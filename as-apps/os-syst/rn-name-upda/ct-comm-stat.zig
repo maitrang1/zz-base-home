@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: rn stat: version, OS, data dir, active skip keys
+// Des: rn-name-upda stat: version, OS, data dir, active skip keys
 // Flo: read config > print one line + the skip list > exit 0
 // I/O: config > text or JSON on stdout; read-only
 // Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe stat
@@ -24,7 +24,7 @@ const body = try std.json.Stringify.valueAlloc(ctxz.allo, Outz{ .vers = CF.vers,
 try ctxz.outw.print("{s}\n", .{body});
 return .okay;
 }
-try ctxz.outw.print("rn {s} · {s} · data {s}\nskip on:", .{ CF.vers, osnm, data });
+try ctxz.outw.print("rn-name-upda {s} · {s} · data {s}\nskip on:", .{ CF.vers, osnm, data });
 inline for (@typeInfo(Skip).@"struct".field_names) |name| { if (@field(skip, name)) try ctxz.outw.print(" {s}", .{name}); }
 try ctxz.outw.print("\n", .{});
 const last = (try stor.idLast(ctxz)) orelse return .okay;
@@ -32,7 +32,7 @@ const pth = try stor.pthsOf(ctxz, last);
 const ents = jour.readAll(ctxz.allo, ctxz.iozz, pth.jfil) catch return .okay;
 const stav = jour.stateOf(ents);
 try ctxz.outw.print("last run {s}: {s}\n", .{ last, @tagName(stav) });
-if (stav == .open) { try ctxz.outw.print("open run: rn undo {s} --live --force\n", .{last}); return .find; }
+if (stav == .open) { try ctxz.outw.print("open run: rn-name-upda undo {s} --live --force\n", .{last}); return .find; }
 return .okay;
 }
 // =======================___THIS_IS_THE_END___=======================

@@ -1,7 +1,7 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Login watch: is each account still logged in
-// Flo: no flag = read the saved login state (no network) and, when the last look is older than aliv_look_hour, one read-only look at ONE account per run (a failed look retries in 1 h, so it never starves the other account) > --live = look now > a dead login saves the state, alerts the owner (6 h gap) and exits 3; a good login or `fb login` saves ok
+// Flo: no flag = read the saved login state (no network) and, when the last look is older than aliv_look_hour, one read-only look at ONE account per run (a failed look retries in 1 h, so it never starves the other account) > --live = look now > a dead login saves the state, alerts the owner (6 h gap) and exits 3; a good login or `fb-face-webs login` saves ok
 // I/O: Ctx (caller) > one line per account; db meta alive_state (1 ok, 2 needs login) alive_at alive_note; exit 0 ok · 1 unknown · 3 needs login
 // ===================================================================
 const std = @import("std"); const task = @import("ru-task-runn.zig"); const halt = @import("ru-safe-halt.zig"); const wait = @import("ru-wait-hand.zig"); const pace = @import("ru-huma-pace.zig");

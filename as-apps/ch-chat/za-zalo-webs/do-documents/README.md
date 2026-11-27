@@ -7,8 +7,8 @@ za is a helper that uses Zalo Web the way you do. It reads your new chats, repli
 - Sends text, files, images and stickers once, never twice, even after a crash. Replies to a message, mentions people, reacts, recalls.
 - Sets reminders, pins, mutes, archives and hides chats. Makes polls, notes, labels and quick messages.
 - Handles friend requests, message requests and group admin. Risky actions (new group, forward, delete, block, add friend, leave) need `--force`.
-- Runs a whole list of jobs by itself (`za plan`, `za go`) and stops to wait only when Zalo needs you (QR, captcha).
-- Handles account pages too: log out, logged-in devices, notification and language settings, storage, help, feedback. `za flows` lists every Zalo Web action and who does it. Passwords, SMS codes and QR scans stay yours; za never types them.
+- Runs a whole list of jobs by itself (`za-zalo-webs plan`, `za-zalo-webs go`) and stops to wait only when Zalo needs you (QR, captcha).
+- Handles account pages too: log out, logged-in devices, notification and language settings, storage, help, feedback. `za-zalo-webs flows` lists every Zalo Web action and who does it. Passwords, SMS codes and QR scans stay yours; za never types them.
 - Stops by itself when Zalo shows a lock, warning or "logged in elsewhere" page.
 - Shows a preview first. Nothing changes until you add `--live`.
 - Messages and help are in Vietnamese by default (English: set `lang_main_code` to `en`).
@@ -40,9 +40,9 @@ E:\zz-base-home\as-apps\ch-chat\za-zalo-webs\zig-out\bin\za-zalo-webs.exe run se
 ## Good to know
 - It uses its own browser profile. Your daily Chrome is not touched. Your data stays on this PC, in a folder only you can open.
 - It is slow on purpose. Hourly and daily limits, quiet hours, work breaks and a one-week warm-up protect your account.
-- Zalo does not offer automation for personal accounts. Your account can still be restricted. You accept this risk with `za setup --yes`.
+- Zalo does not offer automation for personal accounts. Your account can still be restricted. You accept this risk with `za-zalo-webs setup --yes`.
 - The button names on the Zalo page are guesses until you run the live check once (see HOW-TO).
-- If it says "halted", open Zalo yourself, clear the check, then run `za resume`.
+- If it says "halted", open Zalo yourself, clear the check, then run `za-zalo-webs resume`.
 
 ## Next
 - [HOW-TO.md](HOW-TO.md): every task, step by step

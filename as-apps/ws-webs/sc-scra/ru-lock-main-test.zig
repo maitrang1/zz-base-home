@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for the scra run lock
+// Des: Tests for the sc-scra run lock
 // Flo: temp dir > take twice > stale and garbage files > assert refusal or takeover
 // I/O: temp dirs only
 // Run: zig build test -Dfile=ru-lock-main-test.zig

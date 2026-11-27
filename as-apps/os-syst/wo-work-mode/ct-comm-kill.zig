@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo kill: run kill-switch steps from config
+// Des: wo-work-mode kill: run kill-switch steps from config
 // Flo: read steps from config > dry-run lists them > --live runs each, never stops early > emit facts
 // I/O: Ctxz + kill_step_list > one fact per step, exit 0 all ok / 1 any failed / 4 blocked
 // ===================================================================

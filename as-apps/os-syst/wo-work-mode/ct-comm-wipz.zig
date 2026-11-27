@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo wipz: snapshot dirty work to private WIP ref
+// Des: wo-work-mode wipz: snapshot dirty work to private WIP ref
 // Flo: dirty? > temp index > add all > drop big files > tree > commit on last snapshot > gitleaks > (leak: restic bundle only) > head ref > push > daily bookmark > stamp
 // I/O: Ctxz (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================

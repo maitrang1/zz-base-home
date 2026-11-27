@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Label registry and page paths, owner overrides win
 // Flo: key > labl_over from config > built-in PACK > empty; path key > path_over > built-in PATHS
-// I/O: Conf + key (caller) > label list or path (all UNVERIFIED until zr map runs on the real site)
+// I/O: Conf + key (caller) > label list or path (all UNVERIFIED until zr-zrow-webs map runs on the real site)
 // ===================================================================
 const std = @import("std"); const cfgz = @import("cf-conf-load.zig");
 pub const Ent = struct { key: []const u8, labs: []const []const u8 };

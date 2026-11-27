@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | File | `E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe` |
-| Run | `rn plan OLD NEW` · `rn runz OLD NEW [--live] [--force]` · `rn undo ID or last [--live] [--force]` · `rn stat` |
+| Run | `rn-name-upda plan OLD NEW` · `rn-name-upda runz OLD NEW [--live] [--force]` · `rn-name-upda undo ID or last [--live] [--force]` · `rn-name-upda stat` |
 | Flags | `--conf FILE` settings file · `--json` JSON output · `--live` really change things · `--force` go past a blocked or changed item |
 | Output | one result line, or JSON with `--json` |
 | Built with | Zig, no other parts |

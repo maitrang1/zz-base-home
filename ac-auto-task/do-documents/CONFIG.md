@@ -15,7 +15,7 @@ File: aa-conf-main.json, next to aa-auto-task.json. Every key is optional. A mis
 |---|---|---|---|
 | port | the port the page is served on (127.0.0.1 only). A port typed on the command line wins | 4000 | 1 to 65535. If it is taken, the program says so and stops |
 | jobs_same_time | jobs that may run at the same time (this repo sets 8) | 4 | 1 to 8 |
-| lock_list | lock name to the job or step ids that share it: an id or a prefix (`scra-` covers scra-raws, scra-data). Same lock = one at a time | none (all `main`) | `{ "scra": ["scra-"], "cicd": ["cicd-", "home-doct"] }` · up to 32 ids in all · id ≤ 64 · name ≤ 32 · name `none` = run beside anything |
+| lock_list | lock name to the job or step ids that share it: an id or a prefix (`scra-` covers scra-raws, scra-cars). Same lock = one at a time | none (all `main`) | `{ "scra": ["scra-"], "cicd": ["cicd-", "home-doct"] }` · up to 32 ids in all · id ≤ 64 · name ≤ 32 · name `none` = run beside anything |
 | cmds_hist_maxz | commands kept in history | 64 | 1 to 10000 |
 | time_limi_seco | default time limit of a job, in seconds | 86400 | 1 to 86400 |
 | apps_data_loca_wind | data folder on Windows | E:\.zz-base-home-tena\ac-auto-task | absolute path, `~/name`, or a name under your user folder (max 260, no ..) |

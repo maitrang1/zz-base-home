@@ -14,7 +14,7 @@ const targ = buil.standardTargetOptions(.{});
 const opti = buil.standardOptimizeOption(.{});
 const exez = buil.addExecutable(.{ .name = CF.exez, .root_module = modMake(buil, targ, opti, CF.root) }); buil.installArtifact(exez);
 const runz = buil.addRunArtifact(exez); runz.step.dependOn(buil.getInstallStep()); runz.addPassthruArgs();
-buil.step("run", "Build and run za").dependOn(&runz.step);
+buil.step("run", "Build and run za-zalo-webs").dependOn(&runz.step);
 const stepDevz = buil.step("dist-dev", "Build windows-x86_64 + linux-x86_64 into zig-out/dist/");
 for (CF.dist) |dist| { const exed = buil.addExecutable(.{ .name = CF.exez, .root_module = modMake(buil, buil.resolveTargetQuery(dist.quer), .safe, CF.root) }); stepDevz.dependOn(&buil.addInstallArtifact(exed, .{ .dest_dir = .{ .override = .{ .custom = dist.dirz } }, .pdb_dir = .disabled }).step); }
 const stepTest = buil.step("test", "Run every *-test.zig"); const only = buil.option([]const u8, "file", "run only this test file") orelse "";

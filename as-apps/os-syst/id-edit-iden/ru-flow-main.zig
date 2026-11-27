@@ -81,7 +81,7 @@ var resu: Resu = .{ .id = id };
 const hubb = if (ctxz.conf.hubz_chec_on) hz.snap(ctxz, plan.hubz.port) else hz.Snap{};
 body(ctxz, plan, pth, &resu, hubb) catch |err| {
 const urs = undo.undoRun(ctxz, id, true, false) catch {
-resu.note = std.fmt.allocPrint(ctxz.allo, "{s}; rollback failed: run ie undo {s} --live --force", .{ @errorName(err), id }) catch @errorName(err);
+resu.note = std.fmt.allocPrint(ctxz.allo, "{s}; rollback failed: run id-edit-iden undo {s} --live --force", .{ @errorName(err), id }) catch @errorName(err);
 resu.code = .fail;
 return resu;
 };

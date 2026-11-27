@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo bkup: list parse, state job, nightly
+// Des: Tests for wo-work-mode bkup: list parse, state job, nightly
 // Flo: mock restic + sqlite3 > run stat / nigh > check argv, resolved list file, stamps, exit codes
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

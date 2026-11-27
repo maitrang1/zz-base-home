@@ -1,7 +1,7 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Login watch: is each account still logged in
-// Flo: no flag = read the saved login state (no network) and, when the last look is older than aliv_look_hour, one read-only look at ONE account per run (a failed look retries in 1 h, so it never starves the other account) > --live = look now > a dead login saves the state, alerts the owner (toast, 6 h gap) and exits 3; a good login or `za login` saves ok
+// Flo: no flag = read the saved login state (no network) and, when the last look is older than aliv_look_hour, one read-only look at ONE account per run (a failed look retries in 1 h, so it never starves the other account) > --live = look now > a dead login saves the state, alerts the owner (toast, 6 h gap) and exits 3; a good login or `za-zalo-webs login` saves ok
 // I/O: Ctx (caller) > one line per account; file <stat>/za-alive.txt "<ms> <ok|needlogin> <last alert ms>"; exit 0 ok · 1 unknown · 3 needs login
 // ===================================================================
 const std = @import("std"); const ctxz = @import("ct-ctrl-ctxz.zig"); const file = @import("st-stor-file.zig"); const snap = @import("ru-page-snap.zig"); const halt = @import("ru-safe-halt.zig"); const lab = @import("cf-labl-load.zig"); const noti = @import("ru-noti-send.zig"); const pace = @import("ru-huma-pace.zig");

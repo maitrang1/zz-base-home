@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo kill: dry-run, live, bad config
+// Des: Tests for wo-work-mode kill: dry-run, live, bad config
 // Flo: mock tools > run > check calls and exit code
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

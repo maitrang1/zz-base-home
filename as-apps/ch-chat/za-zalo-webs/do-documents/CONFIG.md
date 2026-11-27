@@ -21,7 +21,7 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | read_dely_msec | Pause after opening a chat | [800, 3500] | min 200, max at least 1.5 x min |
 | acct_maxx_coun | Most accounts in `user-acct.json` | 5 | 1 to 20 |
 | acct_gap_secs | Wait between accounts with `--acct all` (min, max seconds) | [240, 960] | numbers |
-| aliv_look_hour | Hours between the automatic read-only login looks of `za alive` (one account per run; 0 is refused) | 8 | 1 to 72 |
+| aliv_look_hour | Hours between the automatic read-only login looks of `za-zalo-webs alive` (one account per run; 0 is refused) | 8 | 1 to 72 |
 | secr_loca_main | Folder with `user-acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/za-zalo-webs | folder |
 | capz_send_hour | Sends per hour | 20 | 1 or more, ≤ day cap |
 | capz_send_dayz | Sends per day | 120 | 1 or more |
@@ -33,8 +33,8 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | warm_dayz_coun | Days to grow caps from 20% to 100% | 7 | 0 or more |
 | retr_coun_maxz | Tries to find a button | 3 | 1-9 |
 | read_msgz_maxz | Messages read per chat | 20 | 1 or more |
-| feed_chat_list | Chats whose stored messages `za feed` hands to scra. Only these; empty = nothing leaves | none | list of chat names |
-| feed_dirz_wind · feed_dirz_unix | Folder where `za feed --live` writes its `.jsonl` files (scra's `social-in` folder) | scra data folder | a path (`~` works) |
+| feed_chat_list | Chats whose stored messages `za-zalo-webs feed` hands to scra. Only these; empty = nothing leaves | none | list of chat names |
+| feed_dirz_wind · feed_dirz_unix | Folder where `za-zalo-webs feed --live` writes its `.jsonl` files (scra's `social-in` folder) | scra data folder | a path (`~` works) |
 | feed_item_maxz | Most messages per chat in one file | 500 | 1 to 5000 |
 | feed_text_maxz | Longest message text kept, in bytes | 4000 | 200 or more |
 | brow_time_secs | Browser wait | 60 | 1 or more |
@@ -60,7 +60,7 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | fail_strk_maxz | Failed sends in a row that stop everything | 3 | 1 or more |
 | msgs_keep_days | Days to keep chat text (0 = forever) | 30 | 0 or more |
 | logz_body_enab | Keep chat text in the log (off = hashed) | false | true, false |
-| inbx_chek_mins | Minutes between inbox checks in `za watch` | 10 | 1 or more |
+| inbx_chek_mins | Minutes between inbox checks in `za-zalo-webs watch` | 10 | 1 or more |
 | sess_actv_mins · sess_brek_mins | Work session and break length | [20,60] · [5,20] | two numbers |
 | watc_chek_maxz · watc_deadl_mins · watc_repl_enab | Watch limits (0 = no check limit) and price replies while watching | 0 · 600 · false | numbers, true/false |
 | smar_calls_dayz | AI replies per day before the template is used | 20 | 0 or more |

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo ci: local CI job mirrors plus cloud watchers
+// Des: wo-work-mode ci: local CI job mirrors plus cloud watchers
 // Flo: pick sub-command > run outside tools through the runner > facts (red = fail, tool absent = blocked)
 // I/O: Ctxz + stat|test|leak|lock|rele|repr|deps > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================
@@ -57,7 +57,7 @@ var lines = std.mem.splitScalar(u8, list.outz, '\n');
 const tag = cx.trim(lines.next() orelse "");
 if (tag.len == 0) { try facts.append(ctxz.allo, cx.mkfa("rele", .skip, "no pending prerelease")); return; }
 const body = (try ctxz.step(facts, "view", &.{ "gh", "release", "view", tag, "--json", "body,assets", "-q", ".body, (.assets[].name)" }, &.{})) orelse return;
-if (std.mem.indexOf(u8, body.outz, CF.miss) != null) try facts.append(ctxz.allo, cx.mkfa("rele", .fail, try std.fmt.allocPrint(ctxz.allo, "{s} MISMATCH: GitHub and GitLab bytes differ", .{tag}))) else if (std.mem.indexOf(u8, body.outz, CF.mark) != null and std.mem.indexOf(u8, body.outz, "sha256.txt.sig") != null) try facts.append(ctxz.allo, cx.mkfa("rele", .okay, try std.fmt.allocPrint(ctxz.allo, "{s} Verified and signed", .{tag}))) else if (std.mem.indexOf(u8, body.outz, CF.mark) != null) try facts.append(ctxz.allo, cx.mkfa("rele", .okay, try std.fmt.allocPrint(ctxz.allo, "{s} Verified: run wo rels sign {s} --live", .{ tag, tag }))) else try facts.append(ctxz.allo, cx.mkfa("rele", .okay, try std.fmt.allocPrint(ctxz.allo, "{s} still pending", .{tag})));
+if (std.mem.indexOf(u8, body.outz, CF.miss) != null) try facts.append(ctxz.allo, cx.mkfa("rele", .fail, try std.fmt.allocPrint(ctxz.allo, "{s} MISMATCH: GitHub and GitLab bytes differ", .{tag}))) else if (std.mem.indexOf(u8, body.outz, CF.mark) != null and std.mem.indexOf(u8, body.outz, "sha256.txt.sig") != null) try facts.append(ctxz.allo, cx.mkfa("rele", .okay, try std.fmt.allocPrint(ctxz.allo, "{s} Verified and signed", .{tag}))) else if (std.mem.indexOf(u8, body.outz, CF.mark) != null) try facts.append(ctxz.allo, cx.mkfa("rele", .okay, try std.fmt.allocPrint(ctxz.allo, "{s} Verified: run wo-work-mode rels sign {s} --live", .{ tag, tag }))) else try facts.append(ctxz.allo, cx.mkfa("rele", .okay, try std.fmt.allocPrint(ctxz.allo, "{s} still pending", .{tag})));
 }
 fn doRepr(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact)) !void {
 const root = try std.fs.path.join(ctxz.allo, &.{ try ctxz.dirzData(), "repr" });

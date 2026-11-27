@@ -16,7 +16,7 @@ One small command that keeps your work safe: it checks your device is healthy, s
 `E:\zz-base-home\wo-work-mode\zig-out\bin\wo-work-mode.exe stat`
 3. You see the version and when each job last ran:
 ```
-okay	vers	wo 0.1.0
+okay	vers	wo-work-mode 0.1.0
 skip	wipz	none yet
 skip	bkup	none yet
 skip	bknt	none yet

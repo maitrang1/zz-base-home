@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: ie stat: version, repo, hub, job files, last run (read-only)
+// Des: id-edit-iden stat: version, repo, hub, job files, last run (read-only)
 // Flo: read config + hub config + job files > ask the hub > last run state > print
 // I/O: none > text or JSON on stdout; nothing written
 // Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe stat
@@ -42,8 +42,8 @@ const outj: Outj = .{ .ok = code == .okay, .cmd = "stat", .exit = @intFromEnum(c
 try ctxz.outw.print("{s}\n", .{try std.json.Stringify.valueAlloc(allo, outj, .{})});
 return code;
 }
-try ctxz.outw.print("ie {s} · {s} · repo {s}\ndata {s}\nhub port {d} ({s}) · data {s}\njob files {d} · job ids {d} · chain steps {d} · steps without a dispatcher {d}\nlast run {s}: {s}\n", .{ CF.vers, osnm, ctxz.repo, data, hubz.port, if (upz) "up" else "down", hubz.data, jobs.len, nids, nstp, unre.len, lrun, lsta });
-if (open) try ctxz.outw.print("open run: ie undo {s} --live --force\n", .{lrun});
+try ctxz.outw.print("id-edit-iden {s} · {s} · repo {s}\ndata {s}\nhub port {d} ({s}) · data {s}\njob files {d} · job ids {d} · chain steps {d} · steps without a dispatcher {d}\nlast run {s}: {s}\n", .{ CF.vers, osnm, ctxz.repo, data, hubz.port, if (upz) "up" else "down", hubz.data, jobs.len, nids, nstp, unre.len, lrun, lsta });
+if (open) try ctxz.outw.print("open run: id-edit-iden undo {s} --live --force\n", .{lrun});
 return code;
 }
 // =======================___THIS_IS_THE_END___=======================

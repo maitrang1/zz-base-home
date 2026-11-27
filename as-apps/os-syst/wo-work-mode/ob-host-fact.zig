@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Only OS-specific reads for wo doct: patch, ESU, CPU
+// Des: Only OS-specific reads for wo-work-mode doct: patch, ESU, CPU
 // Flo: pick the OS tool (PowerShell / stat / reg) > run it through the runner > parse to one number
 // I/O: Ctxz + OS tag > Host (unknown with a reason, a time, or a value)
 // ===================================================================

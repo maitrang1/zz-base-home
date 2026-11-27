@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Job catalog as data: name, cap, risk, page, steps
 // Flo: one row per ZenRows action > steps name a label key (ut-loca-pack) and an argument slot > the runner turns rows into flow steps
-// I/O: none (constants) > Job rows (find by name, list for `zr jobs`)
+// I/O: none (constants) > Job rows (find by name, list for `zr-zrow-webs jobs`)
 // ===================================================================
 const std = @import("std"); const pace = @import("ru-huma-pace.zig"); const flow = @import("ru-flow-runz.zig");
 pub const Risk = enum { w, x };
@@ -24,9 +24,9 @@ fn sl(key: []const u8, arg: Arg) T { return .{ .op = .select, .key = key, .arg =
 fn tg(key: []const u8, lit: []const u8) T { return .{ .op = .toggle, .key = key, .lit = lit, .commit = true }; }
 fn en() T { return .{ .op = .key, .lit = "Enter", .commit = true }; }
 pub const JOBS = [_]Job{
-.{ .name = "signup", .kind = .acct, .risk = .w, .host = .app, .path = "p_regi", .auth = true, .once = true, .need = &.{}, .hint = "OPTIONAL: fill the sign-up form (Cloudflare may block; prefer zr login by hand)", .steps = &.{ g(), ty("emai_boxz", .user), ty("pass_boxz", .pass), cm("regi_subm"), ek("code_page") } },
+.{ .name = "signup", .kind = .acct, .risk = .w, .host = .app, .path = "p_regi", .auth = true, .once = true, .need = &.{}, .hint = "OPTIONAL: fill the sign-up form (Cloudflare may block; prefer zr-zrow-webs login by hand)", .steps = &.{ g(), ty("emai_boxz", .user), ty("pass_boxz", .pass), cm("regi_subm"), ek("code_page") } },
 .{ .name = "verify-email", .kind = .acct, .risk = .w, .host = .app, .path = "p_veri", .auth = true, .need = &.{.text}, .hint = "OPTIONAL: type the 6-digit email code (or type it by hand in the window)", .steps = &.{ g(), ty("code_boxz", .text), cm("veri_subm"), ek("dash_home") } },
-.{ .name = "login", .kind = .acct, .risk = .w, .host = .app, .path = "p_logi", .auth = true, .need = &.{}, .hint = "OPTIONAL: fill the login form (Cloudflare may block; prefer zr login by hand)", .steps = &.{ g(), ty("emai_boxz", .user), ty("pass_boxz", .pass), cm("logi_subm"), ek("dash_home") } },
+.{ .name = "login", .kind = .acct, .risk = .w, .host = .app, .path = "p_logi", .auth = true, .need = &.{}, .hint = "OPTIONAL: fill the login form (Cloudflare may block; prefer zr-zrow-webs login by hand)", .steps = &.{ g(), ty("emai_boxz", .user), ty("pass_boxz", .pass), cm("logi_subm"), ek("dash_home") } },
 .{ .name = "logout", .kind = .acct, .risk = .w, .host = .app, .path = "p_home", .auth = true, .need = &.{}, .hint = "log out", .steps = &.{ g(), c("user_menu"), cm("logo_butt"), ek("logi_page") } },
 .{ .name = "sso-google", .kind = .acct, .risk = .w, .host = .app, .path = "p_logi", .auth = true, .need = &.{}, .hint = "start Google sign-in (you finish it in the window)", .steps = &.{ g(), cm("ssoz_goog") } },
 .{ .name = "sso-github", .kind = .acct, .risk = .w, .host = .app, .path = "p_logi", .auth = true, .need = &.{}, .hint = "start GitHub sign-in (you finish it in the window)", .steps = &.{ g(), cm("ssoz_gith") } },

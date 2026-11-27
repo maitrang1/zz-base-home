@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo entry: parse flags, load config, run command
+// Des: wo-work-mode entry: parse flags, load config, run command
 // Flo: args > ladder flags > config > context > dispatch stat/conf/doct/wipz/bkup/dril/kill/secr > flush > exit
 // I/O: argv + aa-conf-main.json > text or JSON on stdout, errors on stderr, exit 0-4
 // Run: E:\zz-base-home\wo-work-mode\zig-out\bin\wo-work-mode.exe doct --prof ci
@@ -24,7 +24,7 @@ const beat = @import("ct-comm-beat.zig");
 const rels = @import("ct-comm-rels.zig");
 const ciii = @import("ct-comm-ci.zig");
 const sync = @import("ct-comm-sync.zig");
-const CF = .{ .bufz = 8192, .usag = "usage: wo [--conf FILE] [--prof t0|box|ci] [--json] [--live [--force]] stat|conf|doct|wipz|sync|bkup [stat|nigh]|docs init|sync|beat|rels sign TAG|ci stat|test|leak|lock|rele|repr|deps|dril|kill|secr init|lend\n" };
+const CF = .{ .bufz = 8192, .usag = "usage: wo-work-mode [--conf FILE] [--prof t0|box|ci] [--json] [--live [--force]] stat|conf|doct|wipz|sync|bkup [stat|nigh]|docs init|sync|beat|rels sign TAG|ci stat|test|leak|lock|rele|repr|deps|dril|kill|secr init|lend\n" };
 fn devName(allo: std.mem.Allocator, envm: *const std.process.Environ.Map, name: []const u8) ![]const u8 {
 if (envm.get("WO_DEVI_NAME")) |envv| { if (envv.len > 0) return envv; }
 if (name.len > 0) return name;
@@ -56,14 +56,14 @@ var args: std.ArrayList([]const u8) = .empty;
 var iter = try init.minimal.args.iterateAllocator(allo);
 _ = iter.next();
 while (iter.next()) |arg| try args.append(allo, arg);
-const pars = ladz.parse(allo, args.items) catch |err| { std.debug.print("wo: {s}\n" ++ CF.usag, .{@errorName(err)}); return .usag; };
-const cfgv = cfgz.confLoad(allo, init.io, pars.conf) catch |err| { std.debug.print("wo: config unreadable: {s}\n", .{@errorName(err)}); return .fail; };
-const home = init.environ_map.get("USERPROFILE") orelse init.environ_map.get("HOME") orelse { std.debug.print("wo: no HOME or USERPROFILE in the environment\n", .{}); return .fail; };
+const pars = ladz.parse(allo, args.items) catch |err| { std.debug.print("wo-work-mode: {s}\n" ++ CF.usag, .{@errorName(err)}); return .usag; };
+const cfgv = cfgz.confLoad(allo, init.io, pars.conf) catch |err| { std.debug.print("wo-work-mode: config unreadable: {s}\n", .{@errorName(err)}); return .fail; };
+const home = init.environ_map.get("USERPROFILE") orelse init.environ_map.get("HOME") orelse { std.debug.print("wo-work-mode: no HOME or USERPROFILE in the environment\n", .{}); return .fail; };
 var real: runm.Real = .{ .iozz = init.io, .envm = init.environ_map };
 const ctxz: cx.Ctxz = .{ .allo = allo, .iozz = init.io, .runn = real.runn(), .conf = cfgv, .home = home, .devi = try devName(allo, init.environ_map, cfgv.devi_name_main), .ladd = pars.ladd, .prof = pars.prof orelse cfgv.prof_main, .outw = outw, .nowf = cx.realNow };
 return dispatch(&ctxz, pars.rest) catch |err| switch (err) {
 exit.Erro.Usag => { std.debug.print(CF.usag, .{}); return .usag; },
-else => { std.debug.print("wo: failed: {s}\n", .{@errorName(err)}); return .fail; },
+else => { std.debug.print("wo-work-mode: failed: {s}\n", .{@errorName(err)}); return .fail; },
 };
 }
 pub fn main(init: std.process.Init) !void {

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo secr: usage, init dry-run/live/again, lend blocked
+// Des: Tests for wo-work-mode secr: usage, init dry-run/live/again, lend blocked
 // Flo: scratch home > run each sub-command > check dir and exit code
 // I/O: scratch dir under .zig-cache/tmp > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

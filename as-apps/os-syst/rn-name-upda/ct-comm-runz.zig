@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: rn runz OLD NEW: rename, fix refs, dry-run default
+// Des: rn-name-upda runz OLD NEW: rename, fix refs, dry-run default
 // Flo: check pair > dry-run prints the plan > live runs the flow > one-line result
 // I/O: OLD NEW + --live/--force > text or JSON; exit 0 ok · 1 failed (rolled back) · 3 flagged or left · 4 blocked
 // Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe runz E:\proj\old E:\proj\new --live
@@ -25,7 +25,7 @@ return code;
 const rsl = try flow.runFlow(ctxz, old, new, .{ .force = ctxz.ladd.forc });
 if (ctxz.ladd.json) { try ctxz.outw.print("{s}\n", .{try std.json.Stringify.valueAlloc(ctxz.allo, rsl, .{})}); return rsl.code; }
 if (rsl.note.len > 0) { try ctxz.outw.print("failed {s}: {s} · rolled back, nothing changed\n", .{ rsl.id, rsl.note }); return rsl.code; }
-try ctxz.outw.print("ok {s} · patched {d} refs in {d} files · renamed · left {d} · flagged {d}\nundo: rn undo {s} --live\n", .{ rsl.id, rsl.patched, rsl.files, rsl.left, rsl.flagd, rsl.id });
+try ctxz.outw.print("ok {s} · patched {d} refs in {d} files · renamed · left {d} · flagged {d}\nundo: rn-name-upda undo {s} --live\n", .{ rsl.id, rsl.patched, rsl.files, rsl.left, rsl.flagd, rsl.id });
 if (rsl.hint.len > 0) try ctxz.outw.print("note: {s}\n", .{rsl.hint});
 return rsl.code;
 }

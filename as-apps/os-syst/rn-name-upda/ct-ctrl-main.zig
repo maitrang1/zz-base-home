@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: rn entry: parse flags, load config, run command
+// Des: rn-name-upda entry: parse flags, load config, run command
 // Flo: args > ladder flags > config > context > dispatch plan/stat > flush > exit
 // I/O: argv + aa-conf-main.json > text or JSON on stdout, errors on stderr, exit 0-4
 // Run: E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe plan E:\proj\old E:\proj\new
@@ -16,7 +16,7 @@ const plan = @import("ct-comm-plan.zig");
 const stat = @import("ct-comm-stat.zig");
 const runz = @import("ct-comm-runz.zig");
 const undo = @import("ct-comm-undo.zig");
-const CF = .{ .bufz = 8192, .usag = "usage: rn [--conf FILE] [--json] [--live [--force]] plan OLD NEW | runz OLD NEW | undo ID|last | stat\n" };
+const CF = .{ .bufz = 8192, .usag = "usage: rn-name-upda [--conf FILE] [--json] [--live [--force]] plan OLD NEW | runz OLD NEW | undo ID|last | stat\n" };
 fn dispatch(ctxz: *const cx.Ctxz, rest: []const []const u8) !exit.Code {
 if (rest.len == 0) return exit.Erro.Usag;
 const comm = rest[0];
@@ -33,15 +33,15 @@ var args: std.ArrayList([]const u8) = .empty;
 var iter = try init.minimal.args.iterateAllocator(allo);
 _ = iter.next();
 while (iter.next()) |arg| try args.append(allo, arg);
-const pars = ladz.parse(allo, args.items) catch |err| { std.debug.print("rn: {s}\n" ++ CF.usag, .{@errorName(err)}); return .usag; };
-const cfgv = cfgz.confLoad(allo, init.io, pars.conf) catch |err| { std.debug.print("rn: config unreadable: {s}\n", .{@errorName(err)}); return .fail; };
-const home = init.environ_map.get("USERPROFILE") orelse init.environ_map.get("HOME") orelse { std.debug.print("rn: no HOME or USERPROFILE in the environment\n", .{}); return .fail; };
-const cwdz = std.process.currentPathAlloc(init.io, allo) catch |err| { std.debug.print("rn: cannot read the current folder: {s}\n", .{@errorName(err)}); return .fail; };
+const pars = ladz.parse(allo, args.items) catch |err| { std.debug.print("rn-name-upda: {s}\n" ++ CF.usag, .{@errorName(err)}); return .usag; };
+const cfgv = cfgz.confLoad(allo, init.io, pars.conf) catch |err| { std.debug.print("rn-name-upda: config unreadable: {s}\n", .{@errorName(err)}); return .fail; };
+const home = init.environ_map.get("USERPROFILE") orelse init.environ_map.get("HOME") orelse { std.debug.print("rn-name-upda: no HOME or USERPROFILE in the environment\n", .{}); return .fail; };
+const cwdz = std.process.currentPathAlloc(init.io, allo) catch |err| { std.debug.print("rn-name-upda: cannot read the current folder: {s}\n", .{@errorName(err)}); return .fail; };
 var real: runm.Real = .{ .iozz = init.io, .envm = init.environ_map };
 const ctxz: cx.Ctxz = .{ .allo = allo, .gpaz = init.gpa, .iozz = init.io, .conf = cfgv, .ladd = pars.ladd, .outw = outw, .osy = osys.host, .home = home, .cwdz = cwdz, .nowf = cx.realNow, .runn = real.runn() };
 return dispatch(&ctxz, pars.rest) catch |err| switch (err) {
 exit.Erro.Usag => { std.debug.print(CF.usag, .{}); return .usag; },
-else => { std.debug.print("rn: failed: {s}\n", .{@errorName(err)}); return .fail; },
+else => { std.debug.print("rn-name-upda: failed: {s}\n", .{@errorName(err)}); return .fail; },
 };
 }
 pub fn main(init: std.process.Init) !void {

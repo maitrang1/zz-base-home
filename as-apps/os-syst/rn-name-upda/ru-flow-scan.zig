@@ -26,10 +26,10 @@ return .none;
 pub fn badText(bad: Bad) []const u8 {
 return switch (bad) {
 .none => "",
-.oldz_miss => "rn: old path not found. Check the spelling and run again.\n",
-.newz_exis => "rn: new path already exists. Pick a free name.\n",
-.sibl_only => "rn: rename keeps the same parent folder. A move is not built yet.\n",
-.same_name => "rn: old and new names are the same. Nothing to do.\n",
+.oldz_miss => "rn-name-upda: old path not found. Check the spelling and run again.\n",
+.newz_exis => "rn-name-upda: new path already exists. Pick a free name.\n",
+.sibl_only => "rn-name-upda: rename keeps the same parent folder. A move is not built yet.\n",
+.same_name => "rn-name-upda: old and new names are the same. Nothing to do.\n",
 };
 }
 pub fn rootsOf(ctxz: *const cx.Ctxz, old: []const u8) ![]const []const u8 {

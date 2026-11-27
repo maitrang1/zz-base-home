@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Job catalog as data: base rows plus area tables
 // Flo: one row per job > steps name a label key (ut-loca-pack) and an argument slot > the runner turns rows into flow steps
-// I/O: none (constants) > Job rows (find by name, list for `fb jobs`, class A/G/H, area)
+// I/O: none (constants) > Job rows (find by name, list for `fb-face-webs jobs`, class A/G/H, area)
 // ===================================================================
 const std = @import("std"); const t = @import("ru-jobs-type.zig"); const acct = @import("ru-jobs-acct.zig"); const sett = @import("ru-jobs-sett.zig"); const mone = @import("ru-jobs-mone.zig"); const acce = @import("ru-jobs-acce.zig"); const core = @import("ru-jobs-core.zig"); const help = @import("ru-jobs-help.zig");
 pub const Risk = t.Risk; pub const Area = t.Area; pub const Src = t.Src; pub const Arg = t.Arg; pub const T = t.T; pub const Job = t.Job; pub const classOf = t.classOf; pub const readOnly = t.readOnly;

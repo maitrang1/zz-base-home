@@ -40,7 +40,7 @@ E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe runz R
 
 ```
 ok 20261123-140621 · patched 6 refs in 4 files · renamed · left 0 · flagged 0
-undo: rn undo 20261123-140621 --live
+undo: rn-name-upda undo 20261123-140621 --live
 ```
 
 3. Changed your mind? Undo it:

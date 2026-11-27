@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo wipz: dry-run, clean, live, chain, leaks
+// Des: Tests for wo-work-mode wipz: dry-run, clean, live, chain, leaks
 // Flo: mock git + gitleaks + restic > run > check the call order, env, stamp file and exit code
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

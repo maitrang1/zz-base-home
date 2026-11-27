@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo stat: version, ages, failed runs
+// Des: Tests for wo-work-mode stat: version, ages, failed runs
 // Flo: scratch state files > run stat > check text and that exit is always ok
 // I/O: scratch dir under .zig-cache/tmp > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

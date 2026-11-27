@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Exit-code ladder shared by every rn command
+// Des: Exit-code ladder shared by every rn-name-upda command
 // Flo: name each code > exit with one
 // I/O: Code enum > process exit status
 // ===================================================================

@@ -16,7 +16,7 @@ buil.installArtifact(exez);
 const runz = buil.addRunArtifact(exez);
 runz.step.dependOn(buil.getInstallStep());
 runz.addPassthruArgs();
-buil.step("run", "Build and run ie").dependOn(&runz.step);
+buil.step("run", "Build and run id-edit-iden").dependOn(&runz.step);
 const stepDist = buil.step("dist", "Build every target (ReleaseFast) into zig-out/dist/<os>-<arch>/");
 const stepDevz = buil.step("dist-dev", "Build only windows-x86_64 + linux-x86_64 into zig-out/dist/");
 for (CF.dist, 0..) |dist, indx| {

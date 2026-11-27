@@ -43,17 +43,17 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | capz_help_dayz | Reads, support messages, map pages | 40 | 0 and up |
 | acct_maxx_coun | Most accounts in `user-acct.json` | 5 | 1 to 20 |
 | acct_gap_secs | Wait between accounts when running `--acct all` (min, max seconds) | [240, 960] | numbers |
-| aliv_look_hour | Hours between the automatic read-only login looks of `fb alive` (one account per run; 0 is refused) | 8 | 1 to 72 |
+| aliv_look_hour | Hours between the automatic read-only login looks of `fb-face-webs alive` (one account per run; 0 is refused) | 8 | 1 to 72 |
 | mone_spen_capz | Biggest budget a spend job may use (0 = none) | 0 | 0 and up |
 | secr_loca_main | Folder with your secrets file `user-acct.json` | ~/.zz-base-home-secr/as-apps/ch-chat/fb-face-webs | folder |
 | base_deve_main | Developer console address | https://developers.facebook.com | http(s) address |
-| map_page_maxx | Pages `fb map` visits per run | 25 | 1 to 200 |
+| map_page_maxx | Pages `fb-face-webs map` visits per run | 25 | 1 to 200 |
 | map_deep_maxx | How many link steps from a start page | 2 | 0 to 3 |
-| feed_path_list | Pages `fb read feed` reads for scra: group feeds, Marketplace searches (paths that start with `/`) | none | list of paths |
-| feed_dirz_wind · feed_dirz_unix | Folder where `fb read feed --live` writes its `.jsonl` files (scra's `social-in` folder) | scra data folder | a path (`~` works) |
+| feed_path_list | Pages `fb-face-webs read feed` reads for scra: group feeds, Marketplace searches (paths that start with `/`) | none | list of paths |
+| feed_dirz_wind · feed_dirz_unix | Folder where `fb-face-webs read feed --live` writes its `.jsonl` files (scra's `social-in` folder) | scra data folder | a path (`~` works) |
 | feed_item_maxz | Most posts taken from one page per run | 50 | 1 to 500 |
 | feed_text_maxz | Longest post text kept, in bytes | 4000 | 200 or more |
-| map_seed_list | Pages `fb map` starts from | settings, Accounts Center, activity log, ... | list of paths |
+| map_seed_list | Pages `fb-face-webs map` starts from | settings, Accounts Center, activity log, ... | list of paths |
 | map_allo_list | Only paths starting like this are visited | settings, accountscenter, privacy, ... | list of paths |
 | path_*, pbiz_*, pdev_* | Page paths jobs use (account, settings, billing on the business site, developer console, help, ...). Change one if Facebook moves a page | Facebook defaults | paths |
 | quie_hour_rang | Quiet hours (from, to) | [2, 4] | hours 0 to 23 |
@@ -75,7 +75,7 @@ Missing keys use the defaults below. A name this program does not know (a typo) 
 | smar_call_dayz | AI calls per 24 hours | 20 | 0 and up |
 | repl_temp_list | Reply texts when AI is off | 2 short thanks | list of text |
 | inqu_temp_list | Texts for Marketplace buyers | 2 short answers | list of text |
-| labl_over | Your own button names, by key (see `fb doctor`) | {} | key → list of names |
+| labl_over | Your own button names, by key (see `fb-face-webs doctor`) | {} | key → list of names |
 | labl_* | Older button and box names (English + Vietnamese) | built in | lists of text |
 | flow_list | Routines: name and jobs (`job`, `text`, `url`, `maxn`, ...) | one `morning` example | list |
 
@@ -89,6 +89,6 @@ Text on screen (or `--json` for status, log, ledger). Exit code: 0 ok · 1 faile
 
 ## Files (all inside the data folder)
 - `stat/fb-state.db`: limits counters, once-only keys, ledger, log, routines.
-- `stat/map/<date>/`: pages and controls saved by `fb map` (redacted).
-- `stat/alerts.txt`: what fb told you. `stat/snaps/`, `report/`, `backup/`, `export/`: made by `fb snap`, `report`, `backup`, `export`.
+- `stat/map/<date>/`: pages and controls saved by `fb-face-webs map` (redacted).
+- `stat/alerts.txt`: what fb told you. `stat/snaps/`, `report/`, `backup/`, `export/`: made by `fb-face-webs snap`, `report`, `backup`, `export`.
 - `prof/`: the browser profile with your Facebook login. This is the only folder fb uses outside its program folder.

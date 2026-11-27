@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo dril: timed restore drill, digest-only report
+// Des: wo-work-mode dril: timed restore drill, digest-only report
 // Flo: restic restore > integrity check every .db > git fsck on the mirror > time vs RTO > stamp
 // I/O: Ctxz (dry-run default, --live acts) > facts + dril.json stamp, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================

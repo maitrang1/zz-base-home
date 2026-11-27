@@ -27,7 +27,7 @@ call "%DISP%" scra-raws
 > "%T%\exp.txt" echo mise exec -- "%SCX%" run --seed-file "%T%\..\.zz-base-home-tena\as-apps\ws-webs\sc-scra\seeds.txt" --follow 800 --live
 findstr /b /c:"mise exec -- \"%SCX%\" run" "%LOGZ%" > "%T%\got.txt"
 fc "%T%\exp.txt" "%T%\got.txt" >nul && call :ok "scra-raws runs scra run with the tena seeds" || call :bad "scra-raws runs scra run with the tena seeds"
-call :runsc scra-data "cars --live"
+call :runsc scra-cars "cars --live"
 call :runsc scra-inge "ingest --live"
 call :runsc scra-cont "cont --live"
 call :runsc scra-sync "sync --live"

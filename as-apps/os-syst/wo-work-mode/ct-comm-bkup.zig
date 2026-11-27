@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo bkup: restic state job and nightly SQLite copies
+// Des: wo-work-mode bkup: restic state job and nightly SQLite copies
 // Flo: stat: read list > resolve under the tena root > restic backup --files-from, no *.db > stamp | nigh: VACUUM INTO per db > integrity > restic backup > stamp
 // I/O: Ctxz + optional stat|nigh (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================

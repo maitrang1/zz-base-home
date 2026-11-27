@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Entry point: run the command, print typed errors
 // Flo: main > ct-ctrl-main.runMain > on error print 2 lines (what - why / fix) > exit code 0-4
-// I/O: argv (zr help) > stdout result, stderr error, exit 0-4
+// I/O: argv (zr-zrow-webs help) > stdout result, stderr error, exit 0-4
 // Run: E:\zz-base-home\as-apps\in-inte\zr-zrow-webs\zig-out\bin\zr-zrow-webs.exe status --json
 // ===================================================================
 const std = @import("std"); const erro = @import("er-erro-type.zig"); const ctrl = @import("ct-ctrl-main.zig");

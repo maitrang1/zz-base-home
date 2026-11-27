@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo secr: secret-dir setup; lend waits for vault
+// Des: wo-work-mode secr: secret-dir setup; lend waits for vault
 // Flo: pick sub-command > init makes the per-device secret dir (owner-only on POSIX) > lend reports blocked
 // I/O: Ctxz + "init"|"lend" > facts, exit 0 ok / 2 usage / 4 blocked. Never reads or prints a secret value
 // ===================================================================

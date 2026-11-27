@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo conf: valid JSON that round-trips
+// Des: Tests for wo-work-mode conf: valid JSON that round-trips
 // Flo: run conf with a changed value > parse the output back > compare
 // I/O: none > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

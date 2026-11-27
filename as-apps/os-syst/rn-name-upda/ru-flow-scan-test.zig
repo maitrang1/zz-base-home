@@ -141,10 +141,10 @@ try std.testing.expect(std.mem.endsWith(u8, scn.items[0].path, "b.txt"));
 }
 test "pair messages are the documented sentences" {
 try std.testing.expectEqualStrings("", scan.badText(.none));
-try std.testing.expectEqualStrings("rn: old path not found. Check the spelling and run again.\n", scan.badText(.oldz_miss));
-try std.testing.expectEqualStrings("rn: new path already exists. Pick a free name.\n", scan.badText(.newz_exis));
-try std.testing.expectEqualStrings("rn: rename keeps the same parent folder. A move is not built yet.\n", scan.badText(.sibl_only));
-try std.testing.expectEqualStrings("rn: old and new names are the same. Nothing to do.\n", scan.badText(.same_name));
+try std.testing.expectEqualStrings("rn-name-upda: old path not found. Check the spelling and run again.\n", scan.badText(.oldz_miss));
+try std.testing.expectEqualStrings("rn-name-upda: new path already exists. Pick a free name.\n", scan.badText(.newz_exis));
+try std.testing.expectEqualStrings("rn-name-upda: rename keeps the same parent folder. A move is not built yet.\n", scan.badText(.sibl_only));
+try std.testing.expectEqualStrings("rn-name-upda: old and new names are the same. Nothing to do.\n", scan.badText(.same_name));
 }
 // =======================___THIS_IS_THE_END___=======================
 // ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============

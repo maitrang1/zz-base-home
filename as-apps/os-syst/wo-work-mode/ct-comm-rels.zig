@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo rels sign TAG: sign verified release hashes
+// Des: wo-work-mode rels sign TAG: sign verified release hashes
 // Flo: release body says Verified? > download sha256.txt > ssh-keygen -Y sign -U (key from ssh-agent) > upload sha256.txt.sig > stamp
 // I/O: Ctxz + sign TAG (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================

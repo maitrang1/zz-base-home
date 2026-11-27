@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo docs: sync git-ignored docs via a private repo
+// Des: wo-work-mode docs: sync git-ignored docs via a private repo
 // Flo: init: hidden git dir > exclude all > remotes from the main repo > restore | sync: stage docs > scan changed files > commit (author date = edit time) > fetch + merge (newer edit wins a clash, loser saved aside) > push, retry > stamp
 // I/O: Ctxz + init|sync (dry-run default, --live acts) > facts, exit 0 ok / 1 failed / 4 blocked
 // ===================================================================
@@ -90,7 +90,7 @@ return true;
 fn syncRun(ctxz: *const cx.Ctxz, facts: *std.ArrayList(fcts.Fact)) !void {
 const top = (try topFind(ctxz, facts)) orelse return;
 const gitd = try gitdPath(ctxz);
-if (!gitdExist(ctxz, gitd)) { try facts.append(ctxz.allo, cx.mkfa("init", .bloc, "docs git dir missing: run wo docs init --live")); return; }
+if (!gitdExist(ctxz, gitd)) { try facts.append(ctxz.allo, cx.mkfa("init", .bloc, "docs git dir missing: run wo-work-mode docs init --live")); return; }
 const pick = (try bkup.docsFind(ctxz, facts)) orelse return;
 if (pick.len == 0) { try facts.append(ctxz.allo, cx.mkfa("docs", .skip, "no ignored docs found")); return; }
 if (!ctxz.ladd.live) { try facts.append(ctxz.allo, cx.mkfa("sync", .okay, try std.fmt.allocPrint(ctxz.allo, "dry-run: would sync {d} doc path(s): stage, scan the changed files, commit, merge, push to {d} remote(s)", .{ pick.len, ctxz.conf.docs_remo_list.len }))); return; }

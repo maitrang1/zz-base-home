@@ -70,11 +70,11 @@ Add `--json` to any command. You get one JSON document.
 | `[soft] lane` | The new id falls in a different lock lane. Keep the same prefix, or add `--force`. |
 | `[soft] chain` | A chain is saved mid-run. Wait for it to finish, or add `--force`. |
 | `[soft] clash` | A file or folder has the id as its name. Rename it first, or add `--force`. |
-| `run ... never finished` | A past run stopped half way. Run `ie undo <id> --live --force`. |
+| `run ... never finished` | A past run stopped half way. Run `id-edit-iden undo <id> --live --force`. |
 | `another run holds the lock` | Wait. After 10 minutes the lock counts as stale. |
 | `Drift` | A file changed after the preview. Run again. |
 | `Dangling` | A step would lose its start-script entry. Rename the script entry too, or fix the plan. |
-| `hub still lists <id>` | The hub has not reloaded. Wait a minute, then run `ie stat`. If it stays, run `ie undo last --live`. |
+| `hub still lists <id>` | The hub has not reloaded. Wait a minute, then run `id-edit-iden stat`. If it stays, run `id-edit-iden undo last --live`. |
 | `repo root not found` | Run from inside the repo, or set `repo_root` in the config. |
 
 One note: the hub may write one last line to the old log name before it reloads. That old file is not removed.

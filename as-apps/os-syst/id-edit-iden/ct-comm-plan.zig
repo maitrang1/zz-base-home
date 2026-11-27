@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: ie plan: show what a rename would touch (read-only); also the printer run reuses
+// Des: id-edit-iden plan: show what a rename would touch (read-only); also the printer run reuses
 // Flo: parse map > build plan > print pairs, files, moves, guards > exit okay or blocked
 // I/O: args > text or JSON on stdout; nothing written
 // Run: E:\zz-base-home\as-apps\os-syst\id-edit-iden\zig-out\bin\id-edit-iden.exe plan cicd-stat=cics-stat

@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo doct: read-only drift checks, exit 3 on drift
+// Des: wo-work-mode doct: read-only drift checks, exit 3 on drift
 // Flo: pick check list by profile > run each check > emit facts > fold to one exit code
 // I/O: Ctxz + args > one fact per check on stdout, exit 0 ok / 3 drift / 4 blocked
 // ===================================================================

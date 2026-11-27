@@ -27,7 +27,7 @@ cicd-lock) exec "$CMDS_MISE" exec -- "$WOZ" ci lock ;;
 cicd-repr) exec "$CMDS_MISE" exec -- "$WOZ" ci repr ;;
 cicd-deps) exec "$CMDS_MISE" exec -- "$WOZ" ci deps ;;
 scra-raws) exec "$CMDS_MISE" exec -- "$SCRA" run --seed-file "$SEED" --follow 800 --live ;;
-scra-data) exec "$CMDS_MISE" exec -- "$SCRA" cars --live ;;
+scra-cars) exec "$CMDS_MISE" exec -- "$SCRA" cars --live ;;
 scra-inge) exec "$CMDS_MISE" exec -- "$SCRA" ingest --live ;;
 scra-cont) exec "$CMDS_MISE" exec -- "$SCRA" cont --live ;;
 scra-sync) exec "$CMDS_MISE" exec -- "$SCRA" sync --live ;;

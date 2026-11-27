@@ -85,7 +85,7 @@ if (failz == null and rsl.left > 0 and !opts.force) failz = Erro.LeftRefs;
 if (failz) |err| {
 _ = undo.undoRun(ctxz, id, .{ .live = true, .force = true }) catch |uerr| {
 rsl.code = .fail;
-rsl.note = try std.fmt.allocPrint(ctxz.allo, "{s}; rollback failed: {s}; run rn undo {s} --live --force", .{ @errorName(err), @errorName(uerr), id });
+rsl.note = try std.fmt.allocPrint(ctxz.allo, "{s}; rollback failed: {s}; run rn-name-upda undo {s} --live --force", .{ @errorName(err), @errorName(uerr), id });
 return rsl;
 };
 try jour.appd(ctxz.allo, ctxz.iozz, pth.jour, pth.jfil, .{ .op = "fail", .note = @errorName(err) });

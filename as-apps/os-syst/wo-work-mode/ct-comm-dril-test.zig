@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for wo dril: dry-run, good, bad, slow, failed
+// Des: Tests for wo-work-mode dril: dry-run, good, bad, slow, failed
 // Flo: mock restic/sqlite3/git + planted .db file > run > check facts, stamp, exit code
 // I/O: scratch dir under .zig-cache/tmp > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

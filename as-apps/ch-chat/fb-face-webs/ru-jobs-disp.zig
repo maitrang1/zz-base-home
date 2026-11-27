@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Map a job name to its code, risk, description
 // Flo: legacy jobs (post, reply, dm, ...) and catalog jobs (ru-jobs-tabl) and read lists > exec by name > risk class from code (never the AI)
-// I/O: job name + Args (caller) > runs the job; risky(): true when it needs the owner's approval; names() for `fb jobs`
+// I/O: job name + Args (caller) > runs the job; risky(): true when it needs the owner's approval; names() for `fb-face-webs jobs`
 // ===================================================================
 const std = @import("std"); const task = @import("ru-task-runn.zig"); const post = @import("ru-post-main.zig"); const repl = @import("ru-feed-repl.zig"); const dmsg = @import("ru-dmsg-main.zig"); const mark = @import("ru-mark-list.zig"); const jobs = @import("ru-jobs-tabl.zig"); const jrun = @import("ru-jobs-main.zig"); const rdm = @import("ru-read-main.zig");
 pub const Row = struct { name: []const u8, risk: u8, kind: []const u8, area: []const u8 = "core", cls: u8 = 0 };

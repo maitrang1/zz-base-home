@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: End-to-end tests for rn runz and undo
+// Des: End-to-end tests for rn-name-upda runz and undo
 // Flo: dry-run writes nothing > live run line > json > undo last > bad input
 // I/O: tmp dir fake machine > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig
@@ -41,7 +41,7 @@ var aw: std.Io.Writer.Allocating = .init(allo);
 var ctxz = try make.make(allo, &aw.writer, fxt.root, .{}, false);
 ctxz.ladd.live = true;
 try std.testing.expectEqual(exit.Code.okay, try runz.comm(&ctxz, try pair(allo, fxt)));
-try std.testing.expectEqualStrings("ok 20231114-221320 · patched 4 refs in 3 files · renamed · left 0 · flagged 0\nundo: rn undo 20231114-221320 --live\n", aw.written());
+try std.testing.expectEqualStrings("ok 20231114-221320 · patched 4 refs in 3 files · renamed · left 0 · flagged 0\nundo: rn-name-upda undo 20231114-221320 --live\n", aw.written());
 try std.testing.expect(fake.hasz(&tmp, "p/new/x.txt"));
 }
 test "json live result parses" {

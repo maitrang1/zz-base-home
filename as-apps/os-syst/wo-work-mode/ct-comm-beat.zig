@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo beat: heartbeat ping, silence raises an outside alarm
+// Des: wo-work-mode beat: heartbeat ping, silence raises an outside alarm
 // Flo: read ping url file > check stamp ages > live: curl url (ok) or url/fail (stale) > facts
 // I/O: Ctxz (dry-run default, --live pings) > facts, exit 0 ok / 1 stale / 4 blocked
 // ===================================================================

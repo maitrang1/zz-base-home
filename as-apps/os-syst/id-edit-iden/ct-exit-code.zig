@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Exit-code ladder shared by every ie command
+// Des: Exit-code ladder shared by every id-edit-iden command
 // Flo: name each code > exit with one
 // I/O: Code enum > process exit status
 // ===================================================================

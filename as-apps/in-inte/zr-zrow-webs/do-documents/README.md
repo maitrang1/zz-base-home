@@ -7,7 +7,7 @@
 - Creates and manages API keys, webhooks, team invites and alerts.
 - Runs a page scrape, a crawl or a batch, and saves the answer.
 - Shows usage, invoices and your plan. Risky acts (pay, cancel, delete) always wait for your OK.
-- Talks plain English: `zr ask "get https://example.com as text"`.
+- Talks plain English: `zr-zrow-webs ask "get https://example.com as text"`.
 
 ## You need
 - Windows, Linux or macOS.
@@ -29,7 +29,7 @@ The login stays in zr's own browser profile, so later runs need no login until t
 - Default is a preview. Add `--live` to act. Add `--force` too for risky acts.
 - It stops and tells you when it needs you (captcha, 2FA, email code, card).
 - It never bypasses a captcha or 2FA.
-- It has not been checked against the live ZenRows site yet. Run `zr map` first; it lists anything that does not match.
+- It has not been checked against the live ZenRows site yet. Run `zr-zrow-webs map` first; it lists anything that does not match.
 
 ## Next
 [HOW-TO](HOW-TO.md) · [CONFIG](CONFIG.md) · [UPDATE](UPDATE.md)

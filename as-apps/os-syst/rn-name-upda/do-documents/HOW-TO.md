@@ -28,7 +28,7 @@ E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe runz R
 
 ```
 ok 20261123-140621 · patched 6 refs in 4 files · renamed · left 0 · flagged 0
-undo: rn undo 20261123-140621 --live
+undo: rn-name-upda undo 20261123-140621 --live
 ```
 
 - `patched` is how many places changed.
@@ -74,12 +74,12 @@ E:\zz-base-home\as-apps\os-syst\rn-name-upda\zig-out\bin\rn-name-upda.exe stat
 ```
 
 ```
-rn 0.1.0 · windows · data R:/tena/as-apps/os-syst/rn-name-upda
+rn-name-upda 0.1.0 · windows · data R:/tena/as-apps/os-syst/rn-name-upda
 skip on: bina arch sign_hash othe_user syst_owne runn_proc sync_remo pack_mana comp_part urls_exte gitz_hist
 last run 20261123-140621: done
 ```
 
-If the last line says `open run`, a run was cut short. Run `rn undo <id> --live --force` to put things back.
+If the last line says `open run`, a run was cut short. Run `rn-name-upda undo <id> --live --force` to put things back.
 
 ## Use a different settings file
 
@@ -103,4 +103,4 @@ Add `--json` to any command to get one line of JSON.
 | `rn: old and new names are the same. Nothing to do.` | Use a different new name. |
 | `rn: no runs yet. Nothing to undo.` | Nothing has been run yet. |
 | `rn: run <id> is already undone.` | That run was already undone. |
-| `rn: no run named <id>. Run rn stat to see the last one.` | Check the run id. |
+| `rn: no run named <id>. Run rn-name-upda stat to see the last one.` | Check the run id. |

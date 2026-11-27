@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests wo rels sign: tag, verified gate, dry-run, order
+// Des: Tests wo-work-mode rels sign: tag, verified gate, dry-run, order
 // Flo: mock gh + ssh-keygen > run sign > check argv order, gates, stamp, exit codes
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig

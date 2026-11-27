@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests wo ci: every sub-command green, red, tool-absent
+// Des: Tests wo-work-mode ci: every sub-command green, red, tool-absent
 // Flo: mock gh/curl/git/zig/gitleaks + fixed clock > run ci > check argv, facts, exit codes
 // I/O: none live > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\wo-work-mode\build.zig
@@ -107,7 +107,7 @@ const lst: mock.Rule = .{ .pref = &.{ "gh", "release", "list" }, .outz = "v1.2.3
 try std.testing.expectEqual(exit.Code.okay, try runCi(allo, &.{ lst, .{ .pref = &.{ "gh", "release", "view" }, .outz = "waiting on GitLab" } }, "h", "rele", &buff, &mck));
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "v1.2.3 still pending") != null);
 try std.testing.expectEqual(exit.Code.okay, try runCi(allo, &.{ lst, .{ .pref = &.{ "gh", "release", "view" }, .outz = "Verified: GitHub and GitLab built identical bytes" } }, "h", "rele", &buff, &mck));
-try std.testing.expect(std.mem.indexOf(u8, buff.written(), "wo rels sign v1.2.3 --live") != null);
+try std.testing.expect(std.mem.indexOf(u8, buff.written(), "wo-work-mode rels sign v1.2.3 --live") != null);
 try std.testing.expectEqual(exit.Code.okay, try runCi(allo, &.{ lst, .{ .pref = &.{ "gh", "release", "view" }, .outz = "Verified: GitHub and GitLab built identical bytes\nsha256.txt\nsha256.txt.sig" } }, "h", "rele", &buff, &mck));
 try std.testing.expect(std.mem.indexOf(u8, buff.written(), "v1.2.3 Verified and signed") != null);
 try std.testing.expectEqual(exit.Code.fail, try runCi(allo, &.{ lst, .{ .pref = &.{ "gh", "release", "view" }, .outz = "MISMATCH" } }, "h", "rele", &buff, &mck));

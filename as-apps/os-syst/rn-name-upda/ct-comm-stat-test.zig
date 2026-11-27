@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: Tests for rn stat output
+// Des: Tests for rn-name-upda stat output
 // Flo: text lists skip keys > a flipped key drops out > json > usage
 // I/O: tmp dir fake machine > pass or fail
 // Run: zig build test --build-file E:\zz-base-home\as-apps\os-syst\rn-name-upda\build.zig
@@ -23,7 +23,7 @@ var aw: std.Io.Writer.Allocating = .init(allo);
 const ctxz = try make.make(allo, &aw.writer, root, .{}, false);
 try std.testing.expectEqual(exit.Code.okay, try stat.comm(&ctxz, &.{}));
 const outz = aw.written();
-try std.testing.expect(std.mem.startsWith(u8, outz, "rn 0.1.0 · "));
+try std.testing.expect(std.mem.startsWith(u8, outz, "rn-name-upda 0.1.0 · "));
 for (names) |name| try std.testing.expect(std.mem.indexOf(u8, outz, name) != null);
 }
 test "a key set to false drops out of the list" {
@@ -67,7 +67,7 @@ var aw: std.Io.Writer.Allocating = .init(allo);
 const ctxz = try make.make(allo, &aw.writer, root, .{}, false);
 try std.testing.expectEqual(exit.Code.find, try stat.comm(&ctxz, &.{}));
 try std.testing.expect(std.mem.indexOf(u8, aw.written(), "last run 20231114-221320: open") != null);
-try std.testing.expect(std.mem.indexOf(u8, aw.written(), "open run: rn undo 20231114-221320 --live --force") != null);
+try std.testing.expect(std.mem.indexOf(u8, aw.written(), "open run: rn-name-upda undo 20231114-221320 --live --force") != null);
 try fake.putz(&tmp, "zz-tena/as-apps/os-syst/rn-name-upda/jour/20231114-221320.jsonl", "{\"op\":\"open\"}\n{\"op\":\"done\"}\n");
 aw.clearRetainingCapacity();
 try std.testing.expectEqual(exit.Code.okay, try stat.comm(&ctxz, &.{}));

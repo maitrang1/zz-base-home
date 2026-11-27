@@ -2,7 +2,7 @@
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
 // Des: Map a job name to its row, risk, description
 // Flo: catalog jobs (ru-jobs-tabl) > exec by name > risk class from code (never the AI)
-// I/O: job name + Args (caller) > runs the job; risky(): true when it needs the owner's approval; rows for `zr jobs`
+// I/O: job name + Args (caller) > runs the job; risky(): true when it needs the owner's approval; rows for `zr-zrow-webs jobs`
 // ===================================================================
 const std = @import("std"); const task = @import("ru-task-runn.zig"); const jobs = @import("ru-jobs-tabl.zig"); const jrun = @import("ru-jobs-main.zig");
 pub const Row = struct { name: []const u8, risk: u8, kind: []const u8, hint: []const u8 };

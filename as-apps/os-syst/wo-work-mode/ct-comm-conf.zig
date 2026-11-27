@@ -1,6 +1,6 @@
 // ===================================================================
 // Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
-// Des: wo conf: print the settings wo is using
+// Des: wo-work-mode conf: print the settings wo-work-mode is using
 // Flo: serialize Conf as indented JSON > stdout
 // I/O: Ctxz > JSON on stdout, exit 0
 // ===================================================================

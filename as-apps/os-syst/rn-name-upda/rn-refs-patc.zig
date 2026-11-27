@@ -28,7 +28,7 @@ pub fn writeRetry(ctxz: *const cx.Ctxz, nat: []const u8, body: []const u8) !void
 var tryz: u32 = 0;
 while (true) : (tryz += 1) {
 writeOnce(ctxz, nat, body) catch |err| {
-if (tryz >= ctxz.conf.lock_retr) { std.debug.print("rn: cannot write {s}: {s}\n", .{ nat, @errorName(err) }); return Erro.Blocked; }
+if (tryz >= ctxz.conf.lock_retr) { std.debug.print("rn-name-upda: cannot write {s}: {s}\n", .{ nat, @errorName(err) }); return Erro.Blocked; }
 std.Io.sleep(ctxz.iozz, .fromMilliseconds(CF.waitms), .awake) catch {};
 continue;
 };

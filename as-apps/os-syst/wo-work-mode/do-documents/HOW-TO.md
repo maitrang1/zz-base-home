@@ -10,7 +10,7 @@ Use `wo doct --prof ci` for the short check used by CI (hooks, Zig version and C
 A fresh PC shows `drif` for Tailnet Lock, OS patches and ESU until you have done them: that is on purpose.
 
 ## See when each job last ran
-Run: `wo stat`
+Run: `wo-work-mode stat`
 
 ## Save your unsaved work
 1. Name your private remotes once in `aa-conf-main.json` (`wipz_remo_list`).
@@ -40,8 +40,8 @@ It pings when the stamps in `beat_chek_list` are fresh, and pings `/fail` when t
 
 ## Keep all devices on one version of the code
 1. Commit or review anything you do not want published (the job commits every changed file that is not git-ignored and idle for 2 minutes).
-2. Practice run: `wo sync` (shows how many files it would commit and how many are held).
-3. Real run once by hand: `wo sync --live` on each device. Check both repos.
+2. Practice run: `wo-work-mode sync` (shows how many files it would commit and how many are held).
+3. Real run once by hand: `wo-work-mode sync --live` on each device. Check both repos.
 4. The hub step `home-code` (inside the chain `puls-15mi`, every 15 minutes) then keeps going by itself.
 A clash on the same lines is settled by the newer edit; the older text is in `zz-dele-auto/_code-<time>/` and in git history. The run then exits 3 and lists the files, so you can look. Red result: a leak, a failed merge, too many files, or a busy git (a file over the size limit is only kept out and reported). Nothing is lost; fix it by hand. A file you are editing right now is never overwritten: its update waits for the next cycle. Per-device files (secrets, `aa-conf-main.env`) are never synced.
 
@@ -56,8 +56,8 @@ A clash on the same lines is settled by the newer edit; the older text is in `zz
 It restores your latest backup into a new folder in the wo data folder, checks every database in it and times it. Over 15 minutes counts as a failure. Old drill folders stay; move them away by hand.
 
 ## Switch the agents off
-1. Practice run: `wo kill`
-2. Real run: `wo kill --live`
+1. Practice run: `wo-work-mode kill`
+2. Real run: `wo-work-mode kill --live`
 It runs every step listed in `kill_step_list` and never stops at the first failure.
 
 ## Create the secret folder
@@ -68,12 +68,12 @@ Run: `wo secr init --live`
 Add `--json` to any command: `wo doct --json`
 
 ## Use another settings file
-`wo --conf C:\path\to\file.json doct`
+`wo-work-mode --conf C:\path\to\file.json doct`
 
 ## Problems
 | Message | Fix |
 |---|---|
-| `usage: wo [--conf FILE] ...` (exit 2) | Check the command name and flags. `--force` only works with `--live`. |
+| `usage: wo-work-mode [--conf FILE] ...` (exit 2) | Check the command name and flags. `--force` only works with `--live`. |
 | `tool absent: gitleaks` (or restic, sqlite3, gh) | Install that tool, then run again. |
 | `wipz_remo_list is empty` | Add your private remotes to `aa-conf-main.json`. |
 | `LEAK found: git push skipped` | A secret is in your work. Remove it, then run again. The copy is in restic (label `wipz-held`). |

@@ -52,7 +52,7 @@
 | flow_list | Routines | zero-start, daily-check | name + jobs |
 
 ## Input
-Commands and flags: run `zr help`. Flags: `--text --to --url --title --price --desc --group --photo --opt --date --time --max --conf --head --yes --live --force --read --json`.
+Commands and flags: run `zr-zrow-webs help`. Flags: `--text --to --url --title --price --desc --group --photo --opt --date --time --max --conf --head --yes --live --force --read --json`.
 
 ## Output
 Lines on screen. Exit code: 0 ok, 1 failed, 2 usage, 3 page changed, 4 blocked.
