@@ -17,7 +17,7 @@ const wk = @import("se-scan-walk.zig");
 const pl = @import("pl-plan-buil.zig");
 const hz = @import("sy-hubz-chec.zig");
 const undo = @import("ru-flow-undo.zig");
-pub const Erro = error{ Drift, Dangling, JobsBroken, NotApplied };
+pub const Erro = error{ Drift, Dangling, JobsBroken, OpenRun };
 pub const Resu = struct { id: []const u8 = "", code: exit.Code = .okay, edit: usize = 0, mved: usize = 0, left: usize = 0, hubz: []const u8 = "", note: []const u8 = "" };
 fn verif(ctxz: *const cx.Ctxz, plan: pl.Plan, resu: *Resu, hubb: hz.Snap) !void {
 const conf = pl.confOf(ctxz, plan.opts);
@@ -65,7 +65,14 @@ resu.mved += 1;
 try verif(ctxz, plan, resu, hubb);
 try jour.appd(allo, iozz, pth.jour, pth.jfil, .{ .op = "done" });
 }
+pub fn openRun(ctxz: *const cx.Ctxz) ?[]const u8 {
+const last = (stor.idLast(ctxz) catch return null) orelse return null;
+const pth = stor.pthsOf(ctxz, last) catch return null;
+const ents = jour.readAll(ctxz.allo, ctxz.iozz, pth.jfil) catch return null;
+return if (jour.stateOf(ents) == .open) last else null;
+}
 pub fn applyPlan(ctxz: *const cx.Ctxz, plan: pl.Plan) !Resu {
+if (openRun(ctxz) != null) return Erro.OpenRun;
 const id = try stor.idNew(ctxz);
 try stor.lockTake(ctxz, id);
 defer stor.lockFree(ctxz, id);

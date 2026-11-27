@@ -27,6 +27,7 @@ if (live) try ctxz.outw.print("run: blocked, nothing changed → exit 4\n", .{})
 return code;
 }
 const resu = fl.applyPlan(ctxz, plan) catch |err| {
+if (err == fl.Erro.OpenRun) { const opnz = fl.openRun(ctxz) orelse "?"; std.debug.print("ie: run {s} never finished\nfix: ie undo {s} --live --force\n", .{ opnz, opnz }); return .bloc; }
 if (err == stor.Erro.Busy) { std.debug.print("ie: another run holds the lock in the data folder\nfix: wait for it, or after {d}s the lock counts as stale\n", .{ctxz.conf.lock_stal_seco}); return .bloc; }
 return err;
 };

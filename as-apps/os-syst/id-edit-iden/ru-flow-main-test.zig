@@ -93,6 +93,21 @@ try std.testing.expectEqual(exit.Code.fail, resu.code);
 try std.testing.expect(std.mem.indexOf(u8, resu.note, "Drift") != null);
 try std.testing.expectEqualStrings(before, try treeOf(&env));
 }
+test "drift with the same hit count is caught by the hash alone" {
+var tmp = std.testing.tmpDir(.{});
+defer tmp.cleanup();
+var env: Env = undefined;
+try setup(&env, &tmp);
+defer env.arena.deinit();
+const allo = env.arena.allocator();
+const plan = try pl.build(&env.ctxz, &PAIRS, .{});
+try fk.put(allo, std.testing.io, env.fake.repo, "do-note/no-note-docs.txt", "cicd-stat and cicd-stat, text changed by someone\n");
+const before = try treeOf(&env);
+const resu = try fl.applyPlan(&env.ctxz, plan);
+try std.testing.expectEqual(exit.Code.fail, resu.code);
+try std.testing.expect(std.mem.indexOf(u8, resu.note, "Drift") != null);
+try std.testing.expectEqualStrings(before, try treeOf(&env));
+}
 test "dangling: job file renamed but the dispatchers were skipped, run rolls back" {
 var tmp = std.testing.tmpDir(.{});
 defer tmp.cleanup();
