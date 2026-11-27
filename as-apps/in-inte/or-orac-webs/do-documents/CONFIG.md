@@ -19,6 +19,11 @@
 | secr_loca_main | Secret folder | `~/.zz-base-home-secr/as-apps/in-inte/or-orac-webs` | path |
 | brow_exec_path | Chrome path | empty (auto) | path |
 | brow_head_mode | Hide the window (headless) | false | true, false |
+| sess_keep_dayz | Days to keep your Oracle login after the window closes (0 = off) | 7 | 0 to 365 |
+| sess_keep_host | Sites whose login cookies are kept | ["oracle.com", "oraclecloud.com"] | list of site names |
+| brow_wind_widt / brow_wind_high | Window size in pixels (0 and 0 = Chrome default) | 400 / 900 | both 0, or both 1 to 10000 |
+| brow_wind_scal | Page zoom (0.8 shows more on a small window) | 1.0 | 0.25 to 4, or 0 |
+| brow_wind_left | Window distance from the left screen edge | 0 | -100 to 10000 |
 | brow_time_seco | Page wait | 60 | 1 and up |
 | brow_vers_minz | Oldest Chrome | 120 | number |
 | type_dely_msec | Gap between keys | [90, 260] | low ≤ high |

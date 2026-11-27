@@ -1,0 +1,15 @@
+// ===================================================================
+// Own: zzOWN.com - Own Fast. Work Faster.  | Ema: zzown.com@gmail.com
+// Des: Tests for keeping session cookies
+// Flo: host match rules > a session cookie on the mock becomes persistent > other hosts and the off switch are left alone
+// I/O: none (mock site on loopback, scratch profile) > pass or fail (browser tests skip without Chrome)
+// Run: cd E:\zz-base-home\as-apps\in-inte\or-orac-webs && mise exec -- zig build test -Dfile=ru-sess-keep-test.zig
+// ===================================================================
+const std = @import("std"); const rigz = @import("te-rigz-brow.zig"); const sess = @import("ru-sess-keep.zig");
+fn flags(rig: *rigz.Rig, name: []const u8) !struct { sesn: bool, exp: f64 } { const res = try rig.page.call(rig.aren.allocator(), "Network.getAllCookies", ""); for (res.object.get("cookies").?.array.items) |ck| { if (std.mem.eql(u8, ck.object.get("name").?.string, name)) { const ex = ck.object.get("expires").?; return .{ .sesn = ck.object.get("session").?.bool, .exp = switch (ex) { .float => |fl| fl, .integer => |it| @floatFromInt(it), else => 0 } }; } } return error.TestUnexpectedResult; }
+fn plant(rig: *rigz.Rig, name: []const u8) !void { const prm = try std.fmt.allocPrint(rig.aren.allocator(), "{{\"name\":\"{s}\",\"value\":\"v\",\"url\":\"{s}/\"}}", .{ name, rig.base() }); _ = try rig.page.call(rig.aren.allocator(), "Network.setCookie", prm); }
+test "host match: exact and subdomain, not a look-alike" { const hs = [_][]const u8{ "oracle.com", "oraclecloud.com" }; try std.testing.expect(sess.ours(&hs, "oracle.com")); try std.testing.expect(sess.ours(&hs, ".oracle.com")); try std.testing.expect(sess.ours(&hs, "login.oraclecloud.com")); try std.testing.expect(!sess.ours(&hs, "evil-oracle.com")); try std.testing.expect(!sess.ours(&hs, "oracle.com.evil.io")); try std.testing.expect(!sess.ours(&hs, "")); }
+test "a session cookie of our host gets an expiry; the off switch changes nothing" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); try rig.go("/"); try plant(&rig, "sess1"); const hs = [_][]const u8{"127.0.0.1"}; rig.conf.sess_keep_host = &hs; rig.conf.sess_keep_dayz = 0; var cx = rig.ctx(.read); try std.testing.expectEqual(@as(u32, 0), sess.keep(&cx)); try std.testing.expect((try flags(&rig, "sess1")).sesn); rig.conf.sess_keep_dayz = 7; var cx2 = rig.ctx(.read); try std.testing.expectEqual(@as(u32, 1), sess.keep(&cx2)); const fl = try flags(&rig, "sess1"); try std.testing.expect(!fl.sesn); try std.testing.expect(fl.exp > 0); }
+test "a cookie of another host is not touched" { var rig: rigz.Rig = undefined; try rig.up(); defer rig.down(); try rig.go("/"); try plant(&rig, "sess2"); var cx = rig.ctx(.read); try std.testing.expectEqual(@as(u32, 0), sess.keep(&cx)); try std.testing.expect((try flags(&rig, "sess2")).sesn); }
+// =======================___THIS_IS_THE_END___=======================
+// ==============___HOLD_YOUR_BREATH_AND_COUNT_TO_TEN___==============
